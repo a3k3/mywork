@@ -1,0 +1,41 @@
+﻿[
+  {
+    "id": 1,
+    "question": "What is your name?",
+    "caption": "Will not share your name to anyone",
+    "answertype": "text",
+    "answertheme": "",
+    "hint": "Type your name",
+    "placeholder": "Enter your name",
+    "validations": {
+      "required": true,
+      "string": true
+    }
+  },
+  {
+    "id": 2,
+    "question": "What is your phone no.?",
+    "caption": "Will not share your number to anyone",
+    "answertype": "tel",
+    "answertheme": "",
+    "hint": "Type your mobile no",
+    "placeholder": "+91 7893459013",
+    "validations": {
+      "required": true,
+      "maxCount": 10
+    }
+  },
+  {
+    "id": 3,
+    "question": "How would like to rate our Product & Services?",
+    "caption": "Help us serve better",
+    "answertype": "rating",
+    "answertheme": "star",
+    "hint": "Tap the star to give rating",
+    "placeholder": "",
+    "validations": {
+      "required": true,
+      "maxCount": 5
+    }
+  }
+]
