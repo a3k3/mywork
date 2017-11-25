@@ -9,6 +9,9 @@ function MyCtrl1($scope, getAllQuestions) {
     }, function myError(response) {
         $scope.status = response.statusText;
     });
+    $scope.next = function () {
+        $('question.active').next().addClass('active');
+    }
 }
 MyCtrl1.$inject = ['$scope', 'getAllQuestions'];
 
@@ -20,3 +23,4 @@ MyCtrl2.$inject = [];
 function animateQ() {
 
 }
+

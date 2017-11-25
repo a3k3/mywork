@@ -1,5 +1,31 @@
 /* app css stylesheet */
 
+question.active{
+    display:block;
+    height:75vh;
+}
+
+question.active .questionPanel{
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+question .questionPanel .answerContainer, question .questionPanel p{
+    display:none;
+}
+
+question.active .questionPanel .answerContainer, question.active .questionPanel p{
+    display:block;
+}
+
+.nextprev{
+    position:absolute;
+    display:inline-block;
+    bottom:0;
+    left:40%;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
