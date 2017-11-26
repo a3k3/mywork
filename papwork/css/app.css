@@ -6,9 +6,15 @@ ng-view.row {
 question {
     height:12.5vh;
 }
-question.active, question.visited{
+question{
     display:block;
+    zoom:1;
+}
+question.active, question.visited{
     zoom:6;
+}
+question .questionPanel {
+    zoom:50%;
 }
 question.active .questionPanel, question.visited .questionPanel {
     zoom:20%;
@@ -19,8 +25,10 @@ question .questionPanel{
     top:50%;
     transform:translateY(-50%);
 }
-
-question:not(.active) .questionPanel .answerContainer{
+question.active .questionPanel .answerContainer, question.visited .questionPanel .answerContainer{
+    opacity:1;
+}
+question .questionPanel .answerContainer{
     opacity:0;
 }
 

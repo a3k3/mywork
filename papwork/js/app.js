@@ -10,11 +10,12 @@ var app = angular.module('experienceApp', ['experienceApp.filters', 'experienceA
 
   updateZoom = function (index, element) {
       var $slide = $(element),
-          distanceFromTopOfViewport = Math.abs($slide.height()*6 - $(document).scrollTop());
+          $index = parseInt($slide.find('.questionPanel').data('question-id')) - 1,
+          distanceFromTopOfViewport = Math.abs($index * $slide.height() * 6 - $(document).scrollTop());
       //$slide.find('h2').css({
       //    zoom: 2 - distanceFromTopOfViewport / $slide.height()
       //});
-      var ratio = distanceFromTopOfViewport / $slide.height();
+      var ratio = distanceFromTopOfViewport / ($slide.height() * $index);
       $slide.css({
           zoom: 7 - (ratio <= 1 ? 1 : ratio)
       });
@@ -28,10 +29,6 @@ var app = angular.module('experienceApp', ['experienceApp.filters', 'experienceA
       if (ratio < 1) {
           $slide.addClass('active').removeAttr('style');
           $slide.prev().addClass('visited').removeClass('active');
-      }
-      else {
-          $slide.removeClass('active');
-          $slide.prev().removeClass('visited').addClass('active');
       }
   };
 
