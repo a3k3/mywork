@@ -1,9 +1,9 @@
-﻿<div class="questionPanel" data-question-id="{{question.id}}">
+﻿<div id="slide-{{question.id}}" class="questionPanel" data-question-id="{{question.id}}">
     <div class="questionContainer">
         <h2 class="question">{{question.question}}</h2>
-        <p class="caption">{{question.caption}}</p>
     </div>
     <div class="answerContainer">
+        <p class="caption">{{question.caption}}</p>
         <input type="{{question.answertype}}" placeholder="{{question.placeholder}}" />
         <p class="hint">{{question.hint}}</p>
     </div>

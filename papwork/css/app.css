@@ -1,26 +1,31 @@
 /* app css stylesheet */
-
-question.active{
+ng-view.row {
+    display: inline-block;
+    width: 100%;
+}
+question {
+    height:12.5vh;
+}
+question.active, question.visited{
     display:block;
-    height:75vh;
+    zoom:6;
+}
+question.active .questionPanel, question.visited .questionPanel {
+    zoom:20%;
 }
 
-question.active .questionPanel{
+question .questionPanel{
     position:relative;
     top:50%;
     transform:translateY(-50%);
 }
 
-question .questionPanel .answerContainer, question .questionPanel p{
-    display:none;
-}
-
-question.active .questionPanel .answerContainer, question.active .questionPanel p{
-    display:block;
+question:not(.active) .questionPanel .answerContainer{
+    opacity:0;
 }
 
 .nextprev{
-    position:absolute;
+    position:fixed;
     display:inline-block;
     bottom:0;
     left:40%;

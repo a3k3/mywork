@@ -10,7 +10,6 @@ function MyCtrl1($scope, getAllQuestions) {
         $scope.status = response.statusText;
     });
     $scope.next = function () {
-        $('question.active').next().addClass('active');
     }
 }
 MyCtrl1.$inject = ['$scope', 'getAllQuestions'];
