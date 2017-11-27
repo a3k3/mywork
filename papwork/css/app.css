@@ -1,23 +1,74 @@
+.nopadding {
+    padding-left:0;
+    padding-right:0;
+}
+
+.nopadding > .row {
+    margin:0 0;
+}
+.experience-screen {
+    position:relative;
+}
+/***Font Color****/
+.font-color-aaa {
+    color:#aaaaaa;
+}
+.font-color-222 {
+    color:#222222;
+}
+.font-color-000 {
+    color:#aaaaaa;
+}
+/***Font Color****/
+
+/***Font Size****/
+.font-size-10 {
+    font-size:10px;
+}
+.font-size-14 {
+    font-size:14px;
+}
+/***Font Size****/
+
+/*****Progress Bar Overwrite****/
+.progressContainer {
+    position: absolute;
+    width: 100%;
+}
+.progressContainer .progress {
+    height: 4px;
+    margin-bottom:10px;
+}
+.progressContainer .progress-bar {
+    background-color:#ec7474;
+}
+.progressContainer .category {
+    margin-top: 20px;
+}
+/*****Progress Bar Overwrite****/
+
+
+
 /* app css stylesheet */
 ng-view.row {
     display: inline-block;
     width: 100%;
 }
 question {
-    height:12.5vh;
+    height:75vh;
 }
 question{
     display:block;
-    zoom:1;
+    /*zoom:1;*/
 }
 question.active, question.visited{
-    zoom:6;
+    /*zoom:6;*/
 }
 question .questionPanel {
-    zoom:50%;
+    /*zoom:50%;*/
 }
 question.active .questionPanel, question.visited .questionPanel {
-    zoom:20%;
+    /*zoom:20%;*/
 }
 
 question .questionPanel{
@@ -36,7 +87,14 @@ question .questionPanel .answerContainer{
     position:fixed;
     display:inline-block;
     bottom:0;
-    left:40%;
+    right:15px;
+}
+
+a.fa {
+    font-size: 30px;
+    padding-left: 5px;
+    font-weight: bold;
+    color: #ec7474;
 }
 
 .menu {
@@ -67,3 +125,150 @@ question .questionPanel .answerContainer{
   content: "";
   padding: 0;
 }
+/****Menu****/
+
+.answerContainer input{
+    font-size:18px;
+}
+@media screen and (max-width:539px){
+    .questionPanel{
+        text-align:left;
+    }
+    .hint{
+        margin-top:8px;
+    }
+    .caption{
+        margin-top:20px;
+    }
+}
+
+
+/***Input Styles***/
+::-webkit-input-placeholder { text-align: left; } 
+:-moz-placeholder { /* Firefox 18- */ text-align: left; } 
+::-moz-placeholder { /* Firefox 19+ */ text-align: left; } 
+:-ms-input-placeholder { text-align: left; }
+.field {
+    text-align: left;
+    display: inline-block;
+    border-radius: 0;
+    background-color: transparent;
+    color: #035074;
+    margin-bottom: .5rem;
+    padding: .1rem;
+    line-height: 1.8rem;
+    width: auto;
+    max-width: 100%;
+    height:45px;
+}
+
+.field input,.field select,.field textarea,input.field,select.field,textarea.field {
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    color: inherit;
+    display: inline-block;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0
+}
+
+.field input:focus,.field select:focus,.field textarea:focus,input.field:focus,select.field:focus,textarea.field:focus {
+    outline: none
+}
+
+.field select,select.field {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer
+}
+
+.field:not(.field--noedit) {
+    border-bottom: 2px solid rgba(48,146,184,.7)
+}
+
+.field:not(.field--noedit):hover {
+    border-bottom: 2px solid #3092b8;
+    box-shadow: 0 5px 5px -3px rgba(48,146,184,.6)
+}
+
+.field:not(.field--noedit).field--active,.field:not(.field--noedit):focus {
+    border-bottom: 2px solid #3092b8;
+    box-shadow: 0 5px 5px -3px rgba(48,146,184,.6),inset 0 -4px 4px -3px rgba(48,146,184,.5)
+}
+
+.field:not(.field--noedit).interacted:invalid,.field:not(.field--noedit).invalid,.field:not(.field--noedit).is-invalid {
+    border-bottom: 2px solid darkred;
+    box-shadow: 0 5px 5px -3px rgba(139,0,0,.6);
+    color: darkred
+}
+
+.field--expand {
+    width: 100%
+}
+
+.field--light {
+    font-weight: 400
+}
+
+.field--heavy {
+    font-weight: 700
+}
+
+.field--checkbox,.field--radio {
+    cursor: pointer
+}
+
+.field--composite {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    display: inline-flex
+}
+
+.field--composite :last-child {
+    margin-right: 0
+}
+
+.field__item {
+    text-align: inherit;
+    display: inline-block;
+    background: transparent;
+    margin: 0 .5rem 0 0;
+    line-height: 1.8rem;
+    max-width: 100%
+}
+
+.field__item:not(input),.field__item[type=checkbox],.field__item[type=radio] {
+    cursor: pointer
+}
+
+.field__item--label {
+    font-weight: 400
+}
+
+.field__item--compact {
+    margin-right: 0
+}
+
+.field__item--expand {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+select.field,select.field__item {
+    background-image: url(../images/arrow-down-sign-to-navigate.png);
+    background-size: .5rem;
+    background-position: 100%;
+    background-repeat: no-repeat;
+    padding-right: 1rem
+}
+/***Input Styles***/

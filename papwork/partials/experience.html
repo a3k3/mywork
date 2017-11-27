@@ -1,9 +1,19 @@
-<div ng-controller="MyCtrl1" class="row">
-    <question ng-repeat="question in questions" class="question-slide col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0}">
+<div ng-controller="MyCtrl1">
+    <div class="progressContainer">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{questionsObj.activeNow}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount}}" style="width:{{questionsObj.percentComplete()}}%">
+                <span class="sr-only">{{questionsObj.activeNow}} out of {{questionsObj.maxCount}}</span>
+            </div>
+        </div>
+        <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{questionsObj.activeNow}} out of {{questionsObj.maxCount}}</div>
+        <div class="category col-xs-12 text-center font-color-222 font-size-14">Category</div>
+
+    </div>
+    <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0}">
     </question>
 
     <div class="nextprev">
-        <button ng-click="previous()">prev</button>
-        <button ng-click="next()">next</button>
+        <a ng-click="previous()" class="prev fa fa-angle-up"></a>
+        <a ng-click="next()" class="prev fa fa-angle-down"></a>
     </div>
 </div>
