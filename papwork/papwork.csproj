@@ -125,6 +125,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\novajs\demo.css" />
+    <Content Include="lib\novajs\wJSNova.css" />
+    <Content Include="lib\novajs\wJSNova.js" />
     <Content Include="lib\skollr\skrollr.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">

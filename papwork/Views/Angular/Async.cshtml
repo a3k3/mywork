@@ -2,7 +2,37 @@
     ViewBag.Title = "Async";
     Layout = "~/Views/Shared/_LayoutAngularAsync.cshtml";
 }
-@section Script{
-    <script src="~/lib/skollr/skrollr.js"></script>
-}
-<ng-view></ng-view>
+<script type="text/javascript">
+    $("#header-menu-button").click(function(){ $("#header-links").toggle(); });
+</script>
+<!-- headend -->
+<link href="../lib/novajs/wJSNova.css" rel="stylesheet" />
+<script src="../lib/novajs/wJSNova.js"></script>
+
+<style>
+    body, html {
+        margin: 0px;
+        overflow: hidden;
+    }
+</style>
+
+<div id="JSNova" style="width:100%;height:400px;"></div>
+
+<script type="text/javascript">
+
+        var jsn = null;
+
+        $(document).ready(function()
+        {
+            $('#JSNova').height($(window).height()-80);
+            jsn = $("#JSNova").wJSNova();
+            jsn.wJSNova('resize');
+        });
+
+        $(window).resize(function()
+        {
+            $('#JSNova').height($(window).height()-80);
+            jsn.wJSNova('resize');
+        });
+
+</script>
