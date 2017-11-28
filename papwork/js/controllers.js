@@ -2,7 +2,7 @@
 /* App Controllers */
 
 
-function MyCtrl1($scope, getAllQuestions) {
+function questionsCtrl($scope, getAllQuestions) {
     $scope.questionsObj = {
         questions: [],
         maxCount: 0,
@@ -19,10 +19,23 @@ function MyCtrl1($scope, getAllQuestions) {
     }, function myError(response) {
         $scope.status = response.statusText;
     });
-    $scope.next = function () {
+
+    //next button click
+    $scope.questionsObj.next = function () {
+        var _active = document.getElementsByClassName("active");
+        _active = angular.element(_active);
+        _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active');
+    }
+
+    //prev button click
+    $scope.questionsObj.prev = function () {
+        var _active = document.getElementsByClassName("active");
+        _active = angular.element(_active);
+        _active.removeClass('active').addClass('next_active').prev().addClass('active').removeClass('next_active').removeClass('visited');
+        _active.next().removeClass('next_active');
     }
 }
-MyCtrl1.$inject = ['$scope', 'getAllQuestions'];
+questionsCtrl.$inject = ['$scope', 'getAllQuestions'];
 
 
 function MyCtrl2() {
