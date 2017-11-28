@@ -141,6 +141,7 @@
     <Content Include="asset\img\verypoor.JPG" />
     <Content Include="asset\img\verypoor_active.JPG" />
     <Content Include="css\input.css" />
+    <Content Include="js\swipe.js" />
     <Content Include="lib\novajs\demo.css" />
     <Content Include="lib\novajs\wJSNova.css" />
     <Content Include="lib\novajs\wJSNova.js" />
