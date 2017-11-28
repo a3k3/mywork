@@ -272,3 +272,36 @@ select.field,select.field__item {
     padding-right: 1rem
 }
 /***Input Styles***/
+
+
+/******Questions*****/
+question{
+    height:12.5vh;
+    opacity:0.5;
+}
+question .questionPanel {
+    top: 0;
+    transform:none;
+}
+question .questionPanel h2{
+    font-size:14px
+}
+question.active{
+    height:75vh;
+    opacity:1;
+}
+question.visited {
+   display:none;
+}
+question.next_active{
+    opacity:0.8;
+}
+question.active .questionPanel {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+question.active .questionPanel h2{
+    font-size:30px;
+}
+/******Questions*****/
