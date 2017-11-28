@@ -1,4 +1,4 @@
-<div ng-controller="questionsCtrl">
+<form name="questionsForm" ng-controller="questionsCtrl">
     <div class="progressContainer">
         <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="{{questionsObj.activeNow}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount}}" style="width:{{questionsObj.percentComplete()}}%">
@@ -9,11 +9,11 @@
         <div class="category col-xs-12 text-center font-color-222 font-size-14">Category</div>
 
     </div>
-    <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0, next_active: $index == 1}">
+    <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">
     </question>
 
     <div class="nextprev">
         <a ng-click="questionsObj.prev()" class="prev fa fa-angle-up"></a>
         <a ng-click="questionsObj.next()" class="prev fa fa-angle-down"></a>
     </div>
-</div>
+</form>

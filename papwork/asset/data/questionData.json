@@ -2,6 +2,7 @@
   {
     "id": 1,
     "question": "What is your name?",
+    "name": "name",
     "caption": "Will not share your name to anyone",
     "answertype": "text",
     "answertheme": "",
@@ -15,6 +16,7 @@
   {
     "id": 2,
     "question": "What is your phone no.?",
+    "name": "tel",
     "caption": "Will not share your number to anyone",
     "answertype": "tel",
     "answertheme": "",
@@ -28,6 +30,7 @@
   {
     "id": 3,
     "question": "How would like to rate our Product & Services?",
+    "name": "rating",
     "caption": "Help us serve better",
     "answertype": "rating",
     "answertheme": "star",
