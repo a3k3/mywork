@@ -18,7 +18,7 @@
     "question": "What is your phone no.?",
     "name": "tel",
     "caption": "Will not share your number to anyone",
-    "answertype": "tel",
+    "answertype": "text",
     "answertheme": "",
     "hint": "Type your mobile no",
     "placeholder": "+91 7893459013",
@@ -34,6 +34,34 @@
     "caption": "Help us serve better",
     "answertype": "rating",
     "answertheme": "star",
+    "hint": "Tap the star to give rating",
+    "placeholder": "",
+    "validations": {
+      "required": true,
+      "maxCount": 5
+    }
+  },
+  {
+    "id": 4,
+    "question": "How would like to rate our Product & Services?",
+    "name": "rating",
+    "caption": "Help us serve better",
+    "answertype": "rating",
+    "answertheme": "smiley",
+    "hint": "Tap the star to give rating",
+    "placeholder": "",
+    "validations": {
+      "required": true,
+      "maxCount": 5
+    }
+  },
+  {
+    "id": 4,
+    "question": "How would like to rate our Product & Services?",
+    "name": "checkbox",
+    "caption": "Help us serve better",
+    "answertype": "checkbox",
+    "answertheme": "",
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {

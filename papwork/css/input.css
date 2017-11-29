@@ -239,43 +239,43 @@ fieldset, label {
 }
 
 .verypoor {
-    background: transparent url('file:///E:/pap/smiley/verypoor.jpg' ) no-repeat;
+    background: transparent url('../asset/img/verypoor.JPG' ) no-repeat;
 }
 
 .poor {
-    background: transparent url('file:///E:/pap/smiley/poor.jpg' ) no-repeat;
+    background: transparent url('../asset/img/poor.jpg' ) no-repeat;
 }
 
 .average {
-    background: transparent url('file:///E:/pap/smiley/avg.jpg' ) no-repeat;
+    background: transparent url('../asset/img/avg.jpg' ) no-repeat;
 }
 
 .good {
-    background: transparent url('file:///E:/pap/smiley/good.jpg' ) no-repeat;
+    background: transparent url('../asset/img/good.jpg' ) no-repeat;
 }
 
 .excellent {
-    background: transparent url('file:///E:/pap/smiley/excellent.jpg' ) no-repeat;
+    background: transparent url('../asset/img/excellent.jpg' ) no-repeat;
 }
 
 .verypoor.active {
-    background: transparent url('file:///E:/pap/smiley/verypoor_active.jpg' ) no-repeat;
+    background: transparent url('../asset/img/verypoor_active.jpg' ) no-repeat;
 }
 
 .poor.active {
-    background: transparent url('file:///E:/pap/smiley/poor_active.jpg' ) no-repeat;
+    background: transparent url('../asset/img/poor_active.jpg' ) no-repeat;
 }
 
 .average.active {
-    background: transparent url('file:///E:/pap/smiley/avg_active.jpg' ) no-repeat;
+    background: transparent url('../asset/img/avg_active.jpg' ) no-repeat;
 }
 
 .good.active {
-    background: transparent url('file:///E:/pap/smiley/good_active.jpg' ) no-repeat;
+    background: transparent url('../asset/img/good_active.jpg' ) no-repeat;
 }
 
 .excellent.active {
-    background: transparent url('file:///E:/pap/smiley/excellent_active.jpg' ) no-repeat;
+    background: transparent url('../asset/img/excellent_active.jpg' ) no-repeat;
 }
 /****** End of Smiley Rating *****/
 /****** Size Styling *****/
@@ -354,7 +354,7 @@ fieldset, label {
 
 .image-product-type .products.active {
     border: 2px solid green;
-    background: transparent url('file:///E:/pap/smiley/avg.jpg' ) no-repeat;
+    background: transparent url('../asset/img/avg.jpg' ) no-repeat;
 }
 
     .image-product-type .products.active .selected-icon {

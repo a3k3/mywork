@@ -2,32 +2,41 @@
 var app = angular.module('experienceApp', ['experienceApp.filters', 'experienceApp.services', 'experienceApp.directives']);
 
   app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/view1', {template: '/partials/experience.html', controller: questionsCtrl});
-    $routeProvider.when('/view2', {template: '/partials/partial2.html', controller: MyCtrl2});
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.when('/experience', {template: '/partials/experience.html', controller: questionsCtrl});
+    $routeProvider.when('/tool', { template: '/partials/partial2.html', controller: MyCtrl2 });
+    $routeProvider.when('/cover', { template: '/partials/cover.html' });
+    $routeProvider.when('/success', { template: '/partials/success.html' });
+    $routeProvider.otherwise({ redirectTo: '/cover' });
   }]);
 
 
-  //updateZoom = function (index, element) {
-  //    var $slide = $(element),
-  //        $index = parseInt($slide.find('.questionPanel').data('question-id')) - 1,
-  //        distanceFromTopOfViewport = Math.abs($index * $slide.height() * 6 - $(document).scrollTop());
-  //    //$slide.find('h2').css({
-  //    //    zoom: 2 - distanceFromTopOfViewport / $slide.height()
-  //    //});
-  //    var ratio = distanceFromTopOfViewport / ($slide.height() * $index);
-  //    $slide.css({
-  //        zoom: 7 - (ratio <= 1 ? 1 : ratio)
-  //    });
-  //    $slide.find('.questionPanel').css({
-  //        zoom: (20 + (ratio/2)*10)+"%"
-  //    });
-  //    $slide.find('.answerContainer').css({
-  //        opacity: (6 - ratio)/6
-  //    });
+  var timeoutId;
+  $(window).bind('mousewheel', function (event) {
+      if (timeoutId) {
+          clearTimeout(timeoutId);
+      }
+      if (event.originalEvent.wheelDelta >= 0) {
+          timeoutId = setTimeout(function () { $('.prev').trigger('click'); }, 300);
+      }
+      else {
+          timeoutId = setTimeout(function () { $('.next').trigger('click'); }, 300);
+      }
+  });
 
-  //    if (ratio < 1) {
-  //        $slide.addClass('active').removeAttr('style');
-  //        $slide.prev().addClass('visited').removeClass('active');
-  //    }
-  //};
+  $(document).ready(function () {
+      $(".checkbox-block input").click(function () {
+          $(this).toggleClass('checked');
+      })
+      $(".smiley-rating .smiley div").click(function () {
+          $(this).addClass("active").parent().siblings().find("div").removeClass("active");
+      })
+      $(".size-chart li").click(function () {
+          $(this).addClass("active").siblings().removeClass("active");
+      })
+      $(".image-product-type .products").click(function () {
+          if ($(this).hasClass("active"))
+              $(this).removeClass("active");
+          else
+              $(this).addClass("active");
+      })
+  });

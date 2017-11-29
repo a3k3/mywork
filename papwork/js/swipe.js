@@ -64,5 +64,5 @@ $.each({
     };
 });
 
-//$('.outer-ash').on('swipedown', function () { alert("swipedown.."); });
-$('.outer-ash').on('swipeup', function () { $('.next-div').trigger('click'); });
+$('.experience-screen').on('swipeup', function () { $('.next').trigger('click'); });
+$('.experience-screen').on('swipeup', function () { $('.next').trigger('click'); });

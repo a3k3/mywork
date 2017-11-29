@@ -5,8 +5,7 @@
     <div class="answerContainer">
         <p class="caption font-color-666 font-size-14">{{question.caption}}</p>
         <div class="inputContainer">
-            <input class="field font-color-000 font-size-18" name="{{question.name}}" type="{{question.answertype}}" placeholder="{{question.placeholder}}" required />
-            <a class="tick fa fa-check-circle-o disabled"></a>
+        <ng-include src="dynamicTemplateUrl(question)"></ng-include>
         </div>
         <p class="hint font-color-666 font-size-12">Hint: {{question.hint}}</p>
     </div>

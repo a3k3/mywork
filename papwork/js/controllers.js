@@ -20,6 +20,10 @@ function questionsCtrl($scope, getAllQuestions) {
         $scope.status = response.statusText;
     });
 
+    $scope.dynamicTemplateUrl = function (data) {
+        return "../partials/input_templates/" + getTemplate(data) + ".html"
+    }
+
     //next button click
     $scope.questionsObj.next = function () {
         var _active = document.getElementsByClassName("active");
@@ -53,3 +57,15 @@ function animateQ() {
 
 }
 
+var getTemplate = function (data) {
+    var input_template = "";
+    if (data.answertype != null && data.answertype != "") {
+        input_template = data.answertype.toLowerCase();
+        if (data.answertheme != null && data.answertheme != "")
+            input_template = input_template + "_" + data.answertheme.toLowerCase();
+    }
+    else {
+        input_template = "text";
+    }
+    return input_template;
+}
