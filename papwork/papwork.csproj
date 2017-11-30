@@ -133,6 +133,10 @@
     <Content Include="asset\img\excellent_active.JPG" />
     <Content Include="asset\img\good.JPG" />
     <Content Include="asset\img\good_active.JPG" />
+    <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_down_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_left_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_right_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_up_black_24px.svg" />
     <Content Include="asset\img\pancard.JPG" />
     <Content Include="asset\img\poor.JPG" />
     <Content Include="asset\img\poor_active.JPG" />

@@ -1,2 +1,8 @@
-﻿<input class="field font-color-000 font-size-18" name="{{question.name}}" type="{{question.answertype}}" placeholder="{{question.placeholder}}" required />
-<a class="tick fa fa-check-circle-o disabled"></a>
+﻿<md-input-container>
+    <input class="md-accent hue-2" name="{{question.name}}" ng-model="question.modelname" type="{{question.answertype}}" placeholder="{{question.placeholder}}" required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}">
+    <div ng-messages="questionsForm.{{question.name}}.$error" ng-show="questionsForm.{{question.name}}.$dirty">
+        <div ng-message="required">{{question.validations.required.text}}</div>
+        <div ng-message="md-maxlength">{{question.validations.maxlength.text}}</div>
+        <div ng-message="minlength">{{question.validations.minlength.text}}</div>
+    </div>
+</md-input-container>

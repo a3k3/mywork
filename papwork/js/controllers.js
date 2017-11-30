@@ -1,6 +1,7 @@
 
 /* App Controllers */
 
+var myapp = angular.module('experienceApp.controllers', []);
 
 function questionsCtrl($scope, getAllQuestions) {
     $scope.questionsObj = {
@@ -24,6 +25,13 @@ function questionsCtrl($scope, getAllQuestions) {
         return "../partials/input_templates/" + getTemplate(data) + ".html"
     }
 
+    $scope.onSwipeDown = function (ev) {
+        $scope.questionsObj.next();
+    };
+    $scope.onSwipeUp = function (ev) {
+        $scope.questionsObj.prev();
+    };
+
     //next button click
     $scope.questionsObj.next = function () {
         var _active = document.getElementsByClassName("active");
@@ -46,16 +54,16 @@ function questionsCtrl($scope, getAllQuestions) {
         }
     }
 }
-questionsCtrl.$inject = ['$scope', 'getAllQuestions'];
+//questionsCtrl.$inject = ['$scope', 'getAllQuestions'];
+
+myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', questionsCtrl])
 
 
 function MyCtrl2() {
 }
-MyCtrl2.$inject = [];
+//MyCtrl2.$inject = [];
 
-function animateQ() {
-
-}
+myapp.controller('MyCtrl2', ['$scope', 'getAllQuestions', MyCtrl2])
 
 var getTemplate = function (data) {
     var input_template = "";

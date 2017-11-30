@@ -142,23 +142,11 @@ select.field,select.field__item {
     padding-right: 1rem
 }
 /***Input Styles***/
-
-.checkbox-block input {
-    height: 25px;
-    width: 25px;
-    background-color: #fff;
-    border: 2px #222 solid;
-    margin: 15px 0 0 0;
-    -webkit-appearance: none;
+md-checkbox {
+    display:block;
 }
-
-.checkbox-block input.checked {
-    background: transparent url('file:///E:/pap/checked.jpg' ) no-repeat;
-}
-
-.checkbox-block span {
-    vertical-align: super;
-    margin-left: 15px;
+md-checkbox.md-checked.green .md-icon {
+ background-color: #69af4a;
 }
 
 /****** Style Star Rating Widget *****/

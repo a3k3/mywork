@@ -3,41 +3,64 @@
     "id": 1,
     "question": "What is your name?",
     "name": "name",
+    "modelname": "",
     "caption": "Will not share your name to anyone",
     "answertype": "text",
     "answertheme": "",
     "hint": "Type your name",
     "placeholder": "Enter your name",
     "validations": {
-      "required": true,
-      "string": true
+      "required": {
+        "condition": "true",
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "minlength": {
+        "condition": 0,
+        "text": "Thats too short!"
+      }
     }
   },
   {
     "id": 2,
     "question": "What is your phone no.?",
     "name": "tel",
+    "modelname": "",
     "caption": "Will not share your number to anyone",
     "answertype": "text",
     "answertheme": "",
     "hint": "Type your mobile no",
     "placeholder": "+91 7893459013",
     "validations": {
-      "required": true,
-      "maxCount": 10
+      "required": {
+        "condition": "true",
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "minlength": {
+        "condition": 0,
+        "text": "Thats too short!"
+      }
     }
   },
   {
     "id": 3,
     "question": "How would like to rate our Product & Services?",
     "name": "rating",
+    "modelname": "",
     "caption": "Help us serve better",
     "answertype": "rating",
     "answertheme": "star",
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": true,
+      "required": "true",
       "maxCount": 5
     }
   },
@@ -45,28 +68,52 @@
     "id": 4,
     "question": "How would like to rate our Product & Services?",
     "name": "rating",
+    "modelname": "",
     "caption": "Help us serve better",
     "answertype": "rating",
     "answertheme": "smiley",
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": true,
+      "required": "true",
       "maxCount": 5
     }
   },
   {
-    "id": 4,
+    "id": 5,
     "question": "How would like to rate our Product & Services?",
     "name": "checkbox",
+    "modelname": "",
     "caption": "Help us serve better",
     "answertype": "checkbox",
     "answertheme": "",
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": true,
+      "required": "true",
       "maxCount": 5
-    }
+    },
+    "options": [
+      {
+        "name": "product",
+        "key": "ProductA",
+        "value": "ProductA"
+      },
+      {
+        "name": "product",
+        "key": "ProductB",
+        "value": "ProductB"
+      },
+      {
+        "name": "product",
+        "key": "ProductC",
+        "value": "ProductC"
+      },
+      {
+        "name": "product",
+        "key": "ProductD",
+        "value": "ProductD"
+      }
+    ]
   }
 ]

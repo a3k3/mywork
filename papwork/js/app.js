@@ -1,12 +1,25 @@
 // Declare app level module which depends on filters, and services
-var app = angular.module('experienceApp', ['experienceApp.filters', 'experienceApp.services', 'experienceApp.directives']);
+var app = angular.module('experienceApp', ['ngRoute', 'experienceApp.filters', 'experienceApp.services', 'experienceApp.directives', 'experienceApp.controllers', 'ngMaterial']);
 
-  app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/experience', {template: '/partials/experience.html', controller: questionsCtrl});
-    $routeProvider.when('/tool', { template: '/partials/partial2.html', controller: MyCtrl2 });
-    $routeProvider.when('/cover', { template: '/partials/cover.html' });
-    $routeProvider.when('/success', { template: '/partials/success.html' });
+app.config(['$routeProvider', '$controllerProvider', '$mdThemingProvider', function ($routeProvider, $controllerProvider, $mdThemingProvider) {
+    $routeProvider.when('/experience', { templateUrl: '/partials/experience.html'});
+    $routeProvider.when('/tool', { templateUrl: '/partials/partial2.html'});
+    $routeProvider.when('/cover', { templateUrl: '/partials/cover.html' });
+    $routeProvider.when('/success', { templateUrl: '/partials/success.html' });
     $routeProvider.otherwise({ redirectTo: '/cover' });
+    $controllerProvider.allowGlobals();
+
+
+    //themeing
+    $mdThemingProvider.theme('mytheme')
+      .primaryPalette('pink', {
+          'default': '400', // by default use shade 400 from the pink palette for primary intentions
+          'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
+          'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
+          'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
+      })
+      .accentPalette('green')
+      .warnPalette('red');
   }]);
 
 
@@ -21,22 +34,4 @@ var app = angular.module('experienceApp', ['experienceApp.filters', 'experienceA
       else {
           timeoutId = setTimeout(function () { $('.next').trigger('click'); }, 300);
       }
-  });
-
-  $(document).ready(function () {
-      $(".checkbox-block input").click(function () {
-          $(this).toggleClass('checked');
-      })
-      $(".smiley-rating .smiley div").click(function () {
-          $(this).addClass("active").parent().siblings().find("div").removeClass("active");
-      })
-      $(".size-chart li").click(function () {
-          $(this).addClass("active").siblings().removeClass("active");
-      })
-      $(".image-product-type .products").click(function () {
-          if ($(this).hasClass("active"))
-              $(this).removeClass("active");
-          else
-              $(this).addClass("active");
-      })
   });

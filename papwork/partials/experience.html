@@ -1,19 +1,19 @@
-<form name="questionsForm" ng-controller="questionsCtrl">
+<form name="questionsForm" ng-controller="questionsCtrl" md-theme="mytheme" md-swipe-up="onSwipeUp()" md-swipe-down="onSwipeDown()">
     <div class="progressContainer">
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{questionsObj.activeNow}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount}}" style="width:{{questionsObj.percentComplete()}}%">
-                <span class="sr-only">{{questionsObj.activeNow}} out of {{questionsObj.maxCount}}</span>
-            </div>
-        </div>
+        <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{questionsObj.percentComplete()}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount}}"></md-progress-linear>
         <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{questionsObj.activeNow}} out of {{questionsObj.maxCount}}</div>
         <div class="category col-xs-12 text-center font-color-222 font-size-14">Category</div>
-
     </div>
     <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">
     </question>
 
     <div class="nextprev">
-        <a ng-click="questionsObj.prev()" class="prev fa fa-angle-up"></a>
-        <a ng-click="questionsObj.next()" class="next fa fa-angle-down"></a>
+        <md-button class="md-icon-button md-warn md-hue-1" aria-label="Prev" ng-click="questionsObj.prev()">
+            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_keyboard_arrow_up_black_24px.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button md-warn md-hue-1" aria-label="Next" ng-click="questionsObj.next()">
+            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_keyboard_arrow_down_black_24px.svg"></md-icon>
+        </md-button>
     </div>
+    <md-button class="submit md-raised md-accent" ng-if="questionsObj.activeNow == questionsObj.maxCount">Submit</md-button>
 </form>

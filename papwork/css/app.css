@@ -49,15 +49,14 @@
     z-index: 99;
     background: #fff;
 }
-.progressContainer .progress {
-    height: 4px;
-    margin-bottom:10px;
-}
-.progressContainer .progress-bar {
-    background-color:#EA8F9A;
+.progressContainer .status {
+    margin-top:10px;
 }
 .progressContainer .category {
     margin-top: 20px;
+}
+md-progress-linear .md-container {
+    height:4px;
 }
 /*****Progress Bar Overwrite****/
 
@@ -71,12 +70,31 @@
     right:15px;
 }
 
-.nextprev a.fa {
-    font-size: 30px;
-    padding-left: 5px;
-    font-weight: bold;
-    color: #EA8F9A;
-    text-decoration:none;
+.nextprev .md-button.md-icon-button {
+    padding: 0 0;
+    margin: 0;
+    width: auto;
+}
+
+.nextprev .md-button.md-icon-button md-icon {
+    padding: 0 0;
+    margin: 0;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+}
+md-icon svg {
+  fill: inherit;
+}
+.submit {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+.submit span {
+    color:#fff;
 }
 
 .menu {
