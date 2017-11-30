@@ -115,5 +115,42 @@
         "value": "ProductD"
       }
     ]
+  },
+  {
+    "id": 5,
+    "question": "How would like to rate our Product & Services?",
+    "name": "radio",
+    "modelname": "",
+    "caption": "Help us serve better",
+    "answertype": "radio",
+    "answertheme": "",
+    "hint": "Tap the star to give rating",
+    "placeholder": "",
+    "validations": {
+      "required": "true",
+      "maxCount": 5
+    },
+    "options": [
+      {
+        "name": "product",
+        "key": "ProductA",
+        "value": "ProductA"
+      },
+      {
+        "name": "product",
+        "key": "ProductB",
+        "value": "ProductB"
+      },
+      {
+        "name": "product",
+        "key": "ProductC",
+        "value": "ProductC"
+      },
+      {
+        "name": "product",
+        "key": "ProductD",
+        "value": "ProductD"
+      }
+    ]
   }
 ]

@@ -7,11 +7,11 @@
     <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">
     </question>
 
-    <div class="nextprev">
-        <md-button class="md-icon-button md-warn md-hue-1" aria-label="Prev" ng-click="questionsObj.prev()">
+    <div class="nextprev" ng-class="{last: questionsObj.activeNow == questionsObj.maxCount}">
+        <md-button class="md-icon-button md-warn md-hue-1" aria-label="Prev" ng-click="questionsObj.prev()" ng-disabled="questionsObj.activeNow == 1">
             <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_keyboard_arrow_up_black_24px.svg"></md-icon>
         </md-button>
-        <md-button class="md-icon-button md-warn md-hue-1" aria-label="Next" ng-click="questionsObj.next()">
+        <md-button class="md-icon-button md-warn md-hue-1" aria-label="Next" ng-click="questionsObj.next()" ng-disabled="questionsObj.activeNow == questionsObj.maxCount">
             <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_keyboard_arrow_down_black_24px.svg"></md-icon>
         </md-button>
     </div>

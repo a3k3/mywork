@@ -6,7 +6,7 @@
 .nopadding > .row {
     margin:0 0;
 }
-.experience-screen {
+.experience-screen, .experience-screen > form {
     height:100vh;
 }
 /***Font Color****/
@@ -68,8 +68,13 @@ md-progress-linear .md-container {
     display:inline-block;
     bottom:0;
     right:15px;
+    -webkit-transition: bottom .8s ease-out;
+    -moz-transition: bottom .8s ease-out;
+    transition: bottom .8s ease-out;
 }
-
+.nextprev.last {
+    bottom:35px;
+}
 .nextprev .md-button.md-icon-button {
     padding: 0 0;
     margin: 0;

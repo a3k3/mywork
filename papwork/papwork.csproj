@@ -133,6 +133,7 @@
     <Content Include="asset\img\excellent_active.JPG" />
     <Content Include="asset\img\good.JPG" />
     <Content Include="asset\img\good_active.JPG" />
+    <Content Include="asset\img\md-icons\svg\ic_check_circle_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_down_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_left_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_right_black_24px.svg" />
@@ -162,6 +163,7 @@
     <Content Include="partials\cover.html" />
     <Content Include="partials\input_templates\checkbox.html" />
     <Content Include="partials\input_templates\product_select.html" />
+    <Content Include="partials\input_templates\radio.html" />
     <Content Include="partials\input_templates\rating_smiley.html" />
     <Content Include="partials\input_templates\rating_star.html" />
     <Content Include="partials\input_templates\sizechart.html" />
