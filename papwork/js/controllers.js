@@ -3,7 +3,7 @@
 
 var myapp = angular.module('experienceApp.controllers', []);
 
-function questionsCtrl($scope, getAllQuestions) {
+function questionsCtrl($scope, getAllQuestions, $timeout) {
     $scope.questionsObj = {
         questions: [],
         maxCount: 0,
@@ -53,10 +53,27 @@ function questionsCtrl($scope, getAllQuestions) {
             $scope.questionsObj.activeNow--;
         }
     }
+
+    $scope.sizeSelection = function (index) {
+        var _active = document.getElementById('radio-' + index);
+        _active = angular.element(_active);
+        _active.parent().addClass('active').siblings().removeClass('active');
+        _active.attr('checked', true);
+        _active.parent().siblings().find('input').attr('checked', false);
+    }
+
+    $scope.starSelection = function (index) {
+        var _active = document.getElementById(index);
+        _active = angular.element(_active);
+        _active.parent('.ng-scope').addClass('activestar').siblings().removeClass('activestar');
+        $timeout(function () {
+            $scope.questionsObj.next();
+        }, 1000);
+    }
 }
 //questionsCtrl.$inject = ['$scope', 'getAllQuestions'];
 
-myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', questionsCtrl])
+myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', questionsCtrl])
 
 
 function MyCtrl2() {

@@ -9,6 +9,9 @@
 .experience-screen, .experience-screen > form {
     height:100vh;
 }
+.experience-screen > form {
+    overflow:hidden;
+}
 /***Font Color****/
 .font-color-aaa {
     color:#aaaaaa;

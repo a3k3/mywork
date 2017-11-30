@@ -162,12 +162,14 @@
     </Content>
     <Content Include="partials\cover.html" />
     <Content Include="partials\input_templates\checkbox.html" />
+    <Content Include="partials\input_templates\input_calendar.html" />
     <Content Include="partials\input_templates\product_select.html" />
     <Content Include="partials\input_templates\radio.html" />
     <Content Include="partials\input_templates\rating_smiley.html" />
     <Content Include="partials\input_templates\rating_star.html" />
-    <Content Include="partials\input_templates\sizechart.html" />
+    <Content Include="partials\input_templates\radio_size.html" />
     <Content Include="partials\input_templates\text.html" />
+    <Content Include="partials\input_templates\file.html" />
     <Content Include="partials\success.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />

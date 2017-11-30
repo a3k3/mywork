@@ -51,6 +51,23 @@
   },
   {
     "id": 3,
+    "question": "Do you have Adhar Card.?",
+    "name": "adhar",
+    "modelname": "",
+    "caption": "Will not share your number to anyone",
+    "answertype": "file",
+    "answertheme": "",
+    "hint": "Upload your adhar card",
+    "placeholder": "Upload",
+    "validations": {
+      "required": {
+        "condition": "true",
+        "text": "Thats required!"
+      }
+    }
+  },
+  {
+    "id": 4,
     "question": "How would like to rate our Product & Services?",
     "name": "rating",
     "modelname": "",
@@ -62,10 +79,37 @@
     "validations": {
       "required": "true",
       "maxCount": 5
-    }
+    },
+     "options": [
+      {
+        "id": "star5",
+        "title": "Awesome - 5 stars",
+        "value": "5"
+      },
+      {
+        "id": "star4",
+        "title": "Pretty good - 4 stars",
+        "value": "4"
+      },
+      {
+        "id": "star3",
+        "title": "Meh - 3 stars",
+        "value": "3"
+      },
+      {
+        "id": "star2",
+        "title": "Kinda bad - 2 stars",
+        "value": "2"
+      },
+      {
+        "id": "star1",
+        "title": "Sucks big time - 1 star",
+        "value": "1"
+      }
+    ]
   },
   {
-    "id": 4,
+    "id": 5,
     "question": "How would like to rate our Product & Services?",
     "name": "rating",
     "modelname": "",
@@ -80,7 +124,7 @@
     }
   },
   {
-    "id": 5,
+    "id": 6,
     "question": "How would like to rate our Product & Services?",
     "name": "checkbox",
     "modelname": "",
@@ -117,7 +161,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 7,
     "question": "How would like to rate our Product & Services?",
     "name": "radio",
     "modelname": "",
@@ -150,6 +194,59 @@
         "name": "product",
         "key": "ProductD",
         "value": "ProductD"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "When did you born?",
+    "name": "birthday",
+    "modelname": "",
+    "caption": "Help us serve better",
+    "answertype": "input",
+    "answertheme": "calendar",
+    "hint": "Please select the date",
+    "placeholder": ""
+  },
+  {
+    "id": 9,
+    "question": "How would like to rate our Product & Services?",
+    "name": "sizechart",
+    "modelname": "",
+    "caption": "Help us serve better",
+    "answertype": "radio",
+    "answertheme": "size",
+    "hint": "Tap the star to give rating",
+    "placeholder": "",
+    "validations": {
+      "required": "true",
+      "maxCount": 5
+    },
+    "options": [
+      {
+        "name": "size",
+        "key": "XS",
+        "value": "XS"
+      },
+      {
+        "name": "size",
+        "key": "S",
+        "value": "S"
+      },
+      {
+        "name": "size",
+        "key": "M",
+        "value": "M"
+      },
+      {
+        "name": "size",
+        "key": "L",
+        "value": "L"
+      },
+      {
+        "name": "size",
+        "key": "XL",
+        "value": "XL"
       }
     ]
   }

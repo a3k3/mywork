@@ -1,0 +1,9 @@
+﻿<md-input-container>
+    <input class="md-accent hue-2" id="input-file-{{question.id}}" name="{{question.name}}" ng-model="question.modelname" type="{{question.answertype}}" placeholder="{{question.placeholder}}" required="{{question.validations.required.condition}}" />
+    <div ng-messages="questionsForm.{{question.name}}.$error" ng-show="questionsForm.{{question.name}}.$dirty">
+        <div ng-message="required">{{question.validations.required.text}}</div>
+    </div>
+    <md-button for="input-file-{{question.id}}" class="attach md-icon-button md-accent md-hue-3" aria-label="Attach" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$valid">
+        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_attach_file_black_24px.svg"></md-icon>
+    </md-button>
+</md-input-container>

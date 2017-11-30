@@ -5,7 +5,7 @@
         <div ng-message="md-maxlength">{{question.validations.maxlength.text}}</div>
         <div ng-message="minlength">{{question.validations.minlength.text}}</div>
     </div>
-    <md-button class="tick md-icon-button md-accent md-hue-3" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$touched">
+    <md-button class="tick md-icon-button md-accent md-hue-3" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$valid">
         <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
     </md-button>
 </md-input-container>
