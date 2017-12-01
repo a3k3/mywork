@@ -1,0 +1,8 @@
+﻿<md-input-container>
+    <label>Biography</label>
+    <textarea name="{{question.name}}" ng-model="vm.formdata.textarea" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}"></textarea>
+    <div ng-messages="questionsForm.{{question.name}}.$error" ng-show="questionsForm.{{question.name}}.$dirty">
+        <div ng-message="required">{{question.validations.required.text}}</div>
+        <div ng-message="md-maxlength">{{question.validations.maxlength.text}}</div>
+    </div>
+</md-input-container>

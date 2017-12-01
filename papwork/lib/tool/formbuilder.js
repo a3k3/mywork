@@ -140,25 +140,6 @@
 						)
 					)
 					.append(
-						$('<td class="_formbuilder_box _formbuilder_boxTop _formbuilder_boxRight"></td>')
-						.append(
-							$('<div class="_formbuilder_boxContainer"></div>')
-							.append($this.boxCSS)
-							.append('<div class="_formbuilder_boxLabel">CSS</div>')
-						)
-					)
-				)
-				.append(
-					$('<tr></tr>')
-					.append(
-						$('<td class="_formbuilder_box _formbuilder_boxBottom _formbuilder_boxLeft"></td>')
-						.append(
-							$('<div class="_formbuilder_boxContainer"></div>')
-							.append($this.boxJS)
-							.append('<div class="_formbuilder_boxLabel">JavaScript</div>')
-						)
-					)
-					.append(
 						$('<td class="_formbuilder_box _formbuilder_boxBottom _formbuilder_boxRight"></td>')
 						.append(
 							$('<div class="_formbuilder_boxContainer"></div>')
@@ -171,8 +152,7 @@
 
 	        $this.jsn =
 			$('<div class="_formbuilder_holder"></div>')
-			.append($this.menu)
-			.append($this.sidebar)
+			.append($this.menu) //.append($this.sidebar)
 			.append($this.codeArea);
 
 	        return $this.jsn;
@@ -183,13 +163,47 @@
 	        var css = this.boxCSS.val();
 	        var js = this.boxJS.val();
 
-	        var jQuery = '<script type="text/javascript" src="' + this.jQueryVersion.val() + '"></script>';
-	        var jQueryUI = '<script type="text/javascript" src="' + this.jQueryUIVersion.val() + '"></script>';
-	        var jQueryUITheme = '<link rel="stylesheet" type="text/css" href="' + this.jQueryUITheme.val() + '"/>'
+	        //convert to input expected by our theme
+	        var othertypes = ['radio','select','checkbox'];
+            var questions = []
+	        $(html).find('label').each(function (index, value) {
+	            var question = {
+	                "id": index + 1,
+	                "question": $(this).text(),
+	                "name": $(this).next().attr('name'),
+	                "modelname": "",
+	                "caption": "",
+	                "answertype": $(this).next().prop("tagName").toLowerCase() == 'input' ? $(this).next().attr('type') : $(this).next().prop("tagName").toLowerCase(),
+	                "answertheme": "",
+	                "hint": "",
+	                "placeholder": "Enter here",
+	                "validations": {
+	                    "required": {
+	                        "condition": "true",
+	                        "text": "Thats required!"
+	                    }
+	                }
+	            }
+	            if ($.inArray(question.answertype.toLowerCase(), othertypes) > -1) {
+	                question.options = [];
+	                if (question.answertype.toLowerCase() == "select") {
+	                    $(this).next().find('option').each(function () {
+	                        var option = {
+	                            "key": $(this).text(),
+	                            "value":$(this).attr('value')
+	                        }
+	                        question.options.push(option);
+	                    });
+	                }
+                    
+	            }
+	            questions.push(question);
+	        });
+	        console.log(questions);
 
-	        var result = '<html><head>' + jQuery + jQueryUITheme + jQueryUI + '<style>' + css + '</style></head><body>' + html + '<script type="text/javascript">' + js + '</script></body></html>';
+	        var result = 'http://localhost:2472/angular/#/experience';
 
-	        this.writeResult(result);
+	        this.writeResult(result, questions);
 	    },
 
 	    reset: function () {
@@ -197,18 +211,37 @@
 	        this.boxCSS.val('');
 	        this.boxJS.val('');
 	        this.writeResult('');
+	        location.reload();
 	    },
 
-	    writeResult: function (result) {
+	    writeResult: function (result, questions) {
 	        var iframe = this.boxResult[0];
+	        iframe.setAttribute('src', result);
 
-	        if (iframe.contentDocument) doc = iframe.contentDocument;
-	        else if (iframe.contentWindow) doc = iframe.contentWindow.document;
-	        else doc = iframe.document;
 
-	        doc.open();
-	        doc.writeln(result);
-	        doc.close();
+	        if (typeof (Storage) !== "undefined") {
+	            // Code for localStorage/sessionStorage.
+	            sessionStorage.questionsObj = JSON.stringify(questions);
+	        } else {
+	            // Sorry! No Web Storage support..
+	            aler("Sorry! No Web Storage support..");
+	        }
+	        //postToIframe(questions, result, "#iframe")
+	        //if (iframe.contentDocument) doc = iframe.contentDocument;
+	        //else if (iframe.contentWindow) doc = iframe.contentWindow.document;
+	        //else doc = iframe.document;
+
+	        //doc.open();
+	        //doc.writeln(result);
+	        //doc.close();
+
+	        //function postToIframe(data, url, target) {
+	        //    $('body').append('<form action="' + url + '" method="post" target="' + target + '" id="postToIframe"></form>');
+	        //    $.each(data, function (n, v) {
+	        //        $('#postToIframe').append('<input type="hidden" name="' + n + '" value="' + v + '" />');
+	        //    });
+	        //    $('#postToIframe').submit().remove();
+	        //}
 	    },
 
 	    resize: function () {

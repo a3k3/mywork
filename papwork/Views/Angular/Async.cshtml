@@ -6,9 +6,10 @@
     $("#header-menu-button").click(function(){ $("#header-links").toggle(); });
 </script>
 <!-- headend -->
-<link href="~/lib/tool/demo.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="../lib/tool/demo.css" rel="stylesheet" />
 <link href="../lib/tool/formbuilder.css" rel="stylesheet" />
-<script src="../lib/tool/formbuilder.js"></script>
 
 <style>
     body, html {
@@ -19,13 +20,13 @@
 
 <div id="FormTool" style="width:100%;height:400px;"></div>
 
+<script src="../lib/tool/formbuilder.js"></script>
 <script type="text/javascript">
-
         var jsn = null;
 
         $(document).ready(function()
         {
-            $('#FormTool').height($(window).height()-80);
+            $('#FormTool').height($(window).height());
             jsn = $("#FormTool").formbuilder();
             jsn.formbuilder('resize');
         });

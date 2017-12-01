@@ -11,7 +11,7 @@
     "placeholder": "Enter your name",
     "validations": {
       "required": {
-        "condition": "true",
+        "condition": true,
         "text": "Thats required!"
       },
       "maxlength": {
@@ -36,7 +36,7 @@
     "placeholder": "+91 7893459013",
     "validations": {
       "required": {
-        "condition": "true",
+        "condition": true,
         "text": "Thats required!"
       },
       "maxlength": {
@@ -61,7 +61,7 @@
     "placeholder": "Upload",
     "validations": {
       "required": {
-        "condition": "true",
+        "condition": true,
         "text": "Thats required!"
       }
     }
@@ -77,7 +77,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": "true",
+      "required": true,
       "maxCount": 5
     },
      "options": [
@@ -119,7 +119,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": "true",
+      "required": true,
       "maxCount": 5
     }
   },
@@ -134,7 +134,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": "true",
+      "required": true,
       "maxCount": 5
     },
     "options": [
@@ -249,5 +249,67 @@
         "value": "XL"
       }
     ]
+  },
+  {
+    "id": 10,
+    "question": "Select Sizes",
+    "name": "selectsize",
+    "modelname": "",
+    "caption": "Help us serve better",
+    "answertype": "select",
+    "answertheme": "",
+    "hint": "Select appropriate size",
+    "placeholder": "",
+    "validations": {
+      "required": "true",
+      "maxCount": 5
+    },
+    "options": [
+      {
+        "key": "XS",
+        "value": "XS"
+      },
+      {
+        "key": "S",
+        "value": "S"
+      },
+      {
+        "key": "M",
+        "value": "M"
+      },
+      {
+        "key": "L",
+        "value": "L"
+      },
+      {
+        "key": "XL",
+        "value": "XL"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Describe your self?",
+    "name": "bio",
+    "modelname": "",
+    "caption": "Will not share your name to anyone",
+    "answertype": "textarea",
+    "answertheme": "",
+    "hint": "Write in brief about yourself",
+    "placeholder": "Write something..",
+    "validations": {
+      "required": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "condition": 250,
+        "text": "Thats too long!"
+      },
+      "minlength": {
+        "condition": 0,
+        "text": "Thats too short!"
+      }
+    }
   }
 ]

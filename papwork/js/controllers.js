@@ -4,6 +4,10 @@
 var myapp = angular.module('experienceApp.controllers', []);
 
 function questionsCtrl($scope, getAllQuestions, $timeout) {
+    var vm = this;
+
+    vm.formData = {};
+
     $scope.questionsObj = {
         questions: [],
         maxCount: 0,
@@ -14,7 +18,12 @@ function questionsCtrl($scope, getAllQuestions, $timeout) {
         }
     };
     getAllQuestions.then(function (response) {
-        $scope.questionsObj.questions = response.data;
+        if (sessionStorage.questionsObj != undefined) {
+            $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
+        }
+        else {
+            $scope.questionsObj.questions = response.data;
+        }
         $scope.questionsObj.activeNow = 1;
         $scope.questionsObj.maxCount = $scope.questionsObj.questions.length;
     }, function myError(response) {
