@@ -1,10 +1,5 @@
 ﻿<md-input-container>
     <input class="md-accent hue-2" name="{{question.name}}" ng-model="formdata.email" ng-pattern="/^.+@.+\..+$/" placeholder="{{question.placeholder}}" type="{{question.answertype}}" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}" ng-keydown="keypress($event)">
-    <div ng-messages="questionsForm.{{question.name}}.$error" ng-show='questionsForm.{{question.name}}.$dirty'>
-        <div ng-message="required" ng-show="questionsForm.{{question.name}}.$error.required">{{question.validations.required.text}}</div>
-        <div ng-message="md-maxlength" ng-show="questionsForm.{{question.name}}.$error.maxlength">{{question.validations.maxlength.text}}</div>
-        <div ng-message="minlength" ng-show="questionsForm.{{question.name}}.$error.minlength">{{question.validations.minlength.text}}</div>
-    </div>
     <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$valid">
         <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
     </md-button>

@@ -1,6 +1,7 @@
 ﻿<div class="smiley-rating">
     <div class="smiley" ng-repeat="option in question.options">
-        <div class="{{option.name}}" ng-click="smileySelection($event)"></div>
-        <p class="smiley_content abc">{{option.title}}</p>
+        <input id="smiley-{{$index}}" type="radio" name="{{option.name}}" value="{{option.value}}" ng-hide="true"/>
+        <div class="smiley {{option.name}}" ng-click="smileySelection($event)"></div>
+        <p class="smiley_content">{{option.title}}</p>
     </div>
 </div>

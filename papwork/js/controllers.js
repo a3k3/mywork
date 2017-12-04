@@ -102,8 +102,11 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location) {
     }
 
     $scope.smileySelection = function (event) {
-        var _active = $(event.target);
-        _active.addClass("activeSmiley").parent().siblings().find("div").removeClass("activeSmiley");
+        var _active = $(event.target).parent();
+        _active.find('.smiley').addClass("activeSmiley");
+        _active.find('input').attr('checked', true);
+        _active.siblings().find(".smiley").removeClass("activeSmiley");
+        _active.siblings().find('input').attr('checked', false);
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
