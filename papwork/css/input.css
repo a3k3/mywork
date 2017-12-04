@@ -2,7 +2,14 @@
 md-input-container .tick, md-input-container .attach {
     position: absolute;
     right: -10px;
-    top: -3%;
+    top: -6%;
+}
+md-datepicker .md-datepicker-button.md-button.md-icon-button{
+    padding-left: 0;
+    margin-left: 0;
+}
+md-datepicker .md-datepicker-input-container {
+    width: 70%;
 }
 /***Input Styles***/
 md-checkbox {
@@ -10,6 +17,25 @@ md-checkbox {
 }
 md-checkbox.md-checked.green .md-icon {
  background-color: #69af4a;
+}
+
+md-input-container .md-errors-spacer {
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+}
+md-input-container {
+    margin-bottom: 0;
+    width: 70%;
+    margin-top: 10px;
+}
+user-card md-icon {
+    height: 80px;
+    width: 80px;
+}
+user-card md-card{
+    margin:0 0;
+    border-radius:0;
 }
 
 /****** Style Star Rating Widget *****/
@@ -95,43 +121,43 @@ fieldset, label {
 }
 
 .verypoor {
-    background: transparent url('../asset/img/verypoor.JPG' ) no-repeat;
+    background: transparent url('../asset/img/verypoor.png' ) no-repeat center;
 }
 
 .poor {
-    background: transparent url('../asset/img/poor.jpg' ) no-repeat;
+    background: transparent url('../asset/img/poor.png' ) no-repeat center;
 }
 
 .average {
-    background: transparent url('../asset/img/avg.jpg' ) no-repeat;
+    background: transparent url('../asset/img/avg.png' ) no-repeat center;
 }
 
 .good {
-    background: transparent url('../asset/img/good.jpg' ) no-repeat;
+    background: transparent url('../asset/img/good.png' ) no-repeat center;
 }
 
 .excellent {
-    background: transparent url('../asset/img/excellent.jpg' ) no-repeat;
+    background: transparent url('../asset/img/excellent.png' ) no-repeat center;
 }
 
-.verypoor.active {
-    background: transparent url('../asset/img/verypoor_active.jpg' ) no-repeat;
+.verypoor.activeSmiley {
+    background: transparent url('../asset/img/verypoor_active.png' ) no-repeat center;
 }
 
-.poor.active {
-    background: transparent url('../asset/img/poor_active.jpg' ) no-repeat;
+.poor.activeSmiley {
+    background: transparent url('../asset/img/poor_active.png' ) no-repeat center;
 }
 
-.average.active {
-    background: transparent url('../asset/img/avg_active.jpg' ) no-repeat;
+.average.activeSmiley {
+    background: transparent url('../asset/img/avg_active.png' ) no-repeat center;
 }
 
-.good.active {
-    background: transparent url('../asset/img/good_active.jpg' ) no-repeat;
+.good.activeSmiley {
+    background: transparent url('../asset/img/good_active.png' ) no-repeat center;
 }
 
-.excellent.active {
-    background: transparent url('../asset/img/excellent_active.jpg' ) no-repeat;
+.excellent.activeSmiley {
+    background: transparent url('../asset/img/excellent_active.png' ) no-repeat center;
 }
 /****** End of Smiley Rating *****/
 /****** Size Styling *****/

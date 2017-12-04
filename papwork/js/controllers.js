@@ -79,6 +79,14 @@ function questionsCtrl($scope, getAllQuestions, $timeout) {
             $scope.questionsObj.next();
         }, 1000);
     }
+
+    $scope.smileySelection = function (event) {
+        var _active = $(event.target);
+        _active.addClass("activeSmiley").parent().siblings().find("div").removeClass("activeSmiley");
+        $timeout(function () {
+            $scope.questionsObj.next();
+        }, 1000);
+    }
 }
 //questionsCtrl.$inject = ['$scope', 'getAllQuestions'];
 
@@ -103,3 +111,7 @@ var getTemplate = function (data) {
     }
     return input_template;
 }
+
+myapp.controller('successCtrl', ['$scope', function ($scope) {
+    $scope.theme = "mytheme";
+}]);

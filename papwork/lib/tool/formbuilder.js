@@ -176,7 +176,7 @@
 	                "answertype": $(this).next().prop("tagName").toLowerCase() == 'input' ? $(this).next().attr('type') : $(this).next().prop("tagName").toLowerCase(),
 	                "answertheme": "",
 	                "hint": "",
-	                "placeholder": "Enter here",
+	                "placeholder": $(this).next().attr('placeholder') != undefined ? $(this).next().attr('placeholder') : "Enter here",
 	                "validations": {
 	                    "required": {
 	                        "condition": "true",

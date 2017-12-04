@@ -1,10 +1,10 @@
 ﻿<md-input-container>
-    <input class="md-accent hue-2" name="{{question.name}}" ng-model="question.modelname" type="{{question.answertype}}" placeholder="{{question.placeholder}}" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}">
-    <div ng-messages="questionsForm.{{question.name}}.$error" ng-show="questionsForm.{{question.name}}.$dirty">
+    <input class="md-accent hue-2" name="{{question.name}}" ng-model="question.modelname" placeholder="{{question.placeholder}}" type="{{question.answertype}}" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}">
+    <!--<div ng-messages="questionsForm.{{question.name}}.$error" ng-show="questionsForm.{{question.name}}.$dirty">
         <div ng-message="required">{{question.validations.required.text}}</div>
         <div ng-message="md-maxlength">{{question.validations.maxlength.text}}</div>
         <div ng-message="minlength">{{question.validations.minlength.text}}</div>
-    </div>
+    </div>-->
     <md-button class="tick md-icon-button md-accent md-hue-3" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$valid">
         <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
     </md-button>

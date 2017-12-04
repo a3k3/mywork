@@ -1,3 +1,6 @@
+body *{
+    font-family: 'Roboto', sans-serif;
+}
 .nopadding {
     padding-left:0;
     padding-right:0;
@@ -5,6 +8,9 @@
 
 .nopadding > .row {
     margin:0 0;
+}
+.experience-screen {
+    display:inherit;
 }
 .experience-screen, .experience-screen > form {
     height:100vh;
@@ -24,6 +30,9 @@
 }
 .font-color-666 {
     color:#666666;
+}
+.font-color-fff{
+    color:#ffffff;
 }
 /***Font Color****/
 
@@ -143,7 +152,7 @@ md-icon svg {
         text-align:left;
     }
     .hint{
-        margin-top:8px;
+        margin-top:0px;
     }
     .caption{
         margin-top:20px;
@@ -239,9 +248,35 @@ question.active .questionPanel {
 
 
 /*****Cover Page CSS****/
+.cover-page {
+    position:relative;
+    display:inherit;
+    height:inherit;
+    background-color:#d7eff3;
+}
+
+.cover-container {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.content-section{
+    text-align:center;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+}
+.card-media {
+    margin-right: 16px;
+    border-radius: 50%;
+    overflow: hidden;
+}
 .recomends{
 	 border-top: 2px solid #f2f2f2;
 	 margin-top:20px;
+     position:fixed;
+     bottom:0;
 }
 .recomends ul{
 	display:inline-block;
