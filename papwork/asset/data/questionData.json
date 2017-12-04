@@ -30,7 +30,7 @@
     "name": "tel",
     "modelname": "number",
     "caption": "Will not share your number to anyone",
-    "answertype": "text",
+    "answertype": "number",
     "answertheme": "",
     "hint": "Type your mobile no",
     "placeholder": "+91 7893459013",

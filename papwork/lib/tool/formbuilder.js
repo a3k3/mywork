@@ -27,7 +27,7 @@
 
             var $settings = jQuery.extend(true, {}, settings);
 
-            var jsn = new JSNova($settings);
+            var jsn = new FBfunc($settings);
 
             $elem.append(jsn.generate());
             jsn.resize();
@@ -38,7 +38,7 @@
 
     $.fn.formbuilder.defaultSettings = {};
 
-    function JSNova(settings) {
+    function FBfunc(settings) {
         this.jsn = null;
         this.settings = settings;
 
@@ -58,7 +58,7 @@
         return this;
     }
 
-    JSNova.prototype =
+    FBfunc.prototype =
 	{
 	    init: function () {
 	        this.resize();
@@ -74,6 +74,7 @@
 			 ************************************************/
 	        var menuButton_run = $('<span class="_formbuilder_menuButton">Run</span>').click(function () { $this.run(); });
 	        var menuButton_reset = $('<span class="_formbuilder_menuButton">Reset</span>').click(function () { $this.reset(); });
+	        var menuButton_copy = $('<span class="_formbuilder_menuButton">Copy</span>').click(function () { $this.copy(); });
 
 	        $this.menu =
 			$('<div class="_formbuilder_menu"></div>')
@@ -82,6 +83,8 @@
 				.append(menuButton_run)
 				.append(' <span class="_formbuilder_menuBullet">&bull;</span> ')
 				.append(menuButton_reset)
+                .append(' <span class="_formbuilder_menuBullet">&bull;</span> ')
+                .append(menuButton_copy)
 			);
 
 	        /************************************************
@@ -148,6 +151,17 @@
 						)
 					)
 				)
+                .append(
+					$('<tr></tr>')
+                    .append(
+						$('<td class="_formbuilder_box _formbuilder_copy_box" colspan="2"></td>')
+						.append(
+							$('<div class="_formbuilder_boxContainer"></div>')
+							.append('<textarea class="_formbuilder_boxEdit"></textarea>')
+							.append('<div class="_formbuilder_boxLabel">Copy Code</div>')
+						)
+					)
+                )
 			)
 
 	        $this.jsn =
@@ -182,7 +196,7 @@
 	                "answertype": current_input.prop("tagName").toLowerCase() == 'input' ? current_input.attr('type') : current_input.prop("tagName").toLowerCase(),
 	                "answertheme": "",
 	                "hint": current_hint.length == 0 ? "Please see the instructions" : current_hint.text(),
-	                "placeholder": "Enter here",
+	                "placeholder": current_input.attr('placeholder') != undefined ? current_input.attr('placeholder') :  "Enter here",
 	                "validations": {
 	                    "required": {
 	                        "condition": "true",
@@ -205,11 +219,12 @@
 	            }
 	            questions.push(question);
 	        });
+	        var action = $(html).attr('action');
 	        console.log(questions);
 
 	        var result = 'http://localhost:2472/angular/#/experience';
 
-	        this.writeResult(result, questions);
+	        this.writeResult(result, questions, action);
 	    },
 
 	    reset: function () {
@@ -220,34 +235,24 @@
 	        location.reload();
 	    },
 
-	    writeResult: function (result, questions) {
+	    writeResult: function (result, questions, action) {
 	        var iframe = this.boxResult[0];
 	        iframe.setAttribute('src', result);
-
 
 	        if (typeof (Storage) !== "undefined") {
 	            // Code for localStorage/sessionStorage.
 	            sessionStorage.questionsObj = JSON.stringify(questions);
+	            sessionStorage.action = action;
 	        } else {
 	            // Sorry! No Web Storage support..
 	            aler("Sorry! No Web Storage support..");
 	        }
-	        //postToIframe(questions, result, "#iframe")
-	        //if (iframe.contentDocument) doc = iframe.contentDocument;
-	        //else if (iframe.contentWindow) doc = iframe.contentWindow.document;
-	        //else doc = iframe.document;
 
-	        //doc.open();
-	        //doc.writeln(result);
-	        //doc.close();
+	        var origin = prompt("Please enter your orgin e.g. http://www.abc.com");
 
-	        //function postToIframe(data, url, target) {
-	        //    $('body').append('<form action="' + url + '" method="post" target="' + target + '" id="postToIframe"></form>');
-	        //    $.each(data, function (n, v) {
-	        //        $('#postToIframe').append('<input type="hidden" name="' + n + '" value="' + v + '" />');
-	        //    });
-	        //    $('#postToIframe').submit().remove();
-	        //}
+	        if (origin != null) {
+	            sessionStorage.action = sessionStorage.action.indexOf('http') == -1 ? origin + sessionStorage.action : sessionStorage.action;
+	        }
 	    },
 
 	    resize: function () {
@@ -258,6 +263,13 @@
 
 	        this.sidebar.css({ top: menuHeight, height: jsnHeight });
 	        this.codeArea.css({ top: menuHeight, height: jsnHeight, width: codeAreaWidth });
-	    }
+	    },
+
+	    copy: function () {
+	        var iframe = $('#iframe');
+	        var src = iframe.attr('src') + '?session=true&questionobj=' + encodeURIComponent(sessionStorage.questionsObj) + "&actionurl=" + sessionStorage.action;
+	        var build_code = '<iframe src=' + src + ' width="100%" height="700px"></iframe>'
+	        $('._formbuilder_copy_box ._formbuilder_boxEdit').text(build_code);
+        }
 	}
 })(jQuery);

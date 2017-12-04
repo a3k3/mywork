@@ -99,6 +99,7 @@ md-progress-linear .md-container {
     display: inline-block;
     height: 30px;
     width: 30px;
+    transform:scale(1.5);
 }
 md-icon svg {
   fill: inherit;
@@ -261,6 +262,7 @@ question.active .questionPanel {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width:100%;
 }
 .card-media {
     margin-right: 16px;

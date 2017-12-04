@@ -15,7 +15,7 @@ var KeyCodes = {
 
 var myapp = angular.module('experienceApp.controllers', []);
 
-function questionsCtrl($scope, getAllQuestions, $timeout) {
+function questionsCtrl($scope, getAllQuestions, $timeout, $location) {
     var vm = this;
 
     vm.formData = {};
@@ -29,12 +29,21 @@ function questionsCtrl($scope, getAllQuestions, $timeout) {
             return (this.activeNow / this.maxCount) * 100;
         }
     };
+
     getAllQuestions.then(function (response) {
-        if (sessionStorage.questionsObj != undefined) {
-            $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
+
+        //for utility to work
+        if ($location.search().session == "true") {
+            $scope.questionsObj.questions = JSON.parse($location.search().questionobj);
+            $scope.action = $location.search().actionurl;
         }
         else {
-            $scope.questionsObj.questions = response.data;
+            if (sessionStorage.questionsObj != undefined) {
+                $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
+            }
+            else {
+                $scope.questionsObj.questions = response.data;
+            }
         }
         $scope.questionsObj.activeNow = 1;
         $scope.questionsObj.maxCount = $scope.questionsObj.questions.length;
@@ -109,7 +118,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout) {
 }
 //questionsCtrl.$inject = ['$scope', 'getAllQuestions'];
 
-myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', questionsCtrl])
+myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location', questionsCtrl])
 
 
 function MyCtrl2() {

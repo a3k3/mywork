@@ -163,7 +163,9 @@
     </Content>
     <Content Include="partials\cover.html" />
     <Content Include="partials\input_templates\checkbox.html" />
+    <Content Include="partials\input_templates\email.html" />
     <Content Include="partials\input_templates\input_calendar.html" />
+    <Content Include="partials\input_templates\number.html" />
     <Content Include="partials\input_templates\textarea.html" />
     <Content Include="partials\input_templates\product_select.html" />
     <Content Include="partials\input_templates\radio.html" />
@@ -173,6 +175,7 @@
     <Content Include="partials\input_templates\select.html" />
     <Content Include="partials\input_templates\text.html" />
     <Content Include="partials\input_templates\file.html" />
+    <Content Include="partials\input_templates\url.html" />
     <Content Include="partials\success.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
