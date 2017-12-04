@@ -164,19 +164,25 @@
 	        var js = this.boxJS.val();
 
 	        //convert to input expected by our theme
-	        var othertypes = ['radio','select','checkbox'];
-            var questions = []
+	        var othertypes = ['radio', 'select', 'checkbox'];
+	        var questions = []
+	        var allInputs = $(html).find(":input");
+	        var allCaptions = $(html).find(".caption");
+	        var allHints = $(html).find(".hint");
 	        $(html).find('label').each(function (index, value) {
+	            var current_input = allInputs.eq(index);
+	            var current_caption = allCaptions.eq(index);
+	            var current_hint = allHints.eq(index);
 	            var question = {
 	                "id": index + 1,
 	                "question": $(this).text(),
-	                "name": $(this).next().attr('name'),
+	                "name": current_input.attr('name'),
 	                "modelname": "",
-	                "caption": "",
-	                "answertype": $(this).next().prop("tagName").toLowerCase() == 'input' ? $(this).next().attr('type') : $(this).next().prop("tagName").toLowerCase(),
+	                "caption": current_caption.length == 0 ? "" : current_caption.text(),
+	                "answertype": current_input.prop("tagName").toLowerCase() == 'input' ? current_input.attr('type') : current_input.prop("tagName").toLowerCase(),
 	                "answertheme": "",
-	                "hint": "",
-	                "placeholder": $(this).next().attr('placeholder') != undefined ? $(this).next().attr('placeholder') : "Enter here",
+	                "hint": current_hint.length == 0 ? "Please see the instructions" : current_hint.text(),
+	                "placeholder": "Enter here",
 	                "validations": {
 	                    "required": {
 	                        "condition": "true",
@@ -190,12 +196,12 @@
 	                    $(this).next().find('option').each(function () {
 	                        var option = {
 	                            "key": $(this).text(),
-	                            "value":$(this).attr('value')
+	                            "value": $(this).attr('value')
 	                        }
 	                        question.options.push(option);
 	                    });
 	                }
-                    
+
 	            }
 	            questions.push(question);
 	        });

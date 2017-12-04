@@ -1,3 +1,15 @@
+var KeyCodes = {
+    BACKSPACE: 8,
+    TABKEY: 9,
+    RETURNKEY: 13,
+    ESCAPE: 27,
+    SPACEBAR: 32,
+    LEFTARROW: 37,
+    UPARROW: 38,
+    RIGHTARROW: 39,
+    DOWNARROW: 40,
+};
+
 
 /* App Controllers */
 
@@ -86,6 +98,13 @@ function questionsCtrl($scope, getAllQuestions, $timeout) {
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+    }
+
+    $scope.keypress = function ($event) {
+        var clicked = $event.target;
+        if ($event.keyCode == 13) {
+            $scope.questionsObj.next();
+        }
     }
 }
 //questionsCtrl.$inject = ['$scope', 'getAllQuestions'];

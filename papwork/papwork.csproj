@@ -184,6 +184,7 @@
     <Content Include="Views\Angular\Index.cshtml" />
     <Content Include="Views\Angular\Async.cshtml" />
     <Content Include="asset\data\questionData.json" />
+    <Content Include="partials\input_templates\upload.tmpl.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

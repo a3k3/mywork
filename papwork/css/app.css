@@ -183,6 +183,7 @@ question.question-slide{
     -webkit-transition: top .8s ease-out;
     -moz-transition: top .8s ease-out;
     transition: top .8s ease-out;
+    text-align: left;
 }
 question .questionPanel h2{
     font-size:14px;
@@ -260,12 +261,6 @@ question.active .questionPanel {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-}
-.content-section{
-    text-align:center;
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
 }
 .card-media {
     margin-right: 16px;

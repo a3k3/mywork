@@ -4,9 +4,9 @@
     </div>
     <div class="answerContainer">
         <p class="caption font-color-666 font-size-14">{{question.caption}}</p>
-        <div class="inputContainer">
+        <div class="inputContainer {{question.answertheme}}_class">
         <ng-include src="dynamicTemplateUrl(question)"></ng-include>
         </div>
-        <p class="hint font-color-666 font-size-12">Hint: {{question.hint}}</p>
+        <p class="hint font-color-666 font-size-12" ng-hide="!questionsForm.{{question.name}}.$valid && questionsForm.{{question.name}}.$dirty">Hint: {{question.hint}}</p>
     </div>
 </div>

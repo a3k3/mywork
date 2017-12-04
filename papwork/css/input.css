@@ -1,5 +1,5 @@
 ﻿/***Input Styles***/
-md-input-container .tick, md-input-container .attach {
+md-input-container .tick {
     position: absolute;
     right: -10px;
     top: -6%;
@@ -28,6 +28,14 @@ md-input-container {
     margin-bottom: 0;
     width: 70%;
     margin-top: 10px;
+    max-width: 200px;
+}
+.inputContainer.calendar_class {
+    margin-bottom: 0;
+    width: 70%;
+    margin-top: 10px;
+    max-width: 200px;
+    position:relative;
 }
 user-card md-icon {
     height: 80px;
@@ -37,7 +45,35 @@ user-card md-card{
     margin:0 0;
     border-radius:0;
 }
+aps-upload-file.ng-scope {
+    position: relative;
+}
+.md-button.md-icon-button.attach {
+    position: absolute;
+    right: -35px;
+    padding: 0;
+    height: 20px;
+    bottom: -13px;
+    cursor: pointer;
+}
+.md-input-messages-animation.ng-animate.ng-hide-animate {
+    position: absolute;
+    bottom: -15px;
+}
 
+button.md-datepicker-button.md-icon-button.md-button {
+    position: absolute;
+    right: 40px;
+    top: -6px;
+}
+
+.md-datepicker-input-container {
+    margin-left: 0px!important;
+}
+
+.md-datepicker-triangle-button {
+    opacity: 0;
+}
 /****** Style Star Rating Widget *****/
 .star-rating {
     display: inline-block;

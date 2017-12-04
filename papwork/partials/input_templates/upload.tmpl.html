@@ -1,0 +1,7 @@
+﻿<input id="fileInput" name="{{question.name}}" type="{{question.answertype}}" class="ng-hide"> 
+<md-input-container  md-no-float>    
+    <input id="textInput" ng-model="fileName" type="text" placeholder="No file chosen" ng-readonly="true" ng-keydown="keypress($event)" ng-required="{{option.validations.required.condition}}">
+</md-input-container>
+<md-button id="uploadButton" class="attach md-icon-button md-primary hue-2" aria-label="attach_file" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$error.required">
+    <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_attach_file_black_24px.svg"></md-icon>
+</md-button>
