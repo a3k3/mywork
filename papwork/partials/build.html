@@ -1,0 +1,10 @@
+﻿<div class="buildCtrl">
+    <md-card>
+        <div class="progressContainer">
+            <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount}}</div>
+            <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{buildQuestionsObj.percentComplete()}}" aria-valuemin="{{buildQuestionsObj.minCount}}" aria-valuemax="{{buildQuestionsObj.maxCount}}"></md-progress-linear>
+        </div>
+        <md-carousel data="dataArray" item-template-url="'build_questionsTemplate.html'" max-width="800" max-height="500">
+        </md-carousel>        
+    </md-card>
+</div>

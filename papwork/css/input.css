@@ -34,7 +34,7 @@ md-checkbox.md-checked.green .md-icon {
 md-input-container .md-errors-spacer {
     position: absolute;
     right: 0;
-    bottom: -20px;
+    bottom: -24px;
 }
 md-input-container {
     margin-bottom: 0;

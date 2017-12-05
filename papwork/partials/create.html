@@ -1,0 +1,12 @@
+<div ng-controller="tabCtrl" md-theme="mytheme">
+    <md-tabs md-stretch-tabs="never" >
+        <md-tab label="Build" class="md-primary md-hue-1">
+            <ng-include src="'../partials/build.html'"></ng-include>
+        </md-tab>
+        <md-tab label="Preview & Publish">
+            <ng-include src="'../partials/experience.html'"></ng-include>
+        </md-tab>
+        <md-tab label="Response" ng-disabled="true">
+        </md-tab>
+    </md-tabs>
+</div>

@@ -187,7 +187,7 @@
 	        var setradioFlag = 0;
 	        var setradioName = "";
 	        $(html).find(':input').each(function (index, value) {
-	            if ($(this).prop("tagName").toLowerCase() == 'input' && $(this).attr('type').toLowerCase() == 'radio' && setradioFlag && $(this).attr('name').toLowerCase() == setradioName) {
+	            if ($(this).prop("tagName").toLowerCase() == 'input' && ($(this).attr('type').toLowerCase() == 'radio' || $(this).attr('type').toLowerCase() == 'checkbox') && setradioFlag && $(this).attr('name').toLowerCase() == setradioName) {
 	                return true;
 	            }
 	            else {
@@ -229,10 +229,10 @@
 	                            });
 	                        }
 
-	                        if (question.answertype.toLowerCase() == "radio") {
+	                        if (question.answertype.toLowerCase() == "radio" || question.answertype.toLowerCase() == "checkbox") {
 	                            setradioFlag = 1;
 	                            setradioName = question.name;
-	                            $(this).closest('form').find('input:radio[name=' + question.name + ']').each(function () {
+	                            $(this).closest('form').find('input:' + question.answertype.toLowerCase() + '[name=' + question.name + ']').each(function () {
 	                                var option = {
 	                                    "key": $(this)[0].nextSibling.data,
 	                                    "value": $(this).attr('value')
