@@ -164,6 +164,7 @@
     <Content Include="partials\cover.html" />
     <Content Include="partials\input_templates\checkbox.html" />
     <Content Include="partials\input_templates\email.html" />
+    <Content Include="partials\input_templates\hidden.html" />
     <Content Include="partials\input_templates\input_calendar.html" />
     <Content Include="partials\input_templates\number.html" />
     <Content Include="partials\input_templates\textarea.html" />

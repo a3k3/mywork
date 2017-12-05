@@ -180,47 +180,75 @@
 	        //convert to input expected by our theme
 	        var othertypes = ['radio', 'select', 'checkbox'];
 	        var questions = []
-	        var allInputs = $(html).find(":input");
+	        var allLabels = $(html).find("label");
 	        var allCaptions = $(html).find(".caption");
 	        var allHints = $(html).find(".hint");
-	        $(html).find('label').each(function (index, value) {
-	            var current_input = allInputs.eq(index);
-	            var current_caption = allCaptions.eq(index);
-	            var current_hint = allHints.eq(index);
-	            var question = {
-	                "id": index + 1,
-	                "question": $(this).text(),
-	                "name": current_input.attr('name'),
-	                "modelname": "",
-	                "caption": current_caption.length == 0 ? "" : current_caption.text(),
-	                "answertype": current_input.prop("tagName").toLowerCase() == 'input' ? current_input.attr('type') : current_input.prop("tagName").toLowerCase(),
-	                "answertheme": "",
-	                "hint": current_hint.length == 0 ? "Please see the instructions" : current_hint.text(),
-	                "placeholder": current_input.attr('placeholder') != undefined ? current_input.attr('placeholder') :  "Enter here",
-	                "validations": {
-	                    "required": {
-	                        "condition": "true",
-	                        "text": "Thats required!"
-	                    }
-	                }
+	        var lbl_index = 0;
+	        var setradioFlag = 0;
+	        var setradioName = "";
+	        $(html).find(':input').each(function (index, value) {
+	            if ($(this).prop("tagName").toLowerCase() == 'input' && $(this).attr('type').toLowerCase() == 'radio' && setradioFlag && $(this).attr('name').toLowerCase() == setradioName) {
+	                return true;
 	            }
-	            if ($.inArray(question.answertype.toLowerCase(), othertypes) > -1) {
-	                question.options = [];
-	                if (question.answertype.toLowerCase() == "select") {
-	                    $(this).next().find('option').each(function () {
-	                        var option = {
-	                            "key": $(this).text(),
-	                            "value": $(this).attr('value')
+	            else {
+	                setradioFlag = 0;
+	                setradioName = "";
+	                if ($(this).prop("tagName").toLowerCase() == 'input' && ($(this).attr('type').toLowerCase() == 'submit' || $(this).attr('type').toLowerCase() == 'hidden')) {
+	                }
+	                else {
+	                    var current_label = allLabels.eq(lbl_index);
+	                    var current_caption = allCaptions.eq(lbl_index);
+	                    var current_hint = allHints.eq(lbl_index);
+	                    var question = {
+	                        "id": index + 1,
+	                        "question": current_label.text(),
+	                        "name": $(this).attr('name'),
+	                        "modelname": "",
+	                        "caption": current_caption.length == 0 ? "" : current_caption.text(),
+	                        "answertype": $(this).prop("tagName").toLowerCase() == 'input' ? $(this).attr('type') : $(this).prop("tagName").toLowerCase(),
+	                        "answertheme": "",
+	                        "hint": current_hint.length == 0 ? "Please see the instructions" : current_hint.text(),
+	                        "placeholder": $(this).attr('placeholder') != undefined ? $(this).attr('placeholder') : "Enter here",
+	                        "value": $(this).attr('value'),
+	                        "validations": {
+	                            "required": {
+	                                "condition": "true",
+	                                "text": "Thats required!"
+	                            }
 	                        }
-	                        question.options.push(option);
-	                    });
-	                }
+	                    }
+	                    if ($.inArray(question.answertype.toLowerCase(), othertypes) > -1) {
+	                        question.options = [];
+	                        if (question.answertype.toLowerCase() == "select") {
+	                            $(this).find('option').each(function () {
+	                                var option = {
+	                                    "key": $(this).text(),
+	                                    "value": $(this).attr('value')
+	                                }
+	                                question.options.push(option);
+	                            });
+	                        }
 
+	                        if (question.answertype.toLowerCase() == "radio") {
+	                            setradioFlag = 1;
+	                            setradioName = question.name;
+	                            $(this).closest('form').find('input:radio[name=' + question.name + ']').each(function () {
+	                                var option = {
+	                                    "key": $(this)[0].nextSibling.data,
+	                                    "value": $(this).attr('value')
+	                                }
+	                                question.options.push(option);
+	                            });
+	                        }
+
+	                    }
+	                    questions.push(question);
+	                    lbl_index++
+	                }
 	            }
-	            questions.push(question);
 	        });
 	        var action = $(html).attr('action');
-	        console.log(questions);
+	        //console.log(questions);
 
 	        var result = 'http://localhost:2472/angular/#/experience';
 
@@ -231,7 +259,7 @@
 	        this.boxHTML.val('');
 	        this.boxCSS.val('');
 	        this.boxJS.val('');
-	        this.writeResult('');
+	        //this.writeResult('');
 	        location.reload();
 	    },
 
@@ -270,6 +298,6 @@
 	        var src = iframe.attr('src') + '?session=true&questionobj=' + encodeURIComponent(sessionStorage.questionsObj) + "&actionurl=" + sessionStorage.action;
 	        var build_code = '<iframe src=' + src + ' width="100%" height="700px"></iframe>'
 	        $('._formbuilder_copy_box ._formbuilder_boxEdit').text(build_code);
-        }
+	    }
 	}
 })(jQuery);
