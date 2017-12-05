@@ -1,12 +1,14 @@
-﻿
-/******Carousel CSS*****/
-.md-carousel,.md-carousel .slides-container{height:100%;position:relative}
-.md-carousel{overflow:hidden}
-.md-carousel .slides-container .slide .ng-scope img:first-child{max-width:100%;max-height:100%}
-.md-carousel .left-arrow-button,.md-carousel .right-arrow-button{position:absolute;margin:auto!important;top:0;bottom:0}
-.md-carousel .right-arrow-button{right:0}.md-carousel .md-icon-button{width:48px;height:48px;margin:0;padding:0}
-.md-carousel .md-icon-button md-icon{color:#fff;width:48px;height:48px;font-size:48px;cursor:pointer;outline:0!important}
-.md-carousel .radio-buttons-container{position:absolute;bottom:0;margin-bottom:20px;width:100%}
-.md-carousel .radio-buttons-container md-radio-button{margin-right:5px;outline:0}
-.md-carousel .radio-buttons-container md-radio-button .md-off{border-color:#fff}
-/******Carousel CSS*****/
+﻿.apply-questions-container md-card {
+    position: absolute;
+    left: 1000px;
+    width: 95%;
+    -webkit-transition: left .2s ease-out;
+    height: 70vh;
+}
+.apply-questions-container md-card.slide-active{
+    left:0;
+}
+
+.apply-questions-container md-card.slide-left {
+    left: -1000px;
+}

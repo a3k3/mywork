@@ -226,6 +226,9 @@ fieldset, label {
     padding: 0px;
     border-radius: 5px;
     border: 2px solid #a1a1a1;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
 }
 
     .size-chart ul li {
@@ -234,6 +237,7 @@ fieldset, label {
         height: 40px;
         width: 50px;
         position: relative;
+        outline: none;
         border-left: 1px solid #a1a1a1;
     }
 
