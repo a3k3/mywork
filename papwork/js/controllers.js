@@ -160,11 +160,6 @@ myapp.controller('successCtrl', ['$scope', function ($scope) {
 
 
 myapp.controller('tabCtrl', function ($scope) {
-    $scope.panes = [
-    { title: "Home", content: "/cover", active: true },
-    { title: "Settings", content: "/create" },
-    { title: "View", content: "/success" }
-    ];
 });
 
 myapp.controller('buildCtrl', function ($scope) {
@@ -178,30 +173,32 @@ myapp.controller('buildCtrl', function ($scope) {
         }
     };
 
-    $scope.dataArray = [
-      {
-          src: 'https://www.travelexcellence.com/images/movil/La_Paz_Waterfall.jpg'
-      },
-      {
-          src: 'http://www.parasholidays.in/blog/wp-content/uploads/2014/05/holiday-tour-packages-for-usa.jpg'
-      },
-      {
-          src: 'http://clickker.in/wp-content/uploads/2016/03/new-zealand-fy-8-1-Copy.jpg'
-      },
-      {
-          src: 'http://images.kuoni.co.uk/73/indonesia-34834203-1451484722-ImageGalleryLightbox.jpg'
-      },
-      {
-          src: 'http://www.holidaysaga.com/wp-content/uploads/2014/09/Day08-SIN-day-Free-City-View.jpg'
-      },
-      {
-          src: 'http://images.kuoni.co.uk/73/malaysia-21747826-1446726337-ImageGalleryLightbox.jpg'
-      },
-      {
-          src: 'http://www.kimcambodiadriver.com/uploads/images/tours/kim-cambodia-driver-angkor-wat.jpg'
-      },
-      {
-          src: 'https://www.travcoa.com/sites/default/files/styles/flexslider_full/public/tours/images/imperialvietnam-halong-bay-14214576.jpg?itok=O-q1yr5_'
-      }
-    ];
-})
+    $scope.addSlide = function () {
+        var tempQuestion = {
+            "id": $scope.minCount++,
+            "question": "What is your name?",
+            "name": "name",
+            "modelname": "name",
+            "caption": "Will not share your name to anyone",
+            "answertype": "text",
+            "answertheme": "",
+            "hint": "Type your name",
+            "placeholder": "Enter your name",
+            "validations": {
+                "required": {
+                    "condition": true,
+                    "text": "Thats required!"
+                },
+                "maxlength": {
+                    "condition": 10,
+                    "text": "Thats too long!"
+                },
+                "minlength": {
+                    "condition": 0,
+                    "text": "Thats too short!"
+                }
+            }
+        };
+        $scope.buildQuestionsObj.questions.push(tempQuestion);
+    };
+});

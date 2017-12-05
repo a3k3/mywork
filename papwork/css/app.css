@@ -333,12 +333,13 @@ md-tabs-canvas md-ink-bar:after {
     position: absolute;
     transform: translateX(-50%);
 }
-md-card {
+.md-card {
     position:relative;
+    margin:0 8px;
 }
-md-card .progressContainer .status {
+.md-card .progressContainer .status {
     margin-bottom:10px!important;
 }
-md-card .progressContainer md-progress-linear .md-container{
+.md-card .progressContainer md-progress-linear .md-container{
     height:2px;
 }
