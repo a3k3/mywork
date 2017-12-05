@@ -225,7 +225,7 @@ fieldset, label {
     display: inline-block;
     padding: 0px;
     border-radius: 5px;
-    border: 2px solid #a1a1a1;
+    /* border: 2px solid #a1a1a1; */
     -moz-box-shadow: inset 0 0 10px #000000;
     -webkit-box-shadow: inset 0 0 10px #000000;
     box-shadow:         inset 0 0 10px #000000;
@@ -243,7 +243,14 @@ fieldset, label {
 
         .size-chart ul li:first-child {
             border-left: none;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
         }
+
+        .size-chart ul li:last-child {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
 
         .size-chart ul li span {
             position: absolute;
