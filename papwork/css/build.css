@@ -1,4 +1,7 @@
-﻿.build-page .md-card {
+﻿[contenteditable] {
+    text-decoration:underline;
+}
+.build-page .md-card {
     height:100vh;
 }
 .md-card .progressContainer {
@@ -14,17 +17,17 @@
 }
 .apply-questions-container md-card {
     position: absolute;
-    /*left: 1000px;*/
+    left: 1000px;
     width: 100%;
     margin:0 0;
     -webkit-transition: left .2s ease-out;
     height: 70vh;
 }
-.apply-questions-container md-card.slide-active{
+.apply-questions-container md-card.slideactive{
     left:0;
 }
 
-.apply-questions-container md-card.slide-left {
+.apply-questions-container md-card.slideleft {
     left: -1000px;
 }
 .navigation-slide{
@@ -35,5 +38,15 @@
 .navigation-slide md-card{
     width:20%;
     height:100%;
+}
+
+/*******Overrides for question slide******/
+md-card question.question-slide {
+    position: static;
+    transition: none;
+}
+
+md-card question .questionPanel .answerContainer {
+    opacity: 1;
 }
 
