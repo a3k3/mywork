@@ -133,6 +133,7 @@
     <Content Include="asset\img\excellent_active.png" />
     <Content Include="asset\img\good.png" />
     <Content Include="asset\img\good_active.png" />
+    <Content Include="asset\img\md-icons\svg\ic_add_circle_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_check_circle_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_down_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_left_black_24px.svg" />

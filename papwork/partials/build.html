@@ -5,13 +5,30 @@
             <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{buildQuestionsObj.percentComplete()}}" aria-valuemin="{{buildQuestionsObj.minCount}}" aria-valuemax="{{buildQuestionsObj.maxCount}}"></md-progress-linear>
         </div>
         <div class="apply-questions-container">
-            <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">  
+            <flip ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
+                <flip-panel>
+                    <md-card>
+                        <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
+                        </question>
+                    </md-card>
+                </flip-panel>
+                <flip-panel>
+                    <md-card>
+                        <settings>
+                            <div>Settings</div>
+                        </settings>
+                    </md-card>
+                </flip-panel>
+            </flip>
+        </div>
+        <div class="navigation-slide">
+            <md-card class="add-slide" ng-click="addSlide()">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+            </md-card>
+            <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
                 <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
                 </question>
             </md-card>
-        </div>
-        <div class="navigation-slide">
-            <md-card class="add-slide" ng-click="addSlide()"></md-card>
         </div>
     </div>
 </div>

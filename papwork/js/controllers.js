@@ -120,11 +120,11 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
     }
 
     $document.bind("keydown", function (event) {
-        if (event.keyCode == 40) {
+        if (event.keyCode == KeyCodes.DOWNARROW) {
             //$scope.questionsObj.next();
             angular.element('.next').trigger('click')
         }
-        if (event.keyCode == 38) {
+        if (event.keyCode == KeyCodes.UPARROW) {
             //$scope.questionsObj.prev();
             angular.element('.prev').trigger('click')
         }
@@ -162,7 +162,7 @@ myapp.controller('successCtrl', ['$scope', function ($scope) {
 myapp.controller('tabCtrl', function ($scope) {
 });
 
-myapp.controller('buildCtrl', function ($scope) {
+myapp.controller('buildCtrl', function ($scope, $document) {
     $scope.buildQuestionsObj = {
         questions: [],
         maxCount: 0,
@@ -172,10 +172,9 @@ myapp.controller('buildCtrl', function ($scope) {
             return (this.activeNow / this.maxCount) * 100;
         }
     };
-
     $scope.addSlide = function () {
         var tempQuestion = {
-            "id": $scope.minCount++,
+            "id": $scope.buildQuestionsObj.maxCount++,
             "question": "What is your name?",
             "name": "name",
             "modelname": "name",
@@ -199,6 +198,38 @@ myapp.controller('buildCtrl', function ($scope) {
                 }
             }
         };
+        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount;
         $scope.buildQuestionsObj.questions.push(tempQuestion);
     };
+
+    //next button click
+    $scope.buildQuestionsObj.next = function () {
+        var _active = document.getElementsByClassName("slideactive");
+        _active = angular.element(_active);
+        if (_active.index() < $scope.buildQuestionsObj.maxCount-1) {
+            _active.removeClass('slideactive').addClass('slideleft');
+            _active.next().addClass('slideactive').removeClass('slideleft');
+            $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.activeNow + 1;
+        }
+    }
+
+    //prev button click
+    $scope.buildQuestionsObj.prev = function () {
+        var _active = document.getElementsByClassName("slideactive");
+        _active = angular.element(_active);
+        if (_active.index() > 0) {
+            _active.removeClass('slideactive');
+            _active.prev().addClass('slideactive').removeClass('slideleft');
+            $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.activeNow - 1;
+        }
+    }
+
+    $document.bind("keydown", function (event) {
+        if (event.keyCode == KeyCodes.LEFTARROW) {
+            $scope.buildQuestionsObj.prev();
+        }
+        if (event.keyCode == KeyCodes.RIGHTARROW) {
+            $scope.buildQuestionsObj.next();
+        }
+    });
 });

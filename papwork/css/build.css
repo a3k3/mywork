@@ -13,37 +13,78 @@
     position: relative;
     display: inline-block;
     width: 100%;
-    height:70vh;
+    height: 71vh;
 }
-.apply-questions-container md-card {
+.apply-questions-container flip {
     position: absolute;
     left: 1000px;
     width: 100%;
     margin:0 0;
     -webkit-transition: left .2s ease-out;
-    height: 70vh;
+    height: 73vh;
 }
-.apply-questions-container md-card.slideactive{
+.apply-questions-container md-card {
+    margin: 1px;
+}
+.apply-questions-container .slideactive{
     left:0;
 }
 
-.apply-questions-container md-card.slideleft {
+.apply-questions-container .slideleft {
     left: -1000px;
 }
 .navigation-slide{
     position: relative;
-    height: 30vh;
+    height: 13vh;
     bottom: 0;
 }
+.navigation-slide md-card:first-child {
+    margin-right: 1px;
+    float:right;
+}
+.navigation-slide md-card:nth-child(2) {
+    margin-left: 1px;
+}
 .navigation-slide md-card{
-    width:20%;
-    height:100%;
+    width: 14%;
+    float: left;
+    height: 80%;
+    margin: 3px;
+}
+
+.navigation-slide question.question-slide {
+    padding: 4%;
+    transform-origin: 0 0;
+}
+
+.navigation-slide question.question-slide .questionPanel{
+    transform: scale(.2);
+    transform-origin: 0 0;
+    position: absolute;
+    top: 15px;
+    width: 100%;
+}
+
+.navigation-slide .add-slide {
+    position:relative;
+}
+.navigation-slide .add-slide md-icon
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    transform: translate(-50%,-50%);
 }
 
 /*******Overrides for question slide******/
 md-card question.question-slide {
     position: static;
     transition: none;
+    height:70vh;
+}
+md-card settings {
+    height:70vh;
 }
 
 md-card question .questionPanel .answerContainer {
