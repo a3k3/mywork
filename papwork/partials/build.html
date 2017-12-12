@@ -11,13 +11,83 @@
                         <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
                         </question>
                     </md-card>
+                    <div class="controls">
+                        <md-icon class="copy" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                    </div>
                 </flip-panel>
                 <flip-panel>
                     <md-card>
                         <settings>
-                            <div>Settings</div>
+                            <md-tabs>
+                                <md-tab label="basic">
+                                    <md-content class="md-padding">
+                                        <div layout="row" layout-align="start center">
+                                            <div flex>Must Answer</div>
+                                            <div flex>
+                                                <md-switch ng-model="question.validations.required.condition" aria-label="Must Answer"></md-switch>
+                                            </div>
+                                        </div>
+                                        <div layout="row" layout-align="start center">
+                                            <div flex>Character Limit</div>
+                                            <div flex>
+                                                <md-input-container>
+                                                    <input type="number" step="any" name="climit" min="1"
+                                                           max="20"/>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div layout="row" layout-align="start center">
+                                            <div flex>Accept Only</div>
+                                            <div flex>
+                                                <md-input-container>
+                                                    <md-select name="type" ng-model="">
+                                                        <md-option value="number">Number</md-option>
+                                                        <md-option value="text">Text</md-option>
+                                                    </md-select>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div layout="row" layout-align="start center">
+                                            <div flex>Auto Complete</div>
+                                            <div flex>
+                                                <div layout="row" layout-align="start center">
+                                                    <div flex>
+                                                        <md-switch ng-model="question.validations.autocomplete.condition" aria-label="Auto Complete"></md-switch>
+                                                    </div>
+                                                    <div flex>
+                                                        <md-input-container>
+                                                            <input type="number" step="any" name="timer" min="1"
+                                                                   max="200" ng-disabled="!question.validations.autocomplete.condition" />
+                                                        </md-input-container>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                        </div>
+                                        <div layout="row" layout-align="start center">
+                                            <div flex>Success Message</div>
+                                            <div flex>
+                                                <md-input-container>
+                                                    <label>Type your response</label>
+                                                    <input type="text" name="successmessage" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="advanced" ng-disabled="true">
+                                    <md-content class="md-padding">
+                                        <h1 class="md-display-2">Tab One</h1>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
                         </settings>
                     </md-card>
+                    <div class="controls">
+                        <md-icon class="copy" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        <md-icon class="settings back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                    </div>
                 </flip-panel>
             </flip>
         </div>

@@ -23,15 +23,37 @@
     -webkit-transition: left .2s ease-out;
     height: 73vh;
 }
+.apply-questions-container flip flip-panel:first-child{
+    z-index:999;
+}
 .apply-questions-container md-card {
-    margin: 1px;
+    margin: 3px;
 }
 .apply-questions-container .slideactive{
     left:0;
 }
+.navigation-slide .slideactive{
+    border:2px solid rgb(129,199,132);
+}
 
 .apply-questions-container .slideleft {
     left: -1000px;
+}
+
+.controls {
+    position: absolute;
+    right: 15px;
+    bottom: 30px;
+}
+
+settings .md-tab {
+    padding:12px 0;
+    width:50%;
+    font-size:0.9em;
+    text-transform:capitalize;
+}
+settings md-tabs-canvas md-ink-bar {
+    background: #7BCD6E !important;
 }
 .navigation-slide{
     position: relative;

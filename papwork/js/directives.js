@@ -136,8 +136,8 @@ myapp.directive("flip", function () {
                 self.back.addClass("flipBasic");
 
                 showFront();
-                self.front.on("click", showBack);
-                self.back.on("click", showFront);
+                self.front.find('.settings.front').on("click", showBack);
+                self.back.find('.settings.back').on("click", showFront);
             }
 
         },

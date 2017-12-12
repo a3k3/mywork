@@ -306,7 +306,7 @@ md-tab-content {
 md-pagination-wrapper {
     width:100%!important;
 }
-.md-tab {
+.create-tabs > md-tabs-wrapper .md-tab {
     padding:12px 0;
     width:33.33%;
     font-size:0.9em;
@@ -315,14 +315,14 @@ md-pagination-wrapper {
 .md-tab.md-active {
     font-size:1em;
 }
-md-tabs-canvas md-ink-bar{
+.create-tabs > md-tabs-wrapper md-tabs-canvas md-ink-bar{
     background:#7BCD6E!important;
     margin-bottom:10px;
     width:10%;
     padding:2px;
     margin-left:11.5%
 }
-md-tabs-canvas md-ink-bar:after {
+.create-tabs > md-tabs-wrapper md-tabs-canvas md-ink-bar:after {
     width: 0;
     height: 0;
     border-left: 7px solid transparent;

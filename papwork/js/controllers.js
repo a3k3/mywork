@@ -185,7 +185,7 @@ myapp.controller('buildCtrl', function ($scope, $document) {
             "placeholder": "Enter your name",
             "validations": {
                 "required": {
-                    "condition": true,
+                    "condition": false,
                     "text": "Thats required!"
                 },
                 "maxlength": {
@@ -195,6 +195,10 @@ myapp.controller('buildCtrl', function ($scope, $document) {
                 "minlength": {
                     "condition": 0,
                     "text": "Thats too short!"
+                },
+                "autocomplete": {
+                    "condition": false,
+                    "text": "Thats required!"
                 }
             }
         };
