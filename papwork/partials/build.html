@@ -1,18 +1,24 @@
 ﻿<div ng-controller="buildCtrl" md-swipe-up="onSwipeUp()" md-swipe-down="onSwipeDown()">
     <div class="md-card">
         <div class="progressContainer">
-            <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount}}</div>
+            <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount()}}</div>
             <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{buildQuestionsObj.percentComplete()}}" aria-valuemin="{{buildQuestionsObj.minCount}}" aria-valuemax="{{buildQuestionsObj.maxCount}}"></md-progress-linear>
         </div>
         <div class="apply-questions-container">
-            <flip ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
+            <flip class="flip" ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}">
                 <flip-panel>
+                    <div class="type">
+                        <md-button class="md-icon-button" ng-click="openTypeModal($event)">
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
+                        </md-button>
+                    </div>
                     <md-card>
-                        <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
-                        </question>
+                        <buildquestion class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
+                        </buildquestion>
                     </md-card>
                     <div class="controls">
-                        <md-icon class="copy" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
                         <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
                     </div>
                 </flip-panel>
@@ -41,7 +47,7 @@
                                             <div flex>Accept Only</div>
                                             <div flex>
                                                 <md-input-container>
-                                                    <md-select name="type" ng-model="">
+                                                    <md-select name="type" ng-model="question.answertype">
                                                         <md-option value="number">Number</md-option>
                                                         <md-option value="text">Text</md-option>
                                                     </md-select>
@@ -85,7 +91,8 @@
                         </settings>
                     </md-card>
                     <div class="controls">
-                        <md-icon class="copy" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
                         <md-icon class="settings back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
                     </div>
                 </flip-panel>
@@ -95,7 +102,7 @@
             <md-card class="add-slide" ng-click="addSlide()">
                 <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
             </md-card>
-            <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
+            <md-card ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)">
                 <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
                 </question>
             </md-card>

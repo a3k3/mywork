@@ -11,6 +11,13 @@ myapp.directive('question', function () {
     };
 });
 
+myapp.directive('buildquestion', function () {
+    return {
+        restrict: 'E',
+        templateUrl: "../partials/build_questionsTemplate.html"
+    };
+});
+
 myapp.directive('apsUploadFile', apsUploadFile);
 
 function apsUploadFile() {

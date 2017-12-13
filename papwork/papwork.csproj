@@ -136,11 +136,13 @@
     <Content Include="asset\img\md-icons\svg\ic_add_circle_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_attach_file_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_check_circle_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_close_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_content_copy_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_down_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_left_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_right_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_up_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_remove_circle_outline_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_settings_black_24px.svg" />
     <Content Include="asset\img\pancard.JPG" />
     <Content Include="asset\img\poor.png" />
@@ -185,6 +187,7 @@
     <Content Include="partials\input_templates\text.html" />
     <Content Include="partials\input_templates\file.html" />
     <Content Include="partials\input_templates\url.html" />
+    <Content Include="partials\questionType.tmpl.html" />
     <Content Include="partials\success.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />

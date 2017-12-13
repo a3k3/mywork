@@ -1,7 +1,7 @@
 <form name="questionsForm" ng-controller="questionsCtrl as vm" md-theme="mytheme" md-swipe-up="onSwipeUp()" md-swipe-down="onSwipeDown()" action="{{action}}">
     <div class="progressContainer">
-        <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{questionsObj.percentComplete()}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount}}"></md-progress-linear>
-        <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{questionsObj.activeNow}} out of {{questionsObj.maxCount}}</div>
+        <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{questionsObj.percentComplete()}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount()}}"></md-progress-linear>
+        <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{questionsObj.activeNow}} out of {{questionsObj.maxCount()}}</div>
         <div class="category col-xs-12 text-center font-color-222 font-size-14">Category</div>
     </div>
     <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">

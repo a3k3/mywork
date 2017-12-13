@@ -22,11 +22,13 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
 
     $scope.questionsObj = {
         questions: [],
-        maxCount: 0,
+        maxCount: function () {
+            return this.questions.length;
+        },
         minCount: 0,
         activeNow: 0,
         percentComplete: function () {
-            return (this.activeNow / this.maxCount) * 100;
+            return (this.activeNow / this.maxCount()) * 100;
         }
     };
 
@@ -46,9 +48,12 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
             }
         }
         $scope.questionsObj.activeNow = 1;
-        $scope.questionsObj.maxCount = $scope.questionsObj.questions.length;
     }, function myError(response) {
         $scope.status = response.statusText;
+    });
+
+    $scope.$on('questionsData', function (event, data) {
+        $scope.questionsObj.questions =  data;
     });
 
     $scope.dynamicTemplateUrl = function (data) {
@@ -66,7 +71,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
     $scope.questionsObj.next = function () {
         var _active = document.getElementsByClassName("active");
         _active = angular.element(_active);
-        if (_active.index() < $scope.questionsObj.maxCount) {
+        if (_active.index() < $scope.questionsObj.maxCount()) {
             _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
             $scope.questionsObj.activeNow++;
         }
@@ -130,14 +135,12 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
         }
     });
 }
-//questionsCtrl.$inject = ['$scope', 'getAllQuestions'];
 
 myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location','$document', questionsCtrl])
 
 
 function MyCtrl2() {
 }
-//MyCtrl2.$inject = [];
 
 myapp.controller('MyCtrl2', ['$scope', 'getAllQuestions', MyCtrl2])
 
@@ -162,19 +165,24 @@ myapp.controller('successCtrl', ['$scope', function ($scope) {
 myapp.controller('tabCtrl', function ($scope) {
 });
 
-myapp.controller('buildCtrl', function ($scope, $document) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog) {
+
     $scope.buildQuestionsObj = {
         questions: [],
-        maxCount: 0,
+        maxCount: function () {
+            return this.questions.length;
+        },
         minCount: 0,
         activeNow: 0,
         percentComplete: function () {
-            return (this.activeNow / this.maxCount) * 100;
+            return (this.activeNow / this.maxCount()) * 100;
         }
     };
+
+    //add slide
     $scope.addSlide = function () {
         var tempQuestion = {
-            "id": $scope.buildQuestionsObj.maxCount++,
+            "id":$scope.buildQuestionsObj.maxCount()+1,
             "question": "What is your name?",
             "name": "name",
             "modelname": "name",
@@ -202,18 +210,43 @@ myapp.controller('buildCtrl', function ($scope, $document) {
                 }
             }
         };
-        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount;
         $scope.buildQuestionsObj.questions.push(tempQuestion);
+        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
+    };
+
+    //delete slide
+    $scope.deleteSlide = function (event) {
+        var _currentSlide = $(event.target).closest('.flip').index();
+        $scope.buildQuestionsObj.questions.splice(_currentSlide, 1);
+        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+    };
+
+    //copy slide
+    $scope.copySlide = function (event) {
+        var _currentSlide = $(event.target).closest('.flip').index();
+        var copyObj = angular.copy($scope.buildQuestionsObj.questions[_currentSlide]);
+        $scope.buildQuestionsObj.questions.push(copyObj);
+        $scope.buildQuestionsObj.questions[$scope.buildQuestionsObj.maxCount() - 1].id = $scope.buildQuestionsObj.maxCount();
+        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+        resetSlide();
+    };
+
+    //show slide
+    $scope.showSlide = function (event) {
+        var _currentSlide = $(event.target).closest('md-card').index();
+        resetSlide();
+        setActiveSlide(_currentSlide);
+        $scope.buildQuestionsObj.activeNow = _currentSlide;
     };
 
     //next button click
     $scope.buildQuestionsObj.next = function () {
         var _active = document.getElementsByClassName("slideactive");
         _active = angular.element(_active);
-        if (_active.index() < $scope.buildQuestionsObj.maxCount-1) {
-            _active.removeClass('slideactive').addClass('slideleft');
-            _active.next().addClass('slideactive').removeClass('slideleft');
-            $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.activeNow + 1;
+        if (_active.index() < $scope.buildQuestionsObj.maxCount()-1) {
+            _active.next().addClass('slideactive').removeClass('slideleft').prev().removeClass('slideactive').addClass('slideleft');
+            $scope.buildQuestionsObj.activeNow++;
         }
     }
 
@@ -224,7 +257,7 @@ myapp.controller('buildCtrl', function ($scope, $document) {
         if (_active.index() > 0) {
             _active.removeClass('slideactive');
             _active.prev().addClass('slideactive').removeClass('slideleft');
-            $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.activeNow - 1;
+            $scope.buildQuestionsObj.activeNow--;
         }
     }
 
@@ -236,4 +269,48 @@ myapp.controller('buildCtrl', function ($scope, $document) {
             $scope.buildQuestionsObj.next();
         }
     });
+
+    $scope.dynamicTemplateUrl = function (data) {
+        return "../partials/input_templates/" + getTemplate(data) + ".html"
+    }
+
+    //question type modal
+    $scope.openTypeModal = function (ev) {
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: '../partials/questionType.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function () {
+            $scope.status = 'You said the information was.';
+        }, function () {
+            $scope.status = 'You cancelled the dialog.';
+        });
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+    }
+
+    function resetSlide() {
+        angular.element('.apply-questions-container').find('.flip').removeClass('slideactive');
+        angular.element('.navigation-slide').find('md-card').removeClass('slideactive');
+    }
+
+    function setActiveSlide(index) {
+        angular.element('.apply-questions-container').find('.flip').eq(index - 1).addClass('slideactive').removeClass('slideleft');
+        for (var i = 0; i < index - 1; i++) {
+            angular.element('.apply-questions-container').find('.flip').eq(i).addClass('slideleft')
+        }
+        angular.element('.navigation-slide').find('md-card').eq(index).addClass('slideactive').removeClass('slideleft');
+    }
 });

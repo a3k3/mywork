@@ -46,6 +46,16 @@
     bottom: 30px;
 }
 
+.controls md-icon {
+    padding: 6px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0,0,0,0.54);
+    color: #fff;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
 settings .md-tab {
     padding:12px 0;
     width:50%;
@@ -59,6 +69,7 @@ settings md-tabs-canvas md-ink-bar {
     position: relative;
     height: 13vh;
     bottom: 0;
+    width: 300000px;
 }
 .navigation-slide md-card:first-child {
     margin-right: 1px;
@@ -68,10 +79,13 @@ settings md-tabs-canvas md-ink-bar {
     margin-left: 1px;
 }
 .navigation-slide md-card{
-    width: 14%;
+    width: 0.016%;
     float: left;
     height: 80%;
     margin: 3px;
+    outline: none;
+    /* position: absolute; */
+    box-sizing: border-box;
 }
 
 .navigation-slide question.question-slide {
@@ -84,11 +98,14 @@ settings md-tabs-canvas md-ink-bar {
     transform-origin: 0 0;
     position: absolute;
     top: 15px;
-    width: 100%;
+    width: 456%;
+    overflow: hidden;
 }
 
 .navigation-slide .add-slide {
-    position:relative;
+    position: absolute;
+    left: calc(100vw - 70px);
+    z-index: 999;
 }
 .navigation-slide .add-slide md-icon
 {
@@ -99,17 +116,64 @@ settings md-tabs-canvas md-ink-bar {
     transform: translate(-50%,-50%);
 }
 
+.navigation-slide md-card.slideactive {position: relative;}
+
+.navigation-slide md-card.slideactive:after {
+    content:'.';
+    position:absolute;
+    bottom: -49px;
+    font-size: 90px;
+    left: 50%;
+    color: rgb(129,199,132);
+    transform: translateX(-50%);
+}
+
 /*******Overrides for question slide******/
-md-card question.question-slide {
+md-card buildquestion.question-slide, md-card question.question-slide {
     position: static;
     transition: none;
     height:70vh;
+    padding-top:30px;
+    width: 100%;
 }
 md-card settings {
     height:70vh;
 }
 
-md-card question .questionPanel .answerContainer {
-    opacity: 1;
+.type {
+    position: absolute;
 }
 
+md-card buildquestion .questionPanel .answerContainer, md-card question .questionPanel .answerContainer {
+    opacity: 1;
+}
+md-dialog {
+    max-width: 95%!important;
+    width: 95%;
+    background-color: rgba(0,0,0,0.8);
+    color:#fff;
+}
+md-dialog .type-layout {
+    width:100%;
+    height:70vh;
+}
+
+md-dialog .type-layout md-icon{
+    color:#fff;
+    display:block;
+}
+
+.field-type .flex {
+    padding: 8px;
+    text-align:center;
+}
+.field-type .flabel .flex {
+    text-align :left;
+}
+.field-type .content .flex {
+    border: 1px solid;
+}
+
+md-input-container > label {
+    transform: translateY(28px)!important;
+}
