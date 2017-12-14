@@ -28,13 +28,10 @@
                             <md-tabs>
                                 <md-tab label="basic">
                                     <md-content class="md-padding">
-                                        <div layout="row" layout-align="start center">
-                                            <div flex>Must Answer</div>
-                                            <div flex>
-                                                <md-switch ng-model="question.validations.required.condition" aria-label="Must Answer"></md-switch>
-                                            </div>
+                                        <div layout="row" layout-align="start center" ng-repeat="setting in question.validations">
+                                            <div ng-include="getSettingUrl(setting.name)"></div>
                                         </div>
-                                        <div layout="row" layout-align="start center">
+                                        <!--<div layout="row" layout-align="start center">
                                             <div flex>Character Limit</div>
                                             <div flex>
                                                 <md-input-container>
@@ -78,7 +75,7 @@
                                                     <input type="text" name="successmessage" />
                                                 </md-input-container>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </md-content>
                                 </md-tab>
                                 <md-tab label="advanced" ng-disabled="true">

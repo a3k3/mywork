@@ -1,0 +1,102 @@
+﻿{
+  "text": {
+    "validations": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "name": "maxlength",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      }
+    }
+  },
+  "textarea": {
+    "validations": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "name": "maxlength",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      }
+    }
+  },
+  "multichoice": {
+    "validations": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxcount": {
+        "name": "maxcount",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      }
+    },
+    "option": {
+      "name": "product",
+      "key": "ProductA",
+      "value": "ProductA"
+    }
+  },
+  "rating": {
+    "validations": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxcount": {
+        "name": "maxcount",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      }
+    },
+    "options": {
+      "name": "sample",
+      "title": "sample"
+    }
+  }
+}

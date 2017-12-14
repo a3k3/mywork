@@ -13,3 +13,10 @@ myservice.service('getAllQuestions', ['$http',function ($http) {
     })
 }]);
 
+
+myservice.service('getSettings', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/buildquestionData.json"
+    })
+}]);

@@ -170,6 +170,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="partials\build.html" />
+    <Content Include="partials\build_input_templates\rating_star.html" />
+    <Content Include="partials\build_input_templates\text.html" />
     <Content Include="partials\build_questionsTemplate.html" />
     <Content Include="partials\cover.html" />
     <Content Include="partials\input_templates\checkbox.html" />
@@ -188,6 +190,7 @@
     <Content Include="partials\input_templates\file.html" />
     <Content Include="partials\input_templates\url.html" />
     <Content Include="partials\questionType.tmpl.html" />
+    <Content Include="partials\settings_templates\required.html" />
     <Content Include="partials\success.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
@@ -200,6 +203,7 @@
     <Content Include="Views\Angular\Async.cshtml" />
     <Content Include="asset\data\questionData.json" />
     <Content Include="partials\input_templates\upload.tmpl.html" />
+    <Content Include="asset\data\buildquestionData.json" />
     <None Include="Properties\PublishProfiles\PapWork.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

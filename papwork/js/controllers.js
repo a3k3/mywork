@@ -146,10 +146,12 @@ myapp.controller('MyCtrl2', ['$scope', 'getAllQuestions', MyCtrl2])
 
 var getTemplate = function (data) {
     var input_template = "";
-    if (data.answertype != null && data.answertype != "") {
-        input_template = data.answertype.toLowerCase();
-        if (data.answertheme != null && data.answertheme != "")
-            input_template = input_template + "_" + data.answertheme.toLowerCase();
+    if (data != undefined) {
+        if (data.answertype != null && data.answertype != "") {
+            input_template = data.answertype.toLowerCase();
+            if (data.answertheme != null && data.answertheme != "")
+                input_template = input_template + "_" + data.answertheme.toLowerCase();
+        }
     }
     else {
         input_template = "text";
@@ -165,7 +167,7 @@ myapp.controller('successCtrl', ['$scope', function ($scope) {
 myapp.controller('tabCtrl', function ($scope) {
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings) {
 
     $scope.buildQuestionsObj = {
         questions: [],
@@ -183,37 +185,40 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.addSlide = function () {
         var tempQuestion = {
             "id":$scope.buildQuestionsObj.maxCount()+1,
-            "question": "What is your name?",
-            "name": "name",
-            "modelname": "name",
-            "caption": "Will not share your name to anyone",
-            "answertype": "text",
-            "answertheme": "",
-            "hint": "Type your name",
-            "placeholder": "Enter your name",
-            "validations": {
-                "required": {
-                    "condition": false,
-                    "text": "Thats required!"
-                },
-                "maxlength": {
-                    "condition": 10,
-                    "text": "Thats too long!"
-                },
-                "minlength": {
-                    "condition": 0,
-                    "text": "Thats too short!"
-                },
-                "autocomplete": {
-                    "condition": false,
-                    "text": "Thats required!"
-                }
-            }
         };
         $scope.buildQuestionsObj.questions.push(tempQuestion);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
     };
+
+    //add question
+    $scope.addQuestion = function (type) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        var id = $scope.buildQuestionsObj.questions[index].id;
+        $scope.buildQuestionsObj.questions[index] = {
+            "id": id,
+            "question": "Please edit this text?",
+            "caption": "Add a suitable caption",
+            "hint": "Please add your hint here",
+            "placeholder": "Placeholder text",
+        };
+        $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
+        $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
+        var tmplhtml = $compile('<ng-include src="dynamicTemplateUrl(question)"></ng-include>')($scope);
+        angular.element('.apply-questions-container').find('.flip').eq(index).find('.inputContainer').append(tmplhtml);
+
+        //settings
+        getSettings.then(function (response) {
+            $scope.buildQuestionsObj.questions[index].validations = response.data[$scope.buildQuestionsObj.questions[index].answertype];
+        }, function myError(response) {
+            $scope.status = response.statusText;
+        });
+
+    }
+
+    $scope.getSettingUrl = function (tmpl) {
+        return '../partials/settings_templates/'+tmpl+'.html'
+    }
 
     //delete slide
     $scope.deleteSlide = function (event) {
@@ -271,12 +276,17 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     });
 
     $scope.dynamicTemplateUrl = function (data) {
-        return "../partials/input_templates/" + getTemplate(data) + ".html"
+        if (data == undefined)
+            return;
+        return "../partials/build_input_templates/" + getTemplate(data) + ".html"
     }
 
     //question type modal
     $scope.openTypeModal = function (ev) {
         $mdDialog.show({
+            locals:{
+                callback: $scope.addQuestion
+            },
             controller: DialogController,
             templateUrl: '../partials/questionType.tmpl.html',
             parent: angular.element(document.body),
@@ -291,7 +301,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         });
     };
 
-    function DialogController($scope, $mdDialog) {
+    function DialogController($scope, $mdDialog, callback) {
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -299,6 +309,13 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
+
+        $scope.addQuestion = function (event) {
+            angular.element('.content > .flex').removeClass('active');
+            $(event.target).addClass('active');
+            var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
+            callback(type);
+        }
     }
 
     function resetSlide() {
@@ -312,5 +329,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             angular.element('.apply-questions-container').find('.flip').eq(i).addClass('slideleft')
         }
         angular.element('.navigation-slide').find('md-card').eq(index).addClass('slideactive').removeClass('slideleft');
+        for (var i = 0; i < index; i++) {
+            angular.element('.navigation-slide').find('md-card').find('.flip').eq(i).addClass('slideleft')
+        }
     }
 });
