@@ -234,8 +234,6 @@ fieldset, label {
     .size-chart ul li {
         list-style: none;
         float: left;
-        height: 40px;
-        width: 50px;
         position: relative;
         outline: none;
         border-left: 1px solid #a1a1a1;
@@ -252,11 +250,9 @@ fieldset, label {
     border-top-right-radius: 5px;
 }
 
-        .size-chart ul li span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
+        .size-chart ul li p {
+            padding: 8px 10px;
+            margin: 0;
         }
 
 .size-chart li.active {
@@ -265,8 +261,12 @@ fieldset, label {
 }
 /****** End of Size Styling *****/
 /****** image-product-type Styling *****/
+.image-product-type {
+    overflow:hidden;
+    overflow-x: scroll;
+}
 .top-row {
-    display: inline-block;
+    width:300%
 }
 
 .image-product-type .products img {

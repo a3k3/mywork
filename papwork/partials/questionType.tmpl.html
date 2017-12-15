@@ -10,45 +10,55 @@
         </div>
         <div class="content" layout="row" layout-align="center center">
             <div flex data-type="text" ng-click="addQuestion($event)">
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_format_color_text_black_24px.svg" class=""></md-icon>
                 Type Box
             </div>
+            <div flex data-type="textarea" ng-click="addQuestion($event)">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_text_fields_black_24px.svg" class=""></md-icon>
+                Long type Box
+            </div>
+            <div flex data-type="statement" ng-click="addQuestion($event)">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_textsms_black_24px.svg" class=""></md-icon>
+                Statement
+            </div>
+        </div>
+        <div class="content" layout="row" layout-align="center center">
+            <div flex data-type="radio" ng-click="addQuestion($event)">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_radio_button_checked_black_24px.svg" class=""></md-icon>
+                Radio
+            </div>
+            <div flex data-type="checkbox" ng-click="addQuestion($event)">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_check_box_black_24px.svg" class=""></md-icon>
+                Checkbox
+            </div>
+            <div flex data-type="select" ng-click="addQuestion($event)">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_arrow_drop_down_circle_black_24px.svg" class=""></md-icon>
+                Dropdown
+            </div>
+        </div>
+        <div class="content" layout="row" layout-align="center center">
             <div flex data-type="rating_star" ng-click="addQuestion($event)">
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Long type Box
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_star_black_24px.svg" class=""></md-icon>
+                Star Rating
+            </div>
+            <div flex data-type="radio_size" ng-click="addQuestion($event)">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_linear_scale_black_24px.svg" class=""></md-icon>
+                Scale Rating
             </div>
             <div flex>
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Statement
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg" class=""></md-icon>
+                More Fields
             </div>
         </div>
-        <div class="content" layout="row" layout-align="center center">
-            <div flex>
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Type Box
-            </div>
-            <div flex>
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Long type Box
-            </div>
-            <div flex>
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Statement
-            </div>
+    </div>
+    <div class="question-type">
+        <div class="flabel" layout="row" layout-align="start center">
+            <div flex>Question Type</div>
         </div>
-        <div class="content" layout="row" layout-align="center center">
-            <div flex>
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Type Box
-            </div>
-            <div flex>
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Long type Box
-            </div>
-            <div flex>
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
-                Statement
-            </div>
+        <div class="content">
+            <div flex data-qtype="father">Name</div>
+            <div flex data-qtype="father">Age</div>
+            <div flex data-qtype="father">Father</div>
         </div>
     </div>
 </div>

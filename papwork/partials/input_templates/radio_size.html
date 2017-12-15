@@ -2,7 +2,7 @@
     <ul>
         <li class="md-ink-ripple" ng-repeat="option in question.options" ng-click="sizeSelection($index)">
             <input id="radio-{{$index}}" type="radio" name="{{option.name}}" value="{{option.value}}" ng-hide="true" />
-            <span>{{option.key}}</span>
+            <p>{{option.key}}</p>
         </li>
     </ul>
 </div>

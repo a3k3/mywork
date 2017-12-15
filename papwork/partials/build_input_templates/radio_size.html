@@ -1,7 +1,7 @@
 ﻿<div class="option" ng-repeat="option in question.options">
     <div layout="flex">
         <div flex="40">
-            Title: <label contenteditable ng-model="option.title">{{option.title}}</label>
+            Title: <label contenteditable ng-model="option.name">{{option.key}}</label>
         </div>
         <div flex="40">
             Value: <label contenteditable ng-model="option.value">{{option.value}}</label>

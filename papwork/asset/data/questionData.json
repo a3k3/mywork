@@ -5,6 +5,7 @@
     "name": "name",
     "modelname": "name",
     "caption": "Will not share your name to anyone",
+    "category": "Category",
     "answertype": "text",
     "answertheme": "",
     "hint": "Type your name",
@@ -30,6 +31,7 @@
     "name": "tel",
     "modelname": "number",
     "caption": "Will not share your number to anyone",
+    "category": "Category",
     "answertype": "number",
     "answertheme": "",
     "hint": "Type your mobile no",
@@ -55,6 +57,7 @@
     "name": "adhar",
     "modelname": "aadhar",
     "caption": "Will not share your number to anyone",
+    "category": "Category",
     "answertype": "file",
     "answertheme": "",
     "hint": "Upload your adhar card",
@@ -72,6 +75,7 @@
     "name": "rating",
     "modelname": "rating",
     "caption": "Help us serve better",
+    "category": "Category",
     "answertype": "rating",
     "answertheme": "star",
     "hint": "Tap the star to give rating",
@@ -114,6 +118,7 @@
     "name": "rating",
     "modelname": "smiley",
     "caption": "Help us serve better",
+    "category": "Category",
     "answertype": "rating",
     "answertheme": "smiley",
     "hint": "Tap the star to give rating",
@@ -161,6 +166,7 @@
     "name": "checkbox",
     "modelname": "product",
     "caption": "Help us serve better",
+    "category": "Category",
     "answertype": "checkbox",
     "answertheme": "",
     "hint": "Tap the star to give rating",
@@ -172,22 +178,18 @@
     "options": [
       {
         "name": "product",
-        "key": "ProductA",
         "value": "ProductA"
       },
       {
         "name": "product",
-        "key": "ProductB",
         "value": "ProductB"
       },
       {
         "name": "product",
-        "key": "ProductC",
         "value": "ProductC"
       },
       {
         "name": "product",
-        "key": "ProductD",
         "value": "ProductD"
       }
     ]
@@ -198,6 +200,7 @@
     "name": "radio",
     "modelname": "",
     "caption": "Help us serve better",
+    "category": "Category",
     "answertype": "radio",
     "answertheme": "",
     "hint": "Tap the star to give rating",
@@ -208,23 +211,19 @@
     },
     "options": [
       {
-        "name": "product",
-        "key": "ProductA",
+        "name": "productA",
         "value": "ProductA"
       },
       {
-        "name": "product",
-        "key": "ProductB",
+        "name": "productB",
         "value": "ProductB"
       },
       {
-        "name": "product",
-        "key": "ProductC",
+        "name": "productC",
         "value": "ProductC"
       },
       {
-        "name": "product",
-        "key": "ProductD",
+        "name": "productD",
         "value": "ProductD"
       }
     ]
@@ -235,6 +234,7 @@
     "name": "birthday",
     "modelname": "",
     "caption": "Help us serve better",
+    "category": "Category",
     "answertype": "input",
     "answertheme": "calendar",
     "hint": "Please select the date",
@@ -246,6 +246,7 @@
     "name": "sizechart",
     "modelname": "",
     "caption": "Help us serve better",
+    "category": "Category",
     "answertype": "radio",
     "answertheme": "size",
     "hint": "Tap the star to give rating",
@@ -288,6 +289,7 @@
     "name": "selectsize",
     "modelname": "",
     "caption": "Help us serve better",
+    "category": "Category",
     "answertype": "select",
     "answertheme": "",
     "hint": "Select appropriate size",
@@ -298,23 +300,23 @@
     },
     "options": [
       {
-        "key": "XS",
+        "name": "XS",
         "value": "XS"
       },
       {
-        "key": "S",
+        "name": "S",
         "value": "S"
       },
       {
-        "key": "M",
+        "name": "M",
         "value": "M"
       },
       {
-        "key": "L",
+        "name": "L",
         "value": "L"
       },
       {
-        "key": "XL",
+        "name": "XL",
         "value": "XL"
       }
     ]
@@ -325,6 +327,7 @@
     "name": "bio",
     "modelname": "",
     "caption": "Will not share your name to anyone",
+    "category": "Category",
     "answertype": "textarea",
     "answertheme": "",
     "hint": "Write in brief about yourself",
@@ -343,5 +346,43 @@
         "text": "Thats too short!"
       }
     }
+  },
+  {
+    "id": 12,
+    "question": "Select Product",
+    "name": "selectproduct",
+    "modelname": "",
+    "caption": "Help us serve better",
+    "category": "Category",
+    "answertype": "product",
+    "answertheme": "select",
+    "hint": "Select multiple products",
+    "placeholder": "",
+    "validations": {
+      "required": "true",
+      "maxCount": 5
+    },
+    "options": [
+      {
+        "name": "XS",
+        "image_src": "http://localhost:2472/asset/img/product_A.jpg",
+        "value": "XS"
+      },
+      {
+        "name": "S",
+        "image_src": "http://localhost:2472/asset/img/product_B.jpg",
+        "value": "S"
+      },
+      {
+        "name": "M",
+        "image_src": "http://localhost:2472/asset/img/product_C.jpg",
+        "value": "M"
+      },
+      {
+        "name": "L",
+        "image_src": "http://localhost:2472/asset/img/product_D.jpg",
+        "value": "L"
+      }
+    ]
   }
 ]

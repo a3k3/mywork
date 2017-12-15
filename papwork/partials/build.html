@@ -2,7 +2,6 @@
     <div class="md-card">
         <div class="progressContainer">
             <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount()}}</div>
-            <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{buildQuestionsObj.percentComplete()}}" aria-valuemin="{{buildQuestionsObj.minCount}}" aria-valuemax="{{buildQuestionsObj.maxCount}}"></md-progress-linear>
         </div>
         <div class="apply-questions-container">
             <flip class="flip" ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}">
@@ -13,13 +12,24 @@
                         </md-button>
                     </div>
                     <md-card>
+                        <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{buildQuestionsObj.percentComplete()}}" aria-valuemin="{{buildQuestionsObj.minCount}}" aria-valuemax="{{buildQuestionsObj.maxCount}}"></md-progress-linear>
                         <buildquestion class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
                         </buildquestion>
                     </md-card>
                     <div class="controls">
-                        <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
-                        <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
-                        <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                        <div layout="row" layout-align="start center">
+                            <div class="fcontrol" flex="50">
+                                <div>Must Answer</div>
+                                <div>
+                                    <md-switch ng-model="question.validations.mustanswer.condition" aria-label="Must Answer"></md-switch>
+                                </div>
+                            </div>
+                            <div flex="50">
+                                <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                                <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
+                                <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </div>
+                        </div>
                     </div>
                 </flip-panel>
                 <flip-panel>
@@ -28,54 +38,7 @@
                             <md-tabs>
                                 <md-tab label="basic">
                                     <md-content class="md-padding">
-                                        <div layout="row" layout-align="start center" ng-repeat="setting in question.validations">
-                                            <div ng-include="getSettingUrl(setting.name)"></div>
-                                        </div>
-                                        <!--<div layout="row" layout-align="start center">
-                                            <div flex>Character Limit</div>
-                                            <div flex>
-                                                <md-input-container>
-                                                    <input type="number" step="any" name="climit" min="1"
-                                                           max="20"/>
-                                                </md-input-container>
-                                            </div>
-                                        </div>
-                                        <div layout="row" layout-align="start center">
-                                            <div flex>Accept Only</div>
-                                            <div flex>
-                                                <md-input-container>
-                                                    <md-select name="type" ng-model="question.answertype">
-                                                        <md-option value="number">Number</md-option>
-                                                        <md-option value="text">Text</md-option>
-                                                    </md-select>
-                                                </md-input-container>
-                                            </div>
-                                        </div>
-                                        <div layout="row" layout-align="start center">
-                                            <div flex>Auto Complete</div>
-                                            <div flex>
-                                                <div layout="row" layout-align="start center">
-                                                    <div flex>
-                                                        <md-switch ng-model="question.validations.autocomplete.condition" aria-label="Auto Complete"></md-switch>
-                                                    </div>
-                                                    <div flex>
-                                                        <md-input-container>
-                                                            <input type="number" step="any" name="timer" min="1"
-                                                                   max="200" ng-disabled="!question.validations.autocomplete.condition" />
-                                                        </md-input-container>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                        </div>
-                                        <div layout="row" layout-align="start center">
-                                            <div flex>Success Message</div>
-                                            <div flex>
-                                                <md-input-container>
-                                                    <label>Type your response</label>
-                                                    <input type="text" name="successmessage" />
-                                                </md-input-container>
-                                            </div>
-                                        </div>-->
+                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in question.validations"></ng-include>
                                     </md-content>
                                 </md-tab>
                                 <md-tab label="advanced" ng-disabled="true">

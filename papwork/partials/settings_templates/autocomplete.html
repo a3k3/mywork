@@ -1,0 +1,15 @@
+﻿<div layout="row" layout-align="start center">
+    <div flex>Auto Complete</div>
+    <div flex>
+        <div layout="row" layout-align="start center">
+            <div flex>
+                <md-switch ng-model="setting.condition" aria-label="Auto Complete"></md-switch>
+            </div>
+            <div flex>
+                <md-input-container>
+                    <input type="number" step="any" name="timer" min="1" max="{{setting.time}}" ng-model="setting.time" ng-disabled="!setting.condition" />
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>

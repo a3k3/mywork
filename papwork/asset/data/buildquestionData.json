@@ -1,6 +1,6 @@
 ﻿{
   "text": {
-    "validations": {
+    "settings": {
       "required": {
         "name": "mustanswer",
         "condition": false,
@@ -24,7 +24,7 @@
     }
   },
   "textarea": {
-    "validations": {
+    "settings": {
       "required": {
         "name": "mustanswer",
         "condition": false,
@@ -38,6 +38,7 @@
       "autocomplete": {
         "name": "autocomplete",
         "condition": false,
+        "time": 0,
         "text": "This response is timed."
       },
       "acceptonly": {
@@ -47,8 +48,8 @@
       }
     }
   },
-  "multichoice": {
-    "validations": {
+  "checkbox": {
+    "settings": {
       "required": {
         "name": "mustanswer",
         "condition": false,
@@ -70,14 +71,20 @@
         "text": "Please enter valid input."
       }
     },
-    "option": {
-      "name": "product",
-      "key": "ProductA",
+    "options": [ {
+      "name": "productA",
       "value": "ProductA"
-    }
+    }] 
   },
-  "rating": {
-    "validations": {
+  "rating_star": {
+    "options": [
+      {
+        "id": "star5",
+        "title": "Awesome",
+        "value": "5"
+      }
+    ],
+    "settings": {
       "required": {
         "name": "mustanswer",
         "condition": false,
@@ -93,10 +100,66 @@
         "condition": false,
         "text": "This response is timed."
       }
-    },
-    "options": {
-      "name": "sample",
-      "title": "sample"
     }
+  },
+  "radio": {
+    "settings": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxcount": {
+        "name": "maxcount",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      }
+    },
+    "options": [
+      {
+        "name": "productA",
+        "value": "ProductA"
+      }
+    ]
+  },
+  "radio_size": {
+    "settings": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxcount": {
+        "name": "maxcount",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      }
+    },
+    "options": [{
+      "name": "product",
+      "key": "productA",
+      "value": "ProductA"
+    }] 
   }
+
 }

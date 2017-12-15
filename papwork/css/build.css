@@ -9,7 +9,9 @@
     position: relative;
     display: inline-block;
 }
-
+.apply-questions-container md-progress-linear, .apply-questions-container md-progress-linear .md-container {
+    height: 2px;
+}
 .apply-questions-container {
     position: relative;
     display: inline-block;
@@ -18,20 +20,24 @@
 }
 .apply-questions-container flip {
     position: absolute;
-    left: 1000px;
+    left: 10000px;
     width: 100%;
     margin:0 0;
-    -webkit-transition: left .2s ease-out;
+    -webkit-transition: left .8s ease-out;
     height: 73vh;
 }
 .apply-questions-container flip flip-panel:first-child{
     z-index:999;
 }
+.apply-questions-container .flipBasic md-tab-content md-content {
+    background-color:#fff;
+}
 .apply-questions-container md-card {
-    margin: 0 3px;
+    margin: 3px 3px;
 }
 .apply-questions-container .slideactive{
     left:0;
+    -webkit-transition: left .8s ease-out;
 }
 .navigation-slide .slideactive{
     border:2px solid rgb(129,199,132);
@@ -39,12 +45,27 @@
 
 .apply-questions-container .slideleft {
     left: -1000px;
+    -webkit-transition: left .8s ease-out;
 }
 
 .controls {
     position: absolute;
-    right: 15px;
+    right: 0;
     bottom: 30px;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.controls .fcontrol > div {
+    float: left;
+}
+
+.controls .fcontrol > div md-switch {
+    margin: -5px 10px;
+}
+
+.controls .flex-50:last-child {
+    text-align: right;
 }
 
 .controls md-icon {
@@ -168,10 +189,16 @@ md-dialog .type-layout md-icon{
     color:#fff;
     display:block;
 }
-
-.field-type .flex {
+.type-layout md-icon.close-modal {
+    border-radius: 50%;
+    border: 1px solid;
+}
+.field-type .flex{
     padding: 8px;
     text-align:center;
+}
+.question-type .flex {
+    padding: 8px;
 }
 .field-type .flabel .flex {
     text-align :left;
@@ -181,6 +208,19 @@ md-dialog .type-layout md-icon{
     text-align:center;
     font-size:12px;
     padding:16px 8px;
+    outline: none;
+}
+.question-type .content .flex {
+    float: left;
+    border: 1px solid #fff;
+    margin: 0 8px;
+    border-radius: 20px;
+    padding: 5px;
+    min-width: 63px;
+    text-align: center;
+}
+.field-type .flex.active, .question-type .flex.active {
+    background-color: rgb(76,175,80);
 }
 
 .field-type .content .flex:last-child {
@@ -196,4 +236,22 @@ md-dialog .type-layout md-icon{
 }
 .close-tab {
     padding: 10px 0;
+}
+md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
+    background-color: transparent;
+}
+
+@media screen and (min-width:1024px) {
+    flip-panel.flipBasic.flipHideBack {
+        transform: none;
+        width: 40%!important;
+        right: 0;
+    }
+    flip-panel.flipBasic.flipHideBack md-tabs.md-mytheme-theme md-ink-bar{
+        width:50%;
+    }
+
+    flip-panel.flipBasic {
+        width: 60%!important;
+    }
 }
