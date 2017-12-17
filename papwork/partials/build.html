@@ -105,13 +105,15 @@
             <md-card class="add-slide" ng-click="addSlide()">
                 <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
             </md-card>
-            <md-card ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }" ng-click="showSlide($event)">
-                <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
-            </md-card>
-            <md-card ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)">
-                <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
-                </question>
-            </md-card>
+            <div class="navigating_blocks" ng-swipe-left="nextswipes()" ng-swipe-right="previousswipes()">
+                <md-card ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }" ng-click="showSlide($event)">
+                    <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
+                </md-card>
+                <md-card ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)">
+                    <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
+                    </question>
+                </md-card>
+            </div>
         </div>
     </div>
 </div>

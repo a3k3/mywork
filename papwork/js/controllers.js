@@ -194,6 +194,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions.push(tempQuestion);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
+
+        //$('.navigating_blocks md-card').outerWidth(true);
+
+        if ($('.navigating_blocks md-card').length>4){
+        $(".navigating_blocks").animate({
+            marginLeft: '-=54px'
+        }, 500);
+        }
     };
 
     //add question
@@ -279,7 +287,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var _currentSlide = $(event.target).closest('md-card').index();
         resetSlide();
         setActiveSlide(_currentSlide);
-        $scope.buildQuestionsObj.activeNow = _currentSlide-1;
+        $scope.buildQuestionsObj.activeNow = _currentSlide;
     };
 
     //next button click
@@ -290,6 +298,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             _active.next().addClass('slideactive').removeClass('slideleft').prev().removeClass('slideactive').addClass('slideleft');
             if ($scope.buildQuestionsObj.activeNow <= $scope.buildQuestionsObj.maxCount())
                 $scope.buildQuestionsObj.activeNow++;
+        }
+        if ($('.navigating_blocks .slideactive').offset().left > 220 && $('.navigating_blocks .slideactive').offset().left < 230 && $('.navigating_blocks .slideactive').nextAll().length >0) {
+            $(".navigating_blocks").animate({
+                marginLeft: '-=54px'
+            }, 500);
         }
     }
 
@@ -302,6 +315,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             _active.prev().addClass('slideactive').removeClass('slideleft');
             if ($scope.buildQuestionsObj.activeNow > 1)
                 $scope.buildQuestionsObj.activeNow--;
+        }
+        if ($('.navigating_blocks .slideactive').offset().left < 15 && $('.navigating_blocks .slideactive').prevAll().length) {
+            $(".navigating_blocks").animate({
+                marginLeft: '+=54px'
+            }, 500);
         }
     }
 
@@ -340,6 +358,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         });
     };
 
+    $scope.nextswipes = function () {
+        alert();
+    }
+
     function DialogController($scope, $mdDialog, callback) {
         $scope.hide = function () {
             $mdDialog.hide();
@@ -363,16 +385,16 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     function setActiveSlide(index) {
-        angular.element('.apply-questions-container').find('.flip').eq(index - 1).addClass('slideactive').removeClass('slideleft');
-        for (var i = 0; i < index - 1; i++) {
+        angular.element('.apply-questions-container').find('.flip').eq(index).addClass('slideactive').removeClass('slideleft');
+        for (var i = 0; i < index; i++) {
             angular.element('.apply-questions-container').find('.flip').eq(i).addClass('slideleft')
         }
-        for (var i = index; i < $scope.buildQuestionsObj.maxCount(); i++) {
+        for (var i = index+1; i <= $scope.buildQuestionsObj.maxCount(); i++) {
             angular.element('.apply-questions-container').find('.flip').eq(i).removeClass('slideleft')
         }
-        angular.element('.navigation-slide').find('md-card').eq(index).addClass('slideactive').removeClass('slideleft');
+        angular.element('.navigating_blocks').find('md-card').eq(index).addClass('slideactive').removeClass('slideleft');
         for (var i = 0; i < index; i++) {
-            angular.element('.navigation-slide').find('md-card').find('.flip').eq(i).addClass('slideleft')
+            angular.element('.navigating_blocks').find('md-card').find('.flip').eq(i).addClass('slideleft')
         }
     }
 });
@@ -386,3 +408,36 @@ myapp.controller('coverCtrl', function ($scope, getCoverData) {
     });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+//$(document).ready(function (e) {
+//    $('.navigating_blocks').mousedown(function (e) {
+//        var cursorX = e.pageX;
+//        $('#mouseX').text('mouse x: ' + cursorX);
+//    });
+//    $('.navigating_blocks').draggable(
+//    {
+//        drag: function () {
+//            var offset = $(this).offset();
+//            var xPos = offset.left;
+//            $('#posX').text('drag x: ' + xPos);
+//        }
+//    });
+
+//});
+
+//$(".navigating_blocks").swipe(function (direction, offset) {
+//    console.log("Moving", direction.x, "and", direction.y);
+//    console.log("Touch moved by", offset.x, "horizontally and", offset.y, "vertically");
+//});

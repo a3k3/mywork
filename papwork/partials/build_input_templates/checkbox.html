@@ -1,4 +1,4 @@
-﻿<div class="option" ng-repeat="option in question.options">
+﻿<!--<div class="option" ng-repeat="option in question.options">
     <div layout="flex">
         <div flex="40">
             Title: <label contenteditable ng-model="option.name">{{option.name}}</label>
@@ -12,6 +12,9 @@
             </div>
         </div>
     </div>
+</div>-->
+<div class="option checkbox-block">
+    <md-checkbox class="green" ng-repeat="option in question.options" aria-label="{{option.name}}" name="{{option.name}}" value="{{option.value}}">{{option.value}}</md-checkbox>
 </div>
 <div ng-click="addOption($event)">
     <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
