@@ -1,10 +1,10 @@
-﻿<div class="cover-page">
+﻿<div class="cover-page" ng-controller="coverCtrl">
     <div class="cover-container">
         <div class="media-section">
-            <img class="selected-icon" src="../asset/img/coverpage_media.JPG" />
+            <img class="selected-icon" src="{{coverdata.media_src}}" />
         </div>
         <div class="content-section">
-            <h3>Hi, Welcome to <span class="pap-text">Papform</span> template. Let us know your experience with us.</h3>
+            <h3>{{coverdata.text}}</h3>
         </div>
     </div>
 </div>

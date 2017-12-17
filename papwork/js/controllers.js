@@ -166,7 +166,13 @@ myapp.controller('successCtrl', ['$scope', function ($scope) {
 myapp.controller('tabCtrl', function ($scope) {
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData) {
+
+    getCoverData.then(function (cover) {
+        $scope.buildcoverdata = cover.data;
+    }, function myError(response) {
+        $scope.status = response.statusText;
+    });
 
     $scope.buildQuestionsObj = {
         questions: [],
@@ -197,6 +203,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions[index] = {
             "id": id,
             "question": "Please edit this text?",
+            "category": "Category",
             "caption": "Add a suitable caption",
             "hint": "Please add your hint here",
             "placeholder": "Placeholder text",
@@ -253,14 +260,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     //delete slide
     $scope.deleteSlide = function (event) {
         var _currentSlide = $(event.target).closest('.flip').index();
-        $scope.buildQuestionsObj.questions.splice(_currentSlide, 1);
+        $scope.buildQuestionsObj.questions.splice(_currentSlide-1, 1);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
     };
 
     //copy slide
     $scope.copySlide = function (event) {
         var _currentSlide = $(event.target).closest('.flip').index();
-        var copyObj = angular.copy($scope.buildQuestionsObj.questions[_currentSlide]);
+        var copyObj = angular.copy($scope.buildQuestionsObj.questions[_currentSlide-1]);
         $scope.buildQuestionsObj.questions.push(copyObj);
         $scope.buildQuestionsObj.questions[$scope.buildQuestionsObj.maxCount() - 1].id = $scope.buildQuestionsObj.maxCount();
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
@@ -272,16 +279,17 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var _currentSlide = $(event.target).closest('md-card').index();
         resetSlide();
         setActiveSlide(_currentSlide);
-        $scope.buildQuestionsObj.activeNow = _currentSlide;
+        $scope.buildQuestionsObj.activeNow = _currentSlide-1;
     };
 
     //next button click
     $scope.buildQuestionsObj.next = function () {
         var _active = document.getElementsByClassName("slideactive");
         _active = angular.element(_active);
-        if (_active.index() < $scope.buildQuestionsObj.maxCount()-1) {
+        if (_active.index() < $scope.buildQuestionsObj.maxCount()) {
             _active.next().addClass('slideactive').removeClass('slideleft').prev().removeClass('slideactive').addClass('slideleft');
-            $scope.buildQuestionsObj.activeNow++;
+            if ($scope.buildQuestionsObj.activeNow <= $scope.buildQuestionsObj.maxCount())
+                $scope.buildQuestionsObj.activeNow++;
         }
     }
 
@@ -292,7 +300,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         if (_active.index() > 0) {
             _active.removeClass('slideactive');
             _active.prev().addClass('slideactive').removeClass('slideleft');
-            $scope.buildQuestionsObj.activeNow--;
+            if ($scope.buildQuestionsObj.activeNow > 1)
+                $scope.buildQuestionsObj.activeNow--;
         }
     }
 
@@ -358,9 +367,22 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         for (var i = 0; i < index - 1; i++) {
             angular.element('.apply-questions-container').find('.flip').eq(i).addClass('slideleft')
         }
+        for (var i = index; i < $scope.buildQuestionsObj.maxCount(); i++) {
+            angular.element('.apply-questions-container').find('.flip').eq(i).removeClass('slideleft')
+        }
         angular.element('.navigation-slide').find('md-card').eq(index).addClass('slideactive').removeClass('slideleft');
         for (var i = 0; i < index; i++) {
             angular.element('.navigation-slide').find('md-card').find('.flip').eq(i).addClass('slideleft')
         }
     }
+});
+
+myapp.controller('coverCtrl', function ($scope, getCoverData) {
+
+    getCoverData.then(function (cover) {
+        $scope.coverdata = cover.data;
+    }, function myError(response) {
+        $scope.status = response.statusText;
+    });
+
 });

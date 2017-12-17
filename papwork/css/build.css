@@ -20,7 +20,7 @@
 }
 .apply-questions-container flip {
     position: absolute;
-    left: 10000px;
+    left: 1000px;
     width: 100%;
     margin:0 0;
     -webkit-transition: left .8s ease-out;
@@ -37,6 +37,7 @@
 }
 .apply-questions-container .slideactive{
     left:0;
+    z-index:0;
     -webkit-transition: left .8s ease-out;
 }
 .navigation-slide .slideactive{
@@ -45,9 +46,19 @@
 
 .apply-questions-container .slideleft {
     left: -1000px;
+    z-index:999;
     -webkit-transition: left .8s ease-out;
 }
-
+.apply-questions-container .cover-page{
+    height:70vh;
+}
+.navigation-slide .cover-page{
+    overflow:hidden;
+    height: 9vh;
+}
+.navigation-slide .cover-page img{
+    width:100%;
+}
 .controls {
     position: absolute;
     right: 0;
@@ -240,8 +251,44 @@ md-dialog .type-layout md-icon{
 md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
     background-color: transparent;
 }
-
+.flipBasic.flipHideFront .fcontrol {
+    display: none;
+    -webkit-transition: display ease-in 2s; 
+}
+.flipBasic:not(.flipHideFront) .controls{
+    text-align:right;
+}
+.themes{
+    overflow:hidden;
+}
+.themes .circle{
+    width: 35px;
+    height: 35px;
+    margin: 6px 3px;
+    background-color: #d2d2d2;
+    border: 1px solid #2f2f2f;
+    border-radius: 50%;
+    float: left;
+}
+.more-options,.project-title{
+    display:none;
+}
+.publish-panel {
+    z-index: 99;
+    position: absolute;
+    background-color:#fff;
+    width: 90%;
+    height: 8vh;
+    padding: 0 5%;
+    top: 0;
+}
+.publish-panel + ng-include > form{
+    margin-top:8vh;
+}
 @media screen and (min-width:1024px) {
+    .apply-questions-container flip {
+        left:10000px;
+    }
     flip-panel.flipBasic.flipHideBack {
         transform: none;
         width: 40%!important;
@@ -252,6 +299,95 @@ md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
     }
 
     flip-panel.flipBasic {
-        width: 60%!important;
+        width: 59%!important;
+    }
+    flip-panel.flipHideBack .controls,flip-panel .fcontrol,flip-panel .settings{
+        display:none;
+    }
+    flip-panel .controls{
+        top:20px;
+        bottom:auto;
+        right:10px;
+    }
+    flip-panel .controls .flex-50{
+        max-width:100%;
+    }
+    .apply-questions-container .slideleft{
+        left:-4000px;
+    }
+    md-dialog{
+        width:55%;
+        left:51px;
+    }
+    .md-dialog-container{
+        -webkit-box-pack:start;
+        -webkit-justify-content:flex-start;
+        justify-content:flex-start;
+        -webkit-box-align:start;
+        -webkit-align-items:center;
+    }
+    md-dialog .type-layout {
+        height: 69vh;
+    }
+    md-card buildquestion.question-slide, md-card question.question-slide {
+        margin-left:0;
+    }
+    .build{
+        padding: 30px 40px;
+        background-color: #f8f8f8;
+    }
+    .build .progressContainer{
+        width: 60%;
+        background: #f8f8f8;
+    }
+    .questionPanel{
+        text-align:left;
+    }
+    .navigation-slide md-card{
+        width:0.03%;
+    }
+    .navigation-slide .add-slide{
+        position: relative;
+        left: inherit;
+        z-index: 999;
+        float:left!important;
+        margin-right:3px;
+    }
+    .create-tabs > md-tabs-wrapper md-pagination-wrapper {
+        width: 32%!important;
+        left: 35%;
+    }
+    .create-tabs > md-tabs-wrapper md-tabs-canvas md-ink-bar {
+        margin-bottom: 0px;
+        z-index: 9999;
+    }
+    .project-title{
+        position:fixed;
+        width:150px;
+        display:block;
+    }
+    .project-title p{
+        border-bottom:2px grey solid;
+    }
+    .more-options{
+        display:block;
+        text-align:center;
+    }
+    .more-options ul{
+        list-style-type: none;
+        display: inline-block;
+        width: 60%;
+        padding:0px;
+    }
+    .more-options ul li{
+        float:left;
+        margin-right:25px;
+    }
+    .more-options li img{
+        height:25px;
+        width:25px;
+    }
+    .more-options li span{
+        padding-left:10px;
     }
 }

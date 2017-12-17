@@ -20,3 +20,10 @@ myservice.service('getSettings', ['$http', function ($http) {
         url: "../asset/data/buildquestionData.json"
     })
 }]);
+
+myservice.service('getCoverData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/cover.json"
+    })
+}]);

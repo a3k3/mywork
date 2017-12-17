@@ -4,6 +4,17 @@
             <ng-include src="'../partials/build.html'"></ng-include>
         </md-tab>
         <md-tab label="Preview & Publish">
+            <div class="publish-panel" layout="row">
+                <div flex="70" class="themes">
+                    <div class="circle green"></div>
+                    <div class="circle yellow"></div>
+                    <div class="circle blue"></div>
+                    <div class="circle black"></div>
+                </div>
+                <div flex="30">
+                    <md-button class="publish md-raised md-primary md-hue-2">Publish</md-button>
+                </div>
+            </div>
             <ng-include src="'../partials/experience.html'"></ng-include>
         </md-tab>
         <md-tab label="Response" ng-disabled="true">

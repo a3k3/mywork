@@ -1,9 +1,52 @@
-﻿<div ng-controller="buildCtrl" md-swipe-up="onSwipeUp()" md-swipe-down="onSwipeDown()">
+﻿<div class="build" ng-controller="buildCtrl" md-swipe-up="onSwipeUp()" md-swipe-down="onSwipeDown()">
     <div class="md-card">
+        <div class="project-title">
+            <p class="font-size-18">Untitled-Project</p>
+        </div>
+        <div class="more-options">
+            <ul>                
+                <li><img src="../asset/img/avg.png" /><span>Form Settings</span></li>
+                <li><img src="../asset/img/avg.png" /><span>Themes</span></li>
+                <li><img src="../asset/img/avg.png" /><span>Add slides via</span></li>
+                <li><img src="../asset/img/avg.png" /><span>Make Quiz</span></li>
+                <li><img src="../asset/img/avg.png" /><span>Workflows</span></li>
+                <li><img src="../asset/img/avg.png" /><span>Payments</span></li>
+            </ul>
+        </div>
         <div class="progressContainer">
             <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount()}}</div>
         </div>
         <div class="apply-questions-container">
+            <flip class="flip" ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }">
+                <flip-panel>
+                    <md-card>
+                        <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
+                    </md-card>
+                </flip-panel>
+                <flip-panel>
+                    <md-card>
+                        <settings>
+                            <md-tabs>
+                                <md-tab label="basic">
+                                    <md-content class="md-padding">
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="advanced" ng-disabled="true">
+                                    <md-content class="md-padding">
+                                        <h1 class="md-display-2">Tab One</h1>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </settings>
+                    </md-card>
+                    <div class="controls">
+                        <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
+                        <md-icon class="settings back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                    </div>
+                </flip-panel>
+            </flip>
             <flip class="flip" ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}">
                 <flip-panel>
                     <div class="type">
@@ -61,6 +104,9 @@
         <div class="navigation-slide">
             <md-card class="add-slide" ng-click="addSlide()">
                 <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+            </md-card>
+            <md-card ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }" ng-click="showSlide($event)">
+                <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
             </md-card>
             <md-card ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)">
                 <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
