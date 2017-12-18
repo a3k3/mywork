@@ -21,6 +21,9 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
     vm.formData = {};
 
     $scope.questionsObj = {
+        name: "Untitled",
+        id: null,
+        theme: "default",
         questions: [],
         maxCount: function () {
             return this.questions.length;
@@ -50,6 +53,10 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
         $scope.questionsObj.activeNow = 1;
     }, function myError(response) {
         $scope.status = response.statusText;
+    });
+
+    $scope.$on('questionsFormTheme', function (event, data) {
+        $scope.questionsObj.theme = data;
     });
 
     $scope.$on('questionsData', function (event, data) {
@@ -163,10 +170,16 @@ myapp.controller('successCtrl', ['$scope', function ($scope) {
 }]);
 
 
-myapp.controller('tabCtrl', function ($scope) {
+myapp.controller('tabCtrl', function ($scope, $rootScope) {
+    $scope.themes = ['default','green', 'black', 'pink','blue','yellow', 'orange'];
+
+    $scope.changeTheme = function (event) {
+        var theme = $(event.target).data('theme');
+        $rootScope.$broadcast('questionsFormTheme', theme);
+    }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, $http) {
 
     getCoverData.then(function (cover) {
         $scope.buildcoverdata = cover.data;
@@ -175,6 +188,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     });
 
     $scope.buildQuestionsObj = {
+        name: "Untitled",
+        id: null,
+        theme:"default",
         questions: [],
         maxCount: function () {
             return this.questions.length;
@@ -324,10 +340,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     $document.bind("keydown", function (event) {
-        if (event.keyCode == KeyCodes.LEFTARROW) {
+        if (event.keyCode == KeyCodes.LEFTARROW && $(event.target).closest('.apply-questions-container').length == 0) {
             $scope.buildQuestionsObj.prev();
         }
-        if (event.keyCode == KeyCodes.RIGHTARROW) {
+        if (event.keyCode == KeyCodes.RIGHTARROW && $(event.target).closest('.apply-questions-container').length == 0) {
             $scope.buildQuestionsObj.next();
         }
     });
@@ -359,7 +375,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     };
 
     $scope.nextswipes = function () {
-        alert();
+        //alert();
     }
 
     function DialogController($scope, $mdDialog, callback) {
@@ -376,6 +392,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $(event.target).data('type') == undefined ? $(event.target).parent().addClass('active') : $(event.target).addClass('active');
             var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
             callback(type);
+            $scope.cancel();
         }
     }
 
@@ -397,16 +414,45 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             angular.element('.navigating_blocks').find('md-card').find('.flip').eq(i).addClass('slideleft')
         }
     }
+
+    var formdata = new FormData();
+
+    $scope.getTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formdata.append(key, value);
+        });
+    };
+
+    // NOW UPLOAD THE FILES.
+    $scope.uploadFiles = function () {
+
+        var request = {
+            method: 'POST',
+            url: '/api/fileupload/',
+            data: formdata,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                alert(d);
+            })
+            .error(function () {
+            });
+
+    }
 });
 
-myapp.controller('coverCtrl', function ($scope, getCoverData) {
+myapp.controller('coverCtrl', function ($scope, getCoverData, $http) {
 
     getCoverData.then(function (cover) {
         $scope.coverdata = cover.data;
     }, function myError(response) {
         $scope.status = response.statusText;
     });
-
 });
 
 

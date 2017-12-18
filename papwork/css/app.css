@@ -59,7 +59,7 @@ form {
     position: absolute;
     width: 100%;
     z-index: 99;
-    background: #fff;
+    /*background: #fff;*/
 }
 .progressContainer .status {
     margin-top:10px;
@@ -160,6 +160,30 @@ md-icon svg {
     }
 }
 
+/******Questions Theme*****/
+form.default {
+    background-color:#ffffff;
+}
+form.green {
+    background-color:#91C342;
+}
+form.black {
+    background-color:#000000;
+}
+form.pink{
+    background-color:#F78C8B;
+}
+form.blue{
+    background-color:#4FE7FF;
+}
+form.yellow{
+    background-color:#FCEA1E;
+}
+form.orange{
+    background-color:#F79E00;
+}
+
+/******Questions Theme*****/
 
 /******Questions*****/
 question .questionPanel{

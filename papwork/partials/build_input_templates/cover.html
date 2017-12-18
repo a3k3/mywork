@@ -1,7 +1,9 @@
 ﻿<div class="cover-page">
     <div class="cover-container">
         <div class="media-section">
-            <img class="selected-icon" src="{{buildcoverdata.media_src}}" />
+            <img class="selected-icon" src="{{buildcoverdata.media_src}}" ng-click=""/>
+            <input type="file" id="file1" name="file" ng-files="getTheFiles($files)" />
+            <input type="button" ng-click="uploadFiles()" value="Upload" />
         </div>
         <div class="content-section">
             <h3 contenteditable ng-model="buildcoverdata.text">{{buildcoverdata.text}}</h3>

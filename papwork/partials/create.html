@@ -6,12 +6,9 @@
         <md-tab label="Preview & Publish">
             <div class="publish-panel" layout="row">
                 <div flex="70" class="themes">
-                    <div class="circle green"></div>
-                    <div class="circle yellow"></div>
-                    <div class="circle blue"></div>
-                    <div class="circle black"></div>
+                    <div class="circle {{theme}}" data-theme="{{theme}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>
                 </div>
-                <div flex="30">
+                <div flex="30" class="publish-btn-container">
                     <md-button class="publish md-raised md-primary md-hue-2">Publish</md-button>
                 </div>
             </div>

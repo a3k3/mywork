@@ -1,17 +1,57 @@
 ﻿<div class="build" ng-controller="buildCtrl" md-swipe-up="onSwipeUp()" md-swipe-down="onSwipeDown()">
     <div class="md-card">
-        <div class="project-title">
-            <p class="font-size-18">Untitled-Project</p>
-        </div>
-        <div class="more-options">
-            <ul>                
-                <li><img src="../asset/img/avg.png" /><span>Form Settings</span></li>
-                <li><img src="../asset/img/avg.png" /><span>Themes</span></li>
-                <li><img src="../asset/img/avg.png" /><span>Add slides via</span></li>
-                <li><img src="../asset/img/avg.png" /><span>Make Quiz</span></li>
-                <li><img src="../asset/img/avg.png" /><span>Workflows</span></li>
-                <li><img src="../asset/img/avg.png" /><span>Payments</span></li>
-            </ul>
+        <div class="master-settings container">
+            <div class="row">
+                <div flex class="project-title col-md-3">
+                    <md-input-container style="margin-top:0;">
+                        <input class="md-accent hue-2" ng-model="buildQuestionsObj.name" placeholder="{{question.placeholder}}" type="text">
+                    </md-input-container>
+                </div>
+                <div flex class="more-options col-md-9">
+                    <ul>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="settings">
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </md-button>
+                            Form Settings
+                        </li>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="themes">
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </md-button>
+                            Themes
+                        </li>
+                        <li class="club">
+                            Add slides via
+                            <md-button class="md-icon-button" aria-label="add slides">
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_code_black_24px.svg"></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="add slides">
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                            </md-button>
+                        </li>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="quiz">
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_hourglass_empty_black_24px.svg"></md-icon>
+                            </md-button>
+                            Make Quiz
+                        </li>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="themes">
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </md-button>
+                            Workflows
+                        </li>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="themes">
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_payment_black_24px.svg"></md-icon>
+                            </md-button>
+                            Payments
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
         <div class="progressContainer">
             <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount()}}</div>
@@ -22,16 +62,21 @@
                     <md-card>
                         <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
                     </md-card>
+                    <div class="controls">
+                        <div layout="row" layout-align="start center">
+                            <div flex="100">
+                                <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </div>
+                        </div>
+                    </div>
                 </flip-panel>
                 <flip-panel>
                     <md-card>
                         <settings>
                             <md-tabs>
                                 <md-tab label="basic">
-                                    <md-content class="md-padding">
-                                    </md-content>
                                 </md-tab>
-                                <md-tab label="advanced" ng-disabled="true">
+                                <md-tab label="advanced">
                                     <md-content class="md-padding">
                                         <h1 class="md-display-2">Tab One</h1>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>

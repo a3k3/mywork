@@ -180,6 +180,7 @@
     </Content>
     <Content Include="partials\build.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
+    <Content Include="partials\build_input_templates\cover.html" />
     <Content Include="partials\build_input_templates\radio.html" />
     <Content Include="partials\build_input_templates\radio_size.html" />
     <Content Include="partials\build_input_templates\rating_star.html" />
@@ -224,6 +225,7 @@
     <Content Include="asset\data\questionData.json" />
     <Content Include="partials\input_templates\upload.tmpl.html" />
     <Content Include="asset\data\buildquestionData.json" />
+    <Content Include="asset\data\cover.json" />
     <None Include="Properties\PublishProfiles\PapWork.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
