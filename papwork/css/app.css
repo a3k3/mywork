@@ -1,3 +1,21 @@
+/******View Animation******/
+.view{
+  position: absolute;
+  width: 100%;
+  top:0;
+  transition: 2s;
+}
+/* Third animation*/
+.third .view.ng-enter{
+  top: 100vh;
+}
+.third .view.ng-leave{
+  top: 0%;
+}
+/* Third animation*/
+
+/******View Animation******/
+
 body *{
     font-family: 'Roboto', sans-serif;
 }
@@ -286,6 +304,28 @@ question.active .questionPanel {
     width:100%;
     text-align:center;
 }
+.media-section .selected-icon {
+    width:120px;
+    height:120px;
+    margin:0 auto;
+    background-repeat:no-repeat;
+    background-size:cover;
+    border:1px solid #d2d2d2;
+    border-radius:50%;
+    position:relative;
+    overflow:hidden;
+}
+.media-section .selected-icon .upload
+{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 30px;
+    background-color: rgba(0,0,0,0.54);
+}
+.media-section .selected-icon .upload svg {
+    fill:#fff;
+}
 .content-section {
     text-align:center;
 }
@@ -310,6 +350,7 @@ question.active .questionPanel {
 	 margin-top:20px;
      position:fixed;
      bottom:0;
+     width:348px;
 }
 .recomends ul{
 	display:inline-block;

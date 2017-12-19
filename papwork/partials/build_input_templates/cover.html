@@ -1,12 +1,19 @@
 ﻿<div class="cover-page">
-    <div class="cover-container">
+    <div class="cover-container" ng-if="!buildcoverdata.settings.covertemplate.condition">
         <div class="media-section">
-            <img class="selected-icon" src="{{buildcoverdata.media_src}}" ng-click=""/>
-            <input type="file" id="file1" name="file" ng-files="getTheFiles($files)" />
-            <input type="button" ng-click="uploadFiles()" value="Upload" />
+            <div class="selected-icon" data-file="file1" ng-click="updateMedia($event)" style="background-image:url('{{buildcoverdata.default.media_src}}')">
+                <div class="upload" ng-click="uploadFiles($event)">
+                    <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_file_upload_black_24px.svg"></md-icon>
+                </div>
+            </div>
+            <input type="file" id="file1" name="file" ng-files="getTheFiles($files)" style="display:none;"/>
         </div>
         <div class="content-section">
-            <h3 contenteditable ng-model="buildcoverdata.text">{{buildcoverdata.text}}</h3>
+            <h3 contenteditable ng-model="buildcoverdata.default.text">{{buildcoverdata.default.text}}</h3>
         </div>
+        <md-button class="start md-raised md-primary md-hue-2" ng-if="!buildcoverdata.settings.autocomplete.condition"><span contenteditable ng-model="buildcoverdata.default.start.text">{{buildcoverdata.default.start.text}}</span></md-button>
+    </div>
+    <div class="cover-container" ng-if="buildcoverdata.settings.covertemplate.condition">
+        <div>Offical Template</div>
     </div>
 </div>

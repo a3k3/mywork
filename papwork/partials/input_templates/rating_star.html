@@ -1,8 +1,8 @@
 ﻿<div class="star-rating">
     <fieldset class="rating">
         <div ng-repeat="option in question.options">
-            <input type="radio" id="star{{$index}}" name="{{question.name}}" value="{{option.value}}" ng-click="starSelection($event)" />
-            <label class="full" for="star{{$index}}" title="{{option.title}}"></label>
+            <input type="radio" id="{{option.id}}" name="{{question.name}}" value="{{option.value}}" ng-click="starSelection($event)" />
+            <label class="full" for="{{option.id}}" title="{{option.title}}"></label>
         </div>
     </fieldset>
 </div>

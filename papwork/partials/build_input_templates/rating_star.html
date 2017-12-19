@@ -1,18 +1,8 @@
-﻿<div class="option" ng-repeat="option in question.options">
-    <div layout="flex">
-        <div flex="40">
-            Title: <label contenteditable ng-model="option.title">{{option.title}}</label>
+﻿<div class="star-rating">
+    <fieldset class="rating">
+        <div ng-repeat="option in question.options">
+            <input type="radio" id="{{option.id}}" name="{{question.name}}" value="{{option.value}}" ng-click="starSelection($event)" />
+            <label class="full" for="{{option.id}}" title="{{option.title}}"></label>
         </div>
-        <div flex="40">
-            Value: <label contenteditable ng-model="option.value">{{option.value}}</label>
-        </div>
-        <div flex="20">
-            <div ng-click="deleteOption($event)">
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
-            </div>
-        </div>
-    </div>
-</div>
-<div ng-click="addOption($event)">
-    <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+    </fieldset>
 </div>

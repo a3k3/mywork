@@ -1,4 +1,24 @@
 ﻿{
+  "cover": {
+    "settings": {
+      "covertemplate": {
+        "name": "covertemplate",
+        "condition": false,
+        "text": "Cover Template"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      },
+      "disablecover": {
+        "name": "disablecover",
+        "condition": false,
+        "text": "Cover Page Disabled."
+      }
+    }
+  },
   "text": {
     "settings": {
       "required": {
@@ -14,6 +34,7 @@
       "autocomplete": {
         "name": "autocomplete",
         "condition": false,
+        "time": 0,
         "text": "This response is timed."
       },
       "acceptonly": {
@@ -71,17 +92,39 @@
         "text": "Please enter valid input."
       }
     },
-    "options": [ {
-      "name": "productA",
-      "value": "ProductA"
-    }] 
+    "options": [
+      {
+        "name": "productA",
+        "value": "ProductA"
+      }
+    ]
   },
   "rating_star": {
     "options": [
       {
         "id": "star5",
-        "title": "Awesome",
+        "title": "Awesome - 5 stars",
         "value": "5"
+      },
+      {
+        "id": "star4",
+        "title": "Pretty good - 4 stars",
+        "value": "4"
+      },
+      {
+        "id": "star3",
+        "title": "Meh - 3 stars",
+        "value": "3"
+      },
+      {
+        "id": "star2",
+        "title": "Kinda bad - 2 stars",
+        "value": "2"
+      },
+      {
+        "id": "star1",
+        "title": "Sucks big time - 1 star",
+        "value": "1"
       }
     ],
     "settings": {
@@ -155,10 +198,63 @@
         "text": "Please enter valid input."
       }
     },
-    "options": [{
-      "name": "product",
-      "key": "productA",
-      "value": "ProductA"
-    }] 
+    "options": [
+      {
+        "name": "product",
+        "key": "productA",
+        "value": "ProductA"
+      },
+      {
+        "name": "product",
+        "key": "productA",
+        "value": "ProductA"
+      },
+      {
+        "name": "product",
+        "key": "productA",
+        "value": "ProductA"
+      },
+      {
+        "name": "product",
+        "key": "productA",
+        "value": "ProductA"
+      },
+      {
+        "name": "product",
+        "key": "productA",
+        "value": "ProductA"
+      }
+    ]
+  },
+  "statement": {
+    "settings": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxcount": {
+        "name": "maxcount",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      }
+    },
+    "options": [
+      {
+        "name": "product",
+        "key": "productA",
+        "value": "ProductA"
+      }
+    ]
   }
 }

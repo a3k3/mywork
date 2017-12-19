@@ -75,6 +75,9 @@
                         <settings>
                             <md-tabs>
                                 <md-tab label="basic">
+                                    <md-content class="md-padding">
+                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildcoverdata.settings"></ng-include>
+                                    </md-content>
                                 </md-tab>
                                 <md-tab label="advanced">
                                     <md-content class="md-padding">
@@ -86,17 +89,23 @@
                         </settings>
                     </md-card>
                     <div class="controls">
-                        <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
-                        <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
                         <md-icon class="settings back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
                     </div>
                 </flip-panel>
             </flip>
-            <flip class="flip" ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}">
+            <flip class="flip" ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
                 <flip-panel>
                     <div class="type">
-                        <md-button class="md-icon-button" ng-click="openTypeModal($event)">
-                            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class=""></md-icon>
+                        <md-button class="md-icon-button" ng-click="openTypeModal($event)" ng-switch on="question.questiontype">
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/text-box.svg" ng-switch-when="text"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/long-text-box.svg" ng-switch-when="textarea"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/statement.svg" ng-switch-when="statement"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/radio.svg" ng-switch-when="radio"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/checkbox.svg" ng-switch-when="checkbox"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/dropdown.svg" ng-switch-when="select"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/star-rating.svg" ng-switch-when="rating_star"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/scale-rating.svg" ng-switch-when="radio_size"></md-icon>
+                            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" ng-switch-default></md-icon>
                         </md-button>
                     </div>
                     <md-card>
@@ -154,7 +163,7 @@
                 <md-card ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }" ng-click="showSlide($event)">
                     <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
                 </md-card>
-                <md-card ng-repeat="question in buildQuestionsObj.questions track by (question.id + $index)" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)">
+                <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)" ng-drag="true" ng-drag-data="question" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)">
                     <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
                     </question>
                 </md-card>

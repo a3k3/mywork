@@ -1,11 +1,11 @@
 // Declare app level module which depends on filters, and services
-var app = angular.module('experienceApp', ['ngRoute', 'experienceApp.filters', 'experienceApp.services', 'experienceApp.directives', 'experienceApp.controllers', 'ngMaterial', 'ngMessages', 'ngSanitize']);
+var app = angular.module('experienceApp', ['ngRoute', 'experienceApp.filters', 'experienceApp.services', 'experienceApp.directives', 'experienceApp.controllers', 'ngMaterial', 'ngMessages', 'ngSanitize', 'ngAnimate', 'ngDraggable']);
 
 app.config(['$routeProvider', '$controllerProvider', '$mdThemingProvider', function ($routeProvider, $controllerProvider, $mdThemingProvider) {
-    $routeProvider.when('/experience', { templateUrl: '/partials/experience.html'});
-    $routeProvider.when('/create', { templateUrl: '/partials/create.html'});
-    $routeProvider.when('/cover', { templateUrl: '/partials/cover.html' });
-    $routeProvider.when('/success', { templateUrl: '/partials/success.html' });
+    $routeProvider.when('/experience', { templateUrl: '/partials/experience.html', animation: 'third' });
+    $routeProvider.when('/create', { templateUrl: '/partials/create.html', animation: 'third' });
+    $routeProvider.when('/cover', { templateUrl: '/partials/cover.html', animation: 'third' });
+    $routeProvider.when('/success', { templateUrl: '/partials/success.html', animation: 'third' });
     $routeProvider.otherwise({ redirectTo: '/experience' });
     $controllerProvider.allowGlobals();
 

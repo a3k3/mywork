@@ -70,6 +70,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
     $scope.onSwipeDown = function (ev) {
         $scope.questionsObj.next();
     };
+
     $scope.onSwipeUp = function (ev) {
         $scope.questionsObj.prev();
     };
@@ -181,16 +182,10 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
 
 myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, $http) {
 
-    getCoverData.then(function (cover) {
-        $scope.buildcoverdata = cover.data;
-    }, function myError(response) {
-        $scope.status = response.statusText;
-    });
-
     $scope.buildQuestionsObj = {
         name: "Untitled",
         id: null,
-        theme:"default",
+        theme: "default",
         questions: [],
         maxCount: function () {
             return this.questions.length;
@@ -202,6 +197,23 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         }
     };
 
+    getCoverData.then(function (cover) {
+        $scope.buildcoverdata = cover.data;
+        $rootScope.$broadcast('coverData', $scope.buildcoverdata);
+        //settings
+        getSettings.then(function (response) {
+            $scope.buildcoverdata.settings = response.data.cover.settings;
+            if ($scope.buildcoverdata.settings.covertemplate.condition) {
+                $scope.buildcoverdata.cover_template = 'official';
+            }
+            else {
+                $scope.buildcoverdata.cover_template = 'default';
+            }
+        })
+    }, function myError(response) {
+        $scope.status = response.statusText;
+    });
+
     //add slide
     $scope.addSlide = function () {
         var tempQuestion = {
@@ -211,6 +223,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
 
+        resetSlide();
+        setActiveSlide($scope.buildQuestionsObj.maxCount());
         //$('.navigating_blocks md-card').outerWidth(true);
 
         if ($('.navigating_blocks md-card').length>4){
@@ -236,6 +250,12 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
         var tmplhtml = $compile('<ng-include src="dynamicTemplateUrl(question)"></ng-include>')($scope);
         angular.element('.apply-questions-container').find('.flip').eq(index).find('.inputContainer').append(tmplhtml);
+        //angular.element('.apply-questions-container').find('.flip').find('.type').addClass(type[0].toLowerCase());
+        $scope.buildQuestionsObj.questions[index].questiontype = type[0];
+        if (type[1] != undefined)
+        {
+            $scope.buildQuestionsObj.questions[index].questiontype = $scope.buildQuestionsObj.questions[index].questiontype + '_' + type[1];
+        }
 
         //settings
         getSettings.then(function (response) {
@@ -417,15 +437,27 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     var formdata = new FormData();
 
+    $scope.updateMedia = function (event) {
+        var fileBrowse = $(event.target).data('file');
+        document.getElementById(fileBrowse).click();
+    }
+
     $scope.getTheFiles = function ($files) {
         angular.forEach($files, function (value, key) {
             formdata.append(key, value);
         });
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+            $scope.$apply(function () {
+                $scope.buildcoverdata.default.media_src = loadEvent.target.result;
+            });
+        }
+        reader.readAsDataURL($files[0]);
     };
 
     // NOW UPLOAD THE FILES.
-    $scope.uploadFiles = function () {
-
+    $scope.uploadFiles = function (event) {
+        event.stopPropagation();
         var request = {
             method: 'POST',
             url: '/api/fileupload/',
@@ -444,6 +476,15 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             });
 
     }
+
+    //draggable
+    $scope.onDropComplete = function (index, obj, evt) {
+        var otherObj = $scope.buildQuestionsObj.questions[index];
+        var otherIndex = $scope.buildQuestionsObj.questions.indexOf(obj);
+        $scope.buildQuestionsObj.questions[index] = obj;
+        $scope.buildQuestionsObj.questions[otherIndex] = otherObj;
+    }
+    //draggable
 });
 
 myapp.controller('coverCtrl', function ($scope, getCoverData, $http) {
@@ -453,6 +494,14 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http) {
     }, function myError(response) {
         $scope.status = response.statusText;
     });
+
+    $scope.$on('coverData', function (event, data) {
+        $scope.coverdata = data;
+    })
+
+    $scope.gotoExperience = function (url) {
+        window.location = url;
+    }
 });
 
 

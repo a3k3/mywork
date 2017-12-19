@@ -1,22 +1,22 @@
 ﻿{
-  "cover_template": "default",
   "default": {
+    "headline": "Application Submitted",
     "media_src": "../asset/img/coverpage_media.JPG",
-    "text": "Hi, Welcome to Papform template. Let us know your experience.",
     "start": {
       "url": "#/experience",
       "text": "start"
-    }
+    },
+    "text": "Hi, Welcome to Papform template. Let us know your experience."
   },
   "official": {
 
   },
   "settings": {
     "covertemplate": {
-        "name": "covertemplate",
-        "condition": false,
-        "text": "Cover Template"
-      },
+      "name": "covertemplate",
+      "condition": false,
+      "text": "Cover Template"
+    },
     "autocomplete": {
       "name": "autocomplete",
       "condition": false,
@@ -24,9 +24,10 @@
       "text": "This response is timed."
     },
     "disablecover": {
-        "name": "disablecover",
-        "condition": false,
-        "text": "Cover Page Disabled."
-      }
+      "name": "disablecover",
+      "condition": false,
+      "text": "Cover Page Disabled."
     }
+  },
+  "success_template": "default"
 }
