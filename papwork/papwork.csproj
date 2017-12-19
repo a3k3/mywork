@@ -125,6 +125,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="asset\data\success.json" />
     <Content Include="asset\img\avg.png" />
     <Content Include="asset\img\avg_active.png" />
     <Content Include="asset\img\checked.JPG" />
@@ -145,6 +146,7 @@
     <Content Include="asset\img\md-icons\svg\ic_code_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_content_copy_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_delete_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_file_upload_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_format_color_text_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_hourglass_empty_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_down_black_24px.svg" />
