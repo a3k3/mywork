@@ -1,4 +1,4 @@
 ﻿<md-input-container>
     <label>Biography</label>
-    <textarea name="{{question.name}}" ng-model="vm.formdata.textarea" rows="4" placeholder="{{question.placeholder}}" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}"></textarea>
+    <textarea name="textarea" ng-model="question.response" rows="4" placeholder="{{question.placeholder}}" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}"></textarea>
 </md-input-container>

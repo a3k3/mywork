@@ -1,7 +1,6 @@
 ﻿<div class="size-chart">
     <ul>
-        <li class="md-ink-ripple" ng-repeat="option in question.options" ng-click="sizeSelection($index)">
-            <input id="radio-{{$index}}" type="radio" name="{{option.value}}" value="{{option.value}}" ng-hide="true" />
+        <li class="md-ink-ripple size" ng-repeat="option in question.options" ng-click="sizeSelection($index,$event,question.options)">
             <p>{{option.value}}</p>
         </li>
     </ul>

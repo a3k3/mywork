@@ -203,6 +203,7 @@
     <Content Include="partials\build_input_templates\radio_size.html" />
     <Content Include="partials\build_input_templates\rating_star.html" />
     <Content Include="partials\build_input_templates\select.html" />
+    <Content Include="partials\build_input_templates\success.html" />
     <Content Include="partials\build_input_templates\text.html" />
     <Content Include="partials\build_input_templates\textarea.html" />
     <Content Include="partials\build_questionsTemplate.html" />
@@ -227,11 +228,13 @@
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />
     <Content Include="partials\settings_templates\maxcount.html" />
+    <Content Include="partials\settings_templates\reccomendations.html" />
     <Content Include="partials\settings_templates\success.html" />
     <Content Include="partials\settings_templates\maxlength.html" />
     <Content Include="partials\settings_templates\autocomplete.html" />
     <Content Include="partials\settings_templates\acceptonly.html" />
     <Content Include="partials\settings_templates\mustanswer.html" />
+    <Content Include="partials\settings_templates\successtemplate.html" />
     <Content Include="partials\success.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />

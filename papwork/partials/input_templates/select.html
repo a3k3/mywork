@@ -1,5 +1,5 @@
 ﻿<md-input-container>
-    <md-select ng-model="formdata.select" placeholder="{{question.placeholder}}">
-        <md-option value="{{option.value}}" ng-repeat="option in question.options">{{option.name}}</md-option>
+    <md-select ng-model="selectvalue" ng-change="dropdownSelection(selectvalue,question.options)" placeholder="{{question.placeholder}}">
+        <md-option value="{{option.value}}" ng-repeat="option in question.options">{{option.value}}</md-option>
     </md-select>
 </md-input-container>

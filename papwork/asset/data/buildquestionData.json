@@ -19,6 +19,31 @@
       }
     }
   },
+  "success": {
+    "settings": {
+      "successtemplate": {
+        "name": "successtemplate",
+        "condition": false,
+        "text": "Success Template"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      },
+      "disablecover": {
+        "name": "disablecover",
+        "condition": false,
+        "text": "Cover Page Disabled."
+      },
+      "reccomendations": {
+        "name": "reccomendations",
+        "condition": true,
+        "text": "Reccomendations enabled."
+      }
+    }
+  },
   "text": {
     "settings": {
       "required": {

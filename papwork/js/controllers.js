@@ -18,7 +18,7 @@ var myapp = angular.module('experienceApp.controllers', []);
 function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) {
     var vm = this;
 
-    vm.formData = {};
+    $scope.formData = {};
 
     $scope.questionsObj = {
         name: "Untitled",
@@ -51,6 +51,12 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
             }
         }
         $scope.questionsObj.activeNow = 1;
+
+        $timeout(function () {
+            if (angular.element('.top-row').length > 0) {
+                angular.element('.top-row').css('width', (angular.element('.top-row').find('.products').length * angular.element('.top-row').find('.products').outerWidth(true)) / 2)
+            }
+        }, 1000)
     }, function myError(response) {
         $scope.status = response.statusText;
     });
@@ -97,31 +103,74 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
         }
     }
 
-    $scope.sizeSelection = function (index) {
-        var _active = document.getElementById('radio-' + index);
-        _active = angular.element(_active);
-        _active.parent().addClass('active').siblings().removeClass('active');
-        _active.attr('checked', true);
-        _active.parent().siblings().find('input').attr('checked', false);
+    $scope.dropdownSelection = function (selectvalue, options) {
+        $.each(options, function (index, value) {
+            if (value.value == selectvalue)
+                value.selected = true;
+            else
+                value.selected = false;
+        })
     }
 
-    $scope.starSelection = function (event) {
+    $scope.sizeSelection = function (index, event, options) {
+        var _active = $(event.target).hasClass('size') ? $(event.target) : $(event.target).parent();
+        _active.addClass('active').siblings().removeClass('active');
+        $.each(options, function (index, value) {
+            value.selected = false;
+        })
+        options[index].selected = true;
+    }
+
+    $scope.starSelection = function (index, event, options) {
         var _active = $(event.target);
         _active.parent('.ng-scope').addClass('activestar').siblings().removeClass('activestar');
+
+        $.each(options, function (index, value) {
+            value.selected = false;
+        })
+        options[index].selected = true;
+
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
     }
 
-    $scope.smileySelection = function (event) {
+    $scope.selectProduct = function (index, event, options) {
+        var _clicked = $(event.target).hasClass('products') ? $(event.target) : $(event.target).parent();
+        _clicked.toggleClass('active');
+        if (_clicked.hasClass('active')) {
+            _clicked.find('.checkbox').attr('checked', true);
+            options[index].selected = true;
+        }
+        else {
+            _clicked.find('.checkbox').attr('checked', false);
+            options[index].selected = false;
+        }
+    }
+
+    $scope.smileySelection = function (index, event, options) {
         var _active = $(event.target).parent();
         _active.find('.smiley').addClass("activeSmiley");
-        _active.find('input').attr('checked', true);
+        _active.find('.smiley_radio').attr('checked', true);
         _active.siblings().find(".smiley").removeClass("activeSmiley");
-        _active.siblings().find('input').attr('checked', false);
+        _active.siblings().find('.smiley_radio').attr('checked', false);
+        $.each(options,function (index, value) {
+            value.selected = false;
+        })
+        options[index].selected = true;
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+    }
+
+    $scope.checkboxSelection = function (index, event, options) {
+        var _active = $(event.target).hasClass('mdcheckbox') ? $(event.target) : $(event.target).closest('.mdcheckbox');
+        if (_active.hasClass('md-checked')) {
+            options[index].selected = false;
+        }
+        else {
+            options[index].selected = true;
+        }
     }
 
     $scope.keypress = function ($event) {
@@ -141,6 +190,10 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
             angular.element('.prev').trigger('click')
         }
     });
+
+    $scope.submit = function () {
+        console.log($scope.questionsObj.questions);
+    }
 }
 
 myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location','$document', questionsCtrl])
@@ -166,9 +219,15 @@ var getTemplate = function (data) {
     return input_template;
 }
 
-myapp.controller('successCtrl', ['$scope', function ($scope) {
+myapp.controller('successCtrl',function ($scope, getSuccessData) {
     $scope.theme = "mytheme";
-}]);
+
+    getSuccessData.then(function (success) {
+        $scope.successdata = success.data;
+    }, function myError(response) {
+        $scope.status = response.statusText;
+    });
+});
 
 
 myapp.controller('tabCtrl', function ($scope, $rootScope) {
@@ -180,7 +239,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, $http) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http) {
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
@@ -208,6 +267,23 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             }
             else {
                 $scope.buildcoverdata.cover_template = 'default';
+            }
+        })
+    }, function myError(response) {
+        $scope.status = response.statusText;
+    });
+
+    getSuccessData.then(function (success) {
+        $scope.buildsuccessdata = success.data;
+        $rootScope.$broadcast('successData', $scope.buildsuccessdata);
+        //settings
+        getSettings.then(function (response) {
+            $scope.buildsuccessdata.settings = response.data.success.settings;
+            if ($scope.buildsuccessdata.settings.covertemplate.condition) {
+                $scope.buildsuccessdata.success_template = 'official';
+            }
+            else {
+                $scope.buildsuccessdata.success_template = 'default';
             }
         })
     }, function myError(response) {
@@ -438,7 +514,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     var formdata = new FormData();
 
     $scope.updateMedia = function (event) {
-        var fileBrowse = $(event.target).data('file');
+        var fileBrowse = $(event.target).data('file') == undefined? $(event.target).parent().data('file') : $(event.target).data('file');
         document.getElementById(fileBrowse).click();
     }
 
@@ -453,11 +529,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             });
         }
         reader.readAsDataURL($files[0]);
+        $scope.uploadFiles();
     };
 
     // NOW UPLOAD THE FILES.
-    $scope.uploadFiles = function (event) {
-        event.stopPropagation();
+    $scope.uploadFiles = function () {
         var request = {
             method: 'POST',
             url: '/api/fileupload/',

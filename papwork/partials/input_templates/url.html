@@ -1,5 +1,5 @@
 ﻿<md-input-container>
-    <input class="md-accent hue-2" name="{{question.name}}" ng-model="formdata.url" ng-pattern="/^.+@.+\..+$/" placeholder="{{question.placeholder}}" type="{{question.answertype}}" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}" ng-keydown="keypress($event)">
+    <input class="md-accent hue-2" name="{{question.name}}" ng-model="question.response" ng-pattern="/^.+@.+\..+$/" placeholder="{{question.placeholder}}" type="{{question.answertype}}" ng-required="{{question.validations.required.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}" ng-keydown="keypress($event)">
     <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$valid">
         <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
     </md-button>

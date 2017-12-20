@@ -2,7 +2,7 @@
     <div class="cover-container" ng-if="!buildcoverdata.settings.covertemplate.condition">
         <div class="media-section">
             <div class="selected-icon" data-file="file1" ng-click="updateMedia($event)" style="background-image:url('{{buildcoverdata.default.media_src}}')">
-                <div class="upload" ng-click="uploadFiles($event)">
+                <div class="upload">
                     <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_file_upload_black_24px.svg"></md-icon>
                 </div>
             </div>
@@ -11,7 +11,7 @@
         <div class="content-section">
             <h3 contenteditable ng-model="buildcoverdata.default.text">{{buildcoverdata.default.text}}</h3>
         </div>
-        <md-button class="start md-raised md-primary md-hue-2" ng-if="!buildcoverdata.settings.autocomplete.condition"><span contenteditable ng-model="buildcoverdata.default.start.text">{{buildcoverdata.default.start.text}}</span></md-button>
+        <md-button class="start md-raised md-primary md-hue-2"><span contenteditable ng-model="buildcoverdata.default.start.text">{{buildcoverdata.default.start.text}}</span></md-button>
     </div>
     <div class="cover-container" ng-if="buildcoverdata.settings.covertemplate.condition">
         <div>Offical Template</div>

@@ -27,3 +27,10 @@ myservice.service('getCoverData', ['$http', function ($http) {
         url: "../asset/data/cover.json"
     })
 }]);
+
+myservice.service('getSuccessData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/success.json"
+    })
+}]);

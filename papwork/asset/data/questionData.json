@@ -131,32 +131,27 @@
       {
         "name": "verypoor",
         "title": "Very poor",
-        "image": "../asset/img/verypoor.png",
-        "active-image": "../asset/img/verypoor_active.png"
+        "selected": false
       },
       {
         "name": "poor",
         "title": "poor",
-        "image": "../asset/img/poor.png",
-        "active-image": "../asset/img/poor_active.png"
+        "selected": false
       },
       {
         "name": "average",
         "title": "Average",
-        "image": "../asset/img/avg.png",
-        "active-image": "../asset/img/avg_active.png"
+        "selected": false
       },
       {
         "name": "good",
         "title": "Good",
-        "image": "../asset/img/good.png",
-        "active-image": "../asset/img/good_active.png"
+        "selected": false
       },
       {
         "name": "excellent",
         "title": "Excellent",
-        "image": "../asset/img/excellent.png",
-        "active-image": "../asset/img/excellent_active.png"
+        "selected": false
       }
     ]
   },
@@ -178,19 +173,23 @@
     "options": [
       {
         "name": "product",
-        "value": "ProductA"
+        "value": "ProductA",
+        "selected": false
       },
       {
         "name": "product",
-        "value": "ProductB"
+        "value": "ProductB",
+        "selected": false
       },
       {
         "name": "product",
-        "value": "ProductC"
+        "value": "ProductC",
+        "selected": false
       },
       {
         "name": "product",
-        "value": "ProductD"
+        "value": "ProductD",
+        "selected": false
       }
     ]
   },

@@ -1,21 +1,26 @@
 ﻿{
   "default": {
     "headline": "Application Submitted",
-    "media_src": "../asset/img/coverpage_media.JPG",
-    "start": {
-      "url": "#/experience",
-      "text": "start"
-    },
-    "text": "Hi, Welcome to Papform template. Let us know your experience."
+    "media_src": "../asset/img/submitted_icon.JPG",
+    "content": {
+      "headline_text": "Hi, Welcome to Papform template. Let us know your experience.",
+      "mail_text": "Details has been sent to your mail",
+      "poweredby_text": "Powered by pap work",
+      "home_button": {
+        "url": "#/cover",
+        "text": "Home"
+      },
+      "reccomend_text": "Recomended for you"
+    }
   },
   "official": {
 
   },
   "settings": {
-    "covertemplate": {
-      "name": "covertemplate",
+    "successtemplate": {
+      "name": "successtemplate",
       "condition": false,
-      "text": "Cover Template"
+      "text": "Success Template"
     },
     "autocomplete": {
       "name": "autocomplete",
@@ -27,7 +32,24 @@
       "name": "disablecover",
       "condition": false,
       "text": "Cover Page Disabled."
-    }
+    },
+    "reccomendations": [
+      {
+        "link_icon": "../asset/img//pancard.jpg",
+        "link_title": "Pan Card",
+        "link_url": "#"
+      },
+      {
+        "link_icon": "../asset/img//pancard.jpg",
+        "link_title": "Visa",
+        "link_url": "#"
+      },
+      {
+        "link_icon": "../asset/img//pancard.jpg",
+        "link_title": "Tax",
+        "link_url": "#"
+      }
+    ]
   },
   "success_template": "default"
 }

@@ -52,10 +52,10 @@
 .apply-questions-container .cover-page{
     height:70vh;
 }
-.navigation-slide .cover-page{
+.navigation-slide .cover-page, .navigation-slide .app-submit-page{
     height: 10vh;
 }
-.navigation-slide .cover-container {
+.navigation-slide .cover-container, .navigation-slide .default-container {
     height: 48vh;
     transform: scale(.2);
     transform-origin: 0 0;
@@ -210,6 +210,7 @@ md-card settings {
 
 .type {
     position: absolute;
+    top:12px;
 }
 
 md-card buildquestion .questionPanel .answerContainer, md-card question .questionPanel .answerContainer {
@@ -306,24 +307,111 @@ md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
     background-color:#ffffff;
 }
 .circle.green {
-    background-color:#91C342;
+    background-color:#8bc34a;
 }
 .circle.black {
     background-color:#000000;
 }
 .circle.pink{
-    background-color:#F78C8B;
+    background-color:#ff8d8d;
 }
 .circle.blue{
-    background-color:#4FE7FF;
+    background-color:#00e5ff;
 }
 .circle.yellow{
-    background-color:#FCEA1E;
+    background-color:#ffeb3b;
 }
 .circle.orange{
-    background-color:#F79E00;
+    background-color:#ffa000;
 }
-
+buildquestion .question,buildquestion .caption,buildquestion .hint{
+    text-decoration:underline;
+}
+md-input-container.md-mytheme-theme .md-input{
+    color:rgba(101,101,101,0.8);
+    border-color:rgba(0,0,0,0.7);
+}
+.default .question,.default .caption,.default .hint{
+    text-decoration-color:rgba(0,0,0,0.7);
+}
+.black .question{
+    color:#fff;
+}
+.black .font-color-666,.black .category{
+    color:#999999;
+}
+.black .question,.black .caption,.black .hint{
+    text-decoration-color:rgba(225,225,225,0.9);
+}
+.black md-input-container.md-mytheme-theme .md-input,.black md-input-container.md-mytheme-theme label,.black .md-char-counter{
+    color:rgba(203,203,203,0.8);
+    border-color:#999999;
+}
+.pink .question{
+    color:#fff;
+}
+.pink .font-color-666,.pink .category{
+    color:#eeeeee;
+}
+.pink .question,.pink .caption,.pink .hint{
+    text-decoration-color:rgba(225,225,225,0.9);
+}
+.pink md-input-container.md-mytheme-theme .md-input,.pink md-input-container.md-mytheme-theme label,.pink .md-char-counter{
+    color:rgba(67,67,67,0.8);
+    border-color:#444444;
+}
+.blue .question{
+    color:#000;
+}
+.blue .font-color-666,.blue .category{
+    color:#666666;
+}
+.blue .question,.blue .caption,.blue .hint{
+    text-decoration-color:rgba(225,225,225,0.9);
+}
+.blue md-input-container.md-mytheme-theme .md-input,.blue md-input-container.md-mytheme-theme label,.blue .md-char-counter{
+    color:rgba(0,0,0,0.8);
+    border-color:#444444;
+}
+.yellow .question{
+    color:#000;
+}
+.yellow .font-color-666,.yellow .category{
+    color:#666666;
+}
+.yellow .question,.yellow .caption,.yellow .hint{
+    text-decoration-color:rgba(0,0,0,0.9);
+}
+.yellow md-input-container.md-mytheme-theme .md-input,.yellow md-input-container.md-mytheme-theme label,.yellow .md-char-counter{
+    color:rgba(0,0,0,0.8);
+    border-color:#999999;
+}
+.orange .question{
+    color:#fff;
+}
+.orange .font-color-666,.orange .category{
+    color:#eee;
+}
+.orange .question,.orange .caption,.orange .hint{
+    text-decoration-color:rgba(255,255,255,0.9);
+}
+.orange md-input-container.md-mytheme-theme .md-input,.orange md-input-container.md-mytheme-theme label,.orange .md-char-counter{
+    color:rgba(0,0,0,0.8);
+    border-color:#999;
+}
+.green .question{
+    color:#fff;
+}
+.green .font-color-666,.green .category{
+    color:#eee;
+}
+.green .question,.green .caption,.green .hint{
+    text-decoration-color:rgba(255,255,255,0.9);
+}
+.green md-input-container.md-mytheme-theme .md-input,.green md-input-container.md-mytheme-theme label,.green .md-char-counter{
+    color:rgba(0,0,0,0.8);
+    border-color:#999;
+}
 /******Questions Theme*****/
 
 .option + div[role=button] {
@@ -506,4 +594,17 @@ md-card.slideactive question.question-slide:after, md-card.slideactive .cover-pa
     font-size: 72px;
     padding-left: 28%;
     color: rgb(129,199,132);
+}
+
+buildquestion .apply-questions-container .questionPanel {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    padding: 15px;
+    transform: translateY(-50%);
+    top: 50%;
+    height: 70vh;
+}
+buildquestion .category {
+    padding-bottom: 100px;
 }

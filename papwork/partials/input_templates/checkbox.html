@@ -1,3 +1,3 @@
 ﻿<div class="checkbox-block">
-    <md-checkbox class="green" ng-repeat="option in question.options" aria-label="{{option.value}}" name="{{option.value}}" value="{{option.value}}">{{option.value}}</md-checkbox>
+    <md-checkbox class="green mdcheckbox" ng-click="checkboxSelection($index, $event, question.options)" ng-repeat="option in question.options" aria-label="{{option.value}}" name="{{option.value}}" value="{{option.value}}">{{option.value}}</md-checkbox>
 </div>
