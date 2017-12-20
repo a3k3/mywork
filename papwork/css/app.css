@@ -166,16 +166,15 @@ md-icon svg {
 .answerContainer input{
     font-size:18px;
 }
-@media screen and (max-width:539px){
-    .questionPanel{
-        text-align:left;
-    }
-    .hint{
-        margin-top:5px;
-    }
-    .caption{
-        margin-top:20px;
-    }
+
+.questionPanel{
+    text-align:left;
+}
+.hint{
+    margin-top:4px;
+}
+.caption{
+    margin-top:27px;
 }
 
 /******Questions Theme*****/
@@ -236,6 +235,8 @@ question .questionPanel h2{
 }
 question.active .questionPanel h2 {
     font-size:24px;
+    font-family:'Optima';
+    font-weight:bold;
 }
 question.active{
     top:0;
@@ -304,6 +305,11 @@ question.active .questionPanel {
     width:100%;
     text-align:center;
 }
+@media screen and (min-width:1024px) {
+    .cover-container {
+        padding-top: 10%;
+    }
+}
 .media-section .selected-icon {
     width:120px;
     height:120px;
@@ -330,7 +336,7 @@ question.active .questionPanel {
     text-align:center;
 }
 .content-section h3,.pap-text{
-    font-family:'Optima';
+    font-family:Optima;
 }
 .cover-container .content-section{
     margin-top:30px;
