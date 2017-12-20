@@ -40,6 +40,10 @@
     z-index:0;
     -webkit-transition: left .5s ease-out;
 }
+.navigation-slide md-card{
+    box-shadow:none;
+    border:2px solid #d2d2d2;
+}
 .navigation-slide .slideactive{
     border:2px solid rgb(129,199,132);
 }
@@ -466,7 +470,14 @@ md-input-container.md-mytheme-theme .md-input{
 .type md-icon svg {
     fill:#fff;
 }
+md-card.slideactive question.question-slide:after, md-card.slideactive .cover-page:after {
+    content: '.';
+    font-size: 72px;
+    padding-left: 28%;
+    color: rgb(129,199,132);
+}
 @media screen and (min-width:1024px) {
+    .mobile-project-title{display:none}
     .apply-questions-container flip {
         left:10000px;
     }
@@ -553,24 +564,27 @@ md-input-container.md-mytheme-theme .md-input{
         display:block;
         width: 100%;
     }
+    .project-title {
+        width:20%;
+        float:left;
+    }
     .more-options{
-        text-align:center;
+        width:80%;
+        display:inline-block;
     }
     .more-options ul{
         list-style-type: none;
+        padding-left:0px;
     }
     .more-options ul li{
         float:left;
-        margin-right:25px;
+        margin-right:0px;
         padding: 0 10px;
         cursor:pointer;
     }
     .more-options li img{
         height:25px;
         width:25px;
-    }
-    .more-options li span{
-        padding-left:10px;
     }
     .more-options li.club {
         background-color: #fff;
@@ -587,15 +601,15 @@ md-input-container.md-mytheme-theme .md-input{
         overflow: inherit; 
         box-shadow: 2px 2px 10px #d2d2d2;
     }
+    md-card.slideactive question.question-slide:after, md-card.slideactive .cover-page:after{
+        font-size:82px;
+        padding-left:35%;
+    }
 }
-
-md-card.slideactive question.question-slide:after, md-card.slideactive .cover-page:after {
-    content: '.';
-    font-size: 72px;
-    padding-left: 28%;
-    color: rgb(129,199,132);
+@media all and (max-width:1150px){
+    .more-options li span{display:none}
+    .more-options ul{margin-left:13%}
 }
-
 buildquestion .apply-questions-container .questionPanel {
     position: absolute;
     width: 100%;
