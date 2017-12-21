@@ -53,11 +53,13 @@
     z-index:999;
     -webkit-transition: left .5s ease-out;
 }
-.apply-questions-container .cover-page{
-    height:70vh;
+.apply-questions-container .cover-page, .apply-questions-container .app-submit-page{
+    height: 73vh;
 }
 .navigation-slide .cover-page, .navigation-slide .app-submit-page{
     height: 10vh;
+    position: relative;
+    display: inherit;
 }
 .navigation-slide .cover-container, .navigation-slide .default-container {
     height: 48vh;
@@ -76,6 +78,7 @@
     bottom: 30px;
     width: 100%;
     padding: 0 10px;
+    padding-bottom: 15px;
 }
 
 .controls .fcontrol > div {
@@ -128,7 +131,7 @@ settings md-pagination-wrapper:after {
     position: fixed;
     overflow:hidden;
     height: 14vh;
-    bottom: 13px;
+    bottom: 45px;
     left: 0;
     width: 100%;
     padding: 0 8px;
@@ -162,6 +165,8 @@ settings md-pagination-wrapper:after {
     padding: 4%;
     transform-origin: 0 0;
     /*overflow: hidden;*/
+    position: relative;
+    top: 0;
 }
 
 .navigation-slide question.question-slide .questionPanel{
@@ -169,7 +174,7 @@ settings md-pagination-wrapper:after {
     transform-origin: 0 0;
     position: absolute;
     top: 15px;
-    width: 70%;
+    width: 495%;
     height: 42vh;
     overflow: hidden;
 }
@@ -204,12 +209,12 @@ settings md-pagination-wrapper:after {
 md-card buildquestion.question-slide, md-card question.question-slide {
     position: static;
     transition: none;
-    height:70vh;
+    height: 73vh;
     padding-top:30px;
     width: 100%;
 }
 md-card settings {
-    height:70vh;
+    height: 73vh;
 }
 
 .type {
@@ -225,6 +230,8 @@ md-dialog {
     width: 95%;
     background-color: #656565;
     color:#fff;
+    box-shadow: none;
+    border-radius: 0;
 }
 md-dialog .type-layout {
     width:100%;
@@ -470,11 +477,74 @@ md-input-container.md-mytheme-theme .md-input{
 .type md-icon svg {
     fill:#fff;
 }
-md-card.slideactive question.question-slide:after, md-card.slideactive .cover-page:after {
-    content: '.';
-    font-size: 72px;
-    padding-left: 28%;
+md-card.slideactive question.question-slide:after, md-card.slideactive .cover-page:after, md-card.slideactive .app-submit-page:after {
+    content: '';
     color: rgb(129,199,132);
+    width: 10px;
+    height: 10px;
+    background-color: rgb(129,199,132);
+    border-radius: 50%;
+    bottom: -25px;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+buildquestion .apply-questions-container .questionPanel {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    padding: 15px;
+    transform: translateY(-50%);
+    top: 50%;
+    height: 70vh;
+}
+buildquestion .category {
+    padding-bottom: 100px;
+}
+.create-tabs .md-card .progressContainer .status {
+    margin-bottom: 0px!important;
+    margin-top: 0px;
+}
+.navigation-slide .default-container md-card {
+    width: 100%;
+    height: auto;
+}
+.apply-questions-container .app-submit-page .success_media {
+    padding-top: 5px;
+}
+
+.apply-questions-container .app-submit-page .content-section > * {
+    margin-bottom: 10px;
+    margin-top:0;
+    font-size:12px
+}
+
+.apply-questions-container .app-submit-page .content-section h6{
+    margin:0;
+}
+.mobile-project-title md-input-container {
+    width: 45%;
+}
+
+.mobile-project-title {
+    padding: 0 15px;
+    padding-top: 15px;
+}
+.build ng-include {
+    position:relative;
+}
+label + md-input-container label{
+    opacity:0;
+}
+.apply-questions-container .app-submit-page md-card {
+    margin: 0 0;
+}
+.recomends_link {
+    width:100%;
+}
+.recomends_link md-input-container{
+    width:30%;
 }
 @media screen and (min-width:1024px) {
     .mobile-project-title{display:none}
@@ -508,8 +578,9 @@ md-card.slideactive question.question-slide:after, md-card.slideactive .cover-pa
         left:-4000px;
     }
     md-dialog{
-        width:55%;
+        width: 55.8%;
         left:51px;
+        top: -3px;
     }
     .md-dialog-container{
         -webkit-box-pack:start;
@@ -519,7 +590,7 @@ md-card.slideactive question.question-slide:after, md-card.slideactive .cover-pa
         -webkit-align-items:center;
     }
     md-dialog .type-layout {
-        height: 69vh;
+        height: 72.5vh;
     }
     md-card buildquestion.question-slide, md-card question.question-slide {
         margin-left:0;
@@ -601,24 +672,19 @@ md-card.slideactive question.question-slide:after, md-card.slideactive .cover-pa
         overflow: inherit; 
         box-shadow: 2px 2px 10px #d2d2d2;
     }
-    md-card.slideactive question.question-slide:after, md-card.slideactive .cover-page:after{
-        font-size:82px;
-        padding-left:35%;
+    md-card.slideactive question.question-slide:after, md-card.slideactive .cover-page:after, md-card.slideactive .app-submit-page:after{
+    width: 15px;
+    height: 15px;
+    bottom: -25px;
+    }
+    .controls {
+        width:auto;
+    }
+    .navigation-slide {
+        bottom: 0;
     }
 }
 @media all and (max-width:1150px){
     .more-options li span{display:none}
     .more-options ul{margin-left:13%}
-}
-buildquestion .apply-questions-container .questionPanel {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    padding: 15px;
-    transform: translateY(-50%);
-    top: 50%;
-    height: 70vh;
-}
-buildquestion .category {
-    padding-bottom: 100px;
 }

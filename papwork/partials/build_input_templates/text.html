@@ -1,4 +1,4 @@
-﻿<!--<label contenteditable ng-model="question.placeholder">{{question.placeholder}}</label>-->
+﻿<label contenteditable ng-model="question.placeholder" style="position: absolute; top: 6px;z-index:999">{{question.placeholder}}</label>
 <md-input-container>
     <input class="md-accent hue-2" placeholder="{{question.placeholder}}" type="{{question.answertype}}" ng-disabled="true">
     <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="true">

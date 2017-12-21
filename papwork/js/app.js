@@ -9,6 +9,9 @@ app.config(['$routeProvider', '$controllerProvider', '$mdThemingProvider', funct
     $routeProvider.otherwise({ redirectTo: '/experience' });
     $controllerProvider.allowGlobals();
 
+    $mdThemingProvider.extendPalette('green', {
+        'hue1': "#81c784"
+    });
 
     //themeing
     $mdThemingProvider.theme('mytheme')

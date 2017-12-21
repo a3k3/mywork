@@ -10,7 +10,6 @@ var KeyCodes = {
     DOWNARROW: 40,
 };
 
-
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', []);
@@ -237,9 +236,11 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
         var theme = $(event.target).data('theme');
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
+
+    $scope.projectname = "Untitled";
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout) {
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
@@ -255,6 +256,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             return (this.activeNow / this.maxCount()) * 100;
         }
     };
+
+    $scope.$parent.$watch('projectname', function (value) {
+        $scope.buildQuestionsObj.name = value;
+    });
 
     getCoverData.then(function (cover) {
         $scope.buildcoverdata = cover.data;
@@ -279,7 +284,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
-            if ($scope.buildsuccessdata.settings.covertemplate.condition) {
+            if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
             }
             else {
@@ -301,13 +306,19 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         resetSlide();
         setActiveSlide($scope.buildQuestionsObj.maxCount());
+        angular.element('.apply-questions-container').find('.flip:last-child').removeClass('slideactive');
+        angular.element('.navigating_blocks').find('md-card:last-child').removeClass('slideactive');
         //$('.navigating_blocks md-card').outerWidth(true);
 
         if ($('.navigating_blocks md-card').length>4){
-        $(".navigating_blocks").animate({
-            marginLeft: '-=54px'
-        }, 500);
+            $(".navigating_blocks").animate({
+                marginLeft: '-=54px'
+            }, 500);
         }
+
+        $timeout(function () {
+            angular.element('.apply-questions-container').find('.flip').eq($scope.buildQuestionsObj.maxCount()).find('.type button').trigger('click');
+        }, 3000);
     };
 
     //add question
@@ -399,6 +410,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var _currentSlide = $(event.target).closest('md-card').index();
         resetSlide();
         setActiveSlide(_currentSlide);
+        if (_currentSlide <= $scope.buildQuestionsObj.maxCount() && $scope.buildQuestionsObj.maxCount() > 0)
         $scope.buildQuestionsObj.activeNow = _currentSlide;
     };
 
@@ -406,7 +418,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.buildQuestionsObj.next = function () {
         var _active = document.getElementsByClassName("slideactive");
         _active = angular.element(_active);
-        if (_active.index() < $scope.buildQuestionsObj.maxCount()) {
+        if (_active.index() <= $scope.buildQuestionsObj.maxCount()) {
             _active.next().addClass('slideactive').removeClass('slideleft').prev().removeClass('slideactive').addClass('slideleft');
             if ($scope.buildQuestionsObj.activeNow <= $scope.buildQuestionsObj.maxCount())
                 $scope.buildQuestionsObj.activeNow++;
@@ -502,12 +514,15 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         for (var i = 0; i < index; i++) {
             angular.element('.apply-questions-container').find('.flip').eq(i).addClass('slideleft')
         }
-        for (var i = index+1; i <= $scope.buildQuestionsObj.maxCount(); i++) {
+        for (var i = index+1; i <= $scope.buildQuestionsObj.maxCount()+1; i++) {
             angular.element('.apply-questions-container').find('.flip').eq(i).removeClass('slideleft')
         }
-        angular.element('.navigating_blocks').find('md-card').eq(index).addClass('slideactive').removeClass('slideleft');
+        angular.element('.navigating_blocks md-card').eq(index).addClass('slideactive').removeClass('slideleft');
         for (var i = 0; i < index; i++) {
-            angular.element('.navigating_blocks').find('md-card').find('.flip').eq(i).addClass('slideleft')
+            angular.element('.navigating_blocks md-card').find('.flip').eq(i).addClass('slideleft')
+        }
+        for (var i = index + 1; i <= $scope.buildQuestionsObj.maxCount() + 1; i++) {
+            angular.element('.navigating_blocks md-card').find('.flip').eq(i).removeClass('slideleft')
         }
     }
 
@@ -573,7 +588,7 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http) {
 
     $scope.$on('coverData', function (event, data) {
         $scope.coverdata = data;
-    })
+    });
 
     $scope.gotoExperience = function (url) {
         window.location = url;

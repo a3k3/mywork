@@ -1,6 +1,16 @@
-﻿<div layout="row" layout-align="start center">
-    <div flex>Reccomendation</div>
-    <div flex>
-        <md-switch ng-model="setting.condition" aria-label="Official PapWork Template"></md-switch>
+﻿<div layout="row" layout-align="start center" ng-if="!buildsuccessdata.settings.successtemplate.condition">
+    <div flex>Reccomendations</div>
+</div>
+<div layout-align="start center" ng-if="!buildsuccessdata.settings.successtemplate.condition">
+    <div class="recomends_link" ng-repeat="recommendation in setting.options" style="width:100%;">
+        <md-input-container>
+            <input class="md-accent hue-2" placeholder="Link Icon" ng-model="recommendation.link_icon">
+        </md-input-container>
+        <md-input-container>
+            <input class="md-accent hue-2" placeholder="Link Url" ng-model="recommendation.link_url" >
+        </md-input-container>
+        <md-input-container>
+            <input class="md-accent hue-2" placeholder="Link Title" ng-model="recommendation.link_title">
+        </md-input-container>
     </div>
 </div>

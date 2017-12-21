@@ -38,10 +38,26 @@
         "text": "Cover Page Disabled."
       },
       "reccomendations": {
-        "name": "reccomendations",
-        "condition": true,
-        "text": "Reccomendations enabled."
-      }
+      "name": "reccomendations",
+      "options": [
+        {
+          "link_icon": "",
+          "link_title": "",
+          "link_url": ""
+        },
+        {
+          "link_icon": "",
+          "link_title": "",
+          "link_url": ""
+        },
+        {
+          "link_icon": "",
+          "link_title": "",
+          "link_url": ""
+        }
+
+      ]
+    }
     }
   },
   "text": {

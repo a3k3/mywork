@@ -33,23 +33,27 @@
       "condition": false,
       "text": "Cover Page Disabled."
     },
-    "reccomendations": [
-      {
-        "link_icon": "../asset/img//pancard.jpg",
-        "link_title": "Pan Card",
-        "link_url": "#"
-      },
-      {
-        "link_icon": "../asset/img//pancard.jpg",
-        "link_title": "Visa",
-        "link_url": "#"
-      },
-      {
-        "link_icon": "../asset/img//pancard.jpg",
-        "link_title": "Tax",
-        "link_url": "#"
-      }
-    ]
+    "reccomendations": {
+      "name": "reccomendations",
+      "options": [
+        {
+          "link_icon": "../asset/img//pancard.jpg",
+          "link_title": "Pan Card",
+          "link_url": "#"
+        },
+        {
+          "link_icon": "../asset/img//pancard.jpg",
+          "link_title": "Visa",
+          "link_url": "#"
+        },
+        {
+          "link_icon": "../asset/img//pancard.jpg",
+          "link_title": "Tax",
+          "link_url": "#"
+        }
+
+      ]
+    }
   },
   "success_template": "default"
 }

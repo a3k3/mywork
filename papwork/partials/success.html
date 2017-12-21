@@ -15,13 +15,13 @@
             <p class="font-color-666 font-size-14">{{successdata.default.content.mail_text}}</p>
             <h6 class="font-color-ccc font-size-14">{{successdata.default.content.poweredby_text}}</h6>
             <div class="home_button">
-                <md-button class="home md-raised" md-colors="{::background: '{{theme}}-primary-hue-2'}">{{successdata.default.content.home_button.text}}</md-button>
+                <md-button class="home md-raised" md-colors="{::background: '{{theme}}-primary-hue-1'}" ng-click="gotoExperience(successdata.default.content.home_button.url)">{{successdata.default.content.home_button.text}}</md-button>
             </div>
         </div>
         <div class="recomends">
             <h4 class="font-size-16 font-color-666">{{successdata.default.content.reccomend_text}}</h4>
             <ul>
-                <li ng-repeat="reccomendation in successdata.settings.reccomendations">
+                <li ng-repeat="reccomendation in successdata.settings.reccomendations.options">
                     <a href="{{reccomendation.link_url}}">
                         <img class="selected-icon" src="{{reccomendation.link_icon}}">
                         <p class="font-size-12 font-color-444">{{reccomendation.link_title}}</p>

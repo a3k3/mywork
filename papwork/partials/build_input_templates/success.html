@@ -15,13 +15,13 @@
             <p class="font-color-666 font-size-14" contenteditable ng-model="buildsuccessdata.default.content.mail_text">{{buildsuccessdata.default.content.mail_text}}</p>
             <h6 class="font-color-ccc font-size-14" contenteditable ng-model="buildsuccessdata.default.content.poweredby_text">{{buildsuccessdata.default.content.poweredby_text}}</h6>
             <div class="home_button">
-                <md-button class="home md-raised" md-colors="{::background: '{{theme}}-primary-hue-2'}">{{buildsuccessdata.default.content.home_button.text}}</md-button>
+                <md-button class="home md-raised" md-colors="{::background: '{{theme}}-primary-hue-1'}" contenteditable ng-model="buildsuccessdata.default.content.home_button.text">{{buildsuccessdata.default.content.home_button.text}}</md-button>
             </div>
         </div>
         <div class="recomends">
             <h4 class="font-size-16 font-color-666" contenteditable ng-model="buildsuccessdata.default.content.reccomend_text">{{buildsuccessdata.default.content.reccomend_text}}</h4>
             <ul>
-                <li ng-repeat="reccomendation in buildsuccessdata.settings.reccomendations">
+                <li ng-repeat="reccomendation in buildsuccessdata.settings.reccomendations.options">
                     <a href="{{reccomendation.link_url}}">
                         <img class="selected-icon" src="{{reccomendation.link_icon}}">
                         <p class="font-size-12 font-color-444" contenteditable ng-model="reccomendation.link_title">{{reccomendation.link_title}}</p>
