@@ -332,7 +332,7 @@
     "hint": "Write in brief about yourself",
     "placeholder": "Write something..",
     "validations": {
-      "required": {
+      "mustanswer": {
         "condition": true,
         "text": "Thats required!"
       },

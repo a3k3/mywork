@@ -14,7 +14,10 @@ var KeyCodes = {
 
 var myapp = angular.module('experienceApp.controllers', []);
 
-function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) {
+function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, $rootScope) {
+
+    $rootScope.bodylayout = 'experience-layout';
+
     var vm = this;
 
     $scope.formData = {};
@@ -195,7 +198,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document) 
     }
 }
 
-myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location','$document', questionsCtrl])
+myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location', '$document', '$rootScope', questionsCtrl])
 
 
 function MyCtrl2() {
@@ -218,7 +221,10 @@ var getTemplate = function (data) {
     return input_template;
 }
 
-myapp.controller('successCtrl',function ($scope, getSuccessData) {
+myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
+
+    $rootScope.bodylayout = 'success-layout';
+
     $scope.theme = "mytheme";
 
     getSuccessData.then(function (success) {
@@ -227,7 +233,6 @@ myapp.controller('successCtrl',function ($scope, getSuccessData) {
         $scope.status = response.statusText;
     });
 });
-
 
 myapp.controller('tabCtrl', function ($scope, $rootScope) {
     $scope.themes = ['default','green', 'black', 'pink','blue','yellow', 'orange'];
@@ -241,6 +246,8 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
 });
 
 myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout) {
+
+    $rootScope.bodylayout = 'create-layout';
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
@@ -407,6 +414,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     //show slide
     $scope.showSlide = function (event) {
+        event.stopPropagation();
         var _currentSlide = $(event.target).closest('md-card').index();
         resetSlide();
         setActiveSlide(_currentSlide);
@@ -551,7 +559,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.uploadFiles = function () {
         var request = {
             method: 'POST',
-            url: '/api/fileupload/',
+            url: 'http://www.leisureguard-rebrand.insureplc.co.uk/get-quote',
             data: formdata,
             headers: {
                 'Content-Type': undefined
@@ -578,7 +586,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     //draggable
 });
 
-myapp.controller('coverCtrl', function ($scope, getCoverData, $http) {
+myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope) {
+
+    $rootScope.bodylayout = 'cover-layout';
 
     getCoverData.then(function (cover) {
         $scope.coverdata = cover.data;

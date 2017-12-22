@@ -117,26 +117,22 @@
         "condition": false,
         "text": "Thats required!"
       },
-      "maxcount": {
-        "name": "maxcount",
-        "condition": 10,
-        "text": "Thats too long!"
-      },
       "autocomplete": {
         "name": "autocomplete",
         "condition": false,
         "text": "This response is timed."
       },
-      "acceptonly": {
-        "name": "acceptonly",
-        "condition": "text",
-        "text": "Please enter valid input."
+      "enableMedia": {
+        "name": "enableMedia",
+        "condition": false,
+        "text": "Shows media options."
       }
     },
     "options": [
       {
         "name": "productA",
-        "value": "ProductA"
+        "value": "ProductA",
+        "media_src": "../asset/img/md-icons/svg/ic_photo_camera_black_24px.svg"
       }
     ]
   },

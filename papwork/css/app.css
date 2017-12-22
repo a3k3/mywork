@@ -406,7 +406,7 @@ question.active .questionPanel {
 /****Success Page*****/
 
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
-    min-height: 100vh;
+    min-height: 94vh;
 }
 md-tab-content {
     overflow: hidden!important;
@@ -451,3 +451,71 @@ md-pagination-wrapper {
 .md-card .progressContainer md-progress-linear .md-container{
     height:2px;
 }
+
+.experience-layout question.active .category {margin-top: 50px;opacity: 1;-webkit-animation: .8s ease 0s normal forwards 1 fadein;animation: .8s ease 0s normal forwards 1 fadein;}
+
+.experience-layout question .category {
+    opacity: 0;
+}
+
+
+
+
+
+/* ANIMATIONS
+==================Do not edit=========================================================== */
+
+/* leaving animations ----------------------------------------- */
+/* rotate and fall */
+@keyframes rotateFall {
+    0%      { transform: rotateZ(0deg); }
+    20%     { transform: rotateZ(10deg); animation-timing-function: ease-out; }
+    40%     { transform: rotateZ(17deg); }
+    60%     { transform: rotateZ(16deg); }
+    100%    { transform: translateY(100%) rotateZ(17deg); }
+}
+
+/* slide in from the bottom */
+@keyframes slideOutLeft {
+    to      { transform: translateX(-100%); }
+}
+
+/* rotate out newspaper */
+@keyframes rotateOutNewspaper {
+    to      { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+}
+
+/* entering animations --------------------------------------- */
+/* scale up */
+@keyframes scaleUp {
+    from    { opacity: 0.3; -webkit-transform: scale(0.8); }
+}
+
+/* slide in from the right */
+@keyframes slideInRight {
+    from    { transform:translateX(100%); }
+    to      { transform: translateX(0); }
+}
+
+/* slide in from the bottom */
+@keyframes slideInUp {
+    from    { transform:translateY(100%); }
+    to      { transform: translateY(0); }
+}
+
+@keyframes slideOutUp {
+    from    { transform:translateY(0); }
+    to      { transform: translateY(-100%); }
+}
+
+
+/* page specific animations ------------------------ */
+
+    /* cover -------------------------- */
+    .cover-layout ng-view.ng-enter         { animation: slideInUp 0.5s both ease-in; }
+    .experience-layout ng-view.ng-leave         {transform-origin:0 0; animation: slideOutUp 0.5s both ease-in; }
+
+ 
+
+/* ANIMATIONS
+============================================================================= */

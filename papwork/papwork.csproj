@@ -199,6 +199,8 @@
     <Content Include="partials\build.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
+    <Content Include="partials\build_input_templates\email.html" />
+    <Content Include="partials\build_input_templates\number.html" />
     <Content Include="partials\build_input_templates\radio.html" />
     <Content Include="partials\build_input_templates\radio_size.html" />
     <Content Include="partials\build_input_templates\rating_star.html" />
@@ -206,6 +208,7 @@
     <Content Include="partials\build_input_templates\success.html" />
     <Content Include="partials\build_input_templates\text.html" />
     <Content Include="partials\build_input_templates\textarea.html" />
+    <Content Include="partials\build_input_templates\url.html" />
     <Content Include="partials\build_questionsTemplate.html" />
     <Content Include="partials\build_settingsTemplate.html" />
     <Content Include="partials\cover.html" />
@@ -227,6 +230,7 @@
     <Content Include="partials\questionType.tmpl.html" />
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />
+    <Content Include="partials\settings_templates\enableMedia.html" />
     <Content Include="partials\settings_templates\maxcount.html" />
     <Content Include="partials\settings_templates\reccomendations.html" />
     <Content Include="partials\settings_templates\success.html" />

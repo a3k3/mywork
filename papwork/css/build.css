@@ -131,7 +131,7 @@ settings md-pagination-wrapper:after {
     position: fixed;
     overflow:hidden;
     height: 14vh;
-    bottom: 45px;
+    bottom: 0;
     left: 0;
     width: 100%;
     padding: 0 8px;
@@ -139,6 +139,7 @@ settings md-pagination-wrapper:after {
     padding-top: 4px;
     z-index: 999;
     background: #fff;
+    overflow-x:  scroll;
 }
 .navigation-slide > md-card {
     margin-right: 1px;
@@ -147,6 +148,8 @@ settings md-pagination-wrapper:after {
 .navigating_blocks{
     height:13vh;
     width:30000px;
+    overscroll-behavior-x: inherit;
+    margin: 0!important;
 }
 .navigation-slide md-card:nth-child(2) {
     margin-left: 1px;
@@ -154,11 +157,21 @@ settings md-pagination-wrapper:after {
 .navigation-slide md-card{
     width: 48px;
     float: left;
-    height: 80%;
+    height: 10vh;
     margin: 3px;
     outline: none;
-    /* position: absolute; */
+    position: relative;
     box-sizing: border-box;
+}
+
+.navigation-slide .navigating_blocks > md-card:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
 }
 
 .navigation-slide question.question-slide {
@@ -180,7 +193,7 @@ settings md-pagination-wrapper:after {
 }
 
 .navigation-slide .add-slide {
-    position: absolute;
+    position: fixed;
     left: calc(100vw - 70px);
     z-index: 999;
 }
@@ -293,7 +306,7 @@ md-dialog .type-layout md-icon{
 md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
     background-color: transparent;
 }
-.flipBasic.flipHideFront .fcontrol {
+.flipBasic.flipHideFront .fcontrol, .flipBasic.flipHideFront .text_placeholder {
     display: none;
     -webkit-transition: display ease-in 2s; 
 }
@@ -529,7 +542,8 @@ buildquestion .category {
 
 .mobile-project-title {
     padding: 0 15px;
-    padding-top: 15px;
+    padding-top: 5px;
+    height: 6vh;
 }
 .build ng-include {
     position:relative;
@@ -545,6 +559,25 @@ label + md-input-container label{
 }
 .recomends_link md-input-container{
     width:30%;
+}
+.apply-questions-container .questionContainer {
+    display: inline-block;
+    width: 100%;
+}
+.upload-options .col-xs-6 {
+    border: 1px solid #d3d3d3;
+}
+
+.upload-image {
+    padding: 30px 0;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.upload-options .value {
+    text-align: center;
+    background: rgba(0,0,0,.54);
 }
 @media screen and (min-width:1024px) {
     .mobile-project-title{display:none}

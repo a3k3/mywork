@@ -1,0 +1,16 @@
+﻿<div layout="row" layout-align="start center">
+    <div flex>Add image in options</div>
+    <div flex>
+        <md-switch ng-model="setting.condition" aria-label="Add image in options"></md-switch>
+    </div>
+</div>
+<div class="upload-options container" ng-if="setting.condition">
+    <div class="row">
+        <div class="col-xs-6 nopadding" ng-repeat="option in question.options">
+            <div class="upload-image" data-file="product{{$index}}" ng-click="updateMedia($event)" style="background-image:url('{{option.media_src}}')">
+            </div>
+            <input type="file" id="product{{$index}}" name="file" ng-files="getTheFiles($files)" style="display:none;" />
+            <div class="value">{{option.value}}</div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,5 @@
-﻿<label contenteditable ng-model="question.placeholder">{{question.placeholder}}</label>
+﻿<label contenteditable ng-model="question.placeholder" style="position: absolute; top: 6px;z-index:999">{{question.placeholder}}</label>
+<md-input-container>
+    <label>{{question.placeholder}}</label>
+    <textarea name="textarea" rows="4" ng-disabled="true"></textarea>
+</md-input-container>
