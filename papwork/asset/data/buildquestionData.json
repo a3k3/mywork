@@ -293,5 +293,35 @@
         "value": "ProductA"
       }
     ]
+  },
+  "select": {
+    "settings": {
+      "required": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxcount": {
+        "name": "maxcount",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      }
+    },
+    "options": [
+      {
+        "name": "productA",
+        "value": "ProductA"
+      }
+    ]
   }
 }

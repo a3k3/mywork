@@ -148,7 +148,7 @@ settings md-pagination-wrapper:after {
 .navigating_blocks{
     height:13vh;
     width:30000px;
-    overscroll-behavior-x: inherit;
+    /*overscroll-behavior-x: inherit;*/
     margin: 0!important;
 }
 .navigation-slide md-card:nth-child(2) {
@@ -241,7 +241,7 @@ md-card buildquestion .questionPanel .answerContainer, md-card question .questio
 md-dialog {
     max-width: 95%!important;
     width: 95%;
-    background-color: #656565;
+    background-color: rgba(101,101,101,0.8);
     color:#fff;
     box-shadow: none;
     border-radius: 0;
@@ -259,18 +259,19 @@ md-dialog .type-layout md-icon{
     border-radius: 50%;
     border: 1px solid;
 }
-.field-type .flex{
+.field-type .ftype{
     padding: 8px;
     text-align:center;
 }
 .question-type .flex {
     padding: 8px;
 }
-.field-type .flabel .flex {
+.field-type .flabel .ftype {
     text-align :left;
 }
-.field-type .content .flex {
+.field-type .content .ftype {
     border-right: 1px solid #a3a3a3;
+    border-bottom: 1px solid #a3a3a3;
     text-align:center;
     font-size:12px;
     padding:16px 8px;
@@ -285,12 +286,12 @@ md-dialog .type-layout md-icon{
     min-width: 63px;
     text-align: center;
 }
-.field-type .flex.active, .question-type .flex.active {
+.field-type .ftype.active, .question-type .flex.active {
     background-color: rgb(76,175,80);
 }
 
-.field-type .content .flex:last-child {
-    border: none;
+.field-type .content .ftype:last-child {
+    /* border: none; */
 }
 
 .field-type .content {
@@ -298,7 +299,7 @@ md-dialog .type-layout md-icon{
 }
 
 .field-type .content:last-child {
-    border-bottom: 1px solid #a3a3a3;
+    /* border-bottom: 1px solid #a3a3a3; */
 }
 .close-tab {
     padding: 10px 0;
@@ -465,12 +466,12 @@ md-input-container.md-mytheme-theme .md-input{
 }
 .type md-icon{
     background-color: rgba(0,0,0,0.54);
-    padding: 8px 2px;
+    padding: 11px 2px;
     padding-right: 20px;
-    width: 50px;
-    height: 30px;
+    width: 63px;
+    height: 35px;
     position:relative;
-    border-radius:20px
+    border-radius:20px;
 }
 .type md-icon:after {
     content: 'v';
@@ -513,7 +514,7 @@ buildquestion .apply-questions-container .questionPanel {
     height: 70vh;
 }
 buildquestion .category {
-    padding-bottom: 100px;
+    padding-bottom: 9vh;
 }
 .create-tabs .md-card .progressContainer .status {
     margin-bottom: 0px!important;
@@ -564,6 +565,13 @@ label + md-input-container label{
     display: inline-block;
     width: 100%;
 }
+.md-dialog-is-showing .apply-questions-container {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
 .upload-options .col-xs-6 {
     border: 1px solid #d3d3d3;
 }
@@ -578,6 +586,24 @@ label + md-input-container label{
 .upload-options .value {
     text-align: center;
     background: rgba(0,0,0,.54);
+}
+.navigation-slide .category
+{
+    transform-origin: 27%;
+    transform: scale(.2);
+}
+.apply-questions-container .inputContainer .option {
+    position:relative;
+    display: inline-block;
+    width: 100%;
+}
+.apply-questions-container .inputContainer .option > [ng-click] {
+    position:absolute;
+    right:0;
+    bottom:0;
+}
+.apply-questions-container .inputContainer md-radio-group.option > [ng-click] {
+    bottom: 16px!important;
 }
 @media screen and (min-width:1024px) {
     .mobile-project-title{display:none}

@@ -457,7 +457,11 @@ md-pagination-wrapper {
 .experience-layout question .category {
     opacity: 0;
 }
+.create-layout question.active .category {margin-top: 50px;opacity: 1;-webkit-animation: .8s ease 0s normal forwards 1 fadein;animation: .8s ease 0s normal forwards 1 fadein;}
 
+.create-layout question .category {
+    opacity: 0;
+}
 
 
 
@@ -512,7 +516,7 @@ md-pagination-wrapper {
 /* page specific animations ------------------------ */
 
     /* cover -------------------------- */
-    .cover-layout ng-view.ng-enter         { animation: slideInUp 0.5s both ease-in; }
+    .cover-layout ng-view.ng-enter         { animation: rotateOutNewspaper 0.5s both ease-in; }
     .experience-layout ng-view.ng-leave         {transform-origin:0 0; animation: slideOutUp 0.5s both ease-in; }
 
  

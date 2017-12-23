@@ -125,6 +125,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="asset\data\manifest.json" />
+    <Content Include="asset\data\questionType.json" />
     <None Include="asset\data\success.json" />
     <Content Include="asset\img\avg.png" />
     <Content Include="asset\img\avg_active.png" />
@@ -217,6 +219,7 @@
     <Content Include="partials\input_templates\hidden.html" />
     <Content Include="partials\input_templates\input_calendar.html" />
     <Content Include="partials\input_templates\number.html" />
+    <Content Include="partials\input_templates\statement.html" />
     <Content Include="partials\input_templates\textarea.html" />
     <Content Include="partials\input_templates\product_select.html" />
     <Content Include="partials\input_templates\radio.html" />

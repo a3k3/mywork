@@ -325,7 +325,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         $timeout(function () {
             angular.element('.apply-questions-container').find('.flip').eq($scope.buildQuestionsObj.maxCount()).find('.type button').trigger('click');
-        }, 3000);
+        }, 0);
     };
 
     //add question
@@ -342,8 +342,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         };
         $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
-        var tmplhtml = $compile('<ng-include src="dynamicTemplateUrl(question)"></ng-include>')($scope);
-        angular.element('.apply-questions-container').find('.flip').eq(index).find('.inputContainer').append(tmplhtml);
+        //var tmplhtml = $compile('<ng-include src="dynamicTemplateUrl(question)"></ng-include>')($scope);
+        //angular.element('.apply-questions-container').find('.flip').eq(id).find('.inputContainer').append(tmplhtml);
         //angular.element('.apply-questions-container').find('.flip').find('.type').addClass(type[0].toLowerCase());
         $scope.buildQuestionsObj.questions[index].questiontype = type[0];
         if (type[1] != undefined)
@@ -374,6 +374,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $scope.status = response.statusText;
         });
 
+        $timeout(function () {
+            setActiveSlide(id);
+        }, 0);
     }
 
     //set settings panel
@@ -603,6 +606,16 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope)
     $scope.gotoExperience = function (url) {
         window.location = url;
     }
+});
+
+myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
+
+    getFieldTypeData.then(function (fieldtype) {
+        $scope.fieldtypedata = fieldtype.data;
+    }, function myError(response) {
+        $scope.status = response.statusText;
+    });
+
 });
 
 

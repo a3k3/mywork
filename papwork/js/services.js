@@ -34,3 +34,10 @@ myservice.service('getSuccessData', ['$http', function ($http) {
         url: "../asset/data/success.json"
     })
 }]);
+
+myservice.service('getFieldTypeData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/questionType.json"
+    })
+}]);
