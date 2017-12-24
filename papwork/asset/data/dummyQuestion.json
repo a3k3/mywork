@@ -1,0 +1,30 @@
+﻿{
+  "dummyQuestion": {
+    "question": "Please edit this text?",
+    "category": "Category",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Placeholder text"
+  },
+  "name": {
+    "question": "What is your name?",
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Placeholder text"
+  },
+  "age": {
+    "question": "What is your age?",
+    "category": "Age",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Placeholder text"
+  },
+  "father": {
+        "question": "What is your fathers name?",
+        "category": "Details",
+        "caption": "Add a suitable caption",
+        "hint": "Please add your hint here",
+        "placeholder": "Placeholder text"
+    }
+}

@@ -127,6 +127,7 @@
   <ItemGroup>
     <Content Include="asset\data\manifest.json" />
     <Content Include="asset\data\questionType.json" />
+    <Content Include="asset\data\dummyQuestion.json" />
     <None Include="asset\data\success.json" />
     <Content Include="asset\img\avg.png" />
     <Content Include="asset\img\avg_active.png" />

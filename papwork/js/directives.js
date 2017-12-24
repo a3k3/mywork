@@ -198,4 +198,23 @@ myapp.directive('ngFiles', ['$parse', function ($parse) {
     return {
         link: fn_link
     }
-}])
+}]);
+
+myapp.directive('onLongPress', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+            var timeoutHandler;
+
+            elem.bind('touchstart', function () {
+                timeoutHandler = $timeout(function () {
+                    scope.$eval(attrs.onLongPress);
+                }, 600);
+            });
+
+            elem.bind('touchend', function () {
+                $timeout.cancel(timeoutHandler);
+            });
+        }
+    };
+});

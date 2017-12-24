@@ -41,3 +41,10 @@ myservice.service('getFieldTypeData', ['$http', function ($http) {
         url: "../asset/data/questionType.json"
     })
 }]);
+
+myservice.service('getSampleQuestionData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/dummyQuestion.json"
+    })
+}]);

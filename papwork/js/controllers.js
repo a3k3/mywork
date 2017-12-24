@@ -75,11 +75,11 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         return "../partials/input_templates/" + getTemplate(data) + ".html"
     }
 
-    $scope.onSwipeDown = function (ev) {
+    $scope.onSwipeDown = function () {
         $scope.questionsObj.next();
     };
 
-    $scope.onSwipeUp = function (ev) {
+    $scope.onSwipeUp = function () {
         $scope.questionsObj.prev();
     };
 
@@ -245,7 +245,13 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
     $scope.projectname = "Untitled";
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData) {
+    var sampleQuestion = {};
+    getSampleQuestionData.then(function (response) {
+        sampleQuestion = response.data;
+    }, function myError(response) {
+        $scope.status = response.statusText;
+    });
 
     $rootScope.bodylayout = 'create-layout';
 
@@ -329,22 +335,16 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     };
 
     //add question
-    $scope.addQuestion = function (type) {
+    $scope.addQuestion = function (type, qtype) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var id = $scope.buildQuestionsObj.questions[index].id;
-        $scope.buildQuestionsObj.questions[index] = {
-            "id": id,
-            "question": "Please edit this text?",
-            "category": "Category",
-            "caption": "Add a suitable caption",
-            "hint": "Please add your hint here",
-            "placeholder": "Placeholder text",
-        };
+        $scope.buildQuestionsObj.questions[index] = sampleQuestion.dummyQuestion;
+        if (qtype != null) {
+            $scope.buildQuestionsObj.questions[index] = sampleQuestion[qtype];
+        }
+        $scope.buildQuestionsObj.questions[index].id = id
         $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
-        //var tmplhtml = $compile('<ng-include src="dynamicTemplateUrl(question)"></ng-include>')($scope);
-        //angular.element('.apply-questions-container').find('.flip').eq(id).find('.inputContainer').append(tmplhtml);
-        //angular.element('.apply-questions-container').find('.flip').find('.type').addClass(type[0].toLowerCase());
         $scope.buildQuestionsObj.questions[index].questiontype = type[0];
         if (type[1] != undefined)
         {
@@ -498,6 +498,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     function DialogController($scope, $mdDialog, callback) {
+        $scope.query = { primary: true };
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -506,12 +507,26 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $mdDialog.cancel();
         };
 
-        $scope.addQuestion = function (event) {
-            angular.element('.content > .flex').removeClass('active');
-            $(event.target).data('type') == undefined ? $(event.target).parent().addClass('active') : $(event.target).addClass('active');
+        $scope.addQuestion = function (event,samplequestion) {
             var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
-            callback(type);
-            $scope.cancel();
+            if (type[0] != "more" && type[0] != "less") {
+                angular.element('.content > .flex').removeClass('active');
+                $(event.target).data('type') == undefined ? $(event.target).parent().addClass('active') : $(event.target).addClass('active');
+                callback(type, samplequestion);
+                $scope.cancel();
+            }
+            else {
+                if (type[0] == "more") {
+                    $scope.query = {};
+                    angular.element('.content [data-type="more"]').hide()
+                    angular.element('.content [data-type="less"]').show();
+                }
+                else {
+                    $scope.query = { primary: true };
+                    angular.element('.content [data-type="less"]').hide();
+                    angular.element('.content [data-type="more"]').show();
+                }
+            }
         }
     }
 
@@ -587,6 +602,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions[otherIndex] = otherObj;
     }
     //draggable
+
+    $scope.itemOnLongPress = function (index) {
+        angular.element('.navigating_blocks md-card').eq(index + 1).attr('ng-prevent-drag', false).attr('draggable',true);
+    }
 });
 
 myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope) {
@@ -615,7 +634,6 @@ myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
     }, function myError(response) {
         $scope.status = response.statusText;
     });
-
 });
 
 

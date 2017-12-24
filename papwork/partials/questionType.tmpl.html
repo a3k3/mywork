@@ -9,7 +9,7 @@
             <div flex>{{fieldtypedata.name}}</div>
         </div>
         <div class="content" layout="row" layout-wrap>
-            <div class="ftype" flex="33" data-type="{{fieldoption.type}}" ng-repeat="fieldoption in fieldtypedata.options" ng-click="addQuestion($event)">
+            <div class="ftype" flex="33" data-type="{{fieldoption.type}}" ng-repeat="fieldoption in fieldtypedata.options | filter: query" ng-click="addQuestion($event,null)">
                 <md-icon md-svg-icon="{{fieldoption.img_src}}" class=""></md-icon>
                 {{fieldoption.name}}
             </div>
@@ -20,9 +20,9 @@
             <div flex>Question Type</div>
         </div>
         <div class="content">
-            <div flex data-qtype="father">Name</div>
-            <div flex data-qtype="father">Age</div>
-            <div flex data-qtype="father">Father</div>
+            <div flex data-type="text" ng-click="addQuestion($event,'name')">Name</div>
+            <div flex data-type="number"  ng-click="addQuestion($event,'age')">Age</div>
+            <div flex data-type="text"  ng-click="addQuestion($event,'father')">Father</div>
         </div>
     </div>
 </div>

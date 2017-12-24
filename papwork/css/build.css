@@ -233,6 +233,7 @@ md-card settings {
 .type {
     position: absolute;
     top:12px;
+    z-index:999;
 }
 
 md-card buildquestion .questionPanel .answerContainer, md-card question .questionPanel .answerContainer {
@@ -263,7 +264,7 @@ md-dialog .type-layout md-icon{
     padding: 8px;
     text-align:center;
 }
-.question-type .flex {
+.question-type .flex, .field-type .flabel .flex {
     padding: 8px;
 }
 .field-type .flabel .ftype {
@@ -296,6 +297,9 @@ md-dialog .type-layout md-icon{
 
 .field-type .content {
     border-top: 1px solid #a3a3a3;
+    height: calc(74*3px);
+    overflow: hidden;
+    overflow-y: scroll
 }
 
 .field-type .content:last-child {
@@ -746,4 +750,25 @@ label + md-input-container label{
 @media all and (max-width:1150px){
     .more-options li span{display:none}
     .more-options ul{margin-left:13%}
+}
+
+.navigating_blocks md-card{
+    -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+@media screen and (max-width:1023px) {
+.publish-panel + ng-include question.active{
+    top:8vh;
+}
+.publish-panel + ng-include question.question-slide{
+    height:60vh;
+}
+.publish-panel + ng-include question.next_active {
+    top: 70vh;
+}
+.publish-panel + ng-include question.next_next_active {
+    top: 75vh;
+}
 }

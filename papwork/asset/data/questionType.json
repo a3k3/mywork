@@ -2,48 +2,75 @@
   "name": "Field Type",
   "options": [
     {
+      "primary": true,
       "name": "Type Box",
       "type": "text",
       "img_src": "../asset/img/md-icons/svg/text-box.svg"
     },
     {
+      "primary": true,
       "name": "Long Type Box",
       "type": "textarea",
       "img_src": "../asset/img/md-icons/svg/long-text-box.svg"
     },
     {
+      "primary": true,
       "name": "Statement",
       "type": "statement",
       "img_src": "../asset/img/md-icons/svg/statement.svg"
     },
     {
+      "primary": true,
       "name": "Radio",
       "type": "radio",
       "img_src": "../asset/img/md-icons/svg/radio.svg"
     },
     {
+      "primary": true,
       "name": "Checkbox",
       "type": "checkbox",
       "img_src": "../asset/img/md-icons/svg/checkbox.svg"
     },
     {
+      "primary": true,
       "name": "Drop Down",
       "type": "select",
       "img_src": "../asset/img/md-icons/svg/dropdown.svg"
     },
     {
+      "primary": true,
       "name": "Star Rating",
       "type": "rating_star",
       "img_src": "../asset/img/md-icons/svg/star-rating.svg"
     },
     {
+      "primary": true,
       "name": "Scale Rating",
       "type": "radio_size",
       "img_src": "../asset/img/md-icons/svg/scale-rating.svg"
     },
     {
+      "primary": true,
       "name": "More Fields",
       "type": "more",
+      "img_src": "../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg"
+    },
+    {
+      "primary": false,
+      "name": "Star Rating 2",
+      "type": "rating_star",
+      "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+    },
+    {
+      "primary": false,
+      "name": "Scale Rating 2",
+      "type": "radio_size",
+      "img_src": "../asset/img/md-icons/svg/scale-rating.svg"
+    },
+    {
+      "primary": false,
+      "name": "Less Fields",
+      "type": "less",
       "img_src": "../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg"
     }
   ]
