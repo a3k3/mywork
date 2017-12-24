@@ -191,6 +191,7 @@
     <Content Include="js\mdCarousel.js" />
     <Content Include="js\swipe.js" />
     <Content Include="lib\draggable\ngDraggable.js" />
+    <Content Include="lib\swipe\ngSwipe.js" />
     <Content Include="lib\tool\demo.css" />
     <Content Include="lib\tool\formbuilder.css" />
     <Content Include="lib\tool\formbuilder.js" />
