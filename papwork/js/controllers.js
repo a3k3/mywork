@@ -338,7 +338,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.addQuestion = function (type, qtype) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var id = $scope.buildQuestionsObj.questions[index].id;
-        $scope.buildQuestionsObj.questions[index] = sampleQuestion.dummyQuestion;
+        $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
         if (qtype != null) {
             $scope.buildQuestionsObj.questions[index] = sampleQuestion[qtype];
         }
