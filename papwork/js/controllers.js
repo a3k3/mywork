@@ -76,11 +76,11 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
     }
 
     $scope.onSwipeDown = function () {
-        $scope.questionsObj.next();
+        $scope.questionsObj.prev();
     };
 
     $scope.onSwipeUp = function () {
-        $scope.questionsObj.prev();
+        $scope.questionsObj.next();
     };
 
     //next button click
