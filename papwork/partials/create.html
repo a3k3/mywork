@@ -2,7 +2,7 @@
     <div flex class="mobile-project-title">
         <md-icon class="build_back" md-svg-icon="../asset/img/md-icons/svg/ic_arrow_back_black_24px.svg"></md-icon>
         <md-input-container style="margin-top:0;">
-            <input class="md-accent hue-2" ng-model="projectname" type="text">
+            <input class="md-accent hue-2" ng-model="projectName" type="text" aria-label="{{projectName}}">
         </md-input-container>
     </div>
     <md-tabs md-stretch-tabs="never" class="create-tabs">
@@ -15,10 +15,10 @@
                     <div class="circle {{theme}}" data-theme="{{theme}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>
                 </div>
                 <div flex="30" class="publish-btn-container">
-                    <md-button class="publish md-raised md-primary md-hue-2">Publish</md-button>
+                    <md-button class="publish md-raised md-primary md-hue-1">Publish</md-button>
                 </div>
             </div>
-            <ng-include src="'../partials/experience.html'"></ng-include>
+            <ng-include src="getPartial()"></ng-include>
         </md-tab>
         <md-tab label="Response" ng-disabled="true">
         </md-tab>

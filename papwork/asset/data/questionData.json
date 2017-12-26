@@ -383,5 +383,31 @@
         "value": "L"
       }
     ]
+  },
+  {
+    "id": 13,
+    "question": "&lt;span class&#x3D;&#39;action-word&#39; data-mapping&#x3D;&#39;form-name&#39;&gt;Papwork &lt;&#x2F;span&gt; a revolutionary way to automate your boring paperwork job.",
+    "name": "name",
+    "modelname": "name",
+    "caption": "Papwork a revolutionary way to automate.",
+    "category": "Category",
+    "answertype": "statement",
+    "answertheme": "",
+    "hint": "If you go on holiday more than once per year you may want to consider a multi trip (annual) travel insurance policy.",
+    "placeholder": "Sounds Interesting",
+    "validations": {
+      "required": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "minlength": {
+        "condition": 0,
+        "text": "Thats too short!"
+      }
+    }
   }
 ]

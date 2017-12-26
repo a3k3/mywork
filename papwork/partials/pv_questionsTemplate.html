@@ -1,5 +1,5 @@
-﻿<div class="category col-xs-12 text-center font-color-222 font-size-14">{{question.category}}</div>
-<div id="slide-{{question.id}}" class="questionPanel" data-question-id="{{question.id}}">
+﻿<div class="category col-xs-12 text-center font-color-222 font-size-14" ng-if="question.answertype != 'statement'">{{question.category}}</div>
+<div id="slide-{{question.id}}" class="questionPanel" data-question-id="{{question.id}}" ng-if="question.answertype != 'statement'">
     <div class="questionContainer">
         <h2 class="question font-size-24 font-color-000">{{question.question}}</h2>
     </div>
@@ -10,4 +10,7 @@
         </div>
         <p class="hint font-color-666 font-size-12">Hint: {{question.hint}}</p>
     </div>
+</div>
+<div id="slide-{{question.id}}" class="questionPanel" data-question-id="{{question.id}}" ng-if="question.answertype == 'statement'">
+    <ng-include src="dynamicTemplateUrl(question)"></ng-include>
 </div>

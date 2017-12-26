@@ -1,4 +1,4 @@
-﻿<div class="build" ng-controller="buildCtrl" md-swipe-up="onSwipeUp()" md-swipe-down="onSwipeDown()">
+﻿<div class="build" ng-controller="buildCtrl">
     <div class="md-card">
         <div class="master-settings container">
             <div class="row">
@@ -56,8 +56,8 @@
         <div class="progressContainer">
             <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount()}}</div>
         </div>
-        <div class="apply-questions-container">
-            <flip class="flip" ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }">
+        <div class="apply-questions-container" ng-swipe-left="onSwipeLeft()" ng-swipe-right="onSwipeRight()">
+            <flip class="flip noPreventDefault" ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }">
                 <flip-panel>
                     <md-card>
                         <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
@@ -93,7 +93,7 @@
                     </div>
                 </flip-panel>
             </flip>
-            <flip class="flip" ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
+            <flip class="flip noPreventDefault" ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
                 <flip-panel>
                     <div class="type">
                         <md-button class="md-icon-button" ng-click="openTypeModal($event)" ng-switch on="question.questiontype">
@@ -154,7 +154,7 @@
                     </div>
                 </flip-panel>
             </flip>
-            <flip class="flip">
+            <flip class="flip noPreventDefault">
                 <flip-panel>
                     <md-card>
                         <ng-include src="'../partials/build_input_templates/success.html'"></ng-include>
@@ -199,7 +199,7 @@
                 <md-card ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }" ng-click="showSlide($event)">
                     <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
                 </md-card>
-                <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)" ng-drag="true" ng-drag-data="question" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)">
+                <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)" ng-drag="question.draggable" ng-drag-data="question" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)" on-long-press="itemOnLongPress($event, question)">
                     <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
                     </question>
                 </md-card>

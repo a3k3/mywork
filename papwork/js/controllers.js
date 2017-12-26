@@ -10,6 +10,30 @@ var KeyCodes = {
     DOWNARROW: 40,
 };
 
+var entityMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+};
+
+function htmlDecode(input) {
+    var e = document.createElement('div');
+    e.innerHTML = input;
+    // handle case of empty input
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+
+function escapeHtml(string) {
+    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+        return entityMap[s];
+    });
+}
+
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', []);
@@ -50,6 +74,12 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
             }
             else {
                 $scope.questionsObj.questions = response.data;
+                angular.forEach($scope.questionsObj.questions, function (value, index) {
+                    value.question = htmlDecode(value.question);
+                    value.caption = htmlDecode(value.caption);
+                    value.hint = htmlDecode(value.hint);
+                    value.placeholder = htmlDecode(value.placeholder);
+                });
             }
         }
         $scope.questionsObj.activeNow = 1;
@@ -235,6 +265,9 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
 });
 
 myapp.controller('tabCtrl', function ($scope, $rootScope) {
+
+    $rootScope.bodylayout = 'create-layout';
+
     $scope.themes = ['default','green', 'black', 'pink','blue','yellow', 'orange'];
 
     $scope.changeTheme = function (event) {
@@ -242,18 +275,27 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
 
-    $scope.projectname = "Untitled";
+    $scope.projectName = "Untitled";
+
+    $scope.previewURL = "../partials/experience.html";
+
+    $scope.gotoExperience = function () {
+        $scope.previewURL = "../partials/experience.html";
+    }
+
+    $scope.getPartial = function () {
+        return $scope.previewURL;
+    }
 });
 
 myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData) {
     var sampleQuestion = {};
+
     getSampleQuestionData.then(function (response) {
         sampleQuestion = response.data;
     }, function myError(response) {
         $scope.status = response.statusText;
     });
-
-    $rootScope.bodylayout = 'create-layout';
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
@@ -321,16 +363,17 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         setActiveSlide($scope.buildQuestionsObj.maxCount());
         angular.element('.apply-questions-container').find('.flip:last-child').removeClass('slideactive');
         angular.element('.navigating_blocks').find('md-card:last-child').removeClass('slideactive');
-        //$('.navigating_blocks md-card').outerWidth(true);
 
+        var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
         if ($('.navigating_blocks md-card').length>4){
             $(".navigating_blocks").animate({
-                marginLeft: '-=54px'
+                marginLeft: '-='+slidewidth+'px'
             }, 500);
         }
 
         $timeout(function () {
             angular.element('.apply-questions-container').find('.flip').eq($scope.buildQuestionsObj.maxCount()).find('.type button').trigger('click');
+            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
         }, 0);
     };
 
@@ -343,6 +386,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $scope.buildQuestionsObj.questions[index] = sampleQuestion[qtype];
         }
         $scope.buildQuestionsObj.questions[index].id = id
+        $scope.buildQuestionsObj.questions[index].draggable = false;
         $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
         $scope.buildQuestionsObj.questions[index].questiontype = type[0];
@@ -403,6 +447,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var _currentSlide = $(event.target).closest('.flip').index();
         $scope.buildQuestionsObj.questions.splice(_currentSlide-1, 1);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+
+        $timeout(function () {
+            var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
+            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
+        }, 0);
     };
 
     //copy slide
@@ -413,6 +462,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions[$scope.buildQuestionsObj.maxCount() - 1].id = $scope.buildQuestionsObj.maxCount();
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
         resetSlide();
+
+        $timeout(function () {
+            var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
+            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
+        }, 0);
     };
 
     //show slide
@@ -600,15 +654,56 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var otherIndex = $scope.buildQuestionsObj.questions.indexOf(obj);
         $scope.buildQuestionsObj.questions[index] = obj;
         $scope.buildQuestionsObj.questions[otherIndex] = otherObj;
+
+        //set draggable false
+        $scope.buildQuestionsObj.questions[index].draggable = false;
+        $scope.buildQuestionsObj.questions[otherIndex].draggable = false;
+
+        //set element id
+        $scope.buildQuestionsObj.questions[otherIndex].id = otherIndex + 1
+        $scope.buildQuestionsObj.questions[index].id = index + 1;
+
+        resetSlide();
+        setActiveSlide(index + 1);
+
+        //set scroll back
+        angular.element('.navigation-slide').css('overflow-x', 'scroll');
+    }
+
+    //ng-drag-move=
+    $scope.dragContainer = function (ev) {
+        var scrollPostion = $('.navigation-slide').scrollLeft();
+        if (ev.tx > 0) {
+            $('.navigation-slide').scrollLeft(scrollPostion + 1);
+        }
+        else {
+            $('.navigation-slide').scrollLeft(scrollPostion - 1);
+        }
     }
     //draggable
 
-    $scope.itemOnLongPress = function (index) {
-        angular.element('.navigating_blocks md-card').eq(index + 1).attr('ng-prevent-drag', false).attr('draggable',true);
+    $scope.itemOnLongPress = function (event, question) {
+        question.draggable = true;
+        angular.element('.navigation-slide').css('overflow-x','hidden')
+    }
+
+    $scope.onSwipeLeft = function () {
+        var index = angular.element('.apply-questions-container').find('.flip.slideactive').index();
+        var containerLength = angular.element('.apply-questions-container').find('.flip').length-1;
+        index  = index == containerLength ? index : index + 1;
+        resetSlide();
+        setActiveSlide(index);
+    }
+
+    $scope.onSwipeRight = function () {
+        var index = angular.element('.apply-questions-container').find('.flip.slideactive').index();
+        index = index == 0 ? index : index - 1;
+        resetSlide();
+        setActiveSlide(index);
     }
 });
 
-myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope) {
+myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller) {
 
     $rootScope.bodylayout = 'cover-layout';
 
@@ -622,8 +717,24 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope)
         $scope.coverdata = data;
     });
 
-    $scope.gotoExperience = function (url) {
-        window.location = url;
+    angular.extend(this, $controller('tabCtrl', { $scope: $scope }));
+    //extend the scope
+    var superclass = angular.extend({}, $scope);
+
+
+
+    $scope.gotoExperience = function (url, event) {
+        if ($(event.target).closest('.create-tabs').length > 0) {
+            //var ngInclude = $(event.target).closest('.cover-page').parent();
+            //ngInclude.attr('src', '../partials/experience.html');
+
+            if (superclass.gotoExperience) {
+                superclass.gotoExperience();
+            }
+        }
+        else {
+            window.location = url;
+        }
     }
 });
 
@@ -635,36 +746,3 @@ myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
         $scope.status = response.statusText;
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-//$(document).ready(function (e) {
-//    $('.navigating_blocks').mousedown(function (e) {
-//        var cursorX = e.pageX;
-//        $('#mouseX').text('mouse x: ' + cursorX);
-//    });
-//    $('.navigating_blocks').draggable(
-//    {
-//        drag: function () {
-//            var offset = $(this).offset();
-//            var xPos = offset.left;
-//            $('#posX').text('drag x: ' + xPos);
-//        }
-//    });
-
-//});
-
-//$(".navigating_blocks").swipe(function (direction, offset) {
-//    console.log("Moving", direction.x, "and", direction.y);
-//    console.log("Touch moved by", offset.x, "horizontally and", offset.y, "vertically");
-//});

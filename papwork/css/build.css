@@ -57,9 +57,11 @@
     height: 73vh;
 }
 .navigation-slide .cover-page, .navigation-slide .app-submit-page{
-    height: 10vh;
+    height: 9.5vh;
     position: relative;
     display: inherit;
+    /* padding: 1px; */
+    overflow: hidden;
 }
 .navigation-slide .cover-container, .navigation-slide .default-container {
     height: 48vh;
@@ -68,6 +70,7 @@
     width: 495%;
     overflow: hidden;
     position:absolute;
+    border: 1px solid #000;
 }
 .navigation-slide .cover-page img{
     width:100%;
@@ -139,7 +142,7 @@ settings md-pagination-wrapper:after {
     padding-top: 4px;
     z-index: 999;
     background: #fff;
-    overflow-x:  scroll;
+    /*overflow-x:  scroll;*/
 }
 .navigation-slide > md-card {
     margin-right: 1px;
@@ -147,7 +150,7 @@ settings md-pagination-wrapper:after {
 }
 .navigating_blocks{
     height:13vh;
-    width:30000px;
+    /*width:30000px;*/
     /*overscroll-behavior-x: inherit;*/
     margin: 0!important;
 }
@@ -595,20 +598,20 @@ label + md-input-container label{
 {
     transform-origin: 27%;
     transform: scale(.2);
+    opacity:1!important;
 }
 .apply-questions-container .inputContainer .option {
     position:relative;
     display: inline-block;
     width: 100%;
+    padding-top: 5px;
 }
 .apply-questions-container .inputContainer .option > [ng-click] {
     position:absolute;
     right:0;
-    bottom:0;
-}
-.apply-questions-container .inputContainer md-radio-group.option > [ng-click] {
     bottom: 16px!important;
 }
+
 @media screen and (min-width:1024px) {
     .mobile-project-title{display:none}
     .apply-questions-container flip {
@@ -753,22 +756,51 @@ label + md-input-container label{
 }
 
 .navigating_blocks md-card{
-    -moz-user-select: none;
+   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
 }
 
 @media screen and (max-width:1023px) {
-.publish-panel + ng-include question.active{
-    top:8vh;
+    .publish-panel + ng-include question.active{
+        top:8vh;
+    }
+    .publish-panel + ng-include question.question-slide{
+        height:60vh;
+    }
+    .publish-panel + ng-include question.next_active {
+        top: 70vh;
+    }
+    .publish-panel + ng-include question.next_next_active {
+        top: 75vh;
+    }
+    flip-panel .inputContainer {
+        max-height: 135px;
+        overflow: hidden;
+        overflow-y: scroll;
+        height: auto;
+    }
+    .navigation-slide .inputContainer {
+        height: auto;
+        max-height: 70px;
+        overflow: hidden;
+    }
 }
-.publish-panel + ng-include question.question-slide{
-    height:60vh;
+
+.drag-over{
+    transform:scale(1.2);
 }
-.publish-panel + ng-include question.next_active {
-    top: 70vh;
-}
-.publish-panel + ng-include question.next_next_active {
-    top: 75vh;
-}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
 }

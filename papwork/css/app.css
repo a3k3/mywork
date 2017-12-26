@@ -18,6 +18,9 @@ body *{
 form {
     overflow:hidden;
 }
+.action-word {
+    color: rgb(229,115,115);
+}
 /***Font Color****/
 .font-color-aaa {
     color:#aaaaaa;
@@ -457,9 +460,9 @@ md-pagination-wrapper {
 .experience-layout question .category {
     opacity: 0;
 }
-.create-layout question.active .category {margin-top: 50px;opacity: 1;-webkit-animation: .8s ease 0s normal forwards 1 fadein;animation: .8s ease 0s normal forwards 1 fadein;}
+.create-tabs question.active .category {margin-top: 50px;opacity: 1;-webkit-animation: .8s ease 0s normal forwards 1 fadein;animation: .8s ease 0s normal forwards 1 fadein;}
 
-.create-layout question .category {
+.create-tabs question .category {
     opacity: 0;
 }
 
@@ -518,8 +521,6 @@ md-pagination-wrapper {
     /* cover -------------------------- */
     .cover-layout ng-view.ng-enter         { animation: rotateOutNewspaper 0.5s both ease-in; }
     .experience-layout ng-view.ng-leave         {transform-origin:0 0; animation: slideOutUp 0.5s both ease-in; }
-
- 
 
 /* ANIMATIONS
 ============================================================================= */

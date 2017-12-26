@@ -3,10 +3,10 @@
         <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{questionsObj.percentComplete()}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount()}}"></md-progress-linear>
         <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{questionsObj.activeNow}} out of {{questionsObj.maxCount()}}</div>
     </div>
-    <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">
+    <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center noPreventDefault" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">
     </question>
 
-    <div class="nextprev" ng-class="{last: questionsObj.activeNow == questionsObj.maxCount()}">
+    <div class="nextprev noPreventDefault" ng-class="{last: questionsObj.activeNow == questionsObj.maxCount()}">
         <md-button class="md-icon-button md-warn md-hue-1 prev" aria-label="Prev" ng-click="questionsObj.prev()" ng-disabled="questionsObj.activeNow == 1">
             <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_keyboard_arrow_up_black_24px.svg"></md-icon>
         </md-button>
@@ -14,5 +14,5 @@
             <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_keyboard_arrow_down_black_24px.svg"></md-icon>
         </md-button>
     </div>
-    <md-button class="submit md-raised md-primary md-hue-2" ng-if="questionsObj.activeNow == questionsObj.maxCount()" ng-click="submit()" >Submit</md-button>
+    <md-button class="submit md-raised md-primary md-hue-1 noPreventDefault" ng-if="questionsObj.activeNow == questionsObj.maxCount()" ng-click="submit()" >Submit</md-button>
 </form>

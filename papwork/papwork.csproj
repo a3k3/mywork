@@ -209,6 +209,7 @@
     <Content Include="partials\build_input_templates\radio_size.html" />
     <Content Include="partials\build_input_templates\rating_star.html" />
     <Content Include="partials\build_input_templates\select.html" />
+    <Content Include="partials\build_input_templates\statement.html" />
     <Content Include="partials\build_input_templates\success.html" />
     <Content Include="partials\build_input_templates\text.html" />
     <Content Include="partials\build_input_templates\textarea.html" />

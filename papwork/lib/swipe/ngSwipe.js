@@ -1,2 +1,234 @@
-﻿/*! angular-swipe.min.js 13-03-2017 */
-!function (a, b, c) { "use strict"; function d(a, c, d, f) { e.directive(a, ["$parse", "swipe", function (e, g) { var h = 75, i = .3, j = 30; return function (k, l, m) { function n(a, b) { do { var c = a.getAttribute("class"); if (c && null !== c.match(b)) return !0; a = a.parentElement } while (null !== a); return !1 } function o(a) { if (!p || !q) return !1; var b = (a.y - p.y) * c, e = (a.x - p.x) * c; return null === d ? Math.abs(b) < j && Math.abs(e) < j : d === !1 ? Math.abs(b) < h && e > 0 && e > j && Math.abs(b) / e < i : Math.abs(e) < h && b > 0 && b > j && Math.abs(e) / b < i } var p, q, r = e(m[a]), s = ["touch"]; b.isDefined(m.ngSwipeDisableMouse) || s.push("mouse"), g.bind(l, { start: function (a, b) { d && !n(b.target, "noPreventDefault") && b.preventDefault(), p = a, q = !n(b.target, "noStartDrag") }, cancel: function () { q = !1 }, end: function (a, b) { o(a) && k.$apply(function () { l.triggerHandler(f), r(k, { $event: b }) }) } }, s) } }]) } var e = b.module("swipe", []); e.factory("swipe", [function () { function a(a) { var b = a.originalEvent || a, c = b.touches && b.touches.length ? b.touches : [b], d = b.changedTouches && b.changedTouches[0] || c[0]; return { x: d.clientX, y: d.clientY } } function c(a, c) { var e = []; return b.forEach(a, function (a) { var b = d[a][c]; b && e.push(b) }), e.join(" ") } var d = { mouse: { start: "mousedown", move: "mousemove", end: "mouseup" }, touch: { start: "touchstart", move: "touchmove", end: "touchend", cancel: "touchcancel" } }; return { bind: function (b, d, e) { var f, g, h, i, j = !1, k = !1, l = !0; e = e || ["mouse", "touch"], b.on(c(e, "start"), function (b) { h = a(b), j = !0, f = 0, g = 0, k = !1, l = !0, i = h, d.start && d.start(h, b) }), b.on(c(e, "cancel"), function (a) { j = !1, d.cancel && d.cancel(a) }), b.on(c(e, "move"), function (b) { if (j && h) { var c = a(b); if (f += Math.abs(c.x - i.x), g += Math.abs(c.y - i.y), i = c, !(f < 40 && g < 40)) { if (!k) { var e, m, n; e = Math.abs(c.x - h.x), m = Math.abs(c.y - h.y), n = m / e, n < .3 ? (b.preventDefault(), l = !1) : l = !0, k = !0 } b.isVertical = l, d.move && d.move(c, b) } } }), b.on(c(e, "end"), function (b) { j && (b.isVertical = l, j = !1, d.end && d.end(a(b), b)) }) } } }]); try { b.module("ngTouch") } catch (a) { d("ngSwipeLeft", -1, !1, "swipeleft"), d("ngSwipeRight", 1, !1, "swiperight") } d("ngSwipeUp", -1, !0, "swipeup"), d("ngSwipeDown", 1, !0, "swipedown"), d("ngTap", 1, null, "tap") }(window, window.angular);
+﻿(function (window, angular, undefined) {
+    'use strict';
+
+    /* global -ngSwipe */
+
+    var ngSwipe = angular.module('swipe', []);
+
+    ngSwipe.factory('swipe', [function () {
+
+        var MOVE_BUFFER_RADIUS = 40;
+        var MAX_RATIO = 0.3;
+
+        var POINTER_EVENTS = {
+            'mouse': {
+                start: 'mousedown',
+                move: 'mousemove',
+                end: 'mouseup'
+            },
+            'touch': {
+                start: 'touchstart',
+                move: 'touchmove',
+                end: 'touchend',
+                cancel: 'touchcancel'
+            }
+        };
+
+        function getCoordinates(event) {
+            var originalEvent = event.originalEvent || event;
+            var touches = originalEvent.touches && originalEvent.touches.length ? originalEvent.touches : [originalEvent];
+            var e = (originalEvent.changedTouches && originalEvent.changedTouches[0]) || touches[0];
+
+            return {
+                x: e.clientX,
+                y: e.clientY
+            };
+        }
+
+        function getEvents(pointerTypes, eventType) {
+            var res = [];
+            angular.forEach(pointerTypes, function (pointerType) {
+                var eventName = POINTER_EVENTS[pointerType][eventType];
+                if (eventName) {
+                    res.push(eventName);
+                }
+            });
+            return res.join(' ');
+        }
+
+        return {
+
+            bind: function (element, eventHandlers, pointerTypes) {
+
+                // Absolute total movement
+                var totalX, totalY;
+                // Coordinates of the start position.
+                var startCoords;
+                var lastPos;
+                // Whether a swipe is active.
+                var active = false;
+                // Decide where we are going
+                var isDecided = false;
+                var isVertical = true;
+
+                pointerTypes = pointerTypes || ['mouse', 'touch'];
+
+                element.on(getEvents(pointerTypes, 'start'), function (event) {
+                    startCoords = getCoordinates(event);
+                    active = true;
+                    totalX = 0;
+                    totalY = 0;
+                    isDecided = false;
+                    isVertical = true;
+                    lastPos = startCoords;
+                    eventHandlers['start'] && eventHandlers['start'](startCoords, event);
+                });
+
+                element.on(getEvents(pointerTypes, 'cancel'), function (event) {
+                    active = false;
+                    eventHandlers['cancel'] && eventHandlers['cancel'](event);
+                });
+
+                element.on(getEvents(pointerTypes, 'move'), function (event) {
+
+                    if (!active) {
+                        return;
+                    }
+
+                    if (!startCoords) {
+                        return;
+                    }
+
+                    var coords = getCoordinates(event);
+
+                    totalX += Math.abs(coords.x - lastPos.x);
+                    totalY += Math.abs(coords.y - lastPos.y);
+
+                    lastPos = coords;
+
+                    if (totalX < MOVE_BUFFER_RADIUS && totalY < MOVE_BUFFER_RADIUS) {
+                        return;
+                    } else {
+                        if (!isDecided) {
+
+                            var deltaX, deltaY, ratio;
+
+                            deltaX = Math.abs(coords.x - startCoords.x);
+                            deltaY = Math.abs(coords.y - startCoords.y);
+
+                            ratio = deltaY / deltaX;
+
+                            if (ratio < MAX_RATIO) {
+                                event.preventDefault();
+                                isVertical = false;
+                            } else {
+                                isVertical = true;
+                            }
+
+                            isDecided = true;
+                        }
+                    }
+
+                    event.isVertical = isVertical;
+                    eventHandlers['move'] && eventHandlers['move'](coords, event);
+                });
+
+                element.on(getEvents(pointerTypes, 'end'), function (event) {
+                    if (!active) {
+                        return;
+                    }
+                    event.isVertical = isVertical;
+                    active = false;
+                    eventHandlers['end'] && eventHandlers['end'](getCoordinates(event), event);
+                });
+            }
+        };
+    }]);
+
+    function makeSwipeDirective(directiveName, direction, axis, eventName) {
+        ngSwipe.directive(directiveName, ['$parse', 'swipe', function ($parse, swipe) {
+
+            var MAX_OTHER_AXIS_DISTANCE = 75;
+            var MAX_RATIO = 0.3;
+            var MIN_DISTANCE = 30;
+
+            return function (scope, element, attr) {
+
+                var swipeHandler = $parse(attr[directiveName]);
+
+                var startCoords, valid;
+
+                function checkOverride(element, clazz) {
+                    do {
+                        var className = element.getAttribute('class');
+                        if (className && className.match(clazz) !== null) {
+                            return true;
+                        }
+                        element = element.parentElement;
+                    } while (element !== null);
+                    return false;
+                }
+
+                function validSwipe(coords) {
+
+                    if (!startCoords || !valid) {
+                        return false;
+                    }
+
+                    var deltaY = (coords.y - startCoords.y) * direction;
+                    var deltaX = (coords.x - startCoords.x) * direction;
+
+                    if (axis === null) { // tap
+                        return Math.abs(deltaY) < MIN_DISTANCE &&
+                               Math.abs(deltaX) < MIN_DISTANCE;
+                    }
+                    else if (axis === false) {  // horizontal swipe
+                        return Math.abs(deltaY) < MAX_OTHER_AXIS_DISTANCE &&
+                          deltaX > 0 &&
+                          deltaX > MIN_DISTANCE &&
+                          Math.abs(deltaY) / deltaX < MAX_RATIO;
+                    }
+                    else {  // vertical swipe
+                        return Math.abs(deltaX) < MAX_OTHER_AXIS_DISTANCE &&
+                          deltaY > 0 &&
+                          deltaY > MIN_DISTANCE &&
+                          Math.abs(deltaX) / deltaY < MAX_RATIO;
+                    }
+                }
+
+                var pointerTypes = ['touch'];
+
+                if (!angular.isDefined(attr['ngSwipeDisableMouse'])) {
+                    pointerTypes.push('mouse');
+                }
+
+                swipe.bind(element, {
+                    'start': function (coords, event) {
+                        if (axis && !checkOverride(event.target, 'noPreventDefault')) {
+                            event.preventDefault();
+                        }
+                        startCoords = coords;
+                        valid = !checkOverride(event.target, 'noStartDrag');
+                    },
+                    'cancel': function () {
+                        valid = false;
+                    },
+                    'end': function (coords, event) {
+                        if (validSwipe(coords)) {
+                            scope.$apply(function () {
+                                element.triggerHandler(eventName);
+                                swipeHandler(scope, { $event: event });
+                            });
+                        }
+                    }
+                }, pointerTypes);
+            };
+        }]);
+    }
+
+    // avoid conflicts with ngTouch module
+
+    try {
+        angular.module('ngTouch');
+    } catch (err) {
+        makeSwipeDirective('ngSwipeLeft', -1, false, 'swipeleft');
+        makeSwipeDirective('ngSwipeRight', 1, false, 'swiperight');
+    }
+
+    // left is negative x-coordinate, right is positive
+
+    makeSwipeDirective('ngSwipeUp', -1, true, 'swipeup');
+    makeSwipeDirective('ngSwipeDown', 1, true, 'swipedown');
+
+    makeSwipeDirective('ngTap', 1, null, 'tap');
+})(window, window.angular);

@@ -200,20 +200,37 @@ myapp.directive('ngFiles', ['$parse', function ($parse) {
     }
 }]);
 
-myapp.directive('onLongPress', function ($timeout) {
+myapp.directive('onLongPress', function ($timeout, $parse) {
+
     return {
         restrict: 'A',
-        link: function (scope, elem, attrs) {
-            var timeoutHandler;
-
-            elem.bind('touchstart', function () {
-                timeoutHandler = $timeout(function () {
-                    scope.$eval(attrs.onLongPress);
+        link: function ($scope, $elm, $attrs) {
+            $elm.bind('touchstart', function (evt) {
+                // Locally scoped variable that will keep track of the long press
+                $scope.longPress = true;
+                var functionHandler = $parse($attrs.onLongPress);
+                // We'll set a timeout for 600 ms for a long press
+                $timeout(function () {
+                    if ($scope.longPress) {
+                        // If the touchend event hasn't fired,
+                        // apply the function given in on the element's on-long-press attribute
+                        $scope.$apply(function () {
+                            functionHandler($scope, { $event: evt });
+                        });
+                    }
                 }, 600);
             });
 
-            elem.bind('touchend', function () {
-                $timeout.cancel(timeoutHandler);
+            $elm.bind('touchend', function (evt) {
+                // Prevent the onLongPress event from firing
+                $scope.longPress = false;
+                var functionHandler = $parse($attrs.onTouchEnd);
+                // If there is an on-touch-end function attached to this element, apply it
+                if ($attrs.onTouchEnd) {
+                    $scope.$apply(function () {
+                        functionHandler($scope, { $event: evt });
+                    });
+                }
             });
         }
     };
