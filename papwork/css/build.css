@@ -300,7 +300,7 @@ md-dialog .type-layout md-icon{
 
 .field-type .content {
     border-top: 1px solid #a3a3a3;
-    height: calc(74*3px);
+    height: calc(223px);
     overflow: hidden;
     overflow-y: scroll
 }
@@ -314,7 +314,7 @@ md-dialog .type-layout md-icon{
 md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
     background-color: transparent;
 }
-.flipBasic.flipHideFront .fcontrol, .flipBasic.flipHideFront .text_placeholder {
+.flipBasic.flipHideFront .fcontrol, .flipBasic.flipHideFront .text_placeholder, .flipBasic.flipHideFront .questionPanel {
     display: none;
     -webkit-transition: display ease-in 2s; 
 }
@@ -753,6 +753,11 @@ label + md-input-container label{
 @media all and (max-width:1150px){
     .more-options li span{display:none}
     .more-options ul{margin-left:13%}
+}
+
+.upload-options {
+    height: 164px;
+    overflow-y: scroll;
 }
 
 .navigating_blocks md-card{

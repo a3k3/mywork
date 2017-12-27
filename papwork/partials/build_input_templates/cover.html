@@ -6,10 +6,10 @@
                     <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_file_upload_black_24px.svg"></md-icon>
                 </div>
             </div>
-            <input type="file" id="file1" name="file" ng-files="getTheFiles($files)" style="display:none;"/>
+            <input type="file" id="file1" name="file" ng-files="getTheFiles($files,buildcoverdata.default)" style="display:none;"/>
         </div>
         <div class="content-section">
-            <h3 contenteditable ng-model="buildcoverdata.default.text">{{buildcoverdata.default.text}}</h3>
+            <h3 contenteditable ng-model="buildcoverdata.default.text" ng-mouseup="highlightSelection()">{{buildcoverdata.default.text}}</h3>
         </div>
         <md-button class="start md-raised md-primary md-hue-1"><span contenteditable ng-model="buildcoverdata.default.start.text">{{buildcoverdata.default.start.text}}</span></md-button>
     </div>

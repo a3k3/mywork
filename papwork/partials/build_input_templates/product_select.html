@@ -1,0 +1,10 @@
+﻿<div class="image-product-type">
+    <div class="top-row">
+        <div class="products" ng-repeat="option in question.options">
+            <img src="{{option.image_src}}">
+            <img class="selected-icon" src="../../asset/img/checked.jpg">
+            <p>{{option.name}}</p>
+            <input class="checkbox" type="checkbox" value="{{option.value}}" ng-hide="true" />
+        </div>
+    </div>
+</div>

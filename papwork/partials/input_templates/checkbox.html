@@ -1,3 +1,13 @@
-﻿<div class="checkbox-block">
+﻿<div class="checkbox-block" ng-if="!question.validations.enableMedia.condition">
     <md-checkbox class="green mdcheckbox" ng-click="checkboxSelection($index, $event, question.options)" ng-repeat="option in question.options" aria-label="{{option.value}}" name="{{option.value}}" value="{{option.value}}">{{option.value}}</md-checkbox>
+</div>
+<div class="image-product-type" ng-if="question.validations.enableMedia.condition">
+    <div class="top-row">
+        <div class="products" ng-repeat="option in question.options" ng-click="selectProduct($index,$event,question.options)">
+            <img src="{{option.media_src}}">
+            <img class="selected-icon" src="../../asset/img/checked.jpg">
+            <p>{{option.name}}</p>
+            <input class="checkbox" type="checkbox" value="{{option.value}}" ng-hide="true" />
+        </div>
+    </div>
 </div>

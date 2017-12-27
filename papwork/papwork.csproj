@@ -190,6 +190,7 @@
     <Content Include="css\input.css" />
     <Content Include="js\mdCarousel.js" />
     <Content Include="js\swipe.js" />
+    <Content Include="lib\contextmenu\contextMenu.js" />
     <Content Include="lib\draggable\ngDraggable.js" />
     <Content Include="lib\swipe\ngSwipe.js" />
     <Content Include="lib\tool\demo.css" />
@@ -205,6 +206,7 @@
     <Content Include="partials\build_input_templates\cover.html" />
     <Content Include="partials\build_input_templates\email.html" />
     <Content Include="partials\build_input_templates\number.html" />
+    <Content Include="partials\build_input_templates\product_select.html" />
     <Content Include="partials\build_input_templates\radio.html" />
     <Content Include="partials\build_input_templates\radio_size.html" />
     <Content Include="partials\build_input_templates\rating_star.html" />

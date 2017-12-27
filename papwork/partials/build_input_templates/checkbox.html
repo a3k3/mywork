@@ -13,9 +13,19 @@
         </div>
     </div>
 </div>-->
-<div class="option checkbox-block">
+<div class="option checkbox-block" ng-if="!question.validations.enableMedia.condition">
     <md-checkbox class="green" ng-repeat="option in question.options"><span contenteditable ng-model="option.value">{{option.value}}</span></md-checkbox>
     <div ng-click="addOption($event)">
         <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+    </div>
+</div>
+<div class="image-product-type"  ng-if="question.validations.enableMedia.condition">
+    <div class="top-row">
+        <div class="products" ng-repeat="option in question.options">
+            <img src="{{option.media_src}}">
+            <img class="selected-icon" src="../../asset/img/checked.jpg">
+            <p>{{option.name}}</p>
+            <input class="checkbox" type="checkbox" value="{{option.value}}" ng-hide="true" />
+        </div>
     </div>
 </div>
