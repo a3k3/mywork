@@ -108,12 +108,17 @@ function highlightRange(range) {
         range.surroundContents(newNode);
     }
 }
+function disableRange(range) {
+    if (range.startOffset < range.endOffset) {
+        console.log("hiiii");
+    }
+}
 
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', []);
 
-function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, $rootScope) {
+function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -298,12 +303,51 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         }
     });
 
+    $scope.getTheFiles = function ($files, element) {
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+            $scope.$apply(function () {
+                element.response = loadEvent.target.result;
+                var data = loadEvent.target.result.substr(loadEvent.target.result.indexOf(",") + 1, loadEvent.target.result.length);
+                $scope.uploadFiles(data, function (output) {
+                    element.response = output;
+                });
+            });
+        }
+        reader.readAsDataURL($files[0]);
+    };
+
+    // NOW UPLOAD THE FILES.
+    $scope.uploadFiles = function (data, handleData) {
+        var request = {
+            method: 'POST',
+            url: 'https://api.imgur.com/3/image',
+            data: {
+                'image': data,
+                'type': 'base64'
+            },
+            headers: {
+                'Authorization': 'Client-ID ad8dc2dd252ac7c'
+            }
+        };
+
+        // SEND THE FILES.
+        $http(request)
+            .success(function (response) {
+                handleData(response.data.link);
+            })
+            .error(function (error) {
+                console.log(error);
+            });
+
+    }
+
     $scope.submit = function () {
         console.log($scope.questionsObj.questions);
     }
 }
 
-myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location', '$document', '$rootScope', questionsCtrl])
+myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location', '$document', '$rootScope', '$http', questionsCtrl])
 
 
 function MyCtrl2() {
@@ -458,7 +502,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var id = $scope.buildQuestionsObj.questions[index].id;
         $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
         if (qtype != null) {
-            $scope.buildQuestionsObj.questions[index] = sampleQuestion[qtype];
+            $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion[qtype]);
         }
         $scope.buildQuestionsObj.questions[index].id = id
         $scope.buildQuestionsObj.questions[index].draggable = false;
@@ -610,7 +654,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             },
             controller: DialogController,
             templateUrl: '../partials/questionType.tmpl.html',
-            parent: angular.element(document.body),
+            parent: $(ev.target).closest('.apply-questions-container'),
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
@@ -699,7 +743,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 element.media_src = loadEvent.target.result;
                 var data = loadEvent.target.result.substr(loadEvent.target.result.indexOf(",") + 1, loadEvent.target.result.length);
                 $scope.uploadFiles(data, function (output) {
-                    console.log(output);
                     element.media_src = output;
                 });
             });
@@ -786,12 +829,34 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         setActiveSlide(index);
     }
 
-    $scope.highlightSelection = function() {
-        var userSelection = window.getSelection().getRangeAt(0);
-        var safeRanges = getSafeRanges(userSelection);
+    $scope.userSelection = "";
+
+    $scope.highlightSelection = function(event) {
+        $scope.userSelection = window.getSelection().getRangeAt(0);
+        if ($scope.userSelection.startOffset < $scope.userSelection.endOffset) {
+            angular.element('ul.tools').css({
+                'left': event.pageX + 5,
+                'top': event.pageY - 100
+            }).fadeIn(200);
+        } else {
+            angular.element('ul.tools').fadeOut(200);
+        }
+    }
+
+    $scope.addActionWord = function () {
+        var safeRanges = getSafeRanges($scope.userSelection);
         for (var i = 0; i < safeRanges.length; i++) {
             highlightRange(safeRanges[i]);
         }
+        angular.element('ul.tools').fadeOut(200);
+    }
+
+    $scope.removeActionWord = function () {
+        var safeRanges = getSafeRanges($scope.userSelection);
+        for (var i = 0; i < safeRanges.length; i++) {
+            disableRange(safeRanges[i]);
+        }
+        angular.element('ul.tools').fadeOut(200);
     }
 });
 

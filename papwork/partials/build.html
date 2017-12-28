@@ -118,7 +118,7 @@
                             <div class="fcontrol" flex="50">
                                 <div>Must Answer</div>
                                 <div>
-                                    <md-switch ng-model="question.validations.mustanswer.condition" aria-label="Must Answer"></md-switch>
+                                    <md-switch class="md-primary" ng-model="question.validations.mustanswer.condition" aria-label="Must Answer"></md-switch>
                                 </div>
                             </div>
                             <div flex="50">
@@ -190,6 +190,10 @@
                     </div>
                 </flip-panel>
             </flip>
+            <ul class="tools">
+                <li ng-click="addActionWord()">Add Action word</li>
+                <!--<li ng-click="removeActionWord()">Remove Action word</li>-->
+            </ul>
         </div>
         <div class="navigation-slide bottom_fixed">
             <md-card class="add-slide" ng-click="addSlide()">

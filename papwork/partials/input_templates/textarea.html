@@ -1,4 +1,14 @@
-﻿<md-input-container>
-    <label>{{question.placeholder}}</label>
-    <textarea name="textarea" ng-model="question.response" rows="4" ng-required="{{question.validations.mustanswer.condition}}" md-maxlength="{{question.validations.maxlength.condition}}"></textarea>
-</md-input-container>
+﻿<ng-form name="textAreaForm">
+    <md-input-container>
+        <label>{{question.placeholder}}</label>
+        <textarea name="textarea" ng-model="question.response" rows="4" ng-required="{{question.validations.mustanswer.condition}}" md-maxlength="{{question.validations.maxlength.condition}}"></textarea>
+        <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!textAreaForm.textarea.$valid">
+            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
+        </md-button>
+        <div ng-messages="textAreaForm.textarea.$error" ng-show="textAreaForm.textarea.$dirty">
+            <div ng-message="required">{{question.validations.mustanswer.text}}</div>
+            <div ng-message="md-maxlength">{{question.validations.maxlength.text}}</div>
+            <div ng-message="minlength">{{question.validations.minlength.text}}</div>
+        </div>
+    </md-input-container>
+</ng-form>

@@ -11,7 +11,7 @@
     "hint": "Type your name",
     "placeholder": "Enter your name",
     "validations": {
-      "required": {
+      "mustanswer": {
         "condition": true,
         "text": "Thats required!"
       },
@@ -37,7 +37,7 @@
     "hint": "Type your mobile no",
     "placeholder": "+91 7893459013",
     "validations": {
-      "required": {
+      "mustanswer": {
         "condition": true,
         "text": "Thats required!"
       },
@@ -63,7 +63,7 @@
     "hint": "Upload your adhar card",
     "placeholder": "Upload",
     "validations": {
-      "required": {
+      "mustanswer": {
         "condition": true,
         "text": "Thats required!"
       }
@@ -81,7 +81,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": true,
+      "mustanswer": true,
       "maxCount": 5
     },
      "options": [
@@ -124,7 +124,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": true,
+      "mustanswer": true,
       "maxCount": 5
     },
     "options": [
@@ -167,7 +167,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": true,
+      "mustanswer": true,
       "maxCount": 5
     },
     "options": [
@@ -205,7 +205,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": "true",
+      "mustanswer": "true",
       "maxCount": 5
     },
     "options": [
@@ -251,7 +251,7 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "required": "true",
+      "mustanswer": "true",
       "maxCount": 5
     },
     "options": [
@@ -294,7 +294,7 @@
     "hint": "Select appropriate size",
     "placeholder": "",
     "validations": {
-      "required": "true",
+      "mustanswer": "true",
       "maxCount": 5
     },
     "options": [
@@ -358,7 +358,7 @@
     "hint": "Select multiple products",
     "placeholder": "",
     "validations": {
-      "required": "true",
+      "mustanswer": "true",
       "maxCount": 5
     },
     "options": [
@@ -396,7 +396,7 @@
     "hint": "If you go on holiday more than once per year you may want to consider a multi trip (annual) travel insurance policy.",
     "placeholder": "Sounds Interesting",
     "validations": {
-      "required": {
+      "mustanswer": {
         "condition": true,
         "text": "Thats required!"
       },

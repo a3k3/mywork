@@ -247,6 +247,8 @@ question.next_active {
 }
 question.next_active .questionPanel h2{
     font-size:14px;
+    height: 30px;
+    overflow: hidden;
 }
 question.next_next_active {
     opacity: 0.5;
@@ -254,6 +256,8 @@ question.next_next_active {
 }
 question.next_next_active .questionPanel h2{
     font-size:12px;
+    height: 30px;
+    overflow: hidden;
 }
 question.active .questionPanel {
     position: relative;

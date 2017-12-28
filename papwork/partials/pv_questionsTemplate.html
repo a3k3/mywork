@@ -11,6 +11,6 @@
         <p class="hint font-color-666 font-size-12">Hint: {{question.hint}}</p>
     </div>
 </div>
-<div id="slide-{{question.id}}" class="questionPanel" data-question-id="{{question.id}}" ng-if="question.answertype == 'statement'">
+<div id="slide-{{question.id}}" class="questionPanel statement" data-question-id="{{question.id}}" ng-if="question.answertype == 'statement'">
     <ng-include src="dynamicTemplateUrl(question)"></ng-include>
 </div>

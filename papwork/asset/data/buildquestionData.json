@@ -62,7 +62,7 @@
   },
   "text": {
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
@@ -87,7 +87,7 @@
   },
   "textarea": {
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
@@ -112,7 +112,7 @@
   },
   "checkbox": {
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
@@ -165,7 +165,7 @@
       }
     ],
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
@@ -184,7 +184,7 @@
   },
   "radio": {
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
@@ -214,7 +214,7 @@
   },
   "radio_size": {
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
@@ -265,7 +265,7 @@
   },
   "statement": {
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
@@ -296,7 +296,7 @@
   },
   "select": {
     "settings": {
-      "required": {
+      "mustanswer": {
         "name": "mustanswer",
         "condition": false,
         "text": "Thats required!"
