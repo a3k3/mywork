@@ -118,7 +118,7 @@ function disableRange(range) {
 
 var myapp = angular.module('experienceApp.controllers', []);
 
-function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http) {
+function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -164,6 +164,8 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         }
         $scope.questionsObj.activeNow = 1;
 
+        $scope.checkIfTimed();
+
         $timeout(function () {
             if (angular.element('.top-row').length > 0) {
                 angular.element('.top-row').css('width', (angular.element('.top-row').find('.products').length * angular.element('.top-row').find('.products').outerWidth(true)) / 2)
@@ -200,6 +202,27 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         if (_active.index() < $scope.questionsObj.maxCount()) {
             _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
             $scope.questionsObj.activeNow++;
+            $scope.checkIfTimed();
+        }
+    }
+
+    $scope.checkIfTimed = function () {
+        var index = $scope.questionsObj.activeNow - 1;
+        var _autocomplete = $scope.questionsObj.questions[index].validations.autocomplete;
+        if (_autocomplete != undefined && _autocomplete.condition) {
+
+            _autocomplete.start = 0;
+            var autocomplete = $interval(function () {
+                _autocomplete.start += 1;
+                if (_autocomplete.start >= 100) {
+                    $scope.questionsObj.next();
+                    $interval.cancel(autocomplete);
+                }
+            }, _autocomplete.time*10);
+
+            //$timeout(function () {
+            //    $scope.questionsObj.next();
+            //}, _autocomplete.time * 1000)
         }
     }
 
@@ -317,29 +340,13 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         reader.readAsDataURL($files[0]);
     };
 
-    // NOW UPLOAD THE FILES.
     $scope.uploadFiles = function (data, handleData) {
-        var request = {
-            method: 'POST',
-            url: 'https://api.imgur.com/3/image',
-            data: {
-                'image': data,
-                'type': 'base64'
-            },
-            headers: {
-                'Authorization': 'Client-ID ad8dc2dd252ac7c'
-            }
-        };
-
-        // SEND THE FILES.
-        $http(request)
-            .success(function (response) {
-                handleData(response.data.link);
-            })
-            .error(function (error) {
-                console.log(error);
-            });
-
+        uploadData.uploadImage(data).success(function (response) {
+            handleData(response.data.link);
+        })
+        .error(function (error) {
+            console.log(error);
+        });
     }
 
     $scope.submit = function () {
@@ -347,7 +354,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
     }
 }
 
-myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location', '$document', '$rootScope', '$http', questionsCtrl])
+myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location', '$document', '$rootScope', '$http', '$interval', questionsCtrl])
 
 
 function MyCtrl2() {
@@ -407,7 +414,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData) {
     var sampleQuestion = {};
 
     getSampleQuestionData.then(function (response) {
@@ -750,29 +757,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         reader.readAsDataURL($files[0]);
     };
 
-    // NOW UPLOAD THE FILES.
+    //UPLOAD THE FILES.
     $scope.uploadFiles = function (data, handleData) {
-        var request = {
-            method: 'POST',
-            url: 'https://api.imgur.com/3/image',
-            data: {
-                'image': data,
-                'type': 'base64'
-            },
-            headers: {
-                'Authorization': 'Client-ID ad8dc2dd252ac7c'
-            }
-        };
-
-        // SEND THE FILES.
-        $http(request)
-            .success(function (response) {
-                handleData(response.data.link);
-            })
-            .error(function (error) {
-                console.log(error);
-            });
-
+        uploadData.uploadImage(data).success(function (response) {
+            handleData(response.data.link);
+        })
+        .error(function (error) {
+            console.log(error);
+        });
     }
 
     //draggable

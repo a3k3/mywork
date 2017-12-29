@@ -48,3 +48,19 @@ myservice.service('getSampleQuestionData', ['$http', function ($http) {
         url: "../asset/data/dummyQuestion.json"
     })
 }]);
+
+myservice.service('uploadData', ['$http', function ($http) {
+    this.uploadImage = function (data) {
+        return $http({
+            method: 'POST',
+            url: 'https://api.imgur.com/3/image',
+            data: {
+                'image': data,
+                'type': 'base64'
+            },
+            headers: {
+                'Authorization': 'Client-ID ad8dc2dd252ac7c'
+            }
+        });
+    }
+}]);

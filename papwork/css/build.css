@@ -835,3 +835,10 @@ ul.tools li:hover{
     color:#fff;
 }
 /*******Context Menu Tool******/
+
+md-progress-circular + .counter{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}

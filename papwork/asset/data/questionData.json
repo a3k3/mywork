@@ -22,6 +22,12 @@
       "minlength": {
         "condition": 0,
         "text": "Thats too short!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": true,
+        "time": 5,
+        "text": "This response is timed."
       }
     }
   },
@@ -48,6 +54,12 @@
       "minlength": {
         "condition": 0,
         "text": "Thats too short!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": true,
+        "time": 10,
+        "text": "This response is timed."
       }
     }
   },
