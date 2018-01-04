@@ -197,6 +197,7 @@
     <Content Include="lib\tool\formbuilder.css" />
     <Content Include="lib\tool\formbuilder.js" />
     <Content Include="lib\skollr\skrollr.js" />
+    <Content Include="lib\webcam\webcam.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

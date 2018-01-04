@@ -1,3 +1,9 @@
 ﻿<div class="interview">
-    <md-button class="start-interview md-raised md-primary md-hue-1 noPreventDefault" ng-click="start()">{{question.placeholder}}</md-button>
+    <!--<webcam channel="myChannel" on-stream="onstream(stream)" on-streaming="onSuccess()" on-error="onError(err)" placeholder="'loader.gif'"></webcam>-->
+    <md-button class="start-interview md-raised md-primary md-hue-1 noPreventDefault" ng-click="startCam()">{{question.placeholder}}</md-button>
+    <!--<button ng-click="stopCam()">STOP CAMERA</button>
+    <button ng-click="record()">Record</button>
+    <button ng-click="stopRecord()">Stop Record</button>
+    <button ng-click="downloadRecord()">Download Record</button>
+    <video id="playRecVid"></video>-->
 </div>

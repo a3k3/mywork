@@ -353,7 +353,30 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         .error(function (error) {
             console.log(error);
         });
+    };
+
+    /*******Web Cam Functions********/
+    $scope.myChannel = {
+        videoHeight: 800,
+        videoWidth: 600,
+        video: null
+    };
+    $scope.stopCam = function () {
+        $rootScope.$broadcast("STOP_WEBCAM");
     }
+    $scope.startCam = function () {
+        $rootScope.$broadcast("START_WEBCAM");
+    }
+    $scope.record = function () {
+        $rootScope.$broadcast("START_RECORD");
+    }
+    $scope.stopRecord = function () {
+        $rootScope.$broadcast("STOP_RECORD");
+    }
+    $scope.downloadRecord = function () {
+        $rootScope.$broadcast("DOWNLOAD_RECORD");
+    }
+    /*******Web Cam Functions********/
 
     $scope.submit = function () {
         console.log($scope.questionsObj.questions);
