@@ -66,7 +66,7 @@ md-pagination-wrapper span {
     height: 73vh;
 }
 .navigation-slide .cover-page, .navigation-slide .app-submit-page{
-    height: 8.6vh;
+    height: 8.85vh;
     position: relative;
     display: inherit;
 }
@@ -165,7 +165,7 @@ settings md-pagination-wrapper:after {
 .navigation-slide md-card{
     width: 45px;
     float: left;
-    height: 9.35vh;
+    height: 9.2vh;
     margin: 3px;
     outline: none;
     position: relative;
@@ -710,7 +710,7 @@ label.text_placeholder {
         z-index: 999;
         float:left!important;
         margin-right:3px;
-        height:76%;
+        height: 68%;
     }
     .create-tabs > md-tabs-wrapper md-pagination-wrapper {
         width: 32%!important;
@@ -818,6 +818,12 @@ label.text_placeholder {
         height: auto;
         max-height: 70px;
         overflow: hidden;
+    }
+    .navigation-slide md-card {
+        height: 8.997vh;
+    }
+    .navigation-slide .cover-page, .navigation-slide .app-submit-page {
+        height: 8.5vh;
     }
 }
 
