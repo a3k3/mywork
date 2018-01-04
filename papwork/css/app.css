@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'Optima';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../asset/font/OPTIMA.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'Optima Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../asset/font/OPTIMA_B.TTF') format('truetype');
+}
 body *{
     font-family: 'Roboto', sans-serif;
 }

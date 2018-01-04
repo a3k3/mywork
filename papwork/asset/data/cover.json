@@ -3,9 +3,6 @@
   "default": {
     "media_src": "../asset/img/coverpage_media.JPG",
     "text": "Hi, Welcome to <span class='action-word'>Papform</span> template. Let us know your experience.",
-    "before_text": "Hi, Welcome to ",
-    "after_text": " template. Let us know your experience with us.",
-    "action_word": "Papform",
     "start": {
       "url": "#/experience",
       "text": "start"
