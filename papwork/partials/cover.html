@@ -4,7 +4,7 @@
             <img class="selected-icon" src="{{coverdata.default.media_src}}"/>
         </div>
         <div class="content-section">
-            <h3>{{coverdata.default.text}}</h3>
+            <h3>{{coverdata.default.before_text}}<span class="pap-text">{{coverdata.default.action_word}}</span>{{coverdata.default.after_text}}</h3>
         </div>
         <md-button class="start md-raised md-primary md-hue-1" ng-if="!coverdata.settings.autocomplete.condition" ng-click="gotoExperience(coverdata.default.start.url, $event)">{{coverdata.default.start.text}}</md-button>
     </div>

@@ -1,7 +1,7 @@
 ﻿/***Input Styles***/
 md-input-container .tick {
     position: absolute;
-    right: -10px;
+    right: -40px;
     top: -6%;
 }
 md-datepicker .md-datepicker-button.md-button.md-icon-button{
@@ -9,7 +9,7 @@ md-datepicker .md-datepicker-button.md-button.md-icon-button{
     margin-left: 0;
 }
 md-datepicker .md-datepicker-input-container {
-    width: 70%;
+    width: 135%;
 }
 md-input-container .md-input-message-animation {
     -webkit-transition: unset;
@@ -33,13 +33,13 @@ md-checkbox.md-checked.green .md-icon {
 
 md-input-container .md-errors-spacer {
     position: absolute;
-    right: 0;
+    right: -25px;
     bottom: -24px;
 }
 md-input-container {
     margin-bottom: 0;
     width: 70%;
-    margin-top: 10px;
+    margin-top: 30px;
     max-width: 200px;
 }
 .inputContainer.calendar_class {
@@ -65,7 +65,7 @@ aps-upload-file.ng-scope {
     right: -35px;
     padding: 0;
     height: 20px;
-    bottom: -13px;
+    bottom: -25px;
     cursor: pointer;
 }
 .md-input-messages-animation.ng-animate.ng-hide-animate {
@@ -75,7 +75,7 @@ aps-upload-file.ng-scope {
 
 button.md-datepicker-button.md-icon-button.md-button {
     position: absolute;
-    right: 0px;
+    right: -90px;
     top: 0px;
 }
 
@@ -177,12 +177,14 @@ fieldset, label {
 .smiley {
     display: inline-block;
     width: 60px;
-    height: 60px;
+    height: 55px;
     margin-right: 5px;
 }
 
 .smiley_content {
     text-align: center;
+    font-family:'Optima';
+    font-weight:bold;
 }
 
 .verypoor {
@@ -245,6 +247,8 @@ fieldset, label {
     position: relative;
     outline: none;
     border-left: 1px solid #eaeaea;
+    background-color:#fcfcfc;
+    /*box-shadow:inset 0 0 20px #eaeaea;*/
 }
 
 .size-chart ul li:first-child {
@@ -263,6 +267,8 @@ fieldset, label {
     margin: 0;
     text-align:center;
     font-weight:bold;
+    font-family:'Optima';
+    font-size:18px;
 }
 
 .size-chart li.active {
@@ -299,7 +305,7 @@ fieldset, label {
 .image-product-type .products {
     float: left;
     position: relative;
-    border: 2px solid transparent;
+    border-left: 1px solid #b2b2b2;
     width: 200px;
     height: 100px;
 }
@@ -310,7 +316,7 @@ fieldset, label {
     text-align: center;
     width: 100%;
     margin-bottom: 8px;
-    background-color: #000;
+    background-color:rgba(0,0,0,0.8);
     opacity: 0.7;
     color: #fff;
 }
