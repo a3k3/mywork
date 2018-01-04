@@ -175,25 +175,25 @@ md-icon svg {
 }
 
 /******Questions Theme*****/
-form.default {
+form.default, .default .flipBasic buildquestion  {
     background-color:#ffffff;
 }
-form.green {
+form.green , .green .flipBasic buildquestion{
     background-color:#91C342;
 }
-form.black {
+form.black, .black .flipBasic buildquestion {
     background-color:#000000;
 }
-form.pink{
+form.pink, .pink .flipBasic buildquestion{
     background-color:#F78C8B;
 }
-form.blue{
+form.blue, .blue .flipBasic buildquestion{
     background-color:#4FE7FF;
 }
-form.yellow{
+form.yellow, .yellow .flipBasic buildquestion{
     background-color:#FCEA1E;
 }
-form.orange{
+form.orange, .orange .flipBasic buildquestion{
     background-color:#F79E00;
 }
 
@@ -442,15 +442,26 @@ md-pagination-wrapper {
     height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 7px solid #7BCD6E;
+    border-top: 7px solid #71cc71;
     content: '';
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+.create-tabs > md-tabs-wrapper .md-tab:after {
+    content: '';
+    background: #eeeeee!important;
+    margin-bottom: 10px;
+    width: 30px;
+    padding: 2px;
+    bottom: 0;
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
 }
 .md-card {
     position:relative;
-    margin:0 8px;
+    margin:0 13px;
 }
 .md-card .progressContainer .status {
     margin-bottom:10px!important;
@@ -471,6 +482,15 @@ md-pagination-wrapper {
     -webkit-transition: opacity .8s ease-out;
     -moz-transition: opacity .8s ease-out;
     transition: opacity .8s ease-out;
+}
+.answerContainer md-progress-circular {
+    width: 40px!important;
+    height: 40px!important;
+}
+
+.answerContainer md-progress-circular svg {
+    width: 40px!important;
+    height: 40px!important;
 }
 .answerContainer md-progress-circular:after {
     content: attr(data-seconds);

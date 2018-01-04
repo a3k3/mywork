@@ -108,6 +108,7 @@ function highlightRange(range) {
         range.surroundContents(newNode);
     }
 }
+
 function disableRange(range) {
     if (range.startOffset < range.endOffset) {
         console.log("hiiii");
@@ -445,6 +446,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.$parent.$watch('projectname', function (value) {
         $scope.buildQuestionsObj.name = value;
+    });
+
+    $scope.$on('questionsFormTheme', function (event, data) {
+        $scope.buildQuestionsObj.theme = data;
     });
 
     getCoverData.then(function (cover) {

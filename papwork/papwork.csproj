@@ -238,6 +238,7 @@
     <Content Include="partials\input_templates\url.html" />
     <Content Include="partials\input_templates\video.html" />
     <Content Include="partials\questionType.tmpl.html" />
+    <Content Include="partials\response.html" />
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />
     <Content Include="partials\settings_templates\enableMedia.html" />
