@@ -201,6 +201,9 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         _active = angular.element(_active);
         if (_active.index() < $scope.questionsObj.maxCount()) {
             _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
+            if ($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.start > 0) {
+                $interval.cancel($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.interval);
+            }
             $scope.questionsObj.activeNow++;
             $scope.checkIfTimed();
         }
@@ -210,13 +213,15 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         var index = $scope.questionsObj.activeNow - 1;
         var _autocomplete = $scope.questionsObj.questions[index].validations.autocomplete;
         if (_autocomplete != undefined && _autocomplete.condition) {
-
+            if (_autocomplete.start > 0) return;
             _autocomplete.start = 0;
-            var autocomplete = $interval(function () {
+            _autocomplete.seconds = '0s';
+            _autocomplete.interval = $interval(function () {
                 _autocomplete.start += 1;
+                _autocomplete.seconds = parseInt(_autocomplete.start / ( 100/_autocomplete.time))+ 's';
                 if (_autocomplete.start >= 100) {
                     $scope.questionsObj.next();
-                    $interval.cancel(autocomplete);
+                    $interval.cancel(_autocomplete.interval);
                 }
             }, _autocomplete.time*10);
 

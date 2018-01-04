@@ -33,15 +33,15 @@
   },
   {
     "id": 2,
-    "question": "What is your phone no.?",
-    "name": "tel",
-    "modelname": "number",
-    "caption": "Will not share your number to anyone",
-    "category": "Category",
-    "answertype": "number",
+    "question": "What are primary tenants of User Experience Design?",
+    "name": "video",
+    "modelname": "video",
+    "caption": "You have 2 mins to record your response",
+    "category": "Video Interview",
+    "answertype": "video",
     "answertheme": "",
     "hint": "Type your mobile no",
-    "placeholder": "+91 7893459013",
+    "placeholder": "Start Interview",
     "validations": {
       "mustanswer": {
         "condition": true,

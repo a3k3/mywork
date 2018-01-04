@@ -468,8 +468,17 @@ md-pagination-wrapper {
 
 .create-tabs question .category {
     opacity: 0;
+    -webkit-transition: opacity .8s ease-out;
+    -moz-transition: opacity .8s ease-out;
+    transition: opacity .8s ease-out;
 }
-
+.answerContainer md-progress-circular:after {
+    content: attr(data-seconds);
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
 
 
 

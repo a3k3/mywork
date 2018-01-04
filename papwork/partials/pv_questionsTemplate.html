@@ -9,7 +9,7 @@
         <ng-include src="dynamicTemplateUrl(question)"></ng-include>
         </div>
         <p class="hint font-color-666 font-size-12">Hint: {{question.hint}}</p>
-        <md-progress-circular md-mode="determinate" value="{{question.validations.autocomplete.start}}" ng-if="question.validations.autocomplete.condition">
+        <md-progress-circular md-mode="determinate" data-seconds="{{question.validations.autocomplete.seconds}}" value="{{question.validations.autocomplete.start}}" ng-if="question.validations.autocomplete.condition">
         </md-progress-circular>
     </div>
 </div>
