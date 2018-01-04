@@ -432,14 +432,14 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
 
     $scope.projectName = "Untitled";
 
-    $scope.previewURL = "../partials/experience.html";
+    $rootScope.previewURL = "../partials/cover.html";
 
     $scope.gotoExperience = function () {
-        $scope.previewURL = "../partials/experience.html";
+        $rootScope.previewURL = "../partials/experience.html";
     }
 
     $scope.getPartial = function () {
-        return $scope.previewURL;
+        return $rootScope.previewURL;
     }
 });
 
@@ -903,12 +903,10 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
     //extend the scope
     var superclass = angular.extend({}, $scope);
 
-
-
     $scope.gotoExperience = function (url, event) {
         if ($(event.target).closest('.create-tabs').length > 0) {
             //var ngInclude = $(event.target).closest('.cover-page').parent();
-            //ngInclude.attr('src', '../partials/experience.html');
+            //ngInclude.attr('ng-include', '../partials/experience.html');
 
             if (superclass.gotoExperience) {
                 superclass.gotoExperience();
