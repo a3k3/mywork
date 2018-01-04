@@ -358,11 +358,20 @@ md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
 buildquestion .question,buildquestion .caption,buildquestion .hint{
     text-decoration:underline;
 }
+.question, .caption, .hint,md-input-container input{
+    text-decoration:underline;
+}
 md-input-container.md-mytheme-theme .md-input{
     color:rgba(101,101,101,0.8);
-    border-color:rgba(0,0,0,0.7);
+    border-bottom:2px solid #999;
 }
-.default .question,.default .caption,.default .hint{
+md-input-container.md-mytheme-theme label{
+    color:rgba(0,0,0,0.4);
+}
+.md-input-focused label,.md-input-has-value label{
+    display:none;
+}
+.default .question,.default .caption,.default .hint,.default md-input-container input{
     text-decoration-color:rgba(0,0,0,0.7);
 }
 .black .question{
@@ -374,7 +383,7 @@ md-input-container.md-mytheme-theme .md-input{
 .black .question,.black .caption,.black .hint{
     text-decoration-color:rgba(225,225,225,0.9);
 }
-.black md-input-container.md-mytheme-theme .md-input,.black md-input-container.md-mytheme-theme label,.black .md-char-counter{
+.black md-input-container.md-mytheme-theme .md-input,.black .md-char-counter{
     color:rgba(203,203,203,0.8);
     border-color:#999999;
 }
@@ -384,10 +393,10 @@ md-input-container.md-mytheme-theme .md-input{
 .pink .font-color-666,.pink .category{
     color:#eeeeee;
 }
-.pink .question,.pink .caption,.pink .hint{
+.pink .question,.pink .caption,.pink .hint,.pink md-input-container input{
     text-decoration-color:rgba(225,225,225,0.9);
 }
-.pink md-input-container.md-mytheme-theme .md-input,.pink md-input-container.md-mytheme-theme label,.pink .md-char-counter{
+.pink md-input-container.md-mytheme-theme .md-input,.pink .md-char-counter{
     color:rgba(67,67,67,0.8);
     border-color:#444444;
 }
@@ -397,10 +406,10 @@ md-input-container.md-mytheme-theme .md-input{
 .blue .font-color-666,.blue .category{
     color:#666666;
 }
-.blue .question,.blue .caption,.blue .hint{
+.blue .question,.blue .caption,.blue .hint,.blue md-input-container input{
     text-decoration-color:rgba(225,225,225,0.9);
 }
-.blue md-input-container.md-mytheme-theme .md-input,.blue md-input-container.md-mytheme-theme label,.blue .md-char-counter{
+.blue md-input-container.md-mytheme-theme .md-input,.blue .md-char-counter{
     color:rgba(0,0,0,0.8);
     border-color:#444444;
 }
@@ -410,10 +419,10 @@ md-input-container.md-mytheme-theme .md-input{
 .yellow .font-color-666,.yellow .category{
     color:#666666;
 }
-.yellow .question,.yellow .caption,.yellow .hint{
+.yellow .question,.yellow .caption,.yellow .hint,.yellow md-input-container input{
     text-decoration-color:rgba(0,0,0,0.9);
 }
-.yellow md-input-container.md-mytheme-theme .md-input,.yellow md-input-container.md-mytheme-theme label,.yellow .md-char-counter{
+.yellow md-input-container.md-mytheme-theme .md-input,.yellow .md-char-counter{
     color:rgba(0,0,0,0.8);
     border-color:#999999;
 }
@@ -423,10 +432,10 @@ md-input-container.md-mytheme-theme .md-input{
 .orange .font-color-666,.orange .category{
     color:#eee;
 }
-.orange .question,.orange .caption,.orange .hint{
+.orange .question,.orange .caption,.orange .hint,.orange md-input-container input{
     text-decoration-color:rgba(255,255,255,0.9);
 }
-.orange md-input-container.md-mytheme-theme .md-input,.orange md-input-container.md-mytheme-theme label,.orange .md-char-counter{
+.orange md-input-container.md-mytheme-theme .md-input,.orange .md-char-counter{
     color:rgba(0,0,0,0.8);
     border-color:#999;
 }
@@ -436,10 +445,10 @@ md-input-container.md-mytheme-theme .md-input{
 .green .font-color-666,.green .category{
     color:#eee;
 }
-.green .question,.green .caption,.green .hint{
+.green .question,.green .caption,.green .hint,.green md-input-container input{
     text-decoration-color:rgba(255,255,255,0.9);
 }
-.green md-input-container.md-mytheme-theme .md-input,.green md-input-container.md-mytheme-theme label,.green .md-char-counter{
+.green md-input-container.md-mytheme-theme .md-input,.green .md-char-counter{
     color:rgba(0,0,0,0.8);
     border-color:#999;
 }

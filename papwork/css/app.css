@@ -167,11 +167,14 @@ md-icon svg {
 .questionPanel{
     text-align:left;
 }
+.star_class+.hint{
+    margin-top:-8px;
+}
 .hint{
     margin-top:4px;
 }
 .caption{
-    margin-top:27px;
+    margin-top:20px;
 }
 
 /******Questions Theme*****/
@@ -340,7 +343,7 @@ question.active .questionPanel {
     font-family:Optima;
 }
 .cover-container .content-section{
-    margin-top:30px;
+    margin-top:47px;
     width: 80%;
     margin-left: 10%;
 }
@@ -354,9 +357,9 @@ question.active .questionPanel {
 }
 .recomends{
 	 border-top: 2px solid #eeeeee;
-	 margin-top:20px;
+	 margin-top:16px;
      text-align:center;
-     position:fixed;
+     /*position:fixed;*/
      bottom:0;
      width:100%;
 }
@@ -376,10 +379,10 @@ question.active .questionPanel {
 }
 
 .app-submit-page .content-section h2 {
-    font-size:  19px;
+    font-size:  18px;
     margin-top:35px;
-    color: #999999;
-    margin-bottom:30px;
+    color: #999;
+    margin-bottom:34px;
 }
 
 .app-submit-page user-card .md-headline {
@@ -393,14 +396,14 @@ question.active .questionPanel {
 .app-submit-page .recomends h4{
     text-align:left;
     padding-left:70px;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 .app-submit-page .recomends ul {
     margin-top: 10px;
     margin-bottom:0;
 }
 .app-submit-page .recomends ul li .selected-icon{
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 .app-submit-page .content-section p {
     margin-bottom: 0;
