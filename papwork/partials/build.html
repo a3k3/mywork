@@ -56,7 +56,7 @@
         <div class="progressContainer">
             <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{buildQuestionsObj.activeNow}} out of {{buildQuestionsObj.maxCount()}}</div>
         </div>
-        <div class="apply-questions-container" ng-swipe-left="onSwipeLeft()" ng-swipe-right="onSwipeRight()">
+        <div class="apply-questions-container {{buildQuestionsObj.theme}}" ng-swipe-left="onSwipeLeft()" ng-swipe-right="onSwipeRight()">
             <flip class="flip noPreventDefault" ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }">
                 <flip-panel>
                     <md-card>

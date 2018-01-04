@@ -1,6 +1,13 @@
 ﻿[contenteditable] {
     text-decoration:underline;
     outline: none;
+    text-decoration-color: #999999!important;
+}
+md-pagination-wrapper .md-active span {
+    font-size: 14px;
+}
+md-pagination-wrapper span {
+    color:#999999;
 }
 .build-page .md-card {
     height:100vh;
@@ -8,6 +15,7 @@
 .md-card .progressContainer {
     position: relative;
     display: inline-block;
+    margin-bottom: 0;
 }
 .apply-questions-container md-progress-linear, .apply-questions-container md-progress-linear .md-container {
     height: 2px;
@@ -17,6 +25,7 @@
     display: inline-block;
     width: 100%;
     height: 71vh;
+    margin-top: -3px;
 }
 .apply-questions-container flip {
     position: absolute;
@@ -42,7 +51,7 @@
 }
 .navigation-slide md-card{
     box-shadow:none;
-    border:2px solid #d2d2d2;
+    border: 2px solid rgba(238, 238, 238, 0.79);
 }
 .navigation-slide .slideactive{
     border:2px solid rgb(129,199,132);
@@ -57,18 +66,17 @@
     height: 73vh;
 }
 .navigation-slide .cover-page, .navigation-slide .app-submit-page{
-    height: 9.5vh;
+    height: 8.85vh;
     position: relative;
     display: inherit;
 }
 .navigation-slide .cover-container, .navigation-slide .default-container {
-    height: 48vh;
+    height: 43vh;
     transform: scale(.2);
     transform-origin: 0 0;
     width: 495%;
     overflow: hidden;
     position:absolute;
-    border: 1px solid #000;
 }
 .navigation-slide .cover-page img{
     width:100%;
@@ -79,7 +87,6 @@
     bottom: 30px;
     width: 100%;
     padding: 0 10px;
-    padding-bottom: 15px;
 }
 
 .controls .fcontrol > div {
@@ -95,13 +102,13 @@
 }
 
 .controls md-icon {
-    padding: 6px;
-    width: 30px;
-    height: 30px;
-    background-color: rgba(0,0,0,0.54);
+    padding: 5px;
+    width: 28px;
+    height: 28px;
+    background-color: rgba(0,0,0,0.6);
     color: #fff;
     border-radius: 50%;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 settings .md-tab {
@@ -156,9 +163,9 @@ settings md-pagination-wrapper:after {
     margin-left: 1px;
 }
 .navigation-slide md-card{
-    width: 48px;
+    width: 45px;
     float: left;
-    height: 10vh;
+    height: 9.2vh;
     margin: 3px;
     outline: none;
     position: relative;
@@ -235,6 +242,7 @@ md-card settings {
     position: absolute;
     top:12px;
     z-index:999;
+    left: 4px;
 }
 
 md-card buildquestion .questionPanel .answerContainer, md-card question .questionPanel .answerContainer {
@@ -370,6 +378,7 @@ md-input-container.md-mytheme-theme label{
 }
 .md-input-focused label,.md-input-has-value label{
     display:none;
+    border-color: #999999;
 }
 .default .question,.default .caption,.default .hint,.default md-input-container input{
     text-decoration-color:rgba(0,0,0,0.7);
@@ -480,11 +489,11 @@ md-input-container.md-mytheme-theme label{
     height:auto!important;
 }
 .type md-icon{
-    background-color: rgba(0,0,0,0.54);
-    padding: 11px 2px;
-    padding-right: 20px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 5px 13px;
+    padding-right: 27px;
     width: 63px;
-    height: 35px;
+    height: 25px;
     position:relative;
     border-radius:20px;
 }
@@ -557,9 +566,19 @@ buildquestion .category {
 }
 
 .mobile-project-title {
-    padding: 0 15px;
-    padding-top: 5px;
+    padding: 0 10px;
+    padding-top: 15px;
     height: 6vh;
+}
+.mobile-project-title .build_back {
+    margin-right: 33px;
+}
+
+.mobile-project-title md-input-container input {
+    line-height: 0px;
+    height: 13px;
+    padding: 0;
+    text-decoration: underline;
 }
 .build ng-include {
     position:relative;
@@ -621,6 +640,15 @@ label + md-input-container label{
     position:absolute;
     right:0;
     bottom: 16px!important;
+}
+
+#tab-content-2 .cover-page {
+    height: 88vh;
+    display: block;
+}
+
+label.text_placeholder {
+    color: rgba(101,101,101,0.8);
 }
 
 @media screen and (min-width:1024px) {
@@ -692,7 +720,7 @@ label + md-input-container label{
         z-index: 999;
         float:left!important;
         margin-right:3px;
-        height:76%;
+        height: 68%;
     }
     .create-tabs > md-tabs-wrapper md-pagination-wrapper {
         width: 32%!important;
@@ -800,6 +828,12 @@ label + md-input-container label{
         height: auto;
         max-height: 70px;
         overflow: hidden;
+    }
+    .navigation-slide md-card {
+        height: 8.997vh;
+    }
+    .navigation-slide .cover-page, .navigation-slide .app-submit-page {
+        height: 8.5vh;
     }
 }
 

@@ -108,6 +108,7 @@ function highlightRange(range) {
         range.surroundContents(newNode);
     }
 }
+
 function disableRange(range) {
     if (range.startOffset < range.endOffset) {
         console.log("hiiii");
@@ -352,7 +353,30 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         .error(function (error) {
             console.log(error);
         });
+    };
+
+    /*******Web Cam Functions********/
+    $scope.myChannel = {
+        videoHeight: 800,
+        videoWidth: 600,
+        video: null
+    };
+    $scope.stopCam = function () {
+        $rootScope.$broadcast("STOP_WEBCAM");
     }
+    $scope.startCam = function () {
+        $rootScope.$broadcast("START_WEBCAM");
+    }
+    $scope.record = function () {
+        $rootScope.$broadcast("START_RECORD");
+    }
+    $scope.stopRecord = function () {
+        $rootScope.$broadcast("STOP_RECORD");
+    }
+    $scope.downloadRecord = function () {
+        $rootScope.$broadcast("DOWNLOAD_RECORD");
+    }
+    /*******Web Cam Functions********/
 
     $scope.submit = function () {
         console.log($scope.questionsObj.questions);
@@ -445,6 +469,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.$parent.$watch('projectname', function (value) {
         $scope.buildQuestionsObj.name = value;
+    });
+
+    $scope.$on('questionsFormTheme', function (event, data) {
+        $scope.buildQuestionsObj.theme = data;
     });
 
     getCoverData.then(function (cover) {
