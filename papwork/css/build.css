@@ -6,9 +6,6 @@
 md-pagination-wrapper .md-active span {
     font-size: 14px;
 }
-md-pagination-wrapper span {
-    color:#999999;
-}
 .build-page .md-card {
     height:100vh;
 }
@@ -118,6 +115,9 @@ settings .md-tab {
     text-transform:capitalize;
     overflow:hidden;
 }
+settings ng-include [layout="row"] {
+    padding: 10px 0;
+}
 settings md-tabs-canvas md-ink-bar {
     background: #7BCD6E !important;
     z-index:999;
@@ -141,8 +141,8 @@ settings md-tabs-content-wrapper md-content{
 
 settings md-input-container {
     margin-top: 0;
-    width: auto;
-    max-width: 100%;
+    width: 100%;
+    max-width: 80%;
 }
 
 .navigation-slide{
@@ -742,6 +742,7 @@ label.text_placeholder {
     }
     .publish-panel {
         padding: 0 38%;
+        height:4.5vh;
     }
     .publish-panel .publish-btn-container {
         text-align: right;

@@ -482,7 +482,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildcoverdata.settings = response.data.cover.settings;
-            $scope.buildcoverdata.advsettings = response.data.cover.advsettings;
+            //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
             if ($scope.buildcoverdata.settings.covertemplate.condition) {
                 $scope.buildcoverdata.cover_template = 'official';
             }
@@ -500,7 +500,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
-            $scope.buildsuccessdata.advsettings = response.data.success.advsettings;
+            //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
             if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
             }
@@ -598,6 +598,13 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var copyObj = angular.copy($scope.buildQuestionsObj.questions[index].options[0]);
         $scope.buildQuestionsObj.questions[index].options.push(copyObj);
+    }
+
+    //add advance setting show/hide option
+    $scope.addAdvanceOption = function (event) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        var copyObj = angular.copy($scope.buildQuestionsObj.questions[index].advancedvalidations.showhide.logic_options[0]);
+        $scope.buildQuestionsObj.questions[index].advancedvalidations.showhide.logic_options.push(copyObj);
     }
 
     //delete options
