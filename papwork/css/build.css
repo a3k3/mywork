@@ -116,6 +116,7 @@ settings .md-tab {
     width:50%;
     font-size:0.9em;
     text-transform:capitalize;
+    overflow:hidden;
 }
 settings md-tabs-canvas md-ink-bar {
     background: #7BCD6E !important;
@@ -133,6 +134,15 @@ settings md-pagination-wrapper:after {
     bottom: 0;
     background-color: #d2d2d2;
     z-index: 0;
+}
+settings md-tabs-content-wrapper md-content{
+    overflow:hidden;
+}
+
+settings md-input-container {
+    margin-top: 0;
+    width: auto;
+    max-width: 100%;
 }
 
 .navigation-slide{
@@ -787,6 +797,12 @@ label.text_placeholder {
     }
     .navigation-slide {
         bottom: 0;
+    }
+    .create-tabs > md-tabs-wrapper .md-tab:after{
+        margin-bottom:0;
+    }
+    md-card buildquestion.question-slide, md-card question.question-slide{
+        padding-top:22px;
     }
 }
 @media all and (max-width:1150px){

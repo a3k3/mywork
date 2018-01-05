@@ -202,7 +202,8 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         _active = angular.element(_active);
         if (_active.index() < $scope.questionsObj.maxCount()) {
             _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
-            if ($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.start > 0) {
+            var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
+            if (autocomplete != undefined && autocomplete.start > 0) {
                 $interval.cancel($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.interval);
             }
             $scope.questionsObj.activeNow++;
@@ -481,6 +482,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildcoverdata.settings = response.data.cover.settings;
+            $scope.buildcoverdata.advsettings = response.data.cover.advsettings;
             if ($scope.buildcoverdata.settings.covertemplate.condition) {
                 $scope.buildcoverdata.cover_template = 'official';
             }
@@ -498,6 +500,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
+            $scope.buildsuccessdata.advsettings = response.data.success.advsettings;
             if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
             }
@@ -565,6 +568,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             var typedata = response.data[type];
             //add validations 
             $scope.buildQuestionsObj.questions[index].validations = typedata.settings;
+
+            //add advanced validations 
+            $scope.buildQuestionsObj.questions[index].advancedvalidations = typedata.advsettings;
 
             //add options if exist
             if (typedata.options) {

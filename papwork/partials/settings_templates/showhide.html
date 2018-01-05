@@ -1,0 +1,45 @@
+﻿<div layout="row" layout-align="start center">
+    <div flex>{{setting.text}}</div>
+    <div flex>
+        <md-input-container>
+            <md-select name="type" ng-model="setting.condition">
+                <md-option value="show">Show this slide when</md-option>
+                <md-option value="hide">Hide this slide when</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</div>
+
+<div layout="row" layout-align="start center" ng-repeat="logic in setting.logic_options">
+    <div flex>
+        <md-input-container>
+            <md-select name="type" ng-model="logic.question_number">
+                <md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div flex>
+        <md-input-container>
+            <md-select name="type" ng-model="logic.operator">
+                <md-option value="not">Is Not</md-option>
+                <md-option value="equals">Equals</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div flex>
+        <md-input-container>
+            <md-select name="type" ng-model="logic.answer">
+                <md-option value="true">Yes</md-option>
+                <md-option value="false">No</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div flex>
+        <md-input-container>
+            <md-select name="type" ng-model="logic.relation">
+                <md-option value="show">Show this silde when</md-option>
+                <md-option value="hide">Hide this silde when</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</div>

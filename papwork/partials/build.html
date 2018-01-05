@@ -81,8 +81,7 @@
                                 </md-tab>
                                 <md-tab label="advanced">
                                     <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab One</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildcoverdata.advsettings"></ng-include>
                                     </md-content>
                                 </md-tab>
                             </md-tabs>
@@ -138,10 +137,9 @@
                                         <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in question.validations"></ng-include>
                                     </md-content>
                                 </md-tab>
-                                <md-tab label="advanced" ng-disabled="true">
+                                <md-tab label="advanced">
                                     <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab One</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in question.advancedvalidations"></ng-include>
                                     </md-content>
                                 </md-tab>
                             </md-tabs>
@@ -178,8 +176,7 @@
                                 </md-tab>
                                 <md-tab label="advanced">
                                     <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab One</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildsuccessdata.advsettings"></ng-include>
                                     </md-content>
                                 </md-tab>
                             </md-tabs>

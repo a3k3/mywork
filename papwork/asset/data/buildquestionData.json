@@ -17,6 +17,21 @@
         "condition": false,
         "text": "Cover Page Disabled."
       }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "question_number": 1,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      }
     }
   },
   "success": {
@@ -58,6 +73,13 @@
 
       ]
     }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
     }
   },
   "text": {
@@ -83,6 +105,21 @@
         "condition": "text",
         "text": "Please enter valid input."
       }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "question_number": 1,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      }
     }
   },
   "textarea": {
@@ -107,6 +144,13 @@
         "name": "acceptonly",
         "condition": "text",
         "text": "Please enter valid input."
+      }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
       }
     }
   },
@@ -134,7 +178,14 @@
         "value": "ProductA",
         "media_src": "../asset/img/md-icons/svg/ic_photo_camera_black_24px.svg"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
+    }
   },
   "rating_star": {
     "options": [
@@ -180,6 +231,13 @@
         "condition": false,
         "text": "This response is timed."
       }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
     }
   },
   "radio": {
@@ -210,7 +268,14 @@
         "name": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
+    }
   },
   "radio_size": {
     "settings": {
@@ -261,7 +326,14 @@
         "key": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
+    }
   },
   "statement": {
     "settings": {
@@ -292,7 +364,14 @@
         "key": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
+    }
   },
   "select": {
     "settings": {
@@ -322,6 +401,13 @@
         "name": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
+    }
   }
 }
