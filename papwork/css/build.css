@@ -14,6 +14,9 @@ md-pagination-wrapper .md-active span {
     display: inline-block;
     margin-bottom: 0;
 }
+md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container{
+    padding:0 50px;
+}
 .apply-questions-container md-progress-linear, .apply-questions-container md-progress-linear .md-container {
     height: 2px;
 }
@@ -376,9 +379,10 @@ md-backdrop.md-opaque.md-default-theme, md-backdrop.md-opaque {
 buildquestion .question,buildquestion .caption,buildquestion .hint{
     text-decoration:underline;
 }
-.question, .caption, .hint,md-input-container input{
+buildquestion .question,buildquestion .caption,buildquestion .hint,md-input-container input{
     text-decoration:underline;
 }
+
 md-input-container.md-mytheme-theme .md-input{
     color:rgba(101,101,101,0.8);
     border-bottom:2px solid #999;
@@ -402,9 +406,12 @@ md-input-container.md-mytheme-theme label{
 .black .question,.black .caption,.black .hint{
     text-decoration-color:rgba(225,225,225,0.9);
 }
-.black md-input-container.md-mytheme-theme .md-input,.black .md-char-counter{
+.black md-input-container.md-mytheme-theme .md-input,.black .md-char-counter,.black md-checkbox.md-mytheme-theme:not(.md-checked) .md-icon,.black md-radio-button.md-mytheme-theme .md-off{
     color:rgba(203,203,203,0.8);
     border-color:#999999;
+}
+.black md-checkbox span,.black md-radio-button span{
+    color:rgba(203,203,203,0.8);
 }
 .pink .question{
     color:#fff;
@@ -415,9 +422,12 @@ md-input-container.md-mytheme-theme label{
 .pink .question,.pink .caption,.pink .hint,.pink md-input-container input{
     text-decoration-color:rgba(225,225,225,0.9);
 }
-.pink md-input-container.md-mytheme-theme .md-input,.pink .md-char-counter{
+.pink md-input-container.md-mytheme-theme .md-input,.pink .md-char-counter,.pink md-checkbox.md-mytheme-theme:not(.md-checked) .md-icon,.pink md-radio-button.md-mytheme-theme .md-off{
     color:rgba(67,67,67,0.8);
     border-color:#444444;
+}
+.pink md-checkbox span,.pink md-radio-button span{
+    color:rgba(67,67,67,0.8);
 }
 .blue .question{
     color:#000;
@@ -428,9 +438,12 @@ md-input-container.md-mytheme-theme label{
 .blue .question,.blue .caption,.blue .hint,.blue md-input-container input{
     text-decoration-color:rgba(225,225,225,0.9);
 }
-.blue md-input-container.md-mytheme-theme .md-input,.blue .md-char-counter{
+.blue md-input-container.md-mytheme-theme .md-input,.blue .md-char-counter,.blue md-checkbox.md-mytheme-theme:not(.md-checked) .md-icon,.blue md-radio-button.md-mytheme-theme .md-off{
     color:rgba(0,0,0,0.8);
     border-color:#444444;
+}
+.blue md-checkbox span,.blue md-radio-button span{
+    color:rgba(0,0,0,0.8);
 }
 .yellow .question{
     color:#000;
@@ -441,9 +454,12 @@ md-input-container.md-mytheme-theme label{
 .yellow .question,.yellow .caption,.yellow .hint,.yellow md-input-container input{
     text-decoration-color:rgba(0,0,0,0.9);
 }
-.yellow md-input-container.md-mytheme-theme .md-input,.yellow .md-char-counter{
+.yellow md-input-container.md-mytheme-theme .md-input,.yellow .md-char-counter,.yellow md-checkbox.md-mytheme-theme:not(.md-checked) .md-icon,.yellow md-radio-button.md-mytheme-theme .md-off{
     color:rgba(0,0,0,0.8);
     border-color:#999999;
+}
+.yellow md-checkbox span,.yellow md-radio-button span{
+    color:rgba(0,0,0,0.8);
 }
 .orange .question{
     color:#fff;
@@ -454,9 +470,12 @@ md-input-container.md-mytheme-theme label{
 .orange .question,.orange .caption,.orange .hint,.orange md-input-container input{
     text-decoration-color:rgba(255,255,255,0.9);
 }
-.orange md-input-container.md-mytheme-theme .md-input,.orange .md-char-counter{
+.orange md-input-container.md-mytheme-theme .md-input,.orange .md-char-counter,.orange md-checkbox.md-mytheme-theme:not(.md-checked) .md-icon,.orange md-radio-button.md-mytheme-theme .md-off{
     color:rgba(0,0,0,0.8);
     border-color:#999;
+}
+.orange md-checkbox span,.orange md-radio-button span{
+    color:rgba(0,0,0,0.8);
 }
 .green .question{
     color:#fff;
@@ -467,9 +486,12 @@ md-input-container.md-mytheme-theme label{
 .green .question,.green .caption,.green .hint,.green md-input-container input{
     text-decoration-color:rgba(255,255,255,0.9);
 }
-.green md-input-container.md-mytheme-theme .md-input,.green .md-char-counter{
+.green md-input-container.md-mytheme-theme .md-input,.green .md-char-counter,.green md-checkbox.md-mytheme-theme:not(.md-checked) .md-icon,.green md-radio-button.md-mytheme-theme .md-off{
     color:rgba(0,0,0,0.8);
     border-color:#999;
+}
+.green md-checkbox span,.green md-radio-button span{
+    color:rgba(0,0,0,0.8);
 }
 /******Questions Theme*****/
 
@@ -709,6 +731,9 @@ label.text_placeholder {
     }
     md-card buildquestion.question-slide, md-card question.question-slide {
         margin-left:0;
+    }
+    .publish-panel{
+        padding: 30px 40px;
     }
     .build{
         padding: 30px 40px;

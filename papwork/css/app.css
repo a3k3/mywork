@@ -88,6 +88,9 @@ form {
     z-index: 99;
     /*background: #fff;*/
 }
+.success-layout .progressContainer{
+    padding:0 50px;
+}
 .progressContainer .status {
     margin-top:10px;
 }
@@ -264,6 +267,7 @@ question.next_active .questionPanel h2{
     font-size:14px;
     height: 30px;
     overflow: hidden;
+    font-family:Optima;
 }
 question.next_next_active {
     opacity: 0.5;
@@ -273,6 +277,7 @@ question.next_next_active .questionPanel h2{
     font-size:12px;
     height: 30px;
     overflow: hidden;
+    font-family:Optima;
 }
 question.active .questionPanel {
     position: relative;
