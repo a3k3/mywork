@@ -430,6 +430,47 @@ question.active .questionPanel {
     margin-top: 2px;
     margin-bottom: 32px;
 }
+.app-submit-page .variant-container .content-section h6{
+    margin-top:8px
+}
+.variant-container md-card-title-text{
+    display:block;
+    margin-left:10px;
+}
+.app-submit-page .variant-container user-card .md-headline{
+    padding-left:15px;
+}
+.app-submit-page .variant-container .success_media{
+    padding-top:30px;
+}
+.variant-container .recomends{
+    border:none;
+    text-align:left;
+    padding:0 12%;
+    width: 20000px;
+}
+.variant-container .recomends ul{
+    padding-left:0px;
+}
+.app-submit-page .variant-container .content-section h2{
+    font-size: 21px;
+    margin-top: 8px;
+    margin-bottom: 27px;
+}
+.app-submit-page .variant-container .recomends h4{
+    padding-left:0px;
+    margin-bottom:6px;
+}
+.app-submit-page .variant-container .content-section p{
+    font-family:'Optima Bold';
+}
+.success_media_logo{
+    height:40px;
+    width:40px;
+}
+.variant-container .content-section p,.variant-container .content-section h6{
+    text-align:initial;
+}
 /****Success Page*****/
 
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
@@ -519,7 +560,15 @@ md-pagination-wrapper {
     top:50%;
     transform:translate(-50%,-50%);
 }
+@media screen and (min-width:1024px) {
+    .create-tabs question.active .category {
+        margin-top: 100px;
+    }
 
+    .progressContainer .status {
+        margin-top: 20px;
+    }
+}
 
 
 /* ANIMATIONS
