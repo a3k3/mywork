@@ -519,7 +519,13 @@ md-pagination-wrapper {
     top:50%;
     transform:translate(-50%,-50%);
 }
-
+.answerContainer .interview {
+    text-align:center;
+}
+.answerContainer .interview img{
+    display: block;
+    margin: 0 auto;
+}
 
 
 /* ANIMATIONS

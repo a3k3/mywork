@@ -431,7 +431,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
 
-    $scope.projectName = "Untitled";
+    $scope.projectName = "My PapForm";
 
     $rootScope.previewURL = "../partials/cover.html";
 
@@ -444,7 +444,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet) {
     var sampleQuestion = {};
 
     getSampleQuestionData.then(function (response) {
@@ -470,6 +470,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.$parent.$watch('projectname', function (value) {
         $scope.buildQuestionsObj.name = value;
+    });
+
+    $scope.$parent.$watch('previewurl', function (value) {
+        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
     });
 
     $scope.$on('questionsFormTheme', function (event, data) {
@@ -601,10 +605,16 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     //add advance setting show/hide option
-    $scope.addAdvanceOption = function (event) {
+    $scope.addAdvanceOption = function (event,type) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        var copyObj = angular.copy($scope.buildQuestionsObj.questions[index].advancedvalidations.showhide.logic_options[0]);
-        $scope.buildQuestionsObj.questions[index].advancedvalidations.showhide.logic_options.push(copyObj);
+        var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
+        var copyObj = angular.copy(questionTemp.logic_options[0]);
+        questionTemp.logic_options.push(copyObj);
+    }
+
+    $scope.updateAdvanceAnswers = function (logic) {
+        var index = logic.slide_to_show - 1;
+        logic.answer_list = $scope.buildQuestionsObj.questions[index].options
     }
 
     //delete options
@@ -621,6 +631,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
 
         $timeout(function () {
+            resetSlide();
+            setActiveSlide($scope.buildQuestionsObj.activeNow);
             var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
             angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
         }, 0);
@@ -718,10 +730,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $scope.status = 'You cancelled the dialog.';
         });
     };
-
-    $scope.nextswipes = function () {
-        //alert();
-    }
 
     function DialogController($scope, $mdDialog, callback) {
         $scope.query = { primary: true };
@@ -896,6 +904,21 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         }
         angular.element('ul.tools').fadeOut(200);
     }
+
+    $scope.showListBottomSheet = function (event, option) {
+        $mdBottomSheet.show({
+            templateUrl: '../partials/settings_templates/media_bottomsheet.html',
+            controller: 'ListBottomSheetCtrl',
+            locals: {
+                event: event,
+                option: option
+            }
+        }).then(function (clickedItem) {
+            
+        }).catch(function (error) {
+            // User clicked outside or hit escape
+        });
+    };
 });
 
 myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller) {
@@ -939,3 +962,59 @@ myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
         $scope.status = response.statusText;
     });
 });
+
+myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event, option) {
+
+    $scope.items = [
+      { name: 'Link', icon: '../asset/img/md-icons/svg/ic_link_black_24px.svg', type:'link', src:'' },
+      { name: 'Use Gallery', icon: '../asset/img/md-icons/svg/ic_photo_library_black_24px.svg', type: 'gallery', src:'' },
+      { name: 'Use Camera', icon: '../asset/img/md-icons/svg/ic_add_a_photo_black_24px.svg', type:'camera', src:'' }
+    ];
+
+    $scope.listItemClick = function ($index) {
+        var clickedItem = $scope.items[$index];
+        if (clickedItem['type'] == "gallery")
+            $scope.updateMedia(event);
+        if (clickedItem['type'] == "link")
+            $scope.updateLink(event, option, clickedItem);
+        $mdBottomSheet.hide(clickedItem);
+    };
+
+    //UPLOAD THE FILES.
+    $scope.updateMedia = function (event) {
+        var fileBrowse = $(event.target).data('file') == undefined ? $(event.target).parent().data('file') : $(event.target).data('file');
+        document.getElementById(fileBrowse).click();
+    }
+
+    $scope.getTheFiles = function ($files, element) {
+        angular.forEach($files, function (value, key) {
+            formdata.append(key, value);
+        });
+
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+            $scope.$apply(function () {
+                element.media_src = loadEvent.target.result;
+                var data = loadEvent.target.result.substr(loadEvent.target.result.indexOf(",") + 1, loadEvent.target.result.length);
+                $scope.uploadFiles(data, function (output) {
+                    element.media_src = output;
+                });
+            });
+        }
+        reader.readAsDataURL($files[0]);
+    };
+
+    $scope.uploadFiles = function (data, handleData) {
+        uploadData.uploadImage(data).success(function (response) {
+            handleData(response.data.link);
+        })
+        .error(function (error) {
+            console.log(error);
+        });
+    }
+
+    //using external url
+    $scope.updateLink = function (event, element, clickedItem) {
+        element.media_src = clickedItem['src'];
+    }
+})

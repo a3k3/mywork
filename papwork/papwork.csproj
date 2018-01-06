@@ -129,6 +129,7 @@
     <Content Include="asset\data\questionType.json" />
     <Content Include="asset\data\dummyQuestion.json" />
     <None Include="asset\data\success.json" />
+    <Content Include="asset\font\optima.png" />
     <Content Include="asset\img\avg.png" />
     <Content Include="asset\img\avg_active.png" />
     <Content Include="asset\img\checked.JPG" />
@@ -139,6 +140,7 @@
     <Content Include="asset\img\good_active.png" />
     <Content Include="asset\img\md-icons\svg\checkbox.svg" />
     <Content Include="asset\img\md-icons\svg\dropdown.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_add_a_photo_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_add_circle_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_arrow_back_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_arrow_drop_down_circle_black_24px.svg" />
@@ -157,8 +159,11 @@
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_right_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_up_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_linear_scale_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_link_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_more_horiz_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_payment_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_photo_camera_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_photo_library_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_radio_button_checked_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_remove_circle_outline_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_settings_black_24px.svg" />
@@ -185,6 +190,7 @@
     <Content Include="asset\img\tax.JPG" />
     <Content Include="asset\img\verypoor.png" />
     <Content Include="asset\img\verypoor_active.png" />
+    <Content Include="asset\img\video-interview.jpg" />
     <Content Include="asset\img\visa.JPG" />
     <Content Include="css\build.css" />
     <Content Include="css\input.css" />
@@ -243,8 +249,11 @@
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />
     <Content Include="partials\settings_templates\enableMedia.html" />
+    <Content Include="partials\settings_templates\jumplogic.html" />
     <Content Include="partials\settings_templates\maxcount.html" />
+    <Content Include="partials\settings_templates\media_bottomsheet.html" />
     <Content Include="partials\settings_templates\reccomendations.html" />
+    <Content Include="partials\settings_templates\showhide.html" />
     <Content Include="partials\settings_templates\success.html" />
     <Content Include="partials\settings_templates\maxlength.html" />
     <Content Include="partials\settings_templates\autocomplete.html" />
@@ -265,6 +274,9 @@
     <Content Include="partials\input_templates\upload.tmpl.html" />
     <Content Include="asset\data\buildquestionData.json" />
     <Content Include="asset\data\cover.json" />
+    <Content Include="asset\font\OPTIMA.TTF" />
+    <Content Include="asset\font\OPTIMA_B.TTF" />
+    <Content Include="asset\font\unicode.optima.ttf" />
     <None Include="Properties\PublishProfiles\PapWork.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -148,6 +148,10 @@ settings md-input-container {
     max-width: 80%;
 }
 
+settings md-switch {
+    margin: 0;
+}
+
 .navigation-slide{
     position: fixed;
     overflow:hidden;
@@ -681,6 +685,29 @@ label + md-input-container label{
 
 label.text_placeholder {
     color: rgba(101,101,101,0.8);
+}
+
+.enable-media button.md-list-item-content {
+    margin: 0 0;
+    padding: 0 0;
+    text-align: left;
+}
+
+.enable-media .md-list-item-content {
+    width: 100%;
+}
+
+.enable-media md-input-container {
+    margin: 0;
+    max-width: 100%;
+    width: 80%;
+}
+
+settings ng-include.advanced{
+    border-bottom: 1px solid #d2d2d2;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 15px;
 }
 
 @media screen and (min-width:1024px) {

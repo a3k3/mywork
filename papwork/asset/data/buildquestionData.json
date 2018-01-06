@@ -25,7 +25,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "question_number": 1,
+            "slide_to_show": 0,
             "operator": "not",
             "answer": "true",
             "relation": "and"
@@ -113,10 +113,25 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "question_number": 1,
+            "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
           }
         ]
       }
@@ -150,7 +165,28 @@
       "showhide": {
         "name": "showhide",
         "condition": "show",
-        "text": "Show/Hide Logic"
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "true",
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   },
@@ -183,7 +219,28 @@
       "showhide": {
         "name": "showhide",
         "condition": "show",
-        "text": "Show/Hide Logic"
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "true",
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   },
@@ -236,7 +293,28 @@
       "showhide": {
         "name": "showhide",
         "condition": "show",
-        "text": "Show/Hide Logic"
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "true",
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   },
@@ -273,7 +351,28 @@
       "showhide": {
         "name": "showhide",
         "condition": "show",
-        "text": "Show/Hide Logic"
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "true",
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   },
@@ -331,7 +430,28 @@
       "showhide": {
         "name": "showhide",
         "condition": "show",
-        "text": "Show/Hide Logic"
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "true",
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   },
@@ -369,7 +489,28 @@
       "showhide": {
         "name": "showhide",
         "condition": "show",
-        "text": "Show/Hide Logic"
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "true",
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   },
@@ -406,7 +547,28 @@
       "showhide": {
         "name": "showhide",
         "condition": "show",
-        "text": "Show/Hide Logic"
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "true",
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   }
