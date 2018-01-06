@@ -10,7 +10,7 @@
         <md-input-container>
             <md-select name="type" ng-model="logic.answer" ng-model-options="{trackBy: '$value.value'}">
                 <md-option>Answer</md-option>
-                <md-option ng-value="{{answer}}" ng-repeat="answer in logic.answer_list">{{answer.value}}</md-option>
+                <md-option ng-value="{{answer}}" ng-repeat="answer in question.options">{{answer.value}}</md-option>
             </md-select>
         </md-input-container>
     </div>

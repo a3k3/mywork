@@ -420,7 +420,7 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
     });
 });
 
-myapp.controller('tabCtrl', function ($scope, $rootScope) {
+myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $rootScope.bodylayout = 'create-layout';
 
@@ -430,6 +430,39 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
         var theme = $(event.target).data('theme');
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
+
+    function DialogController($scope, $mdDialog, callback) {
+        $scope.query = { primary: true };
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+
+    }
+
+    $scope.PublishPopup = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/PublishPopup.html',
+            parent: $(event.target).closest('body'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+
+
 
     $scope.projectName = "My PapForm";
 
@@ -614,7 +647,12 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.updateAdvanceAnswers = function (logic) {
         var index = logic.slide_to_show - 1;
-        logic.answer_list = $scope.buildQuestionsObj.questions[index].options
+        if ($scope.buildQuestionsObj.questions[index].options.length > 0){
+            logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
+        }
+        else {
+            logic.type = "static";
+        }
     }
 
     //delete options

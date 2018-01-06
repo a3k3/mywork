@@ -170,7 +170,8 @@
           {
             "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
           }
         ]
@@ -183,7 +184,8 @@
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "slide_to_show": 0
           }
         ]
@@ -224,7 +226,8 @@
           {
             "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
           }
         ]
@@ -237,7 +240,8 @@
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "slide_to_show": 0
           }
         ]
@@ -298,7 +302,8 @@
           {
             "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
           }
         ]
@@ -311,7 +316,8 @@
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "slide_to_show": 0
           }
         ]
@@ -343,7 +349,6 @@
     },
     "options": [
       {
-        "name": "productA",
         "value": "ProductA"
       }
     ],
@@ -356,7 +361,8 @@
           {
             "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
           }
         ]
@@ -369,7 +375,8 @@
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "slide_to_show": 0
           }
         ]
@@ -435,7 +442,8 @@
           {
             "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
           }
         ]
@@ -448,7 +456,8 @@
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "slide_to_show": 0
           }
         ]
@@ -494,7 +503,8 @@
           {
             "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
           }
         ]
@@ -507,7 +517,8 @@
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "slide_to_show": 0
           }
         ]
@@ -552,7 +563,8 @@
           {
             "slide_to_show": 0,
             "operator": "not",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "relation": "and"
           }
         ]
@@ -565,7 +577,8 @@
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "true",
+            "answer": "",
+            "answer_list": [],
             "slide_to_show": 0
           }
         ]

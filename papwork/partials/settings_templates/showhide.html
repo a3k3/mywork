@@ -28,11 +28,14 @@
         </md-input-container>
     </div>
     <div flex="30">
-        <md-input-container>
+        <md-input-container ng-if="logic.type !='static'">
             <md-select name="answer" ng-model="logic.answer" ng-model-options="{trackBy: '$value.value'}">
                 <md-option>Answer</md-option>
                 <md-option ng-value="{{answer}}" ng-repeat="answer in logic.answer_list">{{answer.value}}</md-option>
             </md-select>
+        </md-input-container>
+        <md-input-container ng-if="logic.type =='static'">
+            <input class="md-accent hue-2" name="answer" type="text" ng-model="logic.answer">
         </md-input-container>
     </div>
     <div flex="10">

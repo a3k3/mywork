@@ -633,3 +633,28 @@ md-pagination-wrapper {
 
 /* ANIMATIONS
 ============================================================================= */
+
+
+
+/*Publishpop*/
+.popup_layout{
+    padding:40px;
+}
+.popup_layout .sharelink_block, .popup_layout .embedlink_block {
+    width: 100%;
+    display: inline-block;
+}
+
+.popup_layout .share_text, .popup_layout .share_text_url, .popup_layout .embed_text_url, .popup_layout .embed_text {
+    width: 50%;
+    float: left;
+}
+
+.popup_layout .share_text h2, .popup_layout .embed_text h2{
+    margin-bottom:0;
+}
+
+/*body > ng-view ~ .md-dialog-container .md-transition-in {
+    background: #fff;
+    color: #000;
+}*/
