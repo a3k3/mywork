@@ -431,7 +431,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
 
-    $scope.projectName = "Untitled";
+    $scope.projectName = "My PapForm";
 
     $rootScope.previewURL = "../partials/cover.html";
 
