@@ -926,3 +926,106 @@ myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
         $scope.status = response.statusText;
     });
 });
+
+myapp.controller('responsectrl', function ($scope) {   
+    $scope.responseid = "Response ID: 345hfgdgxf";
+    $scope.totaltable = {
+        "row1": {
+            "col1": "Response ID",
+            "col2": "Whats your name?",
+            "col3":"Whats your age?"
+        },
+        "row2": {
+            "col1": "abd23ndjnd",
+            "col2": "Amit Shaw",
+            "col3": 35
+        },
+        "row3": {
+            "col1": "abd23ndjnd",
+            "col2": "Sumit Shaw",
+            "col3": 27
+        }
+    };
+
+    $scope.reviewer1 = {
+        "1": {
+            "1": "Reviewer#1"
+        },
+        "2": {
+            "1": "Question1<br/>answer"
+        },
+        "3": {
+            "1": "Question2<br/>answer"
+        },
+        "4": {
+            "1": "Question3<br/>answer"
+        }
+    };
+    $scope.reviewer2 = {
+        "1": {
+            "1": "Reviewer#2"
+        },
+        "2": {
+            "1": "Question1<br/>answer"
+        },
+        "3": {
+            "1": "Question2<br/>answer"
+        },
+        "4": {
+            "1": "Question3<br/>answer"
+        }
+    };
+    $scope.qblock1 = {
+        "1": {
+            "Q": "Whats your name?",
+            "A": "Amit Kumar Shaw"
+        },
+        "2": {
+            "Q": "Whats your age?",
+            "A": 35
+        },
+        "3": {
+            "Q": "What language do you speak?",
+            "A": "Hindi"
+        },
+        "4": {
+            "Q": "What is your fathers name?",
+            "A": "XYZ Shaw"
+        },
+        "5": {
+            "Q": "Which location you prefer for job?",
+            "A": "Hyderabad"
+        },
+        "6": {
+            "Q": "Which location you prefer for job?",
+            "A": "Hyderabad"
+        }
+    };
+    $scope.qblock2 = {
+        "1": {
+            "Q": "Whats your name?",
+            "A": "Amit Kumar Shaw"
+        },
+        "2": {
+            "Q": "Whats your age?",
+            "A": 35
+        },
+        "3": {
+            "Q": "What language do you speak?",
+            "A": "Hindi"
+        },
+        "4": {
+            "Q": "What is your fathers name?",
+            "A": "XYZ Shaw"
+        },
+        "5": {
+            "Q": "Which location you prefer for job?",
+            "A": "Hyderabad"
+        },
+        "6": {
+            "Q": "Which location you prefer for job?",
+            "A": "Hyderabad"
+        }
+    }
+
+})
