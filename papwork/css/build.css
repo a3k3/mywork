@@ -766,6 +766,9 @@ settings ng-include.advanced{
         padding: 30px 40px;
         background-color: #f8f8f8;
     }
+    .publish-panel+.ng-scope .cover-page{
+        margin:0 50px;
+    }
     .build .progressContainer{
         width: 60%;
         background: #f8f8f8;
@@ -794,7 +797,7 @@ settings ng-include.advanced{
     }
     .publish-panel {
         padding: 0 38%;
-        height:4.5vh;
+        height:7vh;
     }
     .publish-panel .publish-btn-container {
         text-align: right;
