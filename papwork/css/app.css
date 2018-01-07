@@ -567,6 +567,23 @@ md-pagination-wrapper {
     display: block;
     margin: 0 auto;
 }
+.interview .record, .interview .stop, .interview .mute, .interview .unmute{
+    display:none;
+}
+#playRecVid{
+    height:0;
+}
+.webcam{
+    position: fixed;
+    top: -60px;
+    left: -16px;
+}
+.webcam-live{
+    width: 100vw!important;
+    height: 100vh!important;
+    position: absolute;
+}
+
 @media screen and (min-width:1024px) {
     .create-tabs question.active .category {
         margin-top: 100px;
@@ -652,6 +669,30 @@ md-pagination-wrapper {
 
 .popup_layout .share_text h2, .popup_layout .embed_text h2{
     margin-bottom:0;
+}
+
+.popup_layout .embedlink_block h2{
+    margin-top:0;
+}
+
+.embedlink_block{
+    margin-top:50px;
+}
+
+.checkbox-block{
+    margin-top:40px;
+    margin-bottom:40px;
+}
+
+@media screen and (max-width:767px) {
+   .popup_layout .share_text, .popup_layout .share_text_url, .popup_layout .embed_text_url, .popup_layout .embed_text {
+    width: 100%;
+    float: none;
+}
+
+   .popup_layout .share_text_url md-input-container,.popup_layout .share_text_url button{
+       display:inline-block;
+   }
 }
 
 /*body > ng-view ~ .md-dialog-container .md-transition-in {

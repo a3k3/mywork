@@ -365,14 +365,27 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
     $scope.stopCam = function () {
         $rootScope.$broadcast("STOP_WEBCAM");
     }
-    $scope.startCam = function () {
+    $scope.startCam = function (event) {
         $rootScope.$broadcast("START_WEBCAM");
+        var start = angular.element(event.target).hasClass('start-interview') ? angular.element(event.target) : angular.element(event.target).closest('.start-interview');
+        start.hide();
+        start.siblings('.record').show();
     }
-    $scope.record = function () {
+    $scope.record = function (event) {
         $rootScope.$broadcast("START_RECORD");
+        var record = angular.element(event.target).hasClass('record') ? angular.element(event.target) : angular.element(event.target).closest('.record');
+        record.hide();
+        record.siblings('.stop').show();
+        record.siblings('.mute').show();
     }
-    $scope.stopRecord = function () {
+    $scope.stopRecord = function (event) {
         $rootScope.$broadcast("STOP_RECORD");
+        $scope.stopCam();
+        //$scope.downloadRecord();
+        var stoprecord = angular.element(event.target).hasClass('stop') ? angular.element(event.target) : angular.element(event.target).closest('.stop');
+        stoprecord.hide();
+        stoprecord.siblings().hide();
+        //stoprecord.after('<video src="'+url+'"></video>')
     }
     $scope.downloadRecord = function () {
         $rootScope.$broadcast("DOWNLOAD_RECORD");

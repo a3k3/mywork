@@ -160,14 +160,19 @@
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_up_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_linear_scale_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_link_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_mic_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_mic_off_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_more_horiz_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_payment_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_photo_camera_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_photo_library_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_play_arrow_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_play_circle_filled_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_radio_button_checked_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_remove_circle_outline_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_settings_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_star_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_stop_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_textsms_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_text_fields_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\link.svg" />
@@ -278,6 +283,7 @@
     <Content Include="asset\font\OPTIMA.TTF" />
     <Content Include="asset\font\OPTIMA_B.TTF" />
     <Content Include="asset\font\unicode.optima.ttf" />
+    <None Include="Properties\PublishProfiles\papwork aws.pubxml" />
     <None Include="Properties\PublishProfiles\PapWork.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

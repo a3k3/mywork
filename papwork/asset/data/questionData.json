@@ -25,7 +25,7 @@
       },
       "autocomplete": {
         "name": "autocomplete",
-        "condition": true,
+        "condition": false,
         "time": 5,
         "text": "This response is timed."
       }
@@ -57,7 +57,7 @@
       },
       "autocomplete": {
         "name": "autocomplete",
-        "condition": true,
+        "condition": false,
         "time": 10,
         "text": "This response is timed."
       }
