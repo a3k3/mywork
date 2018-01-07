@@ -1,5 +1,5 @@
 ﻿<div class="app-submit-page" ng-controller="successCtrl">
-    <div class="default-container" ng-if="!successdata.settings.successtemplate.condition">
+    <div class="default-container" ng-if="successdata.settings.successtemplate.condition">
         <user-card>
             <md-card md-colors="::{backgroundColor: '{{theme}}-warn-hue-1'}">
                 <md-card-title>
@@ -20,6 +20,35 @@
         </div>
         <div class="recomends">
             <h4 class="font-size-16 font-color-666">{{successdata.default.content.reccomend_text}}</h4>
+            <ul>
+                <li ng-repeat="reccomendation in successdata.settings.reccomendations.options">
+                    <a href="{{reccomendation.link_url}}">
+                        <img class="selected-icon" src="{{reccomendation.link_icon}}">
+                        <p class="font-size-12 font-color-444">{{reccomendation.link_title}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="variant-container" ng-if="!successdata.settings.successtemplate.condition">
+        <user-card>
+            <md-card md-colors="::{backgroundColor: '{{theme}}-primary-hue-1'}">
+                <md-card-title>
+                    <md-card-title-text>
+                        <img class="success_media_logo" src="{{successdata.default.media_src}}" />
+                        <span class="md-headline text-center font-color-000 font-size-18">{{successdata.default.headline}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+        </user-card>
+        <div class="content-section">
+            <img class="success_media" src="{{successdata.default.media_src}}" />
+            <h2>{{successdata.default.content.headline_text}}</h2>
+            <p class="font-color-000 font-size-24">{{successdata.default.content.mail_text}}</p>
+            <h6 class="font-color-666 font-size-14">{{successdata.default.content.poweredby_text}}</h6>
+        </div>
+        <div class="recomends">
+            <h4 class="font-size-16 font-color-000">{{successdata.default.content.reccomend_text}}</h4>
             <ul>
                 <li ng-repeat="reccomendation in successdata.settings.reccomendations.options">
                     <a href="{{reccomendation.link_url}}">

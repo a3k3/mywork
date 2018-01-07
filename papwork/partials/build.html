@@ -4,7 +4,7 @@
             <div class="row">
                 <div flex class="project-title">
                     <md-input-container style="margin-top:0;">
-                        <input class="md-accent hue-2" ng-model="buildQuestionsObj.name" placeholder="{{question.placeholder}}" type="text">
+                        <input class="md-accent hue-2" ng-model="buildQuestionsObj.name" placeholder="My PapForm" type="text">
                     </md-input-container>
                 </div>
                 <div flex class="more-options">
@@ -79,10 +79,9 @@
                                         <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildcoverdata.settings"></ng-include>
                                     </md-content>
                                 </md-tab>
-                                <md-tab label="advanced">
+                                <md-tab label="advanced" ng-disabled="true">
                                     <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab One</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                        <!--<ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildcoverdata.advsettings"></ng-include>-->
                                     </md-content>
                                 </md-tab>
                             </md-tabs>
@@ -135,13 +134,12 @@
                             <md-tabs>
                                 <md-tab label="basic">
                                     <md-content class="md-padding">
-                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in question.validations"></ng-include>
+                                        <ng-include class="basic" src="getSettingUrl(setting.name)" ng-repeat="setting in question.validations" ng-if="setting.name != 'mustanswer'"></ng-include>
                                     </md-content>
                                 </md-tab>
-                                <md-tab label="advanced" ng-disabled="true">
+                                <md-tab label="advanced">
                                     <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab One</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                        <ng-include class="advanced" src="getSettingUrl(setting.name)" ng-repeat="setting in question.advancedvalidations"></ng-include>
                                     </md-content>
                                 </md-tab>
                             </md-tabs>
@@ -177,9 +175,8 @@
                                     </md-content>
                                 </md-tab>
                                 <md-tab label="advanced">
-                                    <md-content class="md-padding">
-                                        <h1 class="md-display-2">Tab One</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                                    <md-content class="md-padding" ng-disabled="true">
+                                        <!--<ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildsuccessdata.advsettings"></ng-include>-->
                                     </md-content>
                                 </md-tab>
                             </md-tabs>

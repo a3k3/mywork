@@ -202,7 +202,8 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         _active = angular.element(_active);
         if (_active.index() < $scope.questionsObj.maxCount()) {
             _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
-            if ($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.start > 0) {
+            var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
+            if (autocomplete != undefined && autocomplete.start > 0) {
                 $interval.cancel($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.interval);
             }
             $scope.questionsObj.activeNow++;
@@ -419,7 +420,7 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
     });
 });
 
-myapp.controller('tabCtrl', function ($scope, $rootScope) {
+myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $rootScope.bodylayout = 'create-layout';
 
@@ -430,7 +431,40 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
 
-    $scope.projectName = "Untitled";
+    function DialogController($scope, $mdDialog, callback) {
+        $scope.query = { primary: true };
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+
+    }
+
+    $scope.PublishPopup = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/PublishPopup.html',
+            parent: $(event.target).closest('body'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+
+
+
+    $scope.projectName = "My PapForm";
 
     $rootScope.previewURL = "../partials/cover.html";
 
@@ -443,7 +477,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope) {
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet) {
     var sampleQuestion = {};
 
     getSampleQuestionData.then(function (response) {
@@ -471,6 +505,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.name = value;
     });
 
+    $scope.$parent.$watch('previewurl', function (value) {
+        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
+    });
+
     $scope.$on('questionsFormTheme', function (event, data) {
         $scope.buildQuestionsObj.theme = data;
     });
@@ -481,6 +519,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildcoverdata.settings = response.data.cover.settings;
+            //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
             if ($scope.buildcoverdata.settings.covertemplate.condition) {
                 $scope.buildcoverdata.cover_template = 'official';
             }
@@ -498,6 +537,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
+            //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
             if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
             }
@@ -566,6 +606,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             //add validations 
             $scope.buildQuestionsObj.questions[index].validations = typedata.settings;
 
+            //add advanced validations 
+            $scope.buildQuestionsObj.questions[index].advancedvalidations = typedata.advsettings;
+
             //add options if exist
             if (typedata.options) {
                 $scope.buildQuestionsObj.questions[index].options = typedata.options;
@@ -594,6 +637,24 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions[index].options.push(copyObj);
     }
 
+    //add advance setting show/hide option
+    $scope.addAdvanceOption = function (event,type) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
+        var copyObj = angular.copy(questionTemp.logic_options[0]);
+        questionTemp.logic_options.push(copyObj);
+    }
+
+    $scope.updateAdvanceAnswers = function (logic) {
+        var index = logic.slide_to_show - 1;
+        if ($scope.buildQuestionsObj.questions[index].options.length > 0){
+            logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
+        }
+        else {
+            logic.type = "static";
+        }
+    }
+
     //delete options
     $scope.deleteOption = function (event) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
@@ -608,6 +669,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
 
         $timeout(function () {
+            resetSlide();
+            setActiveSlide($scope.buildQuestionsObj.activeNow);
             var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
             angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
         }, 0);
@@ -705,10 +768,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $scope.status = 'You cancelled the dialog.';
         });
     };
-
-    $scope.nextswipes = function () {
-        //alert();
-    }
 
     function DialogController($scope, $mdDialog, callback) {
         $scope.query = { primary: true };
@@ -883,6 +942,21 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         }
         angular.element('ul.tools').fadeOut(200);
     }
+
+    $scope.showListBottomSheet = function (event, option) {
+        $mdBottomSheet.show({
+            templateUrl: '../partials/settings_templates/media_bottomsheet.html',
+            controller: 'ListBottomSheetCtrl',
+            locals: {
+                event: event,
+                option: option
+            }
+        }).then(function (clickedItem) {
+            
+        }).catch(function (error) {
+            // User clicked outside or hit escape
+        });
+    };
 });
 
 myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller) {
@@ -1027,5 +1101,59 @@ myapp.controller('responsectrl', function ($scope) {
             "A": "Hyderabad"
         }
     }
+});
+myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event, option) {
 
+    $scope.items = [
+      { name: 'Link', icon: '../asset/img/md-icons/svg/ic_link_black_24px.svg', type:'link', src:'' },
+      { name: 'Use Gallery', icon: '../asset/img/md-icons/svg/ic_photo_library_black_24px.svg', type: 'gallery', src:'' },
+      { name: 'Use Camera', icon: '../asset/img/md-icons/svg/ic_add_a_photo_black_24px.svg', type:'camera', src:'' }
+    ];
+
+    $scope.listItemClick = function ($index) {
+        var clickedItem = $scope.items[$index];
+        if (clickedItem['type'] == "gallery")
+            $scope.updateMedia(event);
+        if (clickedItem['type'] == "link")
+            $scope.updateLink(event, option, clickedItem);
+        $mdBottomSheet.hide(clickedItem);
+    };
+
+    //UPLOAD THE FILES.
+    $scope.updateMedia = function (event) {
+        var fileBrowse = $(event.target).data('file') == undefined ? $(event.target).parent().data('file') : $(event.target).data('file');
+        document.getElementById(fileBrowse).click();
+    }
+
+    $scope.getTheFiles = function ($files, element) {
+        angular.forEach($files, function (value, key) {
+            formdata.append(key, value);
+        });
+
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+            $scope.$apply(function () {
+                element.media_src = loadEvent.target.result;
+                var data = loadEvent.target.result.substr(loadEvent.target.result.indexOf(",") + 1, loadEvent.target.result.length);
+                $scope.uploadFiles(data, function (output) {
+                    element.media_src = output;
+                });
+            });
+        }
+        reader.readAsDataURL($files[0]);
+    };
+
+    $scope.uploadFiles = function (data, handleData) {
+        uploadData.uploadImage(data).success(function (response) {
+            handleData(response.data.link);
+        })
+        .error(function (error) {
+            console.log(error);
+        });
+    }
+
+    //using external url
+    $scope.updateLink = function (event, element, clickedItem) {
+        element.media_src = clickedItem['src'];
+    }
 })

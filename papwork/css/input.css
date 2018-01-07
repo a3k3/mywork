@@ -306,6 +306,7 @@ fieldset, label {
     float: left;
     position: relative;
     border-left: 1px solid #b2b2b2;
+    border-top: 1px solid #b2b2b2;
     width: 200px;
     height: 100px;
 }
