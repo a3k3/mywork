@@ -1,1 +1,78 @@
-﻿
+﻿<section  class="response-section build" ng-controller="responsectrl">
+    <section class="chart-box">
+        <div class="chartbox-headers">
+            <div class="chartbox-header-values">
+                <h4 class="md-title">MySurvey</h4>
+                <h4>600<small>Completed</small></h4>
+                <h4>950<small>Engaged</small></h4>
+                <h4>1200<small>Visited</small></h4>
+                <h4>79%<small>Audience Interest</small></h4>
+                <h4>63%<small>Papform Quality</small></h4>
+            </div>
+            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_filter_list_black_24px.svg" aria-label="Filter Audience"></md-icon>Filter Audience</md-button>
+            <md-button class="md-icon-button share"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_share_black_24px.svg" aria-label="Share"></md-icon></md-button>
+        </div>
+        <div class="chart-body">
+            <md-grid-list md-cols-gt-md="12" md-cols="4" md-cols-md="8"
+                          md-row-height-gt-md="1:1" md-row-height="4:3"
+                          md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px">
+                <doughnut-chart dataval="[2,5,6,8]" datalabel="['2%Item1','5%Item2','6%Item3','8%Item4']"></doughnut-chart>
+                <doughnut-chart dataval="[4,1,10,20,15]" datalabel="['4%Item1','1%Item2','10%Item3','20%Item4','15%Item5']"></doughnut-chart>-->
+                <doughnut-chart dataval="[100,150,200]" datalabel="['100%Item1','150%Item2','200%Item3']"></doughnut-chart>
+                <doughnut-chart dataval="[12,15,20,5]" datalabel="['12%Item1','15%Item2','20%Item3','5%Item4']"></doughnut-chart>
+
+                <!--<md-grid-tile md-colspan-gt-sm="3" md-rowspan-gt-sm="1" ng-style="{'backgroundColor':'#fff'}">
+            jfghdkughdfbgdfjgh
+        </md-grid-tile>
+        <md-grid-tile md-colspan-gt-sm="3" md-rowspan-gt-sm="1" ng-style="{'backgroundColor':'#fff'}">
+            jfghdkughdfbgdfjgh
+        </md-grid-tile>
+        <md-grid-tile md-colspan-gt-sm="3" md-rowspan-gt-sm="1" ng-style="{'backgroundColor':'#fff'}">
+            jfghdkughdfbgdfjgh
+        </md-grid-tile>-->
+            </md-grid-list>
+            <md-button class="md-raised show-insights">Show all insights</md-button>
+        </div>
+    </section>
+    <hr/>
+    <section class="response-data-table">
+        <div class="table">
+            <tbl rows="totaltable"></tbl>
+        </div>
+    </section>
+    <section class="response-review">
+        <section class="response-questions">
+            <h3 class="responseid">{{responseid}}</h3>
+            <div class="reviewers">
+                <div class="reviewer">
+                    <div class="table">
+                        <tbl rows="reviewer1"></tbl>
+                    </div>
+                    <div class="quest-answ">
+                        <div class="quest-block" ng-repeat="(key,val) in qblock1">
+                            <h5>{{key}}.{{val.Q}}</h5>
+                            <p><b>{{val.A}}</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviewer">
+                    <div class="table">
+                        <tbl rows="reviewer2"></tbl>
+                    </div>
+                    <div class="quest-answ">
+                        <div class="quest-block" ng-repeat="(key,val) in qblock2">
+                            <h5>{{key}}.{{val.Q}}</h5>
+                            <p><b>{{val.A}}</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="response-rating">
+            <ng-include src="'../partials/experience.html'"></ng-include>
+        </section>
+        
+        
+
+    </section>
+</section>

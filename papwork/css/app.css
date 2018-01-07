@@ -476,9 +476,9 @@ question.active .questionPanel {
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
     min-height: 94vh;
 }
-md-tab-content {
+/*md-tab-content {
     overflow: hidden!important;
-}
+}*/
 md-pagination-wrapper {
     width:100%!important;
 }
@@ -652,6 +652,81 @@ md-pagination-wrapper {
 ============================================================================= */
 
 
+
+/*----------Response Page---------------*/
+.chartbox-header-values {
+    width: 75%;
+}
+
+    .chartbox-header-values > * {
+        display: inline-block;
+        padding-right:2.5%;
+    }
+.chartbox-headers>*{display:inline-block;}
+.chart-box .md-card {
+    display: inline-block;
+    margin-right: 3%;
+    width:20%;
+    background-color: #fff;   
+    border: 1px solid grey;
+    text-align:center;
+}
+.legend strong {
+    display:inline-block;
+    margin: 5px;
+}
+.legend{
+    margin:20px 2px;
+}
+.chart-body .md-button.md-raised.show-insights {
+    background-color: #fff;
+}
+.chart-body {
+    text-align: center;
+}
+hr {
+    height: 2px;
+    background-color: #c1c1c1;
+}
+.response-section .table {
+    display: table;
+    border: 1px solid #c3b8b8;
+}
+.response-section .tablerow {
+    display: table-row;
+}
+.response-section .tablecell {
+    display: table-cell;
+    border: 0.05px solid #c3b8b8;
+    border-collapse: collapse;
+    border-bottom: 0px;
+    padding: 5px;
+}
+.response-section .tablerow:nth-child(odd) {
+    background-color: #fdfafa;
+}
+.response-section .tablerow:first-child {
+    background-color: #b3b2b1;
+}
+.response-section .tablerow:nth-child(even) {
+    background-color: #fff;
+}
+.response-questions {
+    width: 65%;
+    /*padding-right: 10px;*/
+    border-right: 2px solid #d0caca;
+}
+.reviewer {
+    width: 48%;
+    display: inline-block;
+    padding-right: 2%;
+}
+.response-review>*{
+    display:inline-block;
+}
+.response-rating {
+    width:33%;
+}
 
 /*Publishpop*/
 .popup_layout{
