@@ -473,3 +473,72 @@ myapp.directive('webcam', function () {
         }
     };
 });
+
+myapp.directive('doughnutChart', function () {
+    return {
+        restrict: 'E',
+        replace: false,
+        
+        templateUrl: "../partials/response-templates/chart-card.html",
+        link: function (scope, element, attrs) {
+            var data = JSON.parse(attrs.dataval);
+            //var label = JSON.parse(attrs.datalabel);
+            var label = attrs.datalabel.replace("[", "").replace("]", "").split(",");
+
+            var svg = d3.select(element[0]).select("svg"),
+                //width = svg.attr("width"),
+                width = svg.node().clientWidth,
+                height = svg.node().clientHeight,
+                radius = Math.min(width, height) / 2,
+                holeradius=radius*0.55,
+                g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+            var color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c']);
+
+            // Generate the pie
+            var pie = d3.pie();
+
+            // Generate the arcs
+            var arc = d3.arc()
+                .innerRadius(holeradius)
+                .outerRadius(radius);
+
+            //Generate groups
+            var arcs = g.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+
+            //Draw arc paths
+            var labelColor = [];
+            arcs.append("path")
+                .attr("fill", function (d, i) {
+                    var thisColor = color(i);
+                    labelColor.push(thisColor);
+                    return color(i);
+                })
+                .attr("d", arc);
+            var legendCtr = d3.select(element[0]).select("div.legend");
+            label.forEach(function (d, i) {
+                legendCtr.append("strong").style("color", labelColor[i]).text(label[i]);
+
+            })
+
+
+        }
+    }
+        
+});
+
+myapp.directive('tbl', function () {
+    return {
+        restrict: 'E',
+        replace:true,
+        templateUrl: "../partials/response-templates/respone-table.html",
+        scope: {
+            rows: "=rows"
+        }
+    };
+
+});

@@ -25,6 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -151,7 +152,9 @@
     <Content Include="asset\img\md-icons\svg\ic_code_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_content_copy_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_delete_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_email_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_file_upload_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_filter_list_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_format_color_text_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_hourglass_empty_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_down_black_24px.svg" />
@@ -167,6 +170,7 @@
     <Content Include="asset\img\md-icons\svg\ic_radio_button_checked_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_remove_circle_outline_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_settings_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_share_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_star_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_textsms_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_text_fields_black_24px.svg" />
@@ -246,6 +250,8 @@
     <Content Include="partials\input_templates\video.html" />
     <Content Include="partials\PublishPopup.html" />
     <Content Include="partials\questionType.tmpl.html" />
+    <Content Include="partials\response-templates\chart-card.html" />
+    <Content Include="partials\response-templates\respone-table.html" />
     <Content Include="partials\response.html" />
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />
