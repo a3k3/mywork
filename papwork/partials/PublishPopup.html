@@ -1,0 +1,36 @@
+﻿<div class="popup_layout">
+    <div class="close-tab" layout="row" layout-align="center center">
+        <div flex>
+            <md-icon class="close-modal" ng-click="cancel()" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+        </div>
+    </div>
+    <div class="publish_layout">
+        <div class="sharelink_block">
+            <div class="share_text">
+                <h2>Share Link</h2>
+                <p>Hint</p>
+            </div>
+            <div class="share_text_url">
+                <md-input-container>
+                    <input class="md-accent hue-2" value="" placeholder="enter" name="text">                 
+                </md-input-container>
+                <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="">
+                    COPY
+                </md-button>
+            </div>
+        </div>
+        <div class="embedlink_block">
+            <div class="embed_text">
+                <h2>Embed</h2>
+                <p>Hint</p>
+            </div>
+            <div class="embed_text_url">
+                <md-radio-group ng-model="question.response">
+                    <md-radio-button value="" class="md-primary">Banner</md-radio-button>
+                    <md-radio-button value="" class="md-primary">Pop Up window after</md-radio-button>
+                    <md-radio-button value="" class="md-primary">Pop Up window after</md-radio-button>
+                </md-radio-group>
+            </div>
+            </div>
+        </div>
+</div>

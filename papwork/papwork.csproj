@@ -149,6 +149,7 @@
     <Content Include="asset\img\md-icons\svg\ic_close_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_code_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_content_copy_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_crop_square_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_delete_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_email_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_file_upload_black_24px.svg" />
@@ -164,6 +165,7 @@
     <Content Include="asset\img\md-icons\svg\ic_payment_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_radio_button_checked_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_remove_circle_outline_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_search_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_settings_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_share_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_star_black_24px.svg" />
