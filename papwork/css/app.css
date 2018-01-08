@@ -88,9 +88,9 @@ form {
     z-index: 99;
     /*background: #fff;*/
 }
-.success-layout .progressContainer{
+/*.success-layout .progressContainer{
     padding:0 50px;
-}
+}*/
 .progressContainer .status {
     margin-top:10px;
 }
@@ -232,7 +232,13 @@ question.active .questionPanel .answerContainer, question.visited .questionPanel
 question .questionPanel .answerContainer{
     opacity:0;
 }
-
+/*question .questionPanel .inputContainer ng-include {
+    max-height: 43vh;
+    width: 100%;
+    display: inline-block;
+    overflow-y: scroll;
+    height: auto;
+}*/
 question.question-slide{
     height:75vh;
     position:absolute;

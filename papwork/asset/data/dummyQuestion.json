@@ -1,30 +1,126 @@
 ﻿{
   "dummyQuestion": {
     "question": "Please edit this text?",
+    "type": "text",
     "category": "Category",
     "caption": "Add a suitable caption",
     "hint": "Please add your hint here",
     "placeholder": "Placeholder text"
   },
   "name": {
-    "question": "What is your name?",
+    "question": "What's your name?",
+    "type": "text",
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Placeholder text"
+  },
+  "dob": {
+    "question": "What's your name?",
+    "type": "input_calendar",
+    
     "category": "Details",
     "caption": "Add a suitable caption",
     "hint": "Please add your hint here",
     "placeholder": "Placeholder text"
   },
   "age": {
-    "question": "What is your age?",
-    "category": "Age",
+    "question": "What's your age?",
+    "type": "number",
+    
+    "category": "Details",
     "caption": "Add a suitable caption",
     "hint": "Please add your hint here",
     "placeholder": "Placeholder text"
   },
   "father": {
-        "question": "What is your fathers name?",
-        "category": "Details",
-        "caption": "Add a suitable caption",
-        "hint": "Please add your hint here",
-        "placeholder": "Placeholder text"
-    }
+    "question": "What's your father's name?",
+    "type": "text",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Father's Name"
+  },
+  "mother": {
+    "question": "What's your mother's name?",
+    "type": "text",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Mother's Name"
+  },
+  "spouse": {
+    "question": "What's your spouse's name?",
+    "type": "text",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Spouse Name"
+  },
+  "current_address": {
+    "question": "What's your current address?",
+    "type": "textarea",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Current Address"
+  },
+  "permanent_address": {
+    "question": "What's your permanent address?",
+    "type": "textarea",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Permanent Address"
+  },
+  "office_address": {
+    "question": "What's your office address?",
+    "type": "textarea",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Office Address"
+  },
+  "email": {
+    "question": "What's your email ID?",
+    "type": "email",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Email ID"
+  },
+  "official_email": {
+    "question": "What's your official email?",
+    "type": "email",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Official Email ID"
+  },
+  "phone_number": {
+    "question": "What's your phone number?",
+    "type": "number",
+    
+    "category": "Details",
+    "caption": "Add a suitable caption",
+    "hint": "Please add your hint here",
+    "placeholder": "Phone No."
+  },
+  "url": {
+    "question": "What's your website URL?",
+    "type": "url",
+    
+    "category": "Details",
+    "caption": "Enter full address (e.g. http://www.yoursite.com)",
+    "hint": "Please add your hint here",
+    "placeholder": "URL"
+  }
 }

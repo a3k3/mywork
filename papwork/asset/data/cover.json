@@ -19,8 +19,8 @@
       },
     "autocomplete": {
       "name": "autocomplete",
-      "condition": false,
-      "time": 200,
+      "condition": true,
+      "time": 5,
       "text": "This response is timed."
     },
     "disablecover": {

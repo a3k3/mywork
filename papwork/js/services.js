@@ -35,7 +35,7 @@ myservice.service('getSuccessData', ['$http', function ($http) {
     })
 }]);
 
-myservice.service('getFieldTypeData', ['$http', function ($http) {
+myservice.service('getTypeData', ['$http', function ($http) {
     return $http({
         method: "GET",
         url: "../asset/data/questionType.json"

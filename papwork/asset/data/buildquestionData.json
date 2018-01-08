@@ -16,6 +16,11 @@
         "name": "disablecover",
         "condition": false,
         "text": "Cover Page Disabled."
+      },
+      "reset": {
+        "name": "reset",
+        "condition": false,
+        "text": "Reset to Default."
       }
     },
     "advsettings": {
@@ -53,26 +58,31 @@
         "text": "Cover Page Disabled."
       },
       "reccomendations": {
-      "name": "reccomendations",
-      "options": [
-        {
-          "link_icon": "",
-          "link_title": "",
-          "link_url": ""
-        },
-        {
-          "link_icon": "",
-          "link_title": "",
-          "link_url": ""
-        },
-        {
-          "link_icon": "",
-          "link_title": "",
-          "link_url": ""
-        }
+        "name": "reccomendations",
+        "options": [
+          {
+            "link_icon": "",
+            "link_title": "",
+            "link_url": ""
+          },
+          {
+            "link_icon": "",
+            "link_title": "",
+            "link_url": ""
+          },
+          {
+            "link_icon": "",
+            "link_title": "",
+            "link_url": ""
+          }
 
-      ]
-    }
+        ]
+      },
+      "reset": {
+        "name": "reset",
+        "condition": false,
+        "text": "Reset to Default."
+      }
     },
     "advsettings": {
       "showhide": {
@@ -83,6 +93,13 @@
     }
   },
   "text": {
+    "options": [
+      {
+        "id": 1,
+        "value": "",
+        "placeholder": "Placeholder Text"
+      }
+    ],
     "settings": {
       "mustanswer": {
         "name": "mustanswer",
@@ -116,7 +133,7 @@
             "slide_to_show": 0,
             "operator": "not",
             "answer": "",
-            "answer_list": [],
+            "answer_list": [ ],
             "relation": "and"
           }
         ]
@@ -130,7 +147,7 @@
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
             "answer": "",
-            "answer_list": [],
+            "answer_list": [ ],
             "slide_to_show": 0
           }
         ]
@@ -349,6 +366,7 @@
     },
     "options": [
       {
+        "id": 1,
         "value": "ProductA"
       }
     ],
@@ -408,26 +426,31 @@
     },
     "options": [
       {
+        "id": 1,
         "name": "product",
         "key": "productA",
         "value": "ProductA"
       },
       {
+        "id": 2,
         "name": "product",
         "key": "productA",
         "value": "ProductA"
       },
       {
+        "id": 3,
         "name": "product",
         "key": "productA",
         "value": "ProductA"
       },
       {
+        "id": 4,
         "name": "product",
         "key": "productA",
         "value": "ProductA"
       },
       {
+        "id": 5,
         "name": "product",
         "key": "productA",
         "value": "ProductA"
@@ -564,7 +587,7 @@
             "slide_to_show": 0,
             "operator": "not",
             "answer": "",
-            "answer_list": [],
+            "answer_list": [ ],
             "relation": "and"
           }
         ]
@@ -578,7 +601,7 @@
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
             "answer": "",
-            "answer_list": [],
+            "answer_list": [ ],
             "slide_to_show": 0
           }
         ]

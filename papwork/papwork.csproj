@@ -264,7 +264,9 @@
     <Content Include="partials\settings_templates\jumplogic.html" />
     <Content Include="partials\settings_templates\maxcount.html" />
     <Content Include="partials\settings_templates\media_bottomsheet.html" />
+    <Content Include="partials\settings_templates\randomize.html" />
     <Content Include="partials\settings_templates\reccomendations.html" />
+    <Content Include="partials\settings_templates\reset.html" />
     <Content Include="partials\settings_templates\showhide.html" />
     <Content Include="partials\settings_templates\success.html" />
     <Content Include="partials\settings_templates\maxlength.html" />

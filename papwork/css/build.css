@@ -26,6 +26,7 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container{
     width: 100%;
     height: 71vh;
     margin-top: -3px;
+    overflow:hidden;
 }
 .apply-questions-container flip {
     position: absolute;
@@ -313,6 +314,16 @@ md-card buildquestion .questionPanel .answerContainer, md-card question .questio
     padding: 5px;
     min-width: 63px;
     text-align: center;
+    margin-bottom:10px;
+}
+.question-type .content {
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+.question-type .content .content_container {
+    width: 600px;
+    display:inline-block;
 }
 .field-type .ftype.active, .question-type .flex.active {
     background-color: rgb(76,175,80);
@@ -613,7 +624,9 @@ buildquestion .category {
     text-decoration: underline;
 }
 .build ng-include {
-    position:relative;
+    position: relative;
+    width: 100%;
+    display: inline-block;
 }
 label + md-input-container label{
     opacity:0;
@@ -668,10 +681,18 @@ label + md-input-container label{
     width: 100%;
     padding-top: 5px;
 }
+.apply-questions-container .inputContainer .checkbox-block {
+    margin:0;
+}
 .apply-questions-container .inputContainer .option > [ng-click] {
     position:absolute;
     right:0;
     bottom: 16px!important;
+}
+.apply-questions-container .inputContainer .add-option {
+    position:absolute;
+    right:0;
+    bottom: 0;
 }
 
 #tab-content-2 .cover-page {
@@ -704,6 +725,31 @@ settings ng-include.advanced{
     display: inline-block;
     width: 100%;
     padding-bottom: 15px;
+}
+settings ng-include.advanced.showhide .advance-option {
+    position: absolute;
+    right: -10px;
+    bottom: 21px;
+}
+
+settings md-input-container.autocomplete:after {
+    content: 'sec';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: rgba(101,101,101,0.8);
+    line-height: 35px;
+    font-size: 14px;
+}
+
+.text-options {
+    position:relative;
+}
+.text-options md-input-container{
+    margin-top:0;
+}
+.basic.mustanswer{
+    display:none;
 }
 
 @media screen and (min-width:1024px) {
@@ -856,6 +902,21 @@ settings ng-include.advanced{
     md-card buildquestion.question-slide, md-card question.question-slide{
         padding-top:22px;
     }
+    .question-type .content{
+        overflow-x:auto;
+    }
+    .question-type .content .content_container{
+        width:auto;
+    }
+    md-tabs:not(.md-no-tab-content):not(.md-dynamic-height){
+        height:100vh;
+    }
+    .apply-questions-container {
+        height:76vh;
+    }
+    .basic.mustanswer{
+        display:block;
+    }
 }
 @media all and (max-width:1150px){
     .more-options li span{display:none}
@@ -902,6 +963,10 @@ settings ng-include.advanced{
     }
     .navigation-slide .cover-page, .navigation-slide .app-submit-page {
         height: 8.5vh;
+    }
+    .md-dialog-is-showing .apply-questions-container flip-panel {
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
     }
 }
 

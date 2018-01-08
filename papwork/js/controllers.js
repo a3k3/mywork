@@ -115,6 +115,43 @@ function disableRange(range) {
     }
 }
 
+// -> Fisher–Yates shuffle algorithm
+function shuffleArray(array) {
+    var m = array.length, t, i;
+
+    // While there remain elements to shuffle
+    while (m) {
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+
+    return array;
+}
+
+// Find first ancestor of el with tagName
+// or undefined if not found
+function upTo(el, tagName) {
+    tagName = tagName.toLowerCase();
+
+    while (el && el.parentNode) {
+        el = el.parentNode;
+        if (el.tagName && el.tagName.toLowerCase() == tagName) {
+            return el;
+        }
+    }
+
+    // Many DOM methods return null if they don't 
+    // find the element they are searching for
+    // It would be OK to omit the following and just
+    // return undefined
+    return null;
+}
+
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', []);
@@ -181,7 +218,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
     });
 
     $scope.$on('questionsData', function (event, data) {
-        $scope.questionsObj.questions =  data;
+        $scope.questionsObj.questions = data;
     });
 
     $scope.dynamicTemplateUrl = function (data) {
@@ -200,6 +237,8 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
     $scope.questionsObj.next = function () {
         var _active = document.getElementsByClassName("active");
         _active = angular.element(_active);
+        if (_active.find('.inputContainer input').hasClass('ng-invalid')) return;
+        $scope.checkadvancedvalidation();
         if (_active.index() < $scope.questionsObj.maxCount()) {
             _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
             var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
@@ -211,6 +250,20 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         }
     }
 
+    $scope.checkadvancedvalidation = function () {
+        var index = $scope.questionsObj.activeNow - 1;
+        var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic
+        augular.forEach(jumplogic.logic_options, function (option, index) {
+            if (option.answer_list[option.answer.id - 1].value == $scope.questionsObj.questions[index].response) {
+                console.log("jump to " + option.slide_to_show);
+            }
+        });
+    }
+
+    $scope.questionsObj.nextTab = function (event) {
+        angular.element(event.target).parents('ng-form').next().find('input').focus();
+    }
+
     $scope.checkIfTimed = function () {
         var index = $scope.questionsObj.activeNow - 1;
         var _autocomplete = $scope.questionsObj.questions[index].validations.autocomplete;
@@ -220,12 +273,12 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
             _autocomplete.seconds = '0s';
             _autocomplete.interval = $interval(function () {
                 _autocomplete.start += 1;
-                _autocomplete.seconds = parseInt(_autocomplete.start / ( 100/_autocomplete.time))+ 's';
+                _autocomplete.seconds = parseInt(_autocomplete.start / (100 / _autocomplete.time)) + 's';
                 if (_autocomplete.start >= 100) {
                     $scope.questionsObj.next();
                     $interval.cancel(_autocomplete.interval);
                 }
-            }, _autocomplete.time*10);
+            }, _autocomplete.time * 10);
 
             //$timeout(function () {
             //    $scope.questionsObj.next();
@@ -296,7 +349,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         _active.find('.smiley_radio').attr('checked', true);
         _active.siblings().find(".smiley").removeClass("activeSmiley");
         _active.siblings().find('.smiley_radio').attr('checked', false);
-        $.each(options,function (index, value) {
+        $.each(options, function (index, value) {
             value.selected = false;
         })
         options[index].selected = true;
@@ -437,7 +490,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $rootScope.bodylayout = 'create-layout';
 
-    $scope.themes = ['default','green', 'black', 'pink','blue','yellow', 'orange'];
+    $scope.themes = ['default', 'green', 'black', 'pink', 'blue', 'yellow', 'orange'];
 
     $scope.changeTheme = function (event) {
         var theme = $(event.target).data('theme');
@@ -518,10 +571,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.name = value;
     });
 
-    $scope.$parent.$watch('previewurl', function (value) {
-        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
-    });
-
     $scope.$on('questionsFormTheme', function (event, data) {
         $scope.buildQuestionsObj.theme = data;
     });
@@ -565,7 +614,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     //add slide
     $scope.addSlide = function () {
         var tempQuestion = {
-            "id":$scope.buildQuestionsObj.maxCount()+1,
+            "id": $scope.buildQuestionsObj.maxCount() + 1,
         };
         $scope.buildQuestionsObj.questions.push(tempQuestion);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
@@ -577,9 +626,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         angular.element('.navigating_blocks').find('md-card:last-child').removeClass('slideactive');
 
         var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
-        if ($('.navigating_blocks md-card').length>4){
+        if ($('.navigating_blocks md-card').length > 4) {
             $(".navigating_blocks").animate({
-                marginLeft: '-='+slidewidth+'px'
+                marginLeft: '-=' + slidewidth + 'px'
             }, 500);
         }
 
@@ -593,6 +642,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.addQuestion = function (type, qtype) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var id = $scope.buildQuestionsObj.questions[index].id;
+        var tempoptions = [];
+        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0)
+            tempoptions = $scope.buildQuestionsObj.questions[index].options;
         $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
         if (qtype != null) {
             $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion[qtype]);
@@ -602,29 +654,37 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
         $scope.buildQuestionsObj.questions[index].questiontype = type[0];
-        if (type[1] != undefined)
-        {
+        if (type[1] != undefined) {
             $scope.buildQuestionsObj.questions[index].questiontype = $scope.buildQuestionsObj.questions[index].questiontype + '_' + type[1];
         }
 
         //settings
         getSettings.then(function (response) {
             var type = "";
-            if($scope.buildQuestionsObj.questions[index].answertype != ""){
+            if ($scope.buildQuestionsObj.questions[index].answertype != "") {
                 type = $scope.buildQuestionsObj.questions[index].answertype
-                if($scope.buildQuestionsObj.questions[index].answertheme != "")
-                    type = type + '_' +$scope.buildQuestionsObj.questions[index].answertheme;
+                if ($scope.buildQuestionsObj.questions[index].answertheme != "")
+                    type = type + '_' + $scope.buildQuestionsObj.questions[index].answertheme;
             }
             var typedata = response.data[type];
             //add validations 
-            $scope.buildQuestionsObj.questions[index].validations = typedata.settings;
+            $scope.buildQuestionsObj.questions[index].validations = angular.copy(typedata.settings);
 
             //add advanced validations 
-            $scope.buildQuestionsObj.questions[index].advancedvalidations = typedata.advsettings;
+            $scope.buildQuestionsObj.questions[index].advancedvalidations = angular.copy(typedata.advsettings);
 
             //add options if exist
             if (typedata.options) {
-                $scope.buildQuestionsObj.questions[index].options = typedata.options;
+                if (tempoptions.length > 0) {
+                    $scope.buildQuestionsObj.questions[index].options = tempoptions;
+                    angular.forEach($scope.buildQuestionsObj.questions[index].options, function (option, i) {
+                        if (option.value == "") {
+                            option.value = "Edit This";
+                        }
+                    })
+                }
+                else
+                    $scope.buildQuestionsObj.questions[index].options = angular.copy(typedata.options);
             }
             else {
                 $scope.buildQuestionsObj.questions[index].options = [];
@@ -640,27 +700,40 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     //set settings panel
     $scope.getSettingUrl = function (tmpl) {
-        return '../partials/settings_templates/'+tmpl+'.html'
+        return '../partials/settings_templates/' + tmpl + '.html'
     }
 
     //add options
-    $scope.addOption = function(event){
+    $scope.addOption = function (event) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        var copyObj = angular.copy($scope.buildQuestionsObj.questions[index].options[0]);
-        $scope.buildQuestionsObj.questions[index].options.push(copyObj);
+        var activequestion = $scope.buildQuestionsObj.questions[index];
+        var copyObj = angular.copy(activequestion.options[activequestion.options.length-1]);
+        copyObj.id += 1;
+        activequestion.options.push(copyObj);
     }
 
     //add advance setting show/hide option
-    $scope.addAdvanceOption = function (event,type) {
+    $scope.addAdvanceOption = function (event, type) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
         var copyObj = angular.copy(questionTemp.logic_options[0]);
+        copyObj.slide_to_show = 0;
         questionTemp.logic_options.push(copyObj);
     }
 
     $scope.updateAdvanceAnswers = function (logic) {
-        var index = logic.slide_to_show - 1;
-        if ($scope.buildQuestionsObj.questions[index].options.length > 0){
+        var index = logic.slide_to_show == 0 ? logic.slide_to_show : logic.slide_to_show - 1;
+        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
+            logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
+        }
+        else {
+            logic.type = "static";
+        }
+    }
+
+    $scope.updateAdvanceJumpAnswers = function (logic) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
             logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
         }
         else {
@@ -678,7 +751,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     //delete slide
     $scope.deleteSlide = function (event) {
         var _currentSlide = $(event.target).closest('.flip').index();
-        $scope.buildQuestionsObj.questions.splice(_currentSlide-1, 1);
+        $scope.buildQuestionsObj.questions.splice(_currentSlide - 1, 1);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
 
         $timeout(function () {
@@ -692,7 +765,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     //copy slide
     $scope.copySlide = function (event) {
         var _currentSlide = $(event.target).closest('.flip').index();
-        var copyObj = angular.copy($scope.buildQuestionsObj.questions[_currentSlide-1]);
+        var copyObj = angular.copy($scope.buildQuestionsObj.questions[_currentSlide - 1]);
         $scope.buildQuestionsObj.questions.push(copyObj);
         $scope.buildQuestionsObj.questions[$scope.buildQuestionsObj.maxCount() - 1].id = $scope.buildQuestionsObj.maxCount();
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
@@ -711,7 +784,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         resetSlide();
         setActiveSlide(_currentSlide);
         if (_currentSlide <= $scope.buildQuestionsObj.maxCount() && $scope.buildQuestionsObj.maxCount() > 0)
-        $scope.buildQuestionsObj.activeNow = _currentSlide;
+            $scope.buildQuestionsObj.activeNow = _currentSlide;
     };
 
     //next button click
@@ -723,7 +796,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             if ($scope.buildQuestionsObj.activeNow <= $scope.buildQuestionsObj.maxCount())
                 $scope.buildQuestionsObj.activeNow++;
         }
-        if ($('.navigating_blocks .slideactive').offset().left > 220 && $('.navigating_blocks .slideactive').offset().left < 230 && $('.navigating_blocks .slideactive').nextAll().length >0) {
+        if ($('.navigating_blocks .slideactive').offset().left > 220 && $('.navigating_blocks .slideactive').offset().left < 230 && $('.navigating_blocks .slideactive').nextAll().length > 0) {
             $(".navigating_blocks").animate({
                 marginLeft: '-=54px'
             }, 500);
@@ -765,7 +838,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     //question type modal
     $scope.openTypeModal = function (ev) {
         $mdDialog.show({
-            locals:{
+            locals: {
                 callback: $scope.addQuestion
             },
             controller: DialogController,
@@ -792,7 +865,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $mdDialog.cancel();
         };
 
-        $scope.addQuestion = function (event,samplequestion) {
+        $scope.addQuestion = function (event, samplequestion) {
             var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
             if (type[0] != "more" && type[0] != "less") {
                 angular.element('.content > .flex').removeClass('active');
@@ -825,7 +898,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         for (var i = 0; i < index; i++) {
             angular.element('.apply-questions-container').find('.flip').eq(i).addClass('slideleft')
         }
-        for (var i = index+1; i <= $scope.buildQuestionsObj.maxCount()+1; i++) {
+        for (var i = index + 1; i <= $scope.buildQuestionsObj.maxCount() + 1; i++) {
             angular.element('.apply-questions-container').find('.flip').eq(i).removeClass('slideleft')
         }
         angular.element('.navigating_blocks md-card').eq(index).addClass('slideactive').removeClass('slideleft');
@@ -840,7 +913,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     var formdata = new FormData();
 
     $scope.updateMedia = function (event) {
-        var fileBrowse = $(event.target).data('file') == undefined? $(event.target).parent().data('file') : $(event.target).data('file');
+        var fileBrowse = $(event.target).data('file') == undefined ? $(event.target).parent().data('file') : $(event.target).data('file');
         document.getElementById(fileBrowse).click();
     }
 
@@ -908,18 +981,20 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.itemOnLongPress = function (event, question) {
         question.draggable = true;
-        angular.element('.navigation-slide').css('overflow-x','hidden')
+        angular.element('.navigation-slide').css('overflow-x', 'hidden')
     }
 
     $scope.onSwipeLeft = function () {
+        if (angular.element('body').hasClass('md-dialog-is-showing')) return
         var index = angular.element('.apply-questions-container').find('.flip.slideactive').index();
-        var containerLength = angular.element('.apply-questions-container').find('.flip').length-1;
-        index  = index == containerLength ? index : index + 1;
+        var containerLength = angular.element('.apply-questions-container').find('.flip').length - 1;
+        index = index == containerLength ? index : index + 1;
         resetSlide();
         setActiveSlide(index);
     }
 
     $scope.onSwipeRight = function () {
+        if (angular.element('body').hasClass('md-dialog-is-showing')) return
         var index = angular.element('.apply-questions-container').find('.flip.slideactive').index();
         index = index == 0 ? index : index - 1;
         resetSlide();
@@ -928,7 +1003,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.userSelection = "";
 
-    $scope.highlightSelection = function(event) {
+    $scope.highlightSelection = function (event) {
         $scope.userSelection = window.getSelection().getRangeAt(0);
         if ($scope.userSelection.startOffset < $scope.userSelection.endOffset) {
             angular.element('ul.tools').css({
@@ -965,25 +1040,27 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 option: option
             }
         }).then(function (clickedItem) {
-            
+
         }).catch(function (error) {
             // User clicked outside or hit escape
         });
     };
 });
 
-myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller) {
+myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller, $interval) {
 
     $rootScope.bodylayout = 'cover-layout';
 
     getCoverData.then(function (cover) {
         $scope.coverdata = cover.data;
+        $scope.checkIfTimed();
     }, function myError(response) {
         $scope.status = response.statusText;
     });
 
     $scope.$on('coverData', function (event, data) {
         $scope.coverdata = data;
+        $scope.checkIfTimed();
     });
 
     angular.extend(this, $controller('tabCtrl', { $scope: $scope }));
@@ -991,7 +1068,7 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
     var superclass = angular.extend({}, $scope);
 
     $scope.gotoExperience = function (url, event) {
-        if ($(event.target).closest('.create-tabs').length > 0) {
+        if (event != null && $(event.target).closest('.create-tabs').length > 0) {
             //var ngInclude = $(event.target).closest('.cover-page').parent();
             //ngInclude.attr('ng-include', '../partials/experience.html');
 
@@ -1003,24 +1080,44 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
             window.location = url;
         }
     }
+
+    $scope.checkIfTimed = function () {
+        if (window.location.hash == '#/cover') {
+            var _autocomplete = $scope.coverdata.settings.autocomplete;
+            if (_autocomplete != undefined && _autocomplete.condition) {
+                if (_autocomplete.start > 0) return;
+                _autocomplete.start = 0;
+                _autocomplete.seconds = '0s';
+                _autocomplete.interval = $interval(function () {
+                    _autocomplete.start += 1;
+                    _autocomplete.seconds = parseInt(_autocomplete.start / (100 / _autocomplete.time)) + 's';
+                    if (_autocomplete.start >= 100) {
+                        $scope.gotoExperience('#/experience', null);
+                        $interval.cancel(_autocomplete.interval);
+                    }
+                }, _autocomplete.time * 10);
+            }
+        }
+    }
 });
 
-myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
+myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
 
-    getFieldTypeData.then(function (fieldtype) {
-        $scope.fieldtypedata = fieldtype.data;
+    getTypeData.then(function (typedata) {
+        $scope.fieldtypedata = typedata.data.field_type;
+        $scope.questiontypedata = typedata.data.question_type;
     }, function myError(response) {
         $scope.status = response.statusText;
     });
 });
 
-myapp.controller('responsectrl', function ($scope) {   
+myapp.controller('responsectrl', function ($scope) {
     $scope.responseid = "Response ID: 345hfgdgxf";
     $scope.totaltable = {
         "row1": {
             "col1": "Response ID",
             "col2": "Whats your name?",
-            "col3":"Whats your age?"
+            "col3": "Whats your age?"
         },
         "row2": {
             "col1": "abd23ndjnd",
@@ -1115,12 +1212,13 @@ myapp.controller('responsectrl', function ($scope) {
         }
     }
 });
+
 myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event, option) {
 
     $scope.items = [
-      { name: 'Link', icon: '../asset/img/md-icons/svg/ic_link_black_24px.svg', type:'link', src:'' },
-      { name: 'Use Gallery', icon: '../asset/img/md-icons/svg/ic_photo_library_black_24px.svg', type: 'gallery', src:'' },
-      { name: 'Use Camera', icon: '../asset/img/md-icons/svg/ic_add_a_photo_black_24px.svg', type:'camera', src:'' }
+      { name: 'Link', icon: '../asset/img/md-icons/svg/ic_link_black_24px.svg', type: 'link', src: '' },
+      { name: 'Use Gallery', icon: '../asset/img/md-icons/svg/ic_photo_library_black_24px.svg', type: 'gallery', src: '' },
+      { name: 'Use Camera', icon: '../asset/img/md-icons/svg/ic_add_a_photo_black_24px.svg', type: 'camera', src: '' }
     ];
 
     $scope.listItemClick = function ($index) {
