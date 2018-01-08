@@ -7,10 +7,12 @@
 <div class="upload-options container" ng-if="setting.condition">
     <div class="row">
         <div class="col-xs-6 nopadding" ng-repeat="option in question.options">
-            <div class="upload-image" data-file="product{{$index}}" ng-click="updateMedia($event)" style="background-image:url('{{option.media_src}}')">
+            <div class="upload-image" data-file="product{{$index}}" ng-click="showListBottomSheet($event,option)" style="background-image:url('{{option.media_src}}')">
             </div>
             <input type="file" id="product{{$index}}" name="file" ng-files="getTheFiles($files,option)" style="display:none;" />
             <div class="value">{{option.value}}</div>
         </div>
     </div>
 </div>
+
+<!--updateMedia($event)-->

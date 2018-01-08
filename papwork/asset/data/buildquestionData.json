@@ -17,6 +17,21 @@
         "condition": false,
         "text": "Cover Page Disabled."
       }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "true",
+            "relation": "and"
+          }
+        ]
+      }
     }
   },
   "success": {
@@ -58,6 +73,13 @@
 
       ]
     }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic"
+      }
     }
   },
   "text": {
@@ -83,6 +105,36 @@
         "condition": "text",
         "text": "Please enter valid input."
       }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
+      }
     }
   },
   "textarea": {
@@ -107,6 +159,36 @@
         "name": "acceptonly",
         "condition": "text",
         "text": "Please enter valid input."
+      }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
       }
     }
   },
@@ -134,7 +216,37 @@
         "value": "ProductA",
         "media_src": "../asset/img/md-icons/svg/ic_photo_camera_black_24px.svg"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
+      }
+    }
   },
   "rating_star": {
     "options": [
@@ -180,6 +292,36 @@
         "condition": false,
         "text": "This response is timed."
       }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
+      }
     }
   },
   "radio": {
@@ -207,10 +349,39 @@
     },
     "options": [
       {
-        "name": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
+      }
+    }
   },
   "radio_size": {
     "settings": {
@@ -261,7 +432,37 @@
         "key": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
+      }
+    }
   },
   "statement": {
     "settings": {
@@ -292,7 +493,37 @@
         "key": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
+      }
+    }
   },
   "select": {
     "settings": {
@@ -322,6 +553,36 @@
         "name": "productA",
         "value": "ProductA"
       }
-    ]
+    ],
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [],
+            "slide_to_show": 0
+          }
+        ]
+      }
+    }
   }
 }

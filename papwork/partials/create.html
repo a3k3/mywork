@@ -15,7 +15,7 @@
                     <div class="circle {{theme}}" data-theme="{{theme}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>
                 </div>
                 <div flex="30" class="publish-btn-container">
-                    <md-button class="publish md-raised md-primary md-hue-1">Publish</md-button>
+                    <md-button class="publish md-raised md-primary md-hue-1" ng-click="PublishPopup($event)">Publish</md-button>
                 </div>
             </div>
             <ng-include src="getPartial()"></ng-include>

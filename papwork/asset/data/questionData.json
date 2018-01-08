@@ -78,6 +78,12 @@
       "mustanswer": {
         "condition": true,
         "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
       }
     }
   },
@@ -93,8 +99,16 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "mustanswer": true,
-      "maxCount": 5
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
     },
      "options": [
       {
@@ -136,8 +150,16 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "mustanswer": true,
-      "maxCount": 5
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
     },
     "options": [
       {
@@ -179,8 +201,16 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "mustanswer": true,
-      "maxCount": 5
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
     },
     "options": [
       {
@@ -217,8 +247,16 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "mustanswer": "true",
-      "maxCount": 5
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
     },
     "options": [
       {
@@ -249,7 +287,19 @@
     "answertype": "input",
     "answertheme": "calendar",
     "hint": "Please select the date",
-    "placeholder": ""
+    "placeholder": "",
+    "validations": {
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
+    }
   },
   {
     "id": 9,
@@ -263,8 +313,16 @@
     "hint": "Tap the star to give rating",
     "placeholder": "",
     "validations": {
-      "mustanswer": "true",
-      "maxCount": 5
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
     },
     "options": [
       {
@@ -306,8 +364,16 @@
     "hint": "Select appropriate size",
     "placeholder": "",
     "validations": {
-      "mustanswer": "true",
-      "maxCount": 5
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
     },
     "options": [
       {
@@ -355,6 +421,12 @@
       "minlength": {
         "condition": 0,
         "text": "Thats too short!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
       }
     }
   },
