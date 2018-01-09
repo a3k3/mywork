@@ -48,6 +48,9 @@
             </md-select>
         </md-input-container>
     </div>
+    <md-button class="md-fab md-mini remove" md-colors="{background: 'grey'}" aria-label="Remove" ng-click="removeAdvanceOption(setting.name, $index)" ng-if="$index != 0">
+        <md-icon md-svg-src="../../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+    </md-button>
 </div>
 <div ng-click="addAdvanceOption($event,setting.name)" class="advance-option">
     <md-button class="add" md-colors="{background: 'grey'}">Add</md-button>

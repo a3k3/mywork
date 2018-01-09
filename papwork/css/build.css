@@ -120,6 +120,7 @@ settings .md-tab {
     overflow:hidden;
 }
 settings ng-include [layout="row"] {
+    position:relative;
     padding: 10px 0;
 }
 settings md-tabs-canvas md-ink-bar {
@@ -740,6 +741,18 @@ settings md-input-container.autocomplete:after {
     color: rgba(101,101,101,0.8);
     line-height: 35px;
     font-size: 14px;
+}
+settings ng-include.showhide [layout="row"] .remove{
+    position: absolute;
+    left: -100px;
+    top: 0;
+}
+
+settings ng-include.showhide [layout="row"]:hover .remove{
+    left:-20px;
+    -webkit-transition: left .2s ease-out;
+    -moz-transition: left .2s ease-out;
+    transition: left .2s ease-out;
 }
 
 .text-options {

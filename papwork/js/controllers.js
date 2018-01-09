@@ -156,7 +156,7 @@ function upTo(el, tagName) {
 
 var myapp = angular.module('experienceApp.controllers', []);
 
-function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval) {
+myapp.controller('questionsCtrl', function($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -170,7 +170,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         theme: "default",
         questions: [],
         maxCount: function () {
-            return this.questions.length;
+            return this.questions.filter(function (item) { return item.enable }).length;
         },
         minCount: 0,
         activeNow: 0,
@@ -197,6 +197,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
                     value.caption = htmlDecode(value.caption);
                     value.hint = htmlDecode(value.hint);
                     value.placeholder = htmlDecode(value.placeholder);
+                    value.enable = "true";
                 });
             }
         }
@@ -209,6 +210,8 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
                 angular.element('.top-row').css('width', (angular.element('.top-row').find('.products').length * angular.element('.top-row').find('.products').outerWidth(true)) / 2)
             }
         }, 1000)
+
+
     }, function myError(response) {
         $scope.status = response.statusText;
     });
@@ -238,26 +241,74 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
         var _active = document.getElementsByClassName("active");
         _active = angular.element(_active);
         if (_active.find('.inputContainer input').hasClass('ng-invalid')) return;
-        $scope.checkadvancedvalidation();
-        if (_active.index() < $scope.questionsObj.maxCount()) {
-            _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
-            var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
-            if (autocomplete != undefined && autocomplete.start > 0) {
-                $interval.cancel($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.interval);
+        $timeout(function () {
+            if (_active.index() < $scope.questionsObj.maxCount()) {
+                _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
+                var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
+                if (autocomplete != undefined && autocomplete.start > 0) {
+                    $interval.cancel($scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete.interval);
+                }
+                $scope.questionsObj.activeNow++;
+                $scope.checkIfTimed();
             }
-            $scope.questionsObj.activeNow++;
-            $scope.checkIfTimed();
-        }
+        },500)
     }
 
     $scope.checkadvancedvalidation = function () {
         var index = $scope.questionsObj.activeNow - 1;
-        var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic
-        augular.forEach(jumplogic.logic_options, function (option, index) {
-            if (option.answer_list[option.answer.id - 1].value == $scope.questionsObj.questions[index].response) {
-                console.log("jump to " + option.slide_to_show);
+        if ($scope.questionsObj.questions[index] != undefined && window.location.href.indexOf('experience') != -1) {
+            var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
+            var answer = "";
+            if ($scope.questionsObj.questions[index].response != undefined) {
+                answer = $scope.questionsObj.questions[index].response;
             }
-        });
+            else if ($scope.questionsObj.questions[index].options != undefined) {
+                answer = $scope.questionsObj.questions[index].options.filter(function (item) {
+                    if (item.selected != undefined)
+                        return item.selected == true
+                    else
+                        return item.value != ""
+                })[0];
+            }
+            var match = jumplogic.logic_options.filter(function (item) {
+                if (answer != undefined && answer != "" && item.answer != undefined)
+                    return item.answer.value.toLowerCase() === answer.value.toLowerCase();
+            })[0];
+
+            if (match != undefined) {
+                for (var i = $scope.questionsObj.activeNow; i < match.slide_to_show - 1; i++) {
+                    $scope.questionsObj.questions[i].enable = false;
+                }
+                for (var i = match.slide_to_show; i < $scope.questionsObj.maxCount() ; i++) {
+                    $scope.questionsObj.questions[i].enable = true;
+                }
+                $scope.changeslideorder = true;
+            }
+            else {
+                for (var i = $scope.questionsObj.activeNow; i < $scope.questionsObj.maxCount() ; i++) {
+                    $scope.questionsObj.questions[i].enable = true;
+                }
+                $scope.changeslideorder = true;
+            }
+            $scope.changeslideArrangement();
+        }
+    }
+
+    $scope.$watch('questionsObj.questions',function(newval, oldval){
+        $scope.checkadvancedvalidation();
+    },true);
+
+    $scope.changeslideArrangement= function () {
+        if ($scope.changeslideorder) {
+            var _active = document.getElementsByClassName("active");
+            _active = angular.element(_active);
+            _active.nextAll().removeClass('next_active');
+            _active.nextAll().removeClass('next_next_active');
+
+            _active.next().addClass('next_active');
+            _active.next().next().addClass('next_next_active');
+            $scope.changeslideorder = false;
+        }
     }
 
     $scope.questionsObj.nextTab = function (event) {
@@ -448,9 +499,7 @@ function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, 
     $scope.submit = function () {
         console.log($scope.questionsObj.questions);
     }
-}
-
-myapp.controller('questionsCtrl', ['$scope', 'getAllQuestions', '$timeout', '$location', '$document', '$rootScope', '$http', '$interval', questionsCtrl])
+})
 
 
 function MyCtrl2() {
@@ -712,13 +761,20 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         activequestion.options.push(copyObj);
     }
 
-    //add advance setting show/hide option
+    //add advance setting option
     $scope.addAdvanceOption = function (event, type) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
         var copyObj = angular.copy(questionTemp.logic_options[0]);
         copyObj.slide_to_show = 0;
         questionTemp.logic_options.push(copyObj);
+    }
+
+    //remove advance setting option
+    $scope.removeAdvanceOption = function (type, removeindex) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
+        questionTemp.logic_options.splice(removeindex, 1);
     }
 
     $scope.updateAdvanceAnswers = function (logic) {

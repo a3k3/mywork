@@ -55,7 +55,7 @@
             "operator": "Jump to",
             "answer": {
               "id": 1,
-              "value": "ProductA"
+              "value": "Male"
             },
             "answer_list": [
               {
@@ -63,11 +63,30 @@
                 "value": "Male"
               },
               {
-                "id": 1,
+                "id": 2,
                 "value": "Female"
               }
             ],
-            "slide_to_show": 3
+            "slide_to_show": 5
+          },
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 2,
+              "value": "Female"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 8
           }
         ]
       }
@@ -109,6 +128,67 @@
         "time": 10,
         "text": "This response is timed."
       }
+    },
+    "advancedvalidations": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [ ],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 1,
+              "value": "ProductA"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 5
+          },
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 2,
+              "value": "Female"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 8
+          }
+        ]
+      }
     }
   },
   {
@@ -147,7 +227,68 @@
         "value": "",
         "placeholder": "Phone No."
       }
-    ]
+    ],
+    "advancedvalidations": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [ ],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 1,
+              "value": "ProductA"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 5
+          },
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 2,
+              "value": "Female"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 8
+          }
+        ]
+      }
+    }
   },
   {
     "id": 4,
