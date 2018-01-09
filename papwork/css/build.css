@@ -930,6 +930,16 @@ settings ng-include.showhide [layout="row"]:hover .remove{
     .basic.mustanswer{
         display:block;
     }
+    .publish-panel + ng-include > form{
+        width: 92%;
+        margin-left:4%;
+    }
+    .publish-panel + ng-include > form .progressContainer {
+        width: 90%;
+    }
+    .publish-panel + ng-include > form .nextprev{
+        right:8%;
+    }
 }
 @media all and (max-width:1150px){
     .more-options li span{display:none}

@@ -598,6 +598,13 @@ md-pagination-wrapper {
     .progressContainer .status {
         margin-top: 20px;
     }
+    .variant-container *{
+        text-align:center !important;
+    }
+    .variant-container .recomends{
+        width:auto;
+        padding:0px;
+    }
 }
 
 
