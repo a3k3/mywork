@@ -205,6 +205,7 @@
     <Content Include="lib\contextmenu\contextMenu.js" />
     <Content Include="lib\draggable\ngDraggable.js" />
     <Content Include="lib\swipe\ngSwipe.js" />
+    <Content Include="lib\toArrayFilter.js" />
     <Content Include="lib\tool\demo.css" />
     <Content Include="lib\tool\formbuilder.css" />
     <Content Include="lib\tool\formbuilder.js" />

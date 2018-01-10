@@ -710,10 +710,18 @@ hr {
 .response-rating {
     width:33%;
 }
+doughnut-chart svg > g {
+    /*transform: scale(0.5) translate(50%,50%);*/
+}
 
+@media only screen and (max-width:640px){
+    doughnut-chart .md-card{
+        width:80%;
+    }
+}
 /*Publishpop*/
-.popup_layout{
-    padding:40px;
+.popup_layout {
+    padding: 40px;
 }
 .popup_layout .sharelink_block, .popup_layout .embedlink_block {
     width: 100%;

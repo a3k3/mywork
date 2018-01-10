@@ -117,7 +117,7 @@ function disableRange(range) {
 
 /* App Controllers */
 
-var myapp = angular.module('experienceApp.controllers', []);
+var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
 function questionsCtrl($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval) {
 
@@ -1000,26 +1000,244 @@ myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
         $scope.status = response.statusText;
     });
 });
-
-myapp.controller('responsectrl', function ($scope) {   
-    $scope.responseid = "Response ID: 345hfgdgxf";
-    $scope.totaltable = {
-        "row1": {
-            "col1": "Response ID",
-            "col2": "Whats your name?",
-            "col3":"Whats your age?"
+var table = {
+    1:{
+        "ResponseID":"345hfgdgxf",
+        "userResponses": {
+        1: {
+            Q: "What is your Name?",
+            A: "Amit Shaw"            
         },
-        "row2": {
-            "col1": "abd23ndjnd",
-            "col2": "Amit Shaw",
-            "col3": 35
+        2: {
+            Q: "Your Age?",
+            A: "30"
         },
-        "row3": {
-            "col1": "abd23ndjnd",
-            "col2": "Sumit Shaw",
-            "col3": 27
+        3: {
+            Q: "Do you have Aadhar?",
+            A: "Yes"
+        },
+        4: {
+            Q: "Which language you Speak?",
+            A: "Hindi"
         }
-    };
+    },
+        "reviewerResponses": {
+        "1": {
+            1: {
+                Q: "Plz answer Q1",
+                A:"Answer1"
+            },
+            2: {
+                Q: "Answer Q2",
+                A:"Answer2"
+            },
+            3: {
+                Q: "Answer Q3",
+                A:"Answer3"
+            }
+
+        },
+        "2": {
+            1: {
+                Q: "Plz answer Q1",
+                A: "Answer1"
+            },
+            2: {
+                Q: "Answer Q2",
+                A: "Answer2"
+            }
+        }
+        },
+        "Action": {
+            "value": "submitted",
+            "state":"disabled"
+        }
+    },
+    2:{
+        "ResponseID": "345hfgdgxf",
+        "userResponses": {
+            1: {
+                Q: "What is your Name?",
+                A: "Sumit Shaw"
+            },
+            2: {
+                Q: "Your Age?",
+                A: "31"
+            },
+            3: {
+                Q: "Do you have Aadhar?",
+                A: "Yes"
+            },
+            4: {
+                Q: "Which language you Speak?",
+                A: "Marathi"
+            }
+        },
+        "reviewerResponses": {
+            "1": {
+                1: {
+                    Q: "Plz answer Q1",
+                    A: "Answer1"
+                },
+                2: {
+                    Q: "Answer Q2",
+                    A: "Answer2"
+                },
+                3: {
+                    Q: "Answer Q3",
+                    A: "Answer3"
+                }
+
+            },
+            "2": {
+                1: {
+                    Q: "Plz answer Q1",
+                    A: "Answer1"
+                },
+                2: {
+                    Q: "Answer Q2",
+                    A: "Answer2"
+                }
+            }
+        }
+    },
+    3: {
+        "ResponseID": "345hfgdgxg",
+        "userResponses": {
+            1: {
+                Q: "What is your Name?",
+                A: "Atul Shah"
+            },
+            2: {
+                Q: "Your Age?",
+                A: "27"
+            },
+            3: {
+                Q: "Do you have Aadhar?",
+                A: "No"
+            },
+            4: {
+                Q: "Which language you Speak?",
+                A: "Hindi"
+            }
+        },
+        "reviewerResponses": {
+            "1": {
+                1: {
+                    Q: "Plz answer Q1",
+                    A: "Answer1"
+                },
+                2: {
+                    Q: "Answer Q2",
+                    A: "Answer2"
+                },
+                3: {
+                    Q: "Answer Q3",
+                    A: "Answer3"
+                }
+
+            },
+            "2": {
+                1: {
+                    Q: "Plz answer Q1",
+                    A: "Answer1"
+                },
+                2: {
+                    Q: "Answer Q2",
+                    A: "Answer2"
+                }
+            }
+        }
+    },
+    4: {
+        "ResponseID": "345hfgdgxg",
+        "userResponses": {
+            1: {
+                Q: "What is your Name?",
+                A: "Prem Bhandari"
+            },
+            2: {
+                Q: "Your Age?",
+                A: "29"
+            },
+            3: {
+                Q: "Do you have Aadhar?",
+                A: "yes"
+            },
+            4: {
+                Q: "Which language you Speak?",
+                A: "Hindi"
+            }
+        },
+        "reviewerResponses": {
+            "1": {
+                1: {
+                    Q: "Plz answer Q1",
+                    A: "Answer1"
+                },
+                2: {
+                    Q: "Answer Q2",
+                    A: "Answer2"
+                },
+                3: {
+                    Q: "Answer Q3",
+                    A: "Answer3"
+                }
+
+            },
+            "2": {
+                1: {
+                    Q: "Plz answer Q1",
+                    A: "Answer1"
+                },
+                2: {
+                    Q: "Answer Q2",
+                    A: "Answer2"
+                }
+            }
+        }
+    }
+};
+function chartResize() {
+    var dc = document.querySelector(".chart-body md-grid-list");
+    var dval = [], dLabl = [];
+    dc.querySelectorAll("doughnut-chart").forEach(function (el, i) {
+        dval.push(el.getAttribute("dataval"));
+        dLabl.push(el.getAttribute("datalabel"));
+        el.remove();
+    });
+    dval.forEach(function (el, i) {
+        var newDCel = document.createElement("doughnut-chart");
+        newDCel.setAttribute("dataval", el);
+        newDCel.setAttribute("datalabel", dLabl[i]);
+        dc.append(newDCel);
+    })
+    console.log(dval);
+    console.log(dLabl);
+
+}
+//window.addEventListener('resize', chartResize);
+
+myapp.controller('responsectrl', function ($scope) {
+    $scope.totaltable = table;
+    $scope.responseid = "Response ID: 345hfgdgxf";
+    //$scope.totaltable = {
+    //    "row1": {
+    //        "col1": "Response ID",
+    //        "col2": "Whats your name?",
+    //        "col3": "Whats your age?"
+    //    },
+    //    "row2": {
+    //        "col1": "abd23ndjnd",
+    //        "col2": "Amit Shaw",
+    //        "col3": 35
+    //    },
+    //    "row3": {
+    //        "col1": "abd23ndjnd",
+    //        "col2": "Sumit Shaw",
+    //        "col3": 27
+    //    }
+    //};
 
     $scope.reviewer1 = {
         "1": {
@@ -1102,6 +1320,7 @@ myapp.controller('responsectrl', function ($scope) {
         }
     }
 });
+
 myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event, option) {
 
     $scope.items = [

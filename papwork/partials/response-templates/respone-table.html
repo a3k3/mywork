@@ -1,3 +1,7 @@
-﻿<div class="tablerow" ng-repeat="(rowkey,rowval) in rows">
-    <div class="tablecell" ng-repeat="(datakey,dataval) in rowval"><p ng-bind-html="dataval"></p></div>
+﻿<div class="tablehead">
+    <div class="tablecell" ng-repeat="dataval in rows |toArray | filter:'responsetblhead'"><p ng-bind-html="dataval"></p></div>
+    <!--<div class="tablerow" ng-repeat="(rowkey,rowval) in rows">
+        <div class="tablecell" ng-repeat="(datakey,dataval) in rowval"><p ng-bind-html="dataval"></p></div>
+    </div>-->
 </div>
+
