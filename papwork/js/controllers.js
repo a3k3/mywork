@@ -156,7 +156,7 @@ function upTo(el, tagName) {
 
 var myapp = angular.module('experienceApp.controllers', []);
 
-myapp.controller('questionsCtrl', function($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter) {
+myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -251,7 +251,7 @@ myapp.controller('questionsCtrl', function($scope, getAllQuestions, $timeout, $l
                 $scope.questionsObj.activeNow++;
                 $scope.checkIfTimed();
             }
-        },500)
+        }, 500)
     }
 
     $scope.checkadvancedvalidation = function () {
@@ -294,11 +294,11 @@ myapp.controller('questionsCtrl', function($scope, getAllQuestions, $timeout, $l
         }
     }
 
-    $scope.$watch('questionsObj.questions',function(newval, oldval){
+    $scope.$watch('questionsObj.questions', function (newval, oldval) {
         $scope.checkadvancedvalidation();
-    },true);
+    }, true);
 
-    $scope.changeslideArrangement= function () {
+    $scope.changeslideArrangement = function () {
         if ($scope.changeslideorder) {
             var _active = document.getElementsByClassName("active");
             _active = angular.element(_active);
@@ -756,7 +756,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.addOption = function (event) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var activequestion = $scope.buildQuestionsObj.questions[index];
-        var copyObj = angular.copy(activequestion.options[activequestion.options.length-1]);
+        var copyObj = angular.copy(activequestion.options[activequestion.options.length - 1]);
         copyObj.id += 1;
         activequestion.options.push(copyObj);
     }
@@ -899,7 +899,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             },
             controller: DialogController,
             templateUrl: '../partials/questionType.tmpl.html',
-            parent: $(ev.target).closest('.apply-questions-container'),
+            parent: $(ev.target).closest('.flipBasic'),
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
@@ -1061,14 +1061,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.highlightSelection = function (event) {
         $scope.userSelection = window.getSelection().getRangeAt(0);
-        if ($scope.userSelection.startOffset < $scope.userSelection.endOffset) {
-            angular.element('ul.tools').css({
-                'left': event.pageX + 5,
-                'top': event.pageY - 100
-            }).fadeIn(200);
-        } else {
-            angular.element('ul.tools').fadeOut(200);
-        }
+        $scope.addActionWord();
     }
 
     $scope.addActionWord = function () {
@@ -1076,7 +1069,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         for (var i = 0; i < safeRanges.length; i++) {
             highlightRange(safeRanges[i]);
         }
-        angular.element('ul.tools').fadeOut(200);
     }
 
     $scope.removeActionWord = function () {
@@ -1084,7 +1076,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         for (var i = 0; i < safeRanges.length; i++) {
             disableRange(safeRanges[i]);
         }
-        angular.element('ul.tools').fadeOut(200);
     }
 
     $scope.showListBottomSheet = function (event, option) {
@@ -1100,6 +1091,38 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         }).catch(function (error) {
             // User clicked outside or hit escape
         });
+    };
+
+    $scope.questionList = function () {
+        var list = [];
+        angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
+            list.push({
+                text: "Question#" + value.id,
+                click: function ($itemScope, $event, modelValue, text, $li) {
+                    var answer = '<span ng-model="placeholder"></span>';
+                    $rootScope.$broadcast('add', answer);
+                },
+                hasBottomDivider: true
+            })
+        });
+        return list;
+    }
+
+    $scope.menuOptions = function () {
+       return [
+              {
+                  text: 'Highlight',
+                  click: function ($itemScope, $event) {
+                      $scope.highlightSelection($event)
+                  },
+                  hasBottomDivider: true
+              },
+              {
+                  text: 'Insert Answer of',
+                  click: function ($itemScope) { },
+                  children: $scope.questionList()
+              },
+        ]
     };
 });
 
