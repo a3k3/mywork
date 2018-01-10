@@ -338,7 +338,7 @@ md-card buildquestion .questionPanel .answerContainer, md-card question .questio
     border-top: 1px solid #a3a3a3;
     height: calc(223px);
     overflow: hidden;
-    overflow-y: scroll
+    /*overflow-y: scroll;*/
 }
 
 .field-type .content:last-child {
@@ -521,6 +521,11 @@ md-input-container.md-mytheme-theme label{
     height: 8vh;
     padding: 0 5%;
     top: 0;
+}
+@media (min-width: 992px) {
+.publish-panel + ng-include > form question {
+    margin-left: 12.666667%;
+}
 }
 .publish-panel + ng-include > form{
     margin-top:8vh;
@@ -936,7 +941,7 @@ settings ng-include.showhide [layout="row"]:hover .remove{
         margin-left:4%;
     }
     .publish-panel + ng-include > form .progressContainer {
-        width: 90%;
+        width: 92%;
     }
     .publish-panel + ng-include > form .nextprev{
         right:8%;
