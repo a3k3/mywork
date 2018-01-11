@@ -1,0 +1,33 @@
+﻿<div layout="row" layout-align="start center">
+    <div flex>{{setting.text}}</div>
+</div>
+
+<div ng-repeat="logic in setting.logic_options">
+    <div layout="row" layout-align="start center">
+        <div flex="50">Variable name:</div>
+        <div flex="50">
+            <md-input-container>
+                <input type="text" ng-model="logic.name" placeholder="Type variable name" aria-label="{{logic.name}}" />
+            </md-input-container>
+        </div>
+    </div>
+    <div layout="row" layout-align="start center">
+        <div flex="50">
+            <ul>
+                <li>Answer of</li>
+                <li ng-repeat="tempquestion in buildQuestionsObj.questions">Question#{{tempquestion.id}}</li>
+            </ul>
+        </div>
+        <div flex="50">
+            <div flex>Calculation</div>
+            <div flex="70">
+                <md-input-container>
+                    <textarea name="textarea"></textarea>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-click="addAdvanceOption($event,setting.name)" class="advance-option">
+    <md-button class="add" md-colors="{background: 'grey'}">Add</md-button>
+</div>

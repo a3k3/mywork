@@ -225,6 +225,7 @@
     <Content Include="partials\build_input_templates\product_select.html" />
     <Content Include="partials\build_input_templates\radio.html" />
     <Content Include="partials\build_input_templates\radio_size.html" />
+    <Content Include="partials\build_input_templates\rating_smiley.html" />
     <Content Include="partials\build_input_templates\rating_star.html" />
     <Content Include="partials\build_input_templates\select.html" />
     <Content Include="partials\build_input_templates\statement.html" />
@@ -259,9 +260,11 @@
     <Content Include="partials\response-templates\respone-table.html" />
     <Content Include="partials\response.html" />
     <Content Include="partials\settings_templates\calculatedlogic.html" />
+    <Content Include="partials\settings_templates\calculatedvariable.html" />
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />
     <Content Include="partials\settings_templates\enableMedia.html" />
+    <Content Include="partials\settings_templates\internal.html" />
     <Content Include="partials\settings_templates\jumplogic.html" />
     <Content Include="partials\settings_templates\maxcount.html" />
     <Content Include="partials\settings_templates\media_bottomsheet.html" />

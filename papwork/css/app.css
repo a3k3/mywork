@@ -382,7 +382,7 @@ question.active .questionPanel {
 	 border-top: 2px solid #eeeeee;
 	 margin-top:16px;
      text-align:center;
-     /*position:fixed;*/
+     position:fixed;
      bottom:0;
      width:100%;
 }

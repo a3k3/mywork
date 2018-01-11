@@ -58,15 +58,15 @@
       },
       {
         "primary": false,
-        "name": "Star Rating 2",
-        "type": "rating_star",
+        "name": "Smiley Rating",
+        "type": "rating_smiley",
         "img_src": "../asset/img/md-icons/svg/star-rating.svg"
       },
       {
         "primary": false,
-        "name": "Scale Rating 2",
-        "type": "radio_size",
-        "img_src": "../asset/img/md-icons/svg/scale-rating.svg"
+        "name": "Video Interview",
+        "type": "video",
+        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
       },
       {
         "primary": false,

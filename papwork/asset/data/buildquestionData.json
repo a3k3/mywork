@@ -30,7 +30,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "true",
             "relation": "and"
@@ -121,16 +121,21 @@
         "name": "acceptonly",
         "condition": "text",
         "text": "Please enter valid input."
+      },
+      "internal": {
+        "name": "internal",
+        "condition": false,
+        "text": "Internal Field."
       }
     },
     "advsettings": {
       "showhide": {
         "name": "showhide",
-        "condition": "show",
+        "condition": "true",
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [ ],
@@ -152,8 +157,16 @@
           }
         ]
       },
-      "calculatedlogic": {
-
+      "calculatedvariable": {
+        "name": "calculatedvariable",
+        "condition": "calculate",
+        "text": "Calculated Variable Logic",
+        "logic_options": [
+          {
+            "name": "",
+            "calculation": ""
+          }
+        ]
       }
     }
   },
@@ -188,7 +201,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [],
@@ -224,6 +237,11 @@
         "condition": false,
         "text": "This response is timed."
       },
+      "randomize": {
+        "name": "randomize",
+        "condition": false,
+        "text": "Randomize options."
+      },
       "enableMedia": {
         "name": "enableMedia",
         "condition": false,
@@ -244,7 +262,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [],
@@ -320,7 +338,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [],
@@ -380,7 +398,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [],
@@ -466,7 +484,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [],
@@ -527,7 +545,7 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [],
@@ -587,7 +605,129 @@
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
+            "questionno": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [ ],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [ ],
+            "slide_to_show": 0
+          }
+        ]
+      }
+    }
+  },
+  "rating_smiley": {
+    "options": [
+      {
+        "name": "verypoor",
+        "value": "Very poor",
+        "selected": false
+      },
+      {
+        "name": "poor",
+        "value": "poor",
+        "selected": false
+      },
+      {
+        "name": "average",
+        "value": "Average",
+        "selected": false
+      },
+      {
+        "name": "good",
+        "value": "Good",
+        "selected": false
+      },
+      {
+        "name": "excellent",
+        "value": "Excellent",
+        "selected": false
+      }
+    ],
+    "settings": {
+      "mustanswer": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxcount": {
+        "name": "maxcount",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "questionno": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [ ],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [ ],
+            "slide_to_show": 0
+          }
+        ]
+      }
+    }
+  },
+  "video": {
+    "options": [
+    ],
+    "settings": {
+      "mustanswer": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "text": "This response is timed."
+      }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "questionno": 0,
             "operator": "not",
             "answer": "",
             "answer_list": [ ],

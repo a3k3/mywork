@@ -2,10 +2,6 @@
     <webcam channel="myChannel" on-stream="onstream(stream)" on-streaming="onSuccess()" on-error="onError(err)" placeholder="'loader.gif'"></webcam>
     <img src="../../asset/img/video-interview.jpg" />
     <md-button class="start-interview md-raised md-primary md-hue-1 noPreventDefault" ng-click="startCam($event)">{{question.placeholder}}</md-button>
-    <!--<button ng-click="stopCam()">STOP CAMERA</button>
-    <button ng-click="record()">Record</button>
-    <button ng-click="stopRecord()">Stop Record</button>
-    <button ng-click="downloadRecord()">Download Record</button>-->
     <video id="playRecVid"></video>
     <md-button class="md-fab record md-primary" aria-label="Record" ng-click="record($event)">
         <md-icon md-svg-src="../../asset/img/md-icons/svg/ic_play_arrow_black_24px.svg"></md-icon>

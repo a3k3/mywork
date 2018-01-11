@@ -185,6 +185,7 @@ fieldset, label {
     text-align: center;
     font-family:'Optima';
     font-weight:bold;
+    float:left;
 }
 
 .verypoor {

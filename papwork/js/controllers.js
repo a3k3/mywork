@@ -198,6 +198,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                     value.hint = htmlDecode(value.hint);
                     value.placeholder = htmlDecode(value.placeholder);
                     value.enable = "true";
+                    
+                    //check for random options
+                    if (value.validations.randomize != undefined && value.validations.randomize.condition) {
+                        value.options = shuffleArray(value.options);
+                    }
                 });
             }
         }
@@ -255,11 +260,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     }
 
     $scope.checkadvancedvalidation = function () {
-        var index = $scope.questionsObj.activeNow - 1;
+        var index = $scope.questionsObj.activeNow-1;
         if ($scope.questionsObj.questions[index] != undefined && window.location.href.indexOf('experience') != -1) {
             var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
             var answer = "";
-            if ($scope.questionsObj.questions[index].response != undefined) {
+            if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
                 answer = $scope.questionsObj.questions[index].response;
             }
             else if ($scope.questionsObj.questions[index].options != undefined) {
@@ -294,8 +299,54 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         }
     }
 
+    $scope.checkshowhidevalidation = function () {
+        var index = $scope.questionsObj.activeNow;
+        if ($scope.questionsObj.questions[index] != undefined && window.location.href.indexOf('experience') != -1) {
+            var showhide = $scope.questionsObj.questions[index].advancedvalidations.showhide;
+            $scope.questionsObj.questions[index].enable = showhide.condition;
+            var _condition = true;
+            angular.forEach(showhide.logic_options, function (option, i) {
+                var _question = $scope.questionsObj.questions.filter(function (item) {
+                    return item.id = option.questionno;
+                })[0];
+
+                var answer = {};
+                if (_question.response != undefined && _question.response != "") {
+                    answer.value = _question.response;
+                }
+                else if (_question.options != undefined) {
+                    answer = _question.options.filter(function (item) {
+                        if (item.selected != undefined)
+                            return item.selected == true
+                        else
+                            return item.value != ""
+                    })[0];
+                }
+
+                switch (option.operator) {
+                    case "equals": if (answer.value == option.answer.value) _condition = true
+                                   else _condition = false;
+                        break
+                    case "notequals": if (answer.value != option.answer.value) _condition = true
+                                    else _condition = false;
+                        break
+                    default: _condition = true;
+                }
+            });
+
+            if (_condition && showhide.condition)
+                $scope.questionsObj.questions[index].enable = true;
+            else
+                $scope.questionsObj.questions[index].enable = false;
+
+            $scope.changeslideorder = true;
+            $scope.changeslideArrangement();
+        }
+    }
+
     $scope.$watch('questionsObj.questions', function (newval, oldval) {
         $scope.checkadvancedvalidation();
+        $scope.checkshowhidevalidation();
     }, true);
 
     $scope.changeslideArrangement = function () {
@@ -806,16 +857,28 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     //delete slide
     $scope.deleteSlide = function (event) {
-        var _currentSlide = $(event.target).closest('.flip').index();
-        $scope.buildQuestionsObj.questions.splice(_currentSlide - 1, 1);
-        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+        var confirm = $mdDialog.confirm()
+          .title('Would you like to delete this slide?')
+          .textContent('Slide deletion is permanent please do this carefully')
+          .ariaLabel('Delete')
+          .targetEvent(event)
+          .ok('Yes')
+          .cancel('No');
 
-        $timeout(function () {
-            resetSlide();
-            setActiveSlide($scope.buildQuestionsObj.activeNow);
-            var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
-            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
-        }, 0);
+        $mdDialog.show(confirm).then(function () {
+            var _currentSlide = $(event.target).closest('.flip').index();
+            $scope.buildQuestionsObj.questions.splice(_currentSlide - 1, 1);
+            $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+
+            $timeout(function () {
+                resetSlide();
+                setActiveSlide($scope.buildQuestionsObj.activeNow);
+                var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
+                angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
+            }, 0);
+        }, function () {
+            //nothing to do
+        });
     };
 
     //copy slide
@@ -1119,6 +1182,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
               },
               {
                   text: 'Insert Answer of',
+                  click: function ($itemScope) { },
+                  children: $scope.questionList()
+              },
+              {
+                  text: 'Calculated Variable',
                   click: function ($itemScope) { },
                   children: $scope.questionList()
               },

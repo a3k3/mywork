@@ -33,16 +33,9 @@
     "advancedvalidations": {
       "showhide": {
         "name": "showhide",
-        "condition": "show",
+        "condition": true,
         "text": "Show/Hide Logic",
         "logic_options": [
-          {
-            "slide_to_show": 0,
-            "operator": "not",
-            "answer": "",
-            "answer_list": [ ],
-            "relation": "and"
-          }
         ]
       },
       "jumplogic": {
@@ -132,15 +125,27 @@
     "advancedvalidations": {
       "showhide": {
         "name": "showhide",
-        "condition": "show",
+        "condition": true,
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "slide_to_show": 0,
-            "operator": "not",
-            "answer": "",
-            "answer_list": [ ],
-            "relation": "and"
+            "questionno": 1,
+            "operator": "equals",
+            "answer": {
+              "id": 1,
+              "value": "Abcd"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Abcd"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "relation": ""
           }
         ]
       },
@@ -367,27 +372,27 @@
     "options": [
       {
         "name": "verypoor",
-        "title": "Very poor",
+        "value": "Very poor",
         "selected": false
       },
       {
         "name": "poor",
-        "title": "poor",
+        "value": "poor",
         "selected": false
       },
       {
         "name": "average",
-        "title": "Average",
+        "value": "Average",
         "selected": false
       },
       {
         "name": "good",
-        "title": "Good",
+        "value": "Good",
         "selected": false
       },
       {
         "name": "excellent",
-        "title": "Excellent",
+        "value": "Excellent",
         "selected": false
       }
     ]
@@ -413,6 +418,16 @@
         "condition": false,
         "time": 0,
         "text": "This response is timed."
+      },
+      "randomize": {
+        "name": "randomize",
+        "condition": true,
+        "text": "Randomize options."
+      },
+      "enableMedia": {
+        "name": "enableMedia",
+        "condition": true,
+        "text": "Shows media options."
       }
     },
     "options": [
