@@ -255,6 +255,7 @@
     <Content Include="partials\questionType.tmpl.html" />
     <Content Include="partials\response-templates\chart-card.html" />
     <Content Include="partials\response-templates\respone-table.html" />
+    <Content Include="partials\response-templates\tablefitltermenu.html" />
     <Content Include="partials\response.html" />
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />

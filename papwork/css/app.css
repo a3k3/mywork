@@ -675,9 +675,12 @@ hr {
     display: table;
     border: 1px solid #c3b8b8;
 }
-.response-section .tablerow {
+.response-section .tablerow, .response-section .tablehead {
     display: table-row;
 }
+.response-section .tablebody {
+    display: table-row-group;
+} 
 .response-section .tablecell {
     display: table-cell;
     border: 0.05px solid #c3b8b8;
@@ -688,7 +691,7 @@ hr {
 .response-section .tablerow:nth-child(odd) {
     background-color: #fdfafa;
 }
-.response-section .tablerow:first-child {
+.response-section .tablehead {
     background-color: #b3b2b1;
 }
 .response-section .tablerow:nth-child(even) {
@@ -707,6 +710,11 @@ hr {
 .response-review>*{
     display:inline-block;
 }
+.tablehead .md-icon-button{
+    float:right;
+    margin-top:-35px;
+}
+.filter-menu{display:none;}
 .response-rating {
     width:33%;
 }

@@ -432,7 +432,6 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
     }
 
     function DialogController($scope, $mdDialog, callback) {
-        $scope.query = { primary: true };
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -445,9 +444,6 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $scope.PublishPopup = function (event) {
         $mdDialog.show({
-            locals: {
-                callback: $scope.addQuestion
-            },
             controller: DialogController,
             templateUrl: '../partials/PublishPopup.html',
             parent: $(event.target).closest('body'),
@@ -461,8 +457,6 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
                 $scope.status = 'You cancelled the dialog.';
             });
     }
-
-
 
     $scope.projectName = "My PapForm";
 
@@ -1001,203 +995,185 @@ myapp.controller('typeLayoutCtrl', function ($scope, getFieldTypeData) {
     });
 });
 var table = {
-    1:{
+    '1':{
         "ResponseID":"345hfgdgxf",
-        "userResponses": {
-        1: {
-            Q: "What is your Name?",
-            A: "Amit Shaw"            
-        },
-        2: {
-            Q: "Your Age?",
-            A: "30"
-        },
-        3: {
-            Q: "Do you have Aadhar?",
-            A: "Yes"
-        },
-        4: {
-            Q: "Which language you Speak?",
-            A: "Hindi"
-        }
-    },
+        "userResponses": [
+            {
+                'Q': "What is your Name?",
+                'A': "Amit Shaw"            
+            },
+            {
+                'Q': "Your Age?",
+                'A': "30"
+            },
+            {
+                'Q': "Do you have Aadhar?",
+                'A': "Yes"
+            },
+            {
+                'Q': "Which language you Speak?",
+                'A': "Hindi"
+            }
+        ],
         "reviewerResponses": {
-        "1": {
-            1: {
-                Q: "Plz answer Q1",
-                A:"Answer1"
-            },
-            2: {
-                Q: "Answer Q2",
-                A:"Answer2"
-            },
-            3: {
-                Q: "Answer Q3",
-                A:"Answer3"
-            }
-
+            "1": { 
+                  'reviewerId':"rev1",
+                  'responses': [
+                      {
+                        'Q': "Plz answer Q1",
+                        'A':"Answer1"
+                      },
+                      {
+                        'Q': "Answer Q2",
+                        'A':"Answer2"
+                      },
+                      {
+                        'Q': "Answer Q3",
+                        'A': "Answer3"
+                      }
+                  ]
         },
-        "2": {
-            1: {
-                Q: "Plz answer Q1",
-                A: "Answer1"
-            },
-            2: {
-                Q: "Answer Q2",
-                A: "Answer2"
+            "2": {
+                'reviewerId': "rev2",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    }
+                    
+                ]
             }
-        }
         },
         "Action": {
             "value": "submitted",
             "state":"disabled"
         }
     },
-    2:{
+    '2': {
         "ResponseID": "345hfgdgxf",
-        "userResponses": {
-            1: {
-                Q: "What is your Name?",
-                A: "Sumit Shaw"
+        "userResponses": [
+            {
+                'Q': "What is your Name?",
+                'A': "Sumit Shaw"
             },
-            2: {
-                Q: "Your Age?",
-                A: "31"
+            {
+                'Q': "Your Age?",
+                'A': "34"
             },
-            3: {
-                Q: "Do you have Aadhar?",
-                A: "Yes"
+            {
+                'Q': "Do you have Aadhar?",
+                'A': "No"
             },
-            4: {
-                Q: "Which language you Speak?",
-                A: "Marathi"
+            {
+                'Q': "Which language you Speak?",
+                'A': "Hindi"
             }
-        },
+        ],
         "reviewerResponses": {
             "1": {
-                1: {
-                    Q: "Plz answer Q1",
-                    A: "Answer1"
-                },
-                2: {
-                    Q: "Answer Q2",
-                    A: "Answer2"
-                },
-                3: {
-                    Q: "Answer Q3",
-                    A: "Answer3"
-                }
-
+                'reviewerId': "rev1",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    },
+                    {
+                        'Q': "Answer Q3",
+                        'A': "Answer3"
+                    }
+                ]
             },
             "2": {
-                1: {
-                    Q: "Plz answer Q1",
-                    A: "Answer1"
-                },
-                2: {
-                    Q: "Answer Q2",
-                    A: "Answer2"
-                }
+                'reviewerId': "rev2",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    }
+
+                ]
             }
+        },
+        "Action": {
+            "value": "Review",
+            "state": "enabled"
         }
     },
-    3: {
-        "ResponseID": "345hfgdgxg",
-        "userResponses": {
-            1: {
-                Q: "What is your Name?",
-                A: "Atul Shah"
+    '3':{
+    "ResponseID":"345hfgdgxf",
+        "userResponses": [
+            {
+                'Q': "What is your Name?",
+                'A': "Karan Singh"
             },
-            2: {
-                Q: "Your Age?",
-                A: "27"
+            {
+                'Q': "Your Age?",
+                'A': "25"
             },
-            3: {
-                Q: "Do you have Aadhar?",
-                A: "No"
+            {
+                'Q': "Do you have Aadhar?",
+                'A': "Yes"
             },
-            4: {
-                Q: "Which language you Speak?",
-                A: "Hindi"
+            {
+                'Q': "Which language you Speak?",
+                'A': "Marathi"
             }
+        ],
+    "reviewerResponses": {
+        "1": {
+            'reviewerId':"rev1",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    },
+                    {
+                        'Q': "Answer Q3",
+                        'A': "Answer3"
+                    }
+                ]
         },
-        "reviewerResponses": {
-            "1": {
-                1: {
-                    Q: "Plz answer Q1",
-                    A: "Answer1"
-                },
-                2: {
-                    Q: "Answer Q2",
-                    A: "Answer2"
-                },
-                3: {
-                    Q: "Answer Q3",
-                    A: "Answer3"
-                }
+        "2": {
+            'reviewerId': "rev2",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    }
 
-            },
-            "2": {
-                1: {
-                    Q: "Plz answer Q1",
-                    A: "Answer1"
-                },
-                2: {
-                    Q: "Answer Q2",
-                    A: "Answer2"
-                }
-            }
+                ]
         }
     },
-    4: {
-        "ResponseID": "345hfgdgxg",
-        "userResponses": {
-            1: {
-                Q: "What is your Name?",
-                A: "Prem Bhandari"
-            },
-            2: {
-                Q: "Your Age?",
-                A: "29"
-            },
-            3: {
-                Q: "Do you have Aadhar?",
-                A: "yes"
-            },
-            4: {
-                Q: "Which language you Speak?",
-                A: "Hindi"
-            }
-        },
-        "reviewerResponses": {
-            "1": {
-                1: {
-                    Q: "Plz answer Q1",
-                    A: "Answer1"
-                },
-                2: {
-                    Q: "Answer Q2",
-                    A: "Answer2"
-                },
-                3: {
-                    Q: "Answer Q3",
-                    A: "Answer3"
-                }
-
-            },
-            "2": {
-                1: {
-                    Q: "Plz answer Q1",
-                    A: "Answer1"
-                },
-                2: {
-                    Q: "Answer Q2",
-                    A: "Answer2"
-                }
-            }
-        }
+    "Action": {
+        "value": "review",
+            "state":"enabled"
     }
+}
 };
+
+function JSONToArray(jsonVal) {
+
+}
 function chartResize() {
     var dc = document.querySelector(".chart-body md-grid-list");
     var dval = [], dLabl = [];
@@ -1217,9 +1193,111 @@ function chartResize() {
 
 }
 //window.addEventListener('resize', chartResize);
+function tableFilter() {
+    var answerList = [], uniqueList = [];
+    document.querySelectorAll(".response-data-table .table .tablebody .tablerow").forEach(function (el, i) {
+        var rowAnsw = [], uniqueRow = [];
+        //el.getElementsByClassName("tablecell").forEach(function (elm, indx) {
+        el.querySelectorAll(".tablecell").forEach(function (elm, indx) {
+            rowAnsw.push(elm.textContent);
+            /*if (answerList.length && answerList[indx].indexOf(elm.value) != -1) {
+                uniqueRow.push(elm.textContent);
+            } else {
+                uniqueRow.push("EMPTY");
+            }*/
+        });
+        answerList.push(rowAnsw);
+        //uniqueList.push(uniqueRow);
 
-myapp.controller('responsectrl', function ($scope) {
-    $scope.totaltable = table;
+    });
+    console.log(answerList);
+    //console.log(uniqueList);
+}
+function getQ(tbl) {
+    var arr = [];
+    arr.push("Response Id");
+    tbl[1].userResponses.forEach(function (el, i) {
+        arr.push(el.Q);
+    });
+    return arr;
+}
+function getAnswer(tbl) {
+    var rowList = [];
+    var tblProp = Object.getOwnPropertyNames(tbl);
+    tblProp.forEach(function (el, i) {
+        var row = [];
+        row.push(tbl[el].ResponseID);
+        tbl[el].userResponses.forEach(function (elm, indx) {
+            row.push(elm.A);
+        });
+        rowList.push(row);
+    });
+    return rowList;
+}
+function getFilterAnswer(answList) {
+    var col = [];
+    for (var i = 0; i < answList[0].length; i++){
+        var arr = [];
+        for (var j = 0; j < answList.length; j++){
+            var val = answList[j][i];
+            if (arr.indexOf(val) == -1) {
+                arr.push(val);
+            } 
+        }        
+        col.push(arr);
+    }
+    return col;
+}
+
+
+myapp.controller('responsectrl', function ($scope, $mdDialog) {
+    //var ctrltable = [];
+    $scope.questlist = getQ(table);
+    //JSON.parse(table);
+    $scope.answerlist = getAnswer(table);
+    $scope.uniqueArr=getFilterAnswer($scope.answerlist);
+    setTimeout(tableFilter, 5000);
+
+    $scope.openmenu = function (evt, index) {
+        //$(evt.currentTarget).siblings(".filterbox").find(".filter-menu").show();
+        $mdDialog.show({
+            locals: {
+                uniqueArr: $scope.uniqueArr[index],
+                callback: $scope.filterTableData
+            },
+            controller: TableFilterController,
+            templateUrl: '../partials/response-templates/tablefitltermenu.html',
+            parent: $(evt.target).closest('.table'),
+            targetEvent: evt,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    };
+
+    $scope.filterTableData = function (option) {
+        $scope.filterQuery = option
+    }
+
+    function TableFilterController($scope, $mdDialog, uniqueArr, callback) {
+        $scope.uniqueArr = uniqueArr;
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+
+        $scope.filterTableData = function (option) {
+            callback(option);
+        }
+    }
+    //$scope.totaltable = table;
     $scope.responseid = "Response ID: 345hfgdgxf";
     //$scope.totaltable = {
     //    "row1": {
