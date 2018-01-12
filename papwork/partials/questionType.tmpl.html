@@ -9,7 +9,7 @@
             <div flex>{{fieldtypedata.name}}</div>
         </div>
         <div class="content" layout="row" layout-wrap>
-            <div class="ftype" flex="25" data-type="{{fieldoption.type}}" ng-repeat="fieldoption in fieldtypedata.options | filter: query" ng-click="addQuestion($event,null)">
+            <div class="ftype" flex="25" flex-xs="33" data-type="{{fieldoption.type}}" ng-repeat="fieldoption in fieldtypedata.options | filter: query" ng-click="addQuestion($event,null)">
                 <md-icon md-svg-icon="{{fieldoption.img_src}}" class=""></md-icon>
                 {{fieldoption.name}}
             </div>
