@@ -11,19 +11,34 @@
             </md-input-container>
         </div>
     </div>
-    <div layout="row" layout-align="start center">
+    <div layout="row" layout-align="start start">
         <div flex="50">
-            <ul>
-                <li>Answer of</li>
-                <li ng-repeat="tempquestion in buildQuestionsObj.questions">Question#{{tempquestion.id}}</li>
-            </ul>
-        </div>
+            <div class="table answerof">
+                <div class="tablerow">
+                    <div class="tablecell">Answer of</div>
+                </div>
+                <div class="tablerow" ng-repeat="tempquestion in buildQuestionsObj.questions">
+                    <div class="tablecell questionchip" ng-click="addQuestionToCalculation($event, tempquestion)">Question#{{tempquestion.id}}</div>
+                </div>
+            </div>
+            </div>
         <div flex="50">
-            <div flex>Calculation</div>
-            <div flex="70">
-                <md-input-container>
-                    <textarea name="textarea"></textarea>
-                </md-input-container>
+            <div class="table">
+                <div class="tablerow">
+                    <div class="tablecell">Calculation</div>
+                    <div class="tablecell"></div>
+                </div>
+                <div class="tablerow">
+                    <div class="tablecell calculations" contenteditable ng-model="logic.calculation" ng-mousedown="setcursorposition($event)" ng-mouseup="setcursorposition($event)" ng-keydown="setcursorposition($event)" ng-keyup="setcursorposition($event)"></div>
+                    <div class="tablecell operators">
+                        <div class="operation addition" ng-click="operation($event,'+')">+</div>
+                        <div class="operation subtraction" ng-click="operation($event,'-')">-</div>
+                        <div class="operation multiplication" ng-click="operation($event,'*')">*</div>
+                        <div class="operation division" ng-click="operation($event,'/')">/</div>
+                        <div class="operation opening_bracket" ng-click="operation($event,'(')">(</div>
+                        <div class="operation closing_bracket" ng-click="operation($event,')')">)</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

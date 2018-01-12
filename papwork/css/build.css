@@ -1282,9 +1282,91 @@ ul.tools {
         }
 /*******Context Menu Tool******/
 
-md-progress-circular + .counter {
+md-progress-circular + .counter{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+
+/*****Table Styles*****/
+.build .table {
+    display: table;
+    border: 1px solid #d2d2d2;
+    border-radius: 5px;
+}
+.build .tablerow {
+    display: table-row;
+}
+.build .tablecell {
+    display: table-cell;
+    border: 0.05px solid #d2d2d2;
+    border-collapse: collapse;
+    border-bottom: 0px;
+    padding: 15px 5px;
+}
+.build .tablerow:nth-child(odd) {
+    background-color: #d2d2d2;
+}
+.build .tablerow:first-child {
+    background-color: #d2d2d2;
+}
+.build .tablerow:nth-child(even) {
+    background-color: #fff;
+}
+/*****Table Styles*****/
+
+.calculatedvariable .layout-row [flex] {
+    padding: 0 15px;
+}
+.calculatedvariable .operation {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d2d2d2;
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px;
+    font-size: 14px;
+    float: left;
+    margin: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    cursor:pointer;
+}
+
+.calculatedvariable .operation:nth-child(odd) {clear: left;}
+
+.calculatedvariable .calculations {
+    width:66%;
+    vertical-align:top;
+    text-decoration: none;
+    max-width:100px;
+}
+.calculatedvariable .operators {
+    width:34%;
+}
+.answerof .tablecell{
+    cursor:pointer;
+}
+
+.calculations .chip {
+    padding: 5px;
+    border: 1px solid #d2d2d2;
+    background-color: #D9EBBC;
+    padding-right: 27px;
+    position: relative;
+    margin: 5px;
+    display: inline-block;
+}
+
+.calculations .removeChip {
+    width: 20px;
+    height: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    right: 5px;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #000;
+    font-size: 13px;
 }

@@ -152,6 +152,31 @@ function upTo(el, tagName) {
     return null;
 }
 
+function getCaretPosition(editableDiv) {
+    var caretPos = 0,
+      sel, range;
+    if (window.getSelection) {
+        sel = window.getSelection();
+        if (sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            if (range.commonAncestorContainer.parentNode == editableDiv) {
+                caretPos = range.endOffset;
+            }
+        }
+    } else if (document.selection && document.selection.createRange) {
+        range = document.selection.createRange();
+        if (range.parentElement() == editableDiv) {
+            var tempEl = document.createElement("span");
+            editableDiv.insertBefore(tempEl, editableDiv.firstChild);
+            var tempRange = range.duplicate();
+            tempRange.moveToElementText(tempEl);
+            tempRange.setEndPoint("EndToEnd", range);
+            caretPos = tempRange.text.length;
+        }
+    }
+    return caretPos;
+}
+
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', []);
@@ -1064,6 +1089,37 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         });
     }
 
+
+    //$scope.uploadFiles = function (file, handleData) {
+    //    var uploadbucket = uploadDataToAWS.upload();
+
+    //    if (file) {
+    //        var params = { Key: file.name, ContentType: file.type, Body: file, ServerSideEncryption: 'AES256' };
+
+    //        uploadbucket.putObject(params, function (err, data) {
+    //            if (err) {
+    //                // There Was An Error With Your S3 Config
+    //                console.log(err.message);
+    //                return false;
+    //            }
+    //            else {
+    //                // Success!
+    //                console.log('Upload Done');
+    //                var s3_path = 'papwork/' + file.name;
+    //                handleData(s3_path);
+    //            }
+    //        })
+    //        .on('httpUploadProgress', function (progress) {
+    //            // Log Progress Information
+    //            console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
+    //        });
+    //    }
+    //    else {
+    //        // No File Selected
+    //        alert('No File Selected');
+    //    }
+    //}
+
     //draggable
     $scope.onDropComplete = function (index, obj, evt) {
         var otherObj = $scope.buildQuestionsObj.questions[index];
@@ -1104,7 +1160,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     $scope.onSwipeLeft = function () {
-        if (angular.element('body').hasClass('md-dialog-is-showing')) return
+        if (angular.element('body').hasClass('md-dialog-is-showing') || angular.element('body').width() > 767) return
         var index = angular.element('.apply-questions-container').find('.flip.slideactive').index();
         var containerLength = angular.element('.apply-questions-container').find('.flip').length - 1;
         index = index == containerLength ? index : index + 1;
@@ -1113,7 +1169,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     $scope.onSwipeRight = function () {
-        if (angular.element('body').hasClass('md-dialog-is-showing')) return
+        if (angular.element('body').hasClass('md-dialog-is-showing') || angular.element('body').width() > 767) return
         var index = angular.element('.apply-questions-container').find('.flip.slideactive').index();
         index = index == 0 ? index : index - 1;
         resetSlide();
@@ -1162,11 +1218,27 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             list.push({
                 text: "Question#" + value.id,
                 click: function ($itemScope, $event, modelValue, text, $li) {
-                    var answer = '<span ng-model="placeholder"></span>';
-                    $rootScope.$broadcast('add', answer);
                 },
                 hasBottomDivider: true
             })
+        });
+        return list;
+    }
+
+    $scope.calculatedVariableList = function () {
+        var list = [];
+        angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
+            if (value.advancedvalidations.calculatedvariable != undefined && value.advancedvalidations.calculatedvariable.logic_options.length > 0)
+                angular.forEach(value.advancedvalidations.calculatedvariable.logic_options, function (innervalue, innerkey) {
+                    if (innervalue.name != "") {
+                        list.push({
+                            text: innervalue.name,
+                            click: function ($itemScope, $event, modelValue, text, $li) {
+                            },
+                            hasBottomDivider: true
+                        })
+                    }
+            });
         });
         return list;
     }
@@ -1188,10 +1260,25 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
               {
                   text: 'Calculated Variable',
                   click: function ($itemScope) { },
-                  children: $scope.questionList()
+                  children: $scope.calculatedVariableList()
               },
         ]
     };
+
+    $scope.calculationCursor = 0;
+
+    $scope.questionCursor = 0;
+
+    $scope.setcursorposition = function (event) {
+        $scope.calculationCursor = getCaretPosition(event.target);
+    }
+
+    $scope.addQuestionToCalculation = function (event, question) {
+        var start = angular.element('.calculations').html().substring(0, $scope.calculationCursor);
+        var texttoAdd = '<span class="chip" data-question-id=' + question.id + '>' + angular.element(event.target).text() + '<span class="removeChip" ng-click="removeQuestion()">-</span></span>';
+        var end = angular.element('.calculations').html().substring($scope.calculationCursor);
+        angular.element('.calculations').html(start + texttoAdd + end);
+    }
 });
 
 myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller, $interval) {
