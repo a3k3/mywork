@@ -836,7 +836,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
         var copyObj = angular.copy(questionTemp.logic_options[0]);
-        copyObj.slide_to_show = 0;
+        if (type == "jumplogic")
+            copyObj.slide_to_show = 0;
+        else
+            copyObj.questionno = 0;
         questionTemp.logic_options.push(copyObj);
     }
 
@@ -848,8 +851,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     $scope.updateAdvanceAnswers = function (logic) {
-        var index = logic.slide_to_show == 0 ? logic.slide_to_show : logic.slide_to_show - 1;
-        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
+        var index = logic.questionno == 0 ? logic.questionno : logic.questionno - 1;
+        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
             logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
         }
         else {
@@ -859,7 +862,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.updateAdvanceJumpAnswers = function (logic) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
+        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
             logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
         }
         else {
