@@ -205,6 +205,7 @@
     <Content Include="css\input.css" />
     <Content Include="js\mdCarousel.js" />
     <Content Include="js\swipe.js" />
+    <Content Include="lib\aws-sdk\aws-sdk.js" />
     <Content Include="lib\contextmenu\contextMenu.js" />
     <Content Include="lib\draggable\ngDraggable.js" />
     <Content Include="lib\swipe\ngSwipe.js" />
