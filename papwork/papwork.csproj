@@ -164,16 +164,21 @@
     <Content Include="asset\img\md-icons\svg\ic_keyboard_arrow_up_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_linear_scale_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_link_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_mic_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_mic_off_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_more_horiz_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_payment_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_photo_camera_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_photo_library_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_play_arrow_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_play_circle_filled_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_radio_button_checked_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_remove_circle_outline_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_search_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_settings_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_share_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_star_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_stop_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_textsms_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_text_fields_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\link.svg" />
@@ -202,6 +207,7 @@
     <Content Include="css\input.css" />
     <Content Include="js\mdCarousel.js" />
     <Content Include="js\swipe.js" />
+    <Content Include="lib\aws-sdk\aws-sdk.js" />
     <Content Include="lib\contextmenu\contextMenu.js" />
     <Content Include="lib\draggable\ngDraggable.js" />
     <Content Include="lib\swipe\ngSwipe.js" />
@@ -215,6 +221,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="partials\Addviaslide.html" />
     <Content Include="partials\build.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
@@ -223,6 +230,7 @@
     <Content Include="partials\build_input_templates\product_select.html" />
     <Content Include="partials\build_input_templates\radio.html" />
     <Content Include="partials\build_input_templates\radio_size.html" />
+    <Content Include="partials\build_input_templates\rating_smiley.html" />
     <Content Include="partials\build_input_templates\rating_star.html" />
     <Content Include="partials\build_input_templates\select.html" />
     <Content Include="partials\build_input_templates\statement.html" />
@@ -257,13 +265,18 @@
     <Content Include="partials\response-templates\respone-table.html" />
     <Content Include="partials\response-templates\tablefitltermenu.html" />
     <Content Include="partials\response.html" />
+    <Content Include="partials\settings_templates\calculatedlogic.html" />
+    <Content Include="partials\settings_templates\calculatedvariable.html" />
     <Content Include="partials\settings_templates\covertemplate.html" />
     <Content Include="partials\settings_templates\disablecover.html" />
     <Content Include="partials\settings_templates\enableMedia.html" />
+    <Content Include="partials\settings_templates\internal.html" />
     <Content Include="partials\settings_templates\jumplogic.html" />
     <Content Include="partials\settings_templates\maxcount.html" />
     <Content Include="partials\settings_templates\media_bottomsheet.html" />
+    <Content Include="partials\settings_templates\randomize.html" />
     <Content Include="partials\settings_templates\reccomendations.html" />
+    <Content Include="partials\settings_templates\reset.html" />
     <Content Include="partials\settings_templates\showhide.html" />
     <Content Include="partials\settings_templates\success.html" />
     <Content Include="partials\settings_templates\maxlength.html" />
@@ -272,6 +285,7 @@
     <Content Include="partials\settings_templates\mustanswer.html" />
     <Content Include="partials\settings_templates\successtemplate.html" />
     <Content Include="partials\success.html" />
+    <Content Include="partials\Workflow.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_LayoutAngularAsync.cshtml" />
@@ -288,6 +302,7 @@
     <Content Include="asset\font\OPTIMA.TTF" />
     <Content Include="asset\font\OPTIMA_B.TTF" />
     <Content Include="asset\font\unicode.optima.ttf" />
+    <None Include="Properties\PublishProfiles\papwork aws.pubxml" />
     <None Include="Properties\PublishProfiles\PapWork.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

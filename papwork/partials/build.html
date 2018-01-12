@@ -21,7 +21,7 @@
                             </md-button>
                             <span>Themes</span>
                         </li>
-                        <li class="club">
+                        <li class="club" ng-click="addviaSlide($event)">
                             <span>Add slides via</span> 
                             <md-button class="md-icon-button" aria-label="add slides">
                                 <md-icon title="Add slides via" md-svg-icon="../../asset/img/md-icons/svg/ic_code_black_24px.svg"></md-icon>
@@ -37,7 +37,7 @@
                             <span>Make Quiz</span> 
                         </li>
                         <li>
-                            <md-button class="md-icon-button" aria-label="themes">
+                            <md-button class="md-icon-button"  ng-click="workflow($event)" aria-label="themes">
                                 <md-icon title="Workflows" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
                             </md-button>
                             <span> Workflows</span> 
@@ -134,12 +134,12 @@
                             <md-tabs>
                                 <md-tab label="basic">
                                     <md-content class="md-padding">
-                                        <ng-include class="basic" src="getSettingUrl(setting.name)" ng-repeat="setting in question.validations" ng-if="setting.name != 'mustanswer'"></ng-include>
+                                        <ng-include class="basic {{setting.name}}" src="getSettingUrl(setting.name)" ng-repeat="setting in question.validations"></ng-include>
                                     </md-content>
                                 </md-tab>
                                 <md-tab label="advanced">
                                     <md-content class="md-padding">
-                                        <ng-include class="advanced" src="getSettingUrl(setting.name)" ng-repeat="setting in question.advancedvalidations"></ng-include>
+                                        <ng-include class="advanced {{setting.name}}" src="getSettingUrl(setting.name)" ng-repeat="setting in question.advancedvalidations"></ng-include>
                                     </md-content>
                                 </md-tab>
                             </md-tabs>
@@ -206,8 +206,4 @@
             </div>
         </div>
     </div>
-    <ul class="tools">
-        <li ng-click="addActionWord()">Add Action word</li>
-        <!--<li ng-click="removeActionWord()">Remove Action word</li>-->
-    </ul>
 </div>

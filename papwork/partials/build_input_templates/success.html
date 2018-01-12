@@ -30,4 +30,33 @@
             </ul>
         </div>
     </div>
+    <div class="variant-container" ng-if="buildsuccessdata.settings.successtemplate.condition">
+        <user-card>
+            <md-card md-colors="::{backgroundColor: '{{theme}}-primary-hue-1'}">
+                <md-card-title>
+                    <md-card-title-text>
+                        <img class="success_media_logo" src="{{successdata.default.media_src}}" />
+                        <span class="md-headline text-center font-color-000 font-size-18" contenteditable ng-model="successdata.default.headline">{{successdata.default.headline}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+        </user-card>
+        <div class="content-section">
+            <img class="success_media" src="{{successdata.default.media_src}}" />
+            <h2 contenteditable ng-model="successdata.default.content.headline_text">{{successdata.default.content.headline_text}}</h2>
+            <p class="font-color-000 font-size-24" contenteditable ng-model="successdata.default.content.mail_text">{{successdata.default.content.mail_text}}</p>
+            <h6 class="font-color-666 font-size-14"  contenteditable ng-model="successdata.default.content.poweredby_text">{{successdata.default.content.poweredby_text}}</h6>
+        </div>
+        <div class="recomends">
+            <h4 class="font-size-16 font-color-000" contenteditable ng-model="successdata.default.content.reccomend_text">{{successdata.default.content.reccomend_text}}</h4>
+            <ul>
+                <li ng-repeat="reccomendation in successdata.settings.reccomendations.options">
+                    <a href="{{reccomendation.link_url}}">
+                        <img class="selected-icon" src="{{reccomendation.link_icon}}">
+                        <p class="font-size-12 font-color-444"  contenteditable ng-model="reccomendation.link_title">{{reccomendation.link_title}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

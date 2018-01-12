@@ -3,7 +3,7 @@
         <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{questionsObj.percentComplete()}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount()}}"></md-progress-linear>
         <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{questionsObj.activeNow}} out of {{questionsObj.maxCount()}}</div>
     </div>
-    <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center noPreventDefault" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">
+    <question ng-repeat="question in questionsObj.questions" class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center noPreventDefault" ng-if="question.enable" ng-class="{active: $index == 0, next_active: $index == 1, next_next_active: $index == 2}">
     </question>
 
     <div class="nextprev noPreventDefault" ng-class="{last: questionsObj.activeNow == questionsObj.maxCount()}">

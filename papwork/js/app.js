@@ -1,5 +1,5 @@
 // Declare app level module which depends on filters, and services
-var app = angular.module('experienceApp', ['ngRoute', 'experienceApp.filters', 'experienceApp.services', 'experienceApp.directives', 'experienceApp.controllers', 'ngMaterial', 'ngMessages', 'ngSanitize', 'ngDraggable', 'ngAnimate', 'swipe']);
+var app = angular.module('experienceApp', ['ngRoute', 'experienceApp.filters', 'experienceApp.services', 'experienceApp.directives', 'experienceApp.controllers', 'ngMaterial', 'ngMessages', 'ngSanitize', 'ngDraggable', 'ngAnimate', 'swipe', 'ui.bootstrap.contextMenu']);
 
 app.config(['$routeProvider', '$controllerProvider', '$mdThemingProvider', function ($routeProvider, $controllerProvider, $mdThemingProvider) {
     $routeProvider.when('/experience', { templateUrl: '/partials/experience.html'});

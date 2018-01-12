@@ -1,7 +1,10 @@
-﻿<ng-form name="urlForm">
+﻿<ng-form name="urlForm" ng-repeat="option in question.options">
     <md-input-container>
-        <input class="md-accent hue-2" name="url" ng-model="question.response" ng-pattern="/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/" placeholder="{{question.placeholder}}" type="{{question.answertype}}" ng-required="{{question.validations.mustanswer.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}" ng-keydown="keypress($event)">
-        <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!urlForm.url.$valid">
+        <input class="md-accent hue-2" name="url" ng-model="option.value" ng-pattern="/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/" placeholder="{{question.placeholder}}" type="{{question.answertype}}" ng-required="{{question.validations.mustanswer.condition}}" md-maxlength="{{question.validations.maxlength.condition}}" minlength="{{question.validations.minlength.condition}}" ng-keydown="keypress($event)">
+        <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="!urlForm.url.$valid" ng-if="$last">
+            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
+        </md-button>
+        <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.nextTab()" ng-disabled="!urlForm.url.$valid" ng-if="!$last">
             <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
         </md-button>
         <div ng-messages="urlForm.url.$error" ng-show="urlForm.url.$dirty">

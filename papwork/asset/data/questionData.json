@@ -25,11 +25,71 @@
       },
       "autocomplete": {
         "name": "autocomplete",
-        "condition": true,
+        "condition": false,
         "time": 5,
         "text": "This response is timed."
       }
-    }
+    },
+    "advancedvalidations": {
+      "showhide": {
+        "name": "showhide",
+        "condition": true,
+        "text": "Show/Hide Logic",
+        "logic_options": [
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 1,
+              "value": "Male"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 5
+          },
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 2,
+              "value": "Female"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 8
+          }
+        ]
+      }
+    },
+    "options": [
+      {
+        "value": "",
+        "placeholder": "Placeholder Text"
+      }
+    ]
   },
   {
     "id": 2,
@@ -57,20 +117,93 @@
       },
       "autocomplete": {
         "name": "autocomplete",
-        "condition": true,
+        "condition": false,
         "time": 10,
         "text": "This response is timed."
+      }
+    },
+    "advancedvalidations": {
+      "showhide": {
+        "name": "showhide",
+        "condition": true,
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "questionno": 1,
+            "operator": "equals",
+            "answer": {
+              "id": 1,
+              "value": "Abcd"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Abcd"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "relation": ""
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 1,
+              "value": "ProductA"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 5
+          },
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 2,
+              "value": "Female"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 8
+          }
+        ]
       }
     }
   },
   {
     "id": 3,
-    "question": "Do you have Adhar Card.?",
+    "question": "Aadhar Details",
     "name": "adhar",
     "modelname": "aadhar",
     "caption": "Will not share your number to anyone",
     "category": "Category",
-    "answertype": "file",
+    "answertype": "text",
     "answertheme": "",
     "hint": "Upload your adhar card",
     "placeholder": "Upload",
@@ -84,6 +217,81 @@
         "condition": false,
         "time": 0,
         "text": "This response is timed."
+      }
+    },
+    "options": [
+      {
+        "value": "",
+        "placeholder": "Your Name"
+      },
+      {
+        "value": "",
+        "placeholder": "Age"
+      },
+      {
+        "value": "",
+        "placeholder": "Phone No."
+      }
+    ],
+    "advancedvalidations": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "show",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "slide_to_show": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [ ],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 1,
+              "value": "ProductA"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 5
+          },
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": {
+              "id": 2,
+              "value": "Female"
+            },
+            "answer_list": [
+              {
+                "id": 1,
+                "value": "Male"
+              },
+              {
+                "id": 2,
+                "value": "Female"
+              }
+            ],
+            "slide_to_show": 8
+          }
+        ]
       }
     }
   },
@@ -110,7 +318,7 @@
         "text": "This response is timed."
       }
     },
-     "options": [
+    "options": [
       {
         "id": "star5",
         "title": "Awesome - 5 stars",
@@ -164,27 +372,27 @@
     "options": [
       {
         "name": "verypoor",
-        "title": "Very poor",
+        "value": "Very poor",
         "selected": false
       },
       {
         "name": "poor",
-        "title": "poor",
+        "value": "poor",
         "selected": false
       },
       {
         "name": "average",
-        "title": "Average",
+        "value": "Average",
         "selected": false
       },
       {
         "name": "good",
-        "title": "Good",
+        "value": "Good",
         "selected": false
       },
       {
         "name": "excellent",
-        "title": "Excellent",
+        "value": "Excellent",
         "selected": false
       }
     ]
@@ -210,6 +418,16 @@
         "condition": false,
         "time": 0,
         "text": "This response is timed."
+      },
+      "randomize": {
+        "name": "randomize",
+        "condition": true,
+        "text": "Randomize options."
+      },
+      "enableMedia": {
+        "name": "enableMedia",
+        "condition": true,
+        "text": "Shows media options."
       }
     },
     "options": [
@@ -428,10 +646,62 @@
         "time": 0,
         "text": "This response is timed."
       }
-    }
+    },
+    "options": [
+      {
+        "value": "",
+        "placeholder": "Your bio"
+      }
+    ]
   },
   {
     "id": 12,
+    "question": "Get in touch",
+    "name": "contact",
+    "modelname": "",
+    "caption": "Will not share your name to anyone",
+    "category": "Contact Us",
+    "answertype": "textarea",
+    "answertheme": "",
+    "hint": "Write in brief about yourself",
+    "placeholder": "Write something..",
+    "validations": {
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "condition": 250,
+        "text": "Thats too long!"
+      },
+      "minlength": {
+        "condition": 0,
+        "text": "Thats too short!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
+    },
+    "options": [
+      {
+        "value": "",
+        "placeholder": "Your Name"
+      },
+      {
+        "value": "",
+        "placeholder": "Email"
+      },
+      {
+        "value": "",
+        "placeholder": "Phone No."
+      }
+    ]
+  },
+  {
+    "id": 13,
     "question": "Select Product",
     "name": "selectproduct",
     "modelname": "",
@@ -469,7 +739,7 @@
     ]
   },
   {
-    "id": 13,
+    "id": 14,
     "question": "&lt;span class&#x3D;&#39;action-word&#39; data-mapping&#x3D;&#39;form-name&#39;&gt;Papwork &lt;&#x2F;span&gt; a revolutionary way to automate your boring paperwork job.",
     "name": "name",
     "modelname": "name",
@@ -493,5 +763,43 @@
         "text": "Thats too short!"
       }
     }
+  },
+  {
+    "id": 15,
+    "question": "Give your website url?",
+    "name": "url",
+    "modelname": "",
+    "caption": "Will not share your name to anyone",
+    "category": "Url",
+    "answertype": "url",
+    "answertheme": "",
+    "hint": "Write in brief about yourself",
+    "placeholder": "Write something..",
+    "validations": {
+      "mustanswer": {
+        "condition": true,
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "condition": 250,
+        "text": "Thats too long!"
+      },
+      "minlength": {
+        "condition": 0,
+        "text": "Thats too short!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      }
+    },
+    "options": [
+      {
+        "value": "",
+        "placeholder": "Url here"
+      }
+    ]
   }
 ]
