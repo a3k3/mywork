@@ -218,6 +218,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="partials\Addviaslide.html" />
     <Content Include="partials\build.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
@@ -280,6 +281,7 @@
     <Content Include="partials\settings_templates\mustanswer.html" />
     <Content Include="partials\settings_templates\successtemplate.html" />
     <Content Include="partials\success.html" />
+    <Content Include="partials\Workflow.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_LayoutAngularAsync.cshtml" />

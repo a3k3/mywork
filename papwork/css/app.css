@@ -85,7 +85,7 @@ form {
 .progressContainer {
     position: absolute;
     width: 100%;
-    z-index: 99;
+    z-index: 9;
     /*background: #fff;*/
 }
 /*.success-layout .progressContainer{

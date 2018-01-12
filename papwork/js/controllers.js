@@ -1032,6 +1032,65 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         }
     }
 
+    $scope.workflow = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/Workflow.html',
+            parent: $(event.target).closest('md-tab-content'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+
+    // addViaSlide  
+    $scope.addviaSlide = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/Addviaslide.html',
+            parent: $(event.target).closest('md-tab-content'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+
+    //Make Quiz
+    $scope.makeQuiz = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/makeQuiz.html',
+            parent: $(event.target).closest('md-tab-content'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+
     function resetSlide() {
         angular.element('.apply-questions-container').find('.flip').removeClass('slideactive');
         angular.element('.navigation-slide').find('md-card').removeClass('slideactive');
