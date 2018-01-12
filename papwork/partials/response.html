@@ -36,8 +36,30 @@
     </section>
     <hr/>
     <section class="response-data-table">
+        <div class="action-bar">
+            <md-button class="md-raised filter-audience">Scan QR</md-button>
+            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_crop_square_black_24px.svg" aria-label=""></md-icon></md-button>
+            <md-input-container md-no-float class="md-block">
+                <md-icon md-svg-src="../asset/img/md-icons/svg/ic_search_black_24px.svg"></md-icon>
+                <input type="text" placeholder="Search by keyword or ID">
+            </md-input-container>
+            <!--<md-button class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_email_black_24px.svg"></md-icon>
+            </md-button>-->
+            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_email_black_24px.svg" aria-label=""></md-icon></md-button>
+            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_delete_black_24px.svg" aria-label=""></md-icon></md-button>
+           
+        </div>
         <div class="table">
-            <tbl rows="totaltable"></tbl>
+            <div class="tablehead">
+                <div class="tablecell" ng-repeat="dataval in questlist">
+                    <p ng-bind-html="dataval"></p>
+                    <md-button class="md-icon-button md-primary" aria-label="" ng-click="openmenu($event, $index)">
+                        <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_arrow_drop_down_circle_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>                
+            </div>
+            <tbl rows="answerlist"></tbl>
         </div>
     </section>
     <section class="response-review">
@@ -69,7 +91,7 @@
             </div>
         </section>
         <section class="response-rating">
-            <ng-include src="'../partials/experience.html'"></ng-include>
+            <!--<ng-include src="'../partials/experience.html'"></ng-include>-->
         </section>
         
         

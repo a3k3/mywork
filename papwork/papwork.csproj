@@ -151,6 +151,7 @@
     <Content Include="asset\img\md-icons\svg\ic_close_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_code_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_content_copy_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_crop_square_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_delete_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_email_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_file_upload_black_24px.svg" />
@@ -173,6 +174,7 @@
     <Content Include="asset\img\md-icons\svg\ic_play_circle_filled_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_radio_button_checked_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_remove_circle_outline_black_24px.svg" />
+    <Content Include="asset\img\md-icons\svg\ic_search_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_settings_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_share_black_24px.svg" />
     <Content Include="asset\img\md-icons\svg\ic_star_black_24px.svg" />
@@ -209,6 +211,7 @@
     <Content Include="lib\contextmenu\contextMenu.js" />
     <Content Include="lib\draggable\ngDraggable.js" />
     <Content Include="lib\swipe\ngSwipe.js" />
+    <Content Include="lib\toArrayFilter.js" />
     <Content Include="lib\tool\demo.css" />
     <Content Include="lib\tool\formbuilder.css" />
     <Content Include="lib\tool\formbuilder.js" />
@@ -260,6 +263,7 @@
     <Content Include="partials\questionType.tmpl.html" />
     <Content Include="partials\response-templates\chart-card.html" />
     <Content Include="partials\response-templates\respone-table.html" />
+    <Content Include="partials\response-templates\tablefitltermenu.html" />
     <Content Include="partials\response.html" />
     <Content Include="partials\settings_templates\calculatedlogic.html" />
     <Content Include="partials\settings_templates\calculatedvariable.html" />

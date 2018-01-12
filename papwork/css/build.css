@@ -1288,7 +1288,6 @@ md-progress-circular + .counter{
     transform:translate(-50%,-50%);
 }
 
-
 /*****Table Styles*****/
 .build .table {
     display: table;
