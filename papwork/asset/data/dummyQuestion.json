@@ -117,7 +117,6 @@
   "url": {
     "question": "What's your website URL?",
     "type": "url",
-    
     "category": "Details",
     "caption": "Enter full address (e.g. http://www.yoursite.com)",
     "hint": "Please add your hint here",

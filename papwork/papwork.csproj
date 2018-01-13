@@ -228,6 +228,7 @@
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
     <Content Include="partials\build_input_templates\email.html" />
+    <Content Include="partials\build_input_templates\input_calendar.html" />
     <Content Include="partials\build_input_templates\number.html" />
     <Content Include="partials\build_input_templates\product_select.html" />
     <Content Include="partials\build_input_templates\radio.html" />
@@ -239,6 +240,7 @@
     <Content Include="partials\build_input_templates\success.html" />
     <Content Include="partials\build_input_templates\text.html" />
     <Content Include="partials\build_input_templates\textarea.html" />
+    <Content Include="partials\build_input_templates\file.html" />
     <Content Include="partials\build_input_templates\url.html" />
     <Content Include="partials\build_input_templates\video.html" />
     <Content Include="partials\buildpopup_templates\build_popup.html" />

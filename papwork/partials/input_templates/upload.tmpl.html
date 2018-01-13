@@ -1,7 +1,7 @@
-﻿<input id="fileInput" name="{{question.name}}" type="{{question.answertype}}" class="ng-hide" ng-files="getTheFiles($files,question)"> 
-<md-input-container  md-no-float>    
-    <input id="textInput" ng-model="fileName" type="text" placeholder="No file chosen" ng-readonly="true" ng-keydown="keypress($event)" ng-required="{{option.validations.required.condition}}">
+﻿<input id="fileInput-{{$index}}" name="file" type="{{question.answertype}}" class="ng-hide" ng-files="getTheFiles($files,option)">
+<md-input-container md-no-float>
+    <input id="textInput-{{$index}}" ng-model="option.name" type="text" placeholder="{{option.placeholder}}" ng-readonly="true" ng-keydown="keypress($event)" ng-required="{{question.validations.mustanswer.condition}}">
 </md-input-container>
-<md-button id="uploadButton" class="attach md-icon-button md-primary hue-2" aria-label="attach_file" ng-click="questionsObj.next()" ng-disabled="!questionsForm.{{question.name}}.$error.required">
+<md-button id="uploadButton-{{$index}}" class="attach md-icon-button md-primary hue-2" aria-label="attach_file" ng-click="questionsObj.next()" ng-disabled="!fileform.file.$error.required">
     <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_attach_file_black_24px.svg"></md-icon>
 </md-button>
