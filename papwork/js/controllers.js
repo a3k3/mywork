@@ -699,6 +699,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         getSettings.then(function (response) {
             $scope.buildcoverdata.settings = response.data.cover.settings;
             //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
+            $scope.buildcoverdata.defaultsettings = angular.copy($scope.buildcoverdata.settings);
             if ($scope.buildcoverdata.settings.covertemplate.condition) {
                 $scope.buildcoverdata.cover_template = 'official';
             }
@@ -716,6 +717,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
+            $scope.buildsuccessdata.defaultsettings = angular.copy($scope.buildsuccessdata.settings);
             //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
             if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
@@ -727,6 +729,16 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }, function myError(response) {
         $scope.status = response.statusText;
     });
+
+    $scope.resetToDefault = function (type) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        if (type == 'cover')
+            $scope.buildcoverdata.settings = $scope.buildcoverdata.defaultsettings;
+        else if (type == 'success')
+            $scope.buildsuccessdata.settings = $scope.buildsuccessdata.defaultsettings;
+        else
+            $scope.buildQuestionsObj.questions[index].validations = $scope.buildQuestionsObj.questions[index].defaultsettings;
+    }
 
     //add slide
     $scope.addSlide = function () {
@@ -786,7 +798,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             var typedata = response.data[type];
             //add validations 
             $scope.buildQuestionsObj.questions[index].validations = angular.copy(typedata.settings);
-
+            $scope.buildQuestionsObj.questions[index].defaultsettings = angular.copy($scope.buildQuestionsObj.questions[index].validations);
             //add advanced validations 
             $scope.buildQuestionsObj.questions[index].advancedvalidations = angular.copy(typedata.advsettings);
 
@@ -1047,6 +1059,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     function BuildPopupController($scope, $mdDialog, template) {
+        $scope.template = template;
         $scope.getTemplateUrl = function () {
             return '../partials/buildpopup_templates/'+template+'.html';
         }
@@ -1059,46 +1072,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $mdDialog.cancel();
         };
     }
-
-    //// addViaSlide  
-    //$scope.addviaSlide = function (event) {
-    //    $mdDialog.show({
-    //        locals: {
-    //            callback: $scope.addQuestion
-    //        },
-    //        controller: DialogController,
-    //        templateUrl: '../partials/Addviaslide.html',
-    //        parent: $(event.target).closest('md-tab-content'),
-    //        targetEvent: event,
-    //        clickOutsideToClose: true,
-    //        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //    })
-    //        .then(function () {
-    //            $scope.status = 'You said the information was.';
-    //        }, function () {
-    //            $scope.status = 'You cancelled the dialog.';
-    //        });
-    //}
-
-    ////Make Quiz
-    //$scope.makeQuiz = function (event) {
-    //    $mdDialog.show({
-    //        locals: {
-    //            callback: $scope.addQuestion
-    //        },
-    //        controller: DialogController,
-    //        templateUrl: '../partials/makeQuiz.html',
-    //        parent: $(event.target).closest('md-tab-content'),
-    //        targetEvent: event,
-    //        clickOutsideToClose: true,
-    //        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //    })
-    //        .then(function () {
-    //            $scope.status = 'You said the information was.';
-    //        }, function () {
-    //            $scope.status = 'You cancelled the dialog.';
-    //        });
-    //}
 
     function resetSlide() {
         angular.element('.apply-questions-container').find('.flip').removeClass('slideactive');

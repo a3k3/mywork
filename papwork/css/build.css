@@ -87,13 +87,12 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container {
     display: inherit;
 }
 
-.navigation-slide .cover-container, .navigation-slide .default-container {
+.navigation-slide .cover-container, .navigation-slide .default-container, .navigation-slide .variant-container {
     height: 43vh;
     transform: scale(.2);
     transform-origin: 0 0;
     width: 495%;
     overflow: hidden;
-    position: absolute;
 }
 
 .navigation-slide .cover-page img {
@@ -689,7 +688,7 @@ buildquestion .category {
     margin-top: 0px;
 }
 
-.navigation-slide .default-container md-card {
+.navigation-slide .default-container md-card, .navigation-slide .variant-container md-card {
     width: 100%;
     height: auto;
 }
@@ -1047,6 +1046,7 @@ settings ng-include.showhide [layout="row"]:hover .remove {
                 margin-right: 0px;
                 padding: 0 10px;
                 cursor: pointer;
+                outline:none;
             }
 
         .more-options li img {
@@ -1403,6 +1403,7 @@ md-progress-circular + .counter{
 
 .buildpopup .more-options li.club {
    visibility: visible;
+   margin-top:4px;
 }
 
 .buildpopup .via_progressbar p, .buildpopup .via_progressbar md-icon{
