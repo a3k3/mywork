@@ -177,6 +177,16 @@ function getCaretPosition(editableDiv) {
     return caretPos;
 }
 
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+}
+
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
@@ -191,7 +201,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.questionsObj = {
         name: "Untitled",
-        id: null,
+        id: guid(),
         theme: "default",
         questions: [],
         maxCount: function () {
@@ -620,7 +630,10 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
 
-    function DialogController($scope, $mdDialog, callback) {
+    function publishController($scope, $mdDialog) {
+        $scope.publishUrl = window.location.host.replace('create', 'cover') + '?id=' + $rootScope.formid
+
+        $scope.embedUrl = '<iframe src="' + $scope.publishUrl + '" width="100%" height="100%"></iframe>'
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -633,7 +646,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $scope.PublishPopup = function (event) {
         $mdDialog.show({
-            controller: DialogController,
+            controller: publishController,
             templateUrl: '../partials/PublishPopup.html',
             parent: $(event.target).closest('body'),
             targetEvent: event,
@@ -671,7 +684,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
-        id: null,
+        id: guid(),
         theme: "default",
         questions: [],
         maxCount: function () {
@@ -683,6 +696,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             return (this.activeNow / this.maxCount()) * 100;
         }
     };
+
+    $rootScope.formid = $scope.buildQuestionsObj.id;
 
     $scope.$parent.$watch('projectname', function (value) {
         $scope.buildQuestionsObj.name = value;
@@ -1071,6 +1086,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
+
+        $scope.formSettingController = function (event, template) {
+            $scope.formsettingtemplate = template;
+        }
+
+        $scope.getFormSettingTemplateUrl = function () {
+            return '../partials/buildpopup_templates/Formtemplates/' + $scope.formsettingtemplate + '.html'
+        }
     }
 
     function resetSlide() {
