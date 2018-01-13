@@ -221,7 +221,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="partials\Addviaslide.html" />
+    <Content Include="partials\buildpopup_templates\Addviaslide.html" />
     <Content Include="partials\build.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
@@ -239,6 +239,7 @@
     <Content Include="partials\build_input_templates\textarea.html" />
     <Content Include="partials\build_input_templates\url.html" />
     <Content Include="partials\build_input_templates\video.html" />
+    <Content Include="partials\buildpopup_templates\build_popup.html" />
     <Content Include="partials\build_questionsTemplate.html" />
     <Content Include="partials\build_settingsTemplate.html" />
     <Content Include="partials\cover.html" />
@@ -285,7 +286,7 @@
     <Content Include="partials\settings_templates\mustanswer.html" />
     <Content Include="partials\settings_templates\successtemplate.html" />
     <Content Include="partials\success.html" />
-    <Content Include="partials\Workflow.html" />
+    <Content Include="partials\buildpopup_templates\Workflow.html" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_LayoutAngularAsync.cshtml" />

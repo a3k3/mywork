@@ -10,18 +10,21 @@
                 <div flex class="more-options">
                     <ul>
                         <li>
+                            <md-tooltip md-direction="bottom">Form Settings</md-tooltip>
                             <md-button class="md-icon-button" aria-label="settings">
                                 <md-icon title="Form Settings" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
                             </md-button>
                             <span>Form Settings</span>
                         </li>
                         <li>
-                            <md-button class="md-icon-button" aria-label="themes">
+                            <md-tooltip md-direction="bottom">Themes</md-tooltip>
+                            <md-button class="md-icon-button" aria-label="themes">    
                                 <md-icon title="Themes" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
                             </md-button>
                             <span>Themes</span>
                         </li>
-                        <li class="club" ng-click="addviaSlide($event)">
+                        <li class="club" ng-click="buildpopup($event, 'Addviaslide')">
+                            <md-tooltip md-direction="bottom">Add slides via</md-tooltip>
                             <span>Add slides via</span> 
                             <md-button class="md-icon-button" aria-label="add slides">
                                 <md-icon title="Add slides via" md-svg-icon="../../asset/img/md-icons/svg/ic_code_black_24px.svg"></md-icon>
@@ -31,18 +34,21 @@
                             </md-button>
                         </li>
                         <li>
+                            <md-tooltip md-direction="bottom">Make Quiz</md-tooltip>
                             <md-button class="md-icon-button" aria-label="quiz">
                                 <md-icon title="Make Quiz" md-svg-icon="../../asset/img/md-icons/svg/ic_hourglass_empty_black_24px.svg"></md-icon>
                             </md-button>
                             <span>Make Quiz</span> 
                         </li>
-                        <li>
-                            <md-button class="md-icon-button"  ng-click="workflow($event)" aria-label="themes">
+                        <li ng-click="buildpopup($event, 'Workflow')">
+                            <md-tooltip md-direction="bottom" >Workflows</md-tooltip>
+                            <md-button class="md-icon-button" aria-label="themes">
                                 <md-icon title="Workflows" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
                             </md-button>
                             <span> Workflows</span> 
                         </li>
                         <li>
+                            <md-tooltip md-direction="bottom">Payments</md-tooltip>
                             <md-button class="md-icon-button" aria-label="themes">
                                 <md-icon title="Payments" md-svg-icon="../../asset/img/md-icons/svg/ic_payment_black_24px.svg"></md-icon>
                             </md-button>
@@ -65,7 +71,10 @@
                     <div class="controls">
                         <div layout="row" layout-align="start center">
                             <div flex="100">
-                                <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                                <md-button class="md-icon-button test-tooltip settings" aria-label="Slide Settings">
+                                    <md-tooltip md-direction="bottom">Slide Settings</md-tooltip>
+                                    <md-icon class="back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                                </md-button>
                             </div>
                         </div>
                     </div>
@@ -88,7 +97,10 @@
                         </settings>
                     </md-card>
                     <div class="controls">
-                        <md-icon class="settings back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                        <md-button class="md-icon-button test-tooltip settings" aria-label="Slide Settings">
+                            <md-tooltip md-direction="bottom">Slide Settings</md-tooltip>
+                            <md-icon class="back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                        </md-button>
                     </div>
                 </flip-panel>
             </flip>
@@ -121,9 +133,18 @@
                                 </div>
                             </div>
                             <div flex="50">
-                                <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
-                                <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
-                                <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                                <md-button class="md-icon-button test-tooltip copy" aria-label="Copy Slide">
+                                    <md-tooltip md-direction="bottom">Copy Slide</md-tooltip>
+                                    <md-icon class="" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button test-tooltip delete" aria-label="Delete Slide">
+                                    <md-tooltip md-direction="bottom">Delete Slide</md-tooltip>
+                                    <md-icon class="" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button test-tooltip settings" aria-label="Slide Settings">
+                                    <md-tooltip md-direction="bottom">Slide Settings</md-tooltip>
+                                    <md-icon class="back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                                </md-button>
                             </div>
                         </div>
                     </div>
@@ -146,9 +167,18 @@
                         </settings>
                     </md-card>
                     <div class="controls">
-                        <md-icon class="copy" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
-                        <md-icon class="delete" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
-                        <md-icon class="settings back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                        <md-button class="md-icon-button test-tooltip copy" aria-label="Copy Slide">
+                            <md-tooltip md-direction="bottom">Copy Slide</md-tooltip>
+                            <md-icon class="" ng-click="copySlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button test-tooltip delete" aria-label="Delete Slide">
+                            <md-tooltip md-direction="bottom">Delete Slide</md-tooltip>
+                            <md-icon class="" ng-click="deleteSlide($event)" md-svg-icon="../asset/img/md-icons/svg/ic_remove_circle_outline_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button test-tooltip settings" aria-label="Slide Settings">
+                            <md-tooltip md-direction="bottom">Slide Settings</md-tooltip>
+                            <md-icon class="back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                        </md-button>
                     </div>
                 </flip-panel>
             </flip>
@@ -160,7 +190,10 @@
                     <div class="controls">
                         <div layout="row" layout-align="start center">
                             <div flex="100">
-                                <md-icon class="settings front" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                                <md-button class="md-icon-button test-tooltip settings" aria-label="Slide Settings">
+                                    <md-tooltip md-direction="bottom">Slide Settings</md-tooltip>
+                                    <md-icon class="back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                                </md-button>
                             </div>
                         </div>
                     </div>
@@ -183,7 +216,10 @@
                         </settings>
                     </md-card>
                     <div class="controls">
-                        <md-icon class="settings back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                        <md-button class="md-icon-button test-tooltip settings" aria-label="Slide Settings">
+                            <md-tooltip md-direction="bottom">Slide Settings</md-tooltip>
+                            <md-icon class="back" md-svg-icon="../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                        </md-button>
                     </div>
                 </flip-panel>
             </flip>
