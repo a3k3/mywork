@@ -177,11 +177,21 @@ function getCaretPosition(editableDiv) {
     return caretPos;
 }
 
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+}
+
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
-myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter) {
+myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -191,7 +201,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.questionsObj = {
         name: "Untitled",
-        id: null,
+        id: guid(),
         theme: "default",
         questions: [],
         maxCount: function () {
@@ -218,11 +228,8 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             else {
                 $scope.questionsObj.questions = response.data;
                 angular.forEach($scope.questionsObj.questions, function (value, index) {
-                    value.question = htmlDecode(value.question);
-                    value.caption = htmlDecode(value.caption);
-                    value.hint = htmlDecode(value.hint);
-                    value.placeholder = htmlDecode(value.placeholder);
-                    value.enable = "true";
+                    value.question = value.question;
+                    value.enable = "true"; /*temporary should be removed*/
                     
                     //check for random options
                     if (value.validations.randomize != undefined && value.validations.randomize.condition) {
@@ -252,6 +259,32 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.$on('questionsData', function (event, data) {
         $scope.questionsObj.questions = data;
+        angular.forEach($scope.questionsObj.questions, function (value, index) {
+            //var temp = value.question;
+            //var tmp = document.createElement("DIV");
+            //tmp.innerHTML = temp;
+            //angular.element(tmp).find('span').forEach(function (index, value) {
+            //    if ($(value).hasClass('chip')) {
+            //        var answerfor = $(value).data('question-id');
+
+            //        var answer = $scope.questionsObj.questions[index].options.filter(function (item) {
+            //            if (item.selected != undefined)
+            //                return item.selected == true
+            //            else
+            //                return item.value != ""
+            //        })[0];
+
+            //        $(value).html('{{questionsObj.questions['+(answerfor-1)+']}}')
+            //    }
+            //})
+            //temp = temp.replace(/<(?:.|\n)*?>/gm, '###');
+            value.enable = "true"; /*temporary should be removed*/
+
+            //check for random options
+            if (value.validations.randomize != undefined && value.validations.randomize.condition) {
+                value.options = shuffleArray(value.options);
+            }
+        });
     });
 
     $scope.dynamicTemplateUrl = function (data) {
@@ -517,10 +550,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         var reader = new FileReader();
         reader.onload = function (loadEvent) {
             $scope.$apply(function () {
-                element.response = loadEvent.target.result;
+                element.value = loadEvent.target.result;
                 var data = loadEvent.target.result.substr(loadEvent.target.result.indexOf(",") + 1, loadEvent.target.result.length);
                 $scope.uploadFiles(data, function (output) {
-                    element.response = output;
+                    element.value = output;
+                    element.name = $files[0].name;
                 });
             });
         }
@@ -620,7 +654,10 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
 
-    function DialogController($scope, $mdDialog, callback) {
+    function publishController($scope, $mdDialog) {
+        $scope.publishUrl = window.location.host.replace('create', 'cover') + '?id=' + $rootScope.formid
+
+        $scope.embedUrl = '<iframe src="' + $scope.publishUrl + '" width="100%" height="100%"></iframe>'
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -633,7 +670,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $scope.PublishPopup = function (event) {
         $mdDialog.show({
-            controller: DialogController,
+            controller: publishController,
             templateUrl: '../partials/PublishPopup.html',
             parent: $(event.target).closest('body'),
             targetEvent: event,
@@ -671,7 +708,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
-        id: null,
+        id: guid(),
         theme: "default",
         questions: [],
         maxCount: function () {
@@ -683,6 +720,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             return (this.activeNow / this.maxCount()) * 100;
         }
     };
+
+    $rootScope.formid = $scope.buildQuestionsObj.id;
 
     $scope.$parent.$watch('projectname', function (value) {
         $scope.buildQuestionsObj.name = value;
@@ -699,6 +738,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         getSettings.then(function (response) {
             $scope.buildcoverdata.settings = response.data.cover.settings;
             //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
+            $scope.buildcoverdata.defaultsettings = angular.copy($scope.buildcoverdata.settings);
             if ($scope.buildcoverdata.settings.covertemplate.condition) {
                 $scope.buildcoverdata.cover_template = 'official';
             }
@@ -716,6 +756,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
+            $scope.buildsuccessdata.defaultsettings = angular.copy($scope.buildsuccessdata.settings);
             //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
             if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
@@ -727,6 +768,16 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }, function myError(response) {
         $scope.status = response.statusText;
     });
+
+    $scope.resetToDefault = function (type) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        if (type == 'cover')
+            $scope.buildcoverdata.settings = $scope.buildcoverdata.defaultsettings;
+        else if (type == 'success')
+            $scope.buildsuccessdata.settings = $scope.buildsuccessdata.defaultsettings;
+        else
+            $scope.buildQuestionsObj.questions[index].validations = $scope.buildQuestionsObj.questions[index].defaultsettings;
+    }
 
     //add slide
     $scope.addSlide = function () {
@@ -771,6 +822,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
         $scope.buildQuestionsObj.questions[index].questiontype = type[0];
+        $scope.buildQuestionsObj.questions[index].enable = true;
         if (type[1] != undefined) {
             $scope.buildQuestionsObj.questions[index].questiontype = $scope.buildQuestionsObj.questions[index].questiontype + '_' + type[1];
         }
@@ -786,7 +838,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             var typedata = response.data[type];
             //add validations 
             $scope.buildQuestionsObj.questions[index].validations = angular.copy(typedata.settings);
-
+            $scope.buildQuestionsObj.questions[index].defaultsettings = angular.copy($scope.buildQuestionsObj.questions[index].validations);
             //add advanced validations 
             $scope.buildQuestionsObj.questions[index].advancedvalidations = angular.copy(typedata.advsettings);
 
@@ -1047,6 +1099,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     function BuildPopupController($scope, $mdDialog, template) {
+        $scope.template = template;
         $scope.getTemplateUrl = function () {
             return '../partials/buildpopup_templates/'+template+'.html';
         }
@@ -1058,47 +1111,15 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
+
+        $scope.formSettingController = function (event, template) {
+            $scope.formsettingtemplate = template;
+        }
+
+        $scope.getFormSettingTemplateUrl = function () {
+            return '../partials/buildpopup_templates/Formtemplates/' + $scope.formsettingtemplate + '.html'
+        }
     }
-
-    //// addViaSlide  
-    //$scope.addviaSlide = function (event) {
-    //    $mdDialog.show({
-    //        locals: {
-    //            callback: $scope.addQuestion
-    //        },
-    //        controller: DialogController,
-    //        templateUrl: '../partials/Addviaslide.html',
-    //        parent: $(event.target).closest('md-tab-content'),
-    //        targetEvent: event,
-    //        clickOutsideToClose: true,
-    //        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //    })
-    //        .then(function () {
-    //            $scope.status = 'You said the information was.';
-    //        }, function () {
-    //            $scope.status = 'You cancelled the dialog.';
-    //        });
-    //}
-
-    ////Make Quiz
-    //$scope.makeQuiz = function (event) {
-    //    $mdDialog.show({
-    //        locals: {
-    //            callback: $scope.addQuestion
-    //        },
-    //        controller: DialogController,
-    //        templateUrl: '../partials/makeQuiz.html',
-    //        parent: $(event.target).closest('md-tab-content'),
-    //        targetEvent: event,
-    //        clickOutsideToClose: true,
-    //        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //    })
-    //        .then(function () {
-    //            $scope.status = 'You said the information was.';
-    //        }, function () {
-    //            $scope.status = 'You cancelled the dialog.';
-    //        });
-    //}
 
     function resetSlide() {
         angular.element('.apply-questions-container').find('.flip').removeClass('slideactive');
@@ -1286,6 +1307,13 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             list.push({
                 text: "Question#" + value.id,
                 click: function ($itemScope, $event, modelValue, text, $li) {
+                    var start = $itemScope.question.question.substring(0, $scope.questionCursor);
+                    var texttoAdd = '<span class="chip" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
+                    var end = $itemScope.question.question.substring($scope.questionCursor);
+                    $($event.target).html(start + texttoAdd + end);
+                    angular.element('.removeChip').on('click', function (event) {
+                        angular.element(event.target).parent().remove();
+                    })
                 },
                 hasBottomDivider: true
             })
@@ -1341,11 +1369,24 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.calculationCursor = getCaretPosition(event.target);
     }
 
+    $scope.setquestioncursorposition = function (event) {
+        $scope.questionCursor = getCaretPosition(event.target);
+    }
+
     $scope.addQuestionToCalculation = function (event, question) {
-        var start = angular.element('.calculations').html().substring(0, $scope.calculationCursor);
-        var texttoAdd = '<span class="chip" data-question-id=' + question.id + '>' + angular.element(event.target).text() + '<span class="removeChip" ng-click="removeQuestion()">-</span></span>';
-        var end = angular.element('.calculations').html().substring($scope.calculationCursor);
-        angular.element('.calculations').html(start + texttoAdd + end);
+        var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
+        var start = calculationbox.html().substring(0, $scope.calculationCursor);
+        var texttoAdd = '<span class="chip" data-question-id=' + question.id + ' contenteditable="false" readonly>' + angular.element(event.target).text() + '<span class="removeChip">-</span></span>';
+        var end = calculationbox.html().substring($scope.calculationCursor);
+        calculationbox.html(start + texttoAdd + end);
+        angular.element('.removeChip').on('click', function (event) {
+            angular.element(event.target).parent().remove();
+        })
+    }
+
+    $scope.operation = function (event, operator) {
+        var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
+        calculationbox.html(calculationbox.html() + operator);
     }
 });
 

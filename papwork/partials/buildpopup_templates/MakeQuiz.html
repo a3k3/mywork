@@ -1,0 +1,136 @@
+﻿    <div>
+        <div class="quiz_layout" md-theme="mytheme">
+            <div class="makeQuiz_inner_layout">
+                <div class="quiz_Edit">
+                    <table class="table">
+
+
+                        <tr>
+                            <th>Slides</th>
+                            <th>Questions</th>
+                            <th>Correct Answer</th>
+                            <th>Score</th>
+                            <th>Instant Feedback</th>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>How do you estimate the  distance between two planets?</td>
+                            <td>
+
+
+                                <div flex-gt-sm="50">
+                                    <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                        Scale
+                                    </md-checkbox>
+                                    <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                        Traingulation
+                                    </md-checkbox>
+                                    <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                        Google
+                                    </md-checkbox>
+                                    <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                        Others
+                                    </md-checkbox>
+                                </div>
+
+
+                            </td>
+
+
+                            <td>
+
+
+                                <div flex="" class="flex">
+                                    <md-input-container>
+                                        <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                                    </md-input-container>
+                                    <md-input-container class="md-mytheme-theme md-input-has-value">
+                                        <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                                    </md-input-container>
+                                    <md-input-container class="md-mytheme-theme md-input-has-value">
+                                        <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+
+                                    </md-input-container>
+                                </div>
+
+
+                            </td>
+
+                            <td>
+
+                                <div flex="" class="flex">
+                                    <md-input-container class="md-mytheme-theme md-input-has-value">
+                                        <md-input-container class="md-mytheme-theme md-input-has-value">
+                                            <md-select name="type" ng-model="" class="ng-pristine ng-valid md-mytheme-theme ng-empty ng-touched"
+                                                       tabindex="0" aria-disabled="false" role="listbox" aria-expanded="false"
+                                                       aria-multiselectable="false" id="select_81" aria-owns="select_container_82"
+                                                       aria-invalid="false" style="">
+                                                <md-select-value class="md-select-value" id="select_value_label_75">
+                                                    <span>
+                                                        <div class="md-text">Text</div>
+                                                    </span><span class="md-select-icon" aria-hidden="true"></span>
+                                                </md-select-value>
+
+                                        </md-input-container>
+                                    </md-input-container>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="next_step">
+                                <md-card class="add-slide-workflow _md md-mytheme-theme">
+                                    <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1 md-mytheme-theme" aria-hidden="true">
+                                        <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <path d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path>
+                                        </svg>
+                                    </md-icon>
+                                </md-card>
+                                <p class="addstep">Question</p>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+                <div class="quiz_Setting">
+                    <div class="quiz_score">
+
+                        <span>Grand Total Score</span>
+                        <span class="max_value">100Max</span>
+                        <span class="min_value">-50min </span>
+
+                    </div>
+
+
+                    <div class="workflow_checkbox_block">
+                        <span>Correct Answer Score:</span> <span>
+                            <md-input-container class="md-mytheme-theme md-input-has-value">
+                                <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                            </md-input-container>
+                        </span><br>
+                        <span> Wrong Answer Score:</span>
+                        <span>
+                            <md-input-container class="md-mytheme-theme md-input-has-value">
+                                <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                            </md-input-container>
+                        </span>
+
+                    </div>
+                    <hr>
+                    <div class="conditional_flow">
+                        <h4>Settings</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -13,36 +13,70 @@
                 <td>Reception</td>
                 <td>status</td>
                 <td>Ajay</td>
-                <td></td>
+                <td>
+                    <button type="button" class="btn btn-default">
+                        <i class="glyphicon glyphicon-pencil">
+                        </i>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash">
+                        </i>
+                    </button>
+                </td>
             </tr>
             <tr>
                 <td>steps 1</td>
                 <td>Reception</td>
                 <td>status</td>
                 <td>Ajay</td>
-                <td></td>
+                <td>
+                    <button type="button" class="btn btn-default">
+                        <i class="glyphicon glyphicon-pencil">
+                        </i>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash">
+                        </i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <md-card class="add-slide-workflow">
+                        <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>                       
+                    </md-card>
+                    <p class="addstep">Step</p>
+                </td>
             </tr>
         </table>
     </div>
     <div class="workflow_right_table">
-        <h2>Tasks for Ajay</h2>
+        <h3>Tasks for Ajay</h3>
         <div class="private_workflow">
             <p class="left_slide_workflow">Select Slide/Question</p>
             <p class="right_slide_workflow">Private</p>
         </div>
         <div class="workflow_checkbox_block">
-            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">How do you define</md-checkbox>
-            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">Can he manage</md-checkbox>
-            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">How do you rate</md-checkbox>
+            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                How do you define
+                <span class="number_private">12</span>
+            </md-checkbox>
+            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                Can he manage
+                <span class="number_private">12</span>
+            </md-checkbox>
+            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                How do you rate
+                <span class="number_private">12</span>
+            </md-checkbox>
         </div>
         <div class="conditional_flow">
-            <md-switch class="md-primary" md-invert aria-label="Switch 7">
-                Switch (Inverted)
+            <p>Conditional Step</p>
+            <md-switch ng-model="data.cb1" aria-label="Switch 1">
             </md-switch>
         </div>
 
     </div>
-
 </div>
 
 

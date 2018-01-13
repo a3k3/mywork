@@ -9,7 +9,7 @@
                 </div>
                 <div flex class="more-options">
                     <ul>
-                        <li>
+                        <li ng-click="buildpopup($event, 'FormSettings')">
                             <md-tooltip md-direction="bottom">Form Settings</md-tooltip>
                             <md-button class="md-icon-button" aria-label="settings">
                                 <md-icon title="Form Settings" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
@@ -107,6 +107,7 @@
             <flip class="flip noPreventDefault" ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}">
                 <flip-panel>
                     <div class="type">
+                        <md-tooltip md-direction="bottom">Question Type Selection</md-tooltip>
                         <md-button class="md-icon-button" ng-click="openTypeModal($event)" ng-switch on="question.questiontype">
                             <md-icon md-svg-icon="../asset/img/md-icons/svg/text-box.svg" ng-switch-when="text"></md-icon>
                             <md-icon md-svg-icon="../asset/img/md-icons/svg/long-text-box.svg" ng-switch-when="textarea"></md-icon>

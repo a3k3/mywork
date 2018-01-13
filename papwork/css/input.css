@@ -1,6 +1,9 @@
 ﻿.inputContainer ng-form {
     display: block;
 }
+aps-upload-file {
+    position: relative;
+}
 /***Input Styles***/
 md-input-container .tick {
     position: absolute;

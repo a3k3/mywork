@@ -70,6 +70,12 @@
       },
       {
         "primary": false,
+        "name": "Attach",
+        "type": "file",
+        "img_src": "../asset/img/md-icons/svg/ic_attach_file_black_24px.svg"
+      },
+      {
+        "primary": false,
         "name": "Less Fields",
         "type": "less",
         "img_src": "../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg"

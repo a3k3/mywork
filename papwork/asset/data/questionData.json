@@ -203,7 +203,7 @@
     "modelname": "aadhar",
     "caption": "Will not share your number to anyone",
     "category": "Category",
-    "answertype": "text",
+    "answertype": "file",
     "answertheme": "",
     "hint": "Upload your adhar card",
     "placeholder": "Upload",
@@ -222,14 +222,17 @@
     "options": [
       {
         "value": "",
+        "name": "",
         "placeholder": "Your Name"
       },
       {
         "value": "",
+        "name": "",
         "placeholder": "Age"
       },
       {
         "value": "",
+        "name": "",
         "placeholder": "Phone No."
       }
     ],

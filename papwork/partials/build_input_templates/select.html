@@ -1,25 +1,6 @@
-﻿<!--<div class="option" ng-repeat="option in question.options">
-    <div layout="flex">
-        <div flex="40">
-            Title: <label contenteditable ng-model="option.name">{{option.name}}</label>
-        </div>
-        <div flex="40">
-            Value: <label contenteditable ng-model="option.value">{{option.value}}</label>
-        </div>
-        <div flex="20">
-            <div ng-click="deleteOption($event)">
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
-            </div>
-        </div>
-    </div>
-    <div ng-click="addOption($event)">
-        <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
-    </div>
-</div>-->
-
-<md-radio-group class="option">
+﻿<md-radio-group class="option">
     <md-radio-button ng-repeat="option in question.options" class="md-primary"><span contenteditable ng-model="option.value">{{option.value}}</span></md-radio-button>
-    <div ng-click="addOption($event)">
+    <div class="add-option" ng-click="addOption($event)">
         <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
     </div>
 </md-radio-group>
