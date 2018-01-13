@@ -1,21 +1,7 @@
-﻿<!--<div class="option" ng-repeat="option in question.options">
-    <div layout="flex">
-        <div flex="40">
-            Title: <label contenteditable ng-model="option.name">{{option.name}}</label>
-        </div>
-        <div flex="40">
-            Value: <label contenteditable ng-model="option.value">{{option.value}}</label>
-        </div>
-        <div flex="20">
-            <div ng-click="deleteOption($event)">
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
-            </div>
-        </div>
-    </div>
-</div>-->
-<div class="option checkbox-block" ng-if="!question.validations.enableMedia.condition">
+﻿<div class="option checkbox-block" ng-if="!question.validations.enableMedia.condition">
     <md-checkbox class="green" ng-repeat="option in question.options"><span contenteditable ng-model="option.value">{{option.value}}</span></md-checkbox>
-    <div ng-click="addOption($event)">
+    <div class="add-option" ng-click="addOption($event)">
+        <md-tooltip md-direction="top">Add Options</md-tooltip>
         <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
     </div>
 </div>
@@ -28,7 +14,8 @@
             <input class="checkbox" type="checkbox" value="{{option.value}}" ng-hide="true" />
         </div>
     </div>
-    <div ng-click="addOption($event)">
+    <div class="add-option" ng-click="addOption($event)">
+        <md-tooltip md-direction="top">Add Options</md-tooltip>
         <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
     </div>
 </div>

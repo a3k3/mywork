@@ -1,6 +1,7 @@
 ﻿<md-radio-group class="option">
     <md-radio-button ng-repeat="option in question.options" class="md-primary"><span contenteditable ng-model="option.value">{{option.value}}</span></md-radio-button>
-    <div ng-click="addOption($event)">
+    <div class="add-option" ng-click="addOption($event)">
+        <md-tooltip md-direction="top">Add Options</md-tooltip>
         <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
     </div>
 </md-radio-group>
