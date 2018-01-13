@@ -115,13 +115,13 @@ function disableRange(range) {
     }
 }
 
-// -> Fisher–Yates shuffle algorithm
+// -> Fisherâ€“Yates shuffle algorithm
 function shuffleArray(array) {
     var m = array.length, t, i;
 
     // While there remain elements to shuffle
     while (m) {
-        // Pick a remaining element…
+        // Pick a remaining elementâ€¦
         i = Math.floor(Math.random() * m--);
 
         // And swap it with the current element.
@@ -179,7 +179,7 @@ function getCaretPosition(editableDiv) {
 
 /* App Controllers */
 
-var myapp = angular.module('experienceApp.controllers', []);
+var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
 myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter) {
 
@@ -621,7 +621,6 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
     }
 
     function DialogController($scope, $mdDialog, callback) {
-        $scope.query = { primary: true };
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -634,9 +633,6 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $scope.PublishPopup = function (event) {
         $mdDialog.show({
-            locals: {
-                callback: $scope.addQuestion
-            },
             controller: DialogController,
             templateUrl: '../partials/PublishPopup.html',
             parent: $(event.target).closest('body'),
@@ -650,8 +646,6 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
                 $scope.status = 'You cancelled the dialog.';
             });
     }
-
-
 
     $scope.projectName = "My PapForm";
 
@@ -840,7 +834,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var index = $scope.buildQuestionsObj.activeNow - 1;
         var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
         var copyObj = angular.copy(questionTemp.logic_options[0]);
-        copyObj.slide_to_show = 0;
+        if (type == "jumplogic")
+            copyObj.slide_to_show = 0;
+        else
+            copyObj.questionno = 0;
         questionTemp.logic_options.push(copyObj);
     }
 
@@ -852,8 +849,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     $scope.updateAdvanceAnswers = function (logic) {
-        var index = logic.slide_to_show == 0 ? logic.slide_to_show : logic.slide_to_show - 1;
-        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
+        var index = logic.questionno == 0 ? logic.questionno : logic.questionno - 1;
+        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
             logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
         }
         else {
@@ -863,7 +860,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.updateAdvanceJumpAnswers = function (logic) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
+        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
             logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
         }
         else {
@@ -1028,6 +1025,65 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 }
             }
         }
+    }
+
+    $scope.workflow = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/Workflow.html',
+            parent: $(event.target).closest('md-tab-content'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+
+    // addViaSlide  
+    $scope.addviaSlide = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/Addviaslide.html',
+            parent: $(event.target).closest('md-tab-content'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+
+    //Make Quiz
+    $scope.makeQuiz = function (event) {
+        $mdDialog.show({
+            locals: {
+                callback: $scope.addQuestion
+            },
+            controller: DialogController,
+            templateUrl: '../partials/makeQuiz.html',
+            parent: $(event.target).closest('md-tab-content'),
+            targetEvent: event,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
     }
 
     function resetSlide() {
@@ -1347,26 +1403,328 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
         $scope.status = response.statusText;
     });
 });
-
-myapp.controller('responsectrl', function ($scope) {
-    $scope.responseid = "Response ID: 345hfgdgxf";
-    $scope.totaltable = {
-        "row1": {
-            "col1": "Response ID",
-            "col2": "Whats your name?",
-            "col3": "Whats your age?"
+var table = {
+    '1':{
+        "ResponseID":"345hfgdgxf",
+        "userResponses": [
+            {
+                'Q': "What is your Name?",
+                'A': "Amit Shaw"            
+            },
+            {
+                'Q': "Your Age?",
+                'A': "30"
+            },
+            {
+                'Q': "Do you have Aadhar?",
+                'A': "Yes"
+            },
+            {
+                'Q': "Which language you Speak?",
+                'A': "Hindi"
+            }
+        ],
+        "reviewerResponses": {
+            "1": { 
+                  'reviewerId':"rev1",
+                  'responses': [
+                      {
+                        'Q': "Plz answer Q1",
+                        'A':"Answer1"
+                      },
+                      {
+                        'Q': "Answer Q2",
+                        'A':"Answer2"
+                      },
+                      {
+                        'Q': "Answer Q3",
+                        'A': "Answer3"
+                      }
+                  ]
         },
-        "row2": {
-            "col1": "abd23ndjnd",
-            "col2": "Amit Shaw",
-            "col3": 35
+            "2": {
+                'reviewerId': "rev2",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    }
+                    
+                ]
+            }
         },
-        "row3": {
-            "col1": "abd23ndjnd",
-            "col2": "Sumit Shaw",
-            "col3": 27
+        "Action": {
+            "value": "submitted",
+            "state":"disabled"
         }
+    },
+    '2': {
+        "ResponseID": "345hfgdgxf",
+        "userResponses": [
+            {
+                'Q': "What is your Name?",
+                'A': "Sumit Shaw"
+            },
+            {
+                'Q': "Your Age?",
+                'A': "34"
+            },
+            {
+                'Q': "Do you have Aadhar?",
+                'A': "No"
+            },
+            {
+                'Q': "Which language you Speak?",
+                'A': "Hindi"
+            }
+        ],
+        "reviewerResponses": {
+            "1": {
+                'reviewerId': "rev1",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    },
+                    {
+                        'Q': "Answer Q3",
+                        'A': "Answer3"
+                    }
+                ]
+            },
+            "2": {
+                'reviewerId': "rev2",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    }
+
+                ]
+            }
+        },
+        "Action": {
+            "value": "Review",
+            "state": "enabled"
+        }
+    },
+    '3':{
+    "ResponseID":"345hfgdgxf",
+        "userResponses": [
+            {
+                'Q': "What is your Name?",
+                'A': "Karan Singh"
+            },
+            {
+                'Q': "Your Age?",
+                'A': "25"
+            },
+            {
+                'Q': "Do you have Aadhar?",
+                'A': "Yes"
+            },
+            {
+                'Q': "Which language you Speak?",
+                'A': "Marathi"
+            }
+        ],
+    "reviewerResponses": {
+        "1": {
+            'reviewerId':"rev1",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    },
+                    {
+                        'Q': "Answer Q3",
+                        'A': "Answer3"
+                    }
+                ]
+        },
+        "2": {
+            'reviewerId': "rev2",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    }
+
+                ]
+        }
+    },
+    "Action": {
+        "value": "review",
+            "state":"enabled"
+    }
+}
+};
+
+function JSONToArray(jsonVal) {
+
+}
+function chartResize() {
+    var dc = document.querySelector(".chart-body md-grid-list");
+    var dval = [], dLabl = [];
+    dc.querySelectorAll("doughnut-chart").forEach(function (el, i) {
+        dval.push(el.getAttribute("dataval"));
+        dLabl.push(el.getAttribute("datalabel"));
+        el.remove();
+    });
+    dval.forEach(function (el, i) {
+        var newDCel = document.createElement("doughnut-chart");
+        newDCel.setAttribute("dataval", el);
+        newDCel.setAttribute("datalabel", dLabl[i]);
+        dc.append(newDCel);
+    })
+    console.log(dval);
+    console.log(dLabl);
+
+}
+//window.addEventListener('resize', chartResize);
+function tableFilter() {
+    var answerList = [], uniqueList = [];
+    document.querySelectorAll(".response-data-table .table .tablebody .tablerow").forEach(function (el, i) {
+        var rowAnsw = [], uniqueRow = [];
+        //el.getElementsByClassName("tablecell").forEach(function (elm, indx) {
+        el.querySelectorAll(".tablecell").forEach(function (elm, indx) {
+            rowAnsw.push(elm.textContent);
+            /*if (answerList.length && answerList[indx].indexOf(elm.value) != -1) {
+                uniqueRow.push(elm.textContent);
+            } else {
+                uniqueRow.push("EMPTY");
+            }*/
+        });
+        answerList.push(rowAnsw);
+        //uniqueList.push(uniqueRow);
+
+    });
+    console.log(answerList);
+    //console.log(uniqueList);
+}
+function getQ(tbl) {
+    var arr = [];
+    arr.push("Response Id");
+    tbl[1].userResponses.forEach(function (el, i) {
+        arr.push(el.Q);
+    });
+    return arr;
+}
+function getAnswer(tbl) {
+    var rowList = [];
+    var tblProp = Object.getOwnPropertyNames(tbl);
+    tblProp.forEach(function (el, i) {
+        var row = [];
+        row.push(tbl[el].ResponseID);
+        tbl[el].userResponses.forEach(function (elm, indx) {
+            row.push(elm.A);
+        });
+        rowList.push(row);
+    });
+    return rowList;
+}
+function getFilterAnswer(answList) {
+    var col = [];
+    for (var i = 0; i < answList[0].length; i++){
+        var arr = [];
+        for (var j = 0; j < answList.length; j++){
+            var val = answList[j][i];
+            if (arr.indexOf(val) == -1) {
+                arr.push(val);
+            } 
+        }        
+        col.push(arr);
+    }
+    return col;
+}
+
+
+myapp.controller('responsectrl', function ($scope, $mdDialog) {
+    //var ctrltable = [];
+    $scope.questlist = getQ(table);
+    //JSON.parse(table);
+    $scope.answerlist = getAnswer(table);
+    $scope.uniqueArr=getFilterAnswer($scope.answerlist);
+    setTimeout(tableFilter, 5000);
+
+    $scope.openmenu = function (evt, index) {
+        //$(evt.currentTarget).siblings(".filterbox").find(".filter-menu").show();
+        $mdDialog.show({
+            locals: {
+                uniqueArr: $scope.uniqueArr[index],
+                callback: $scope.filterTableData
+            },
+            controller: TableFilterController,
+            templateUrl: '../partials/response-templates/tablefitltermenu.html',
+            parent: $(evt.target).closest('.table'),
+            targetEvent: evt,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
     };
+
+    $scope.filterTableData = function (option) {
+        $scope.filterQuery = option
+    }
+
+    function TableFilterController($scope, $mdDialog, uniqueArr, callback) {
+        $scope.uniqueArr = uniqueArr;
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+
+        $scope.filterTableData = function (option) {
+            callback(option);
+        }
+    }
+    //$scope.totaltable = table;
+    $scope.responseid = "Response ID: 345hfgdgxf";
+    //$scope.totaltable = {
+    //    "row1": {
+    //        "col1": "Response ID",
+    //        "col2": "Whats your name?",
+    //        "col3": "Whats your age?"
+    //    },
+    //    "row2": {
+    //        "col1": "abd23ndjnd",
+    //        "col2": "Amit Shaw",
+    //        "col3": 35
+    //    },
+    //    "row3": {
+    //        "col1": "abd23ndjnd",
+    //        "col2": "Sumit Shaw",
+    //        "col3": 27
+    //    }
+    //};
 
     $scope.reviewer1 = {
         "1": {

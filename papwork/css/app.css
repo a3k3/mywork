@@ -85,7 +85,7 @@ form {
 .progressContainer {
     position: absolute;
     width: 100%;
-    z-index: 99;
+    z-index: 9;
     /*background: #fff;*/
 }
 /*.success-layout .progressContainer{
@@ -705,9 +705,12 @@ hr {
     display: table;
     border: 1px solid #c3b8b8;
 }
-.response-section .tablerow {
+.response-section .tablerow, .response-section .tablehead {
     display: table-row;
 }
+.response-section .tablebody {
+    display: table-row-group;
+} 
 .response-section .tablecell {
     display: table-cell;
     border: 0.05px solid #c3b8b8;
@@ -718,7 +721,7 @@ hr {
 .response-section .tablerow:nth-child(odd) {
     background-color: #fdfafa;
 }
-.response-section .tablerow:first-child {
+.response-section .tablehead {
     background-color: #b3b2b1;
 }
 .response-section .tablerow:nth-child(even) {
@@ -737,13 +740,26 @@ hr {
 .response-review>*{
     display:inline-block;
 }
+.tablehead .md-icon-button{
+    float:right;
+    margin-top:-35px;
+}
+.filter-menu{display:none;}
 .response-rating {
     width:33%;
 }
+doughnut-chart svg > g {
+    /*transform: scale(0.5) translate(50%,50%);*/
+}
 
+@media only screen and (max-width:640px){
+    doughnut-chart .md-card{
+        width:80%;
+    }
+}
 /*Publishpop*/
-.popup_layout{
-    padding:40px;
+.popup_layout {
+    padding: 40px;
 }
 .popup_layout .sharelink_block, .popup_layout .embedlink_block {
     width: 100%;

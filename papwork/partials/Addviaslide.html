@@ -1,0 +1,94 @@
+﻿<div class="buildpopup addvia_layout" md-theme="mytheme">
+    <div class="addvia_inner_layout">
+    
+        <div class="master-settings container">
+            <div class="row">
+                <div flex class="project-title">
+                    <md-input-container style="margin-top:0;">
+                        <input class="md-accent hue-2" ng-model="buildQuestionsObj.name" placeholder="My PapForm" type="text">
+                    </md-input-container>
+                </div>
+                <div flex class="more-options">
+                    <ul>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="settings">
+                                <md-icon title="Form Settings" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </md-button>
+                            <span>Form Settings</span>
+                        </li>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="themes">
+                                <md-icon title="Themes" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </md-button>
+                            <span>Themes</span>
+                        </li>
+                        <li class="club" ng-click="addviaSlide($event)">
+                            <span>Add slides via</span>
+                            <md-button class="md-icon-button" aria-label="add slides">
+                                <md-icon title="Add slides via" md-svg-icon="../../asset/img/md-icons/svg/ic_code_black_24px.svg"></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="add slides">
+                                <md-icon title="Add slides via" md-svg-icon="../../asset/img/md-icons/svg/ic_content_copy_black_24px.svg"></md-icon>
+                            </md-button>
+                        </li>
+
+                        <li ng-click="makeQuiz($event)">
+                            <md-button class="md-icon-button" aria-label="quiz">
+                                <md-icon title="Make Quiz" md-svg-icon="../../asset/img/md-icons/svg/ic_hourglass_empty_black_24px.svg"></md-icon>
+                            </md-button>
+                            <span>Make Quiz</span>
+                        </li>
+
+                        <li ng-click="workFlow($event)">
+                            <md-button class="md-icon-button" aria-label="themes">
+                                <md-icon title="Workflows" md-svg-icon="../../asset/img/md-icons/svg/ic_settings_black_24px.svg"></md-icon>
+                            </md-button>
+                            <span> Workflows</span>
+                        </li>
+                        <li>
+                            <md-button class="md-icon-button" aria-label="themes">
+                                <md-icon title="Payments" md-svg-icon="../../asset/img/md-icons/svg/ic_payment_black_24px.svg"></md-icon>
+                            </md-button>
+                            <span>Payments</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="close-tab" layout="row" layout-align="center center">
+            <div flex>
+                <md-icon class="close-modal" ng-click="cancel()" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+            </div>
+        </div>
+        <div class="addvia_sectionblock">
+            <div class="codeedit_via">
+                <md-input-container>
+                    <textarea class="md-accent hue-2" value="" placeholder="Enter Html" name="text"></textarea>
+                </md-input-container>
+                <div class="option_via">
+                    <md-button class="md-raised hue-2" aria-label="copy" ng-click="">
+                        Text
+                    </md-button>
+                    <md-button class="md-raised hue-2" aria-label="copy" ng-click="">
+                        HTML
+                    </md-button>
+                </div>
+            </div>
+            <div class="preview_via">
+
+            </div>
+        </div>
+        <div class="cancel_save_via">
+
+            <md-button class="md-raised hue-2" aria-label="copy" ng-click="reset()">
+                Cancel
+            </md-button>
+
+            <md-button class="md-raised md-primary hue-2" aria-label="copy" ng-click="">
+                Save
+            </md-button>
+        </div>
+
+    </div>
+</div>
