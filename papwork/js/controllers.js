@@ -571,12 +571,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $rootScope.$broadcast("DOWNLOAD_RECORD");
     }
     /*******Web Cam Functions********/
-
     $scope.submit = function () {
         console.log($scope.questionsObj.questions);
     }
 })
-
 
 function MyCtrl2() {
 }
@@ -701,6 +699,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         getSettings.then(function (response) {
             $scope.buildcoverdata.settings = response.data.cover.settings;
             //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
+            $scope.buildcoverdata.defaultsettings = angular.copy($scope.buildcoverdata.settings);
             if ($scope.buildcoverdata.settings.covertemplate.condition) {
                 $scope.buildcoverdata.cover_template = 'official';
             }
@@ -718,6 +717,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
+            $scope.buildsuccessdata.defaultsettings = angular.copy($scope.buildsuccessdata.settings);
             //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
             if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
@@ -729,6 +729,16 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }, function myError(response) {
         $scope.status = response.statusText;
     });
+
+    $scope.resetToDefault = function (type) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        if (type == 'cover')
+            $scope.buildcoverdata.settings = $scope.buildcoverdata.defaultsettings;
+        else if (type == 'success')
+            $scope.buildsuccessdata.settings = $scope.buildsuccessdata.defaultsettings;
+        else
+            $scope.buildQuestionsObj.questions[index].validations = $scope.buildQuestionsObj.questions[index].defaultsettings;
+    }
 
     //add slide
     $scope.addSlide = function () {
@@ -788,7 +798,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             var typedata = response.data[type];
             //add validations 
             $scope.buildQuestionsObj.questions[index].validations = angular.copy(typedata.settings);
-
+            $scope.buildQuestionsObj.questions[index].defaultsettings = angular.copy($scope.buildQuestionsObj.questions[index].validations);
             //add advanced validations 
             $scope.buildQuestionsObj.questions[index].advancedvalidations = angular.copy(typedata.advsettings);
 
@@ -1029,13 +1039,13 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         }
     }
 
-    $scope.workflow = function (event) {
+    $scope.buildpopup = function (event, template) {
         $mdDialog.show({
             locals: {
-                callback: $scope.addQuestion
+                template: template
             },
-            controller: DialogController,
-            templateUrl: '../partials/Workflow.html',
+            controller: BuildPopupController,
+            templateUrl: '../partials/buildpopup_templates/build_popup.html',
             parent: $(event.target).closest('md-tab-content'),
             targetEvent: event,
             clickOutsideToClose: true,
@@ -1048,44 +1058,19 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             });
     }
 
-    // addViaSlide  
-    $scope.addviaSlide = function (event) {
-        $mdDialog.show({
-            locals: {
-                callback: $scope.addQuestion
-            },
-            controller: DialogController,
-            templateUrl: '../partials/Addviaslide.html',
-            parent: $(event.target).closest('md-tab-content'),
-            targetEvent: event,
-            clickOutsideToClose: true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-            .then(function () {
-                $scope.status = 'You said the information was.';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
-            });
-    }
+    function BuildPopupController($scope, $mdDialog, template) {
+        $scope.template = template;
+        $scope.getTemplateUrl = function () {
+            return '../partials/buildpopup_templates/'+template+'.html';
+        }
 
-    //Make Quiz
-    $scope.makeQuiz = function (event) {
-        $mdDialog.show({
-            locals: {
-                callback: $scope.addQuestion
-            },
-            controller: DialogController,
-            templateUrl: '../partials/makeQuiz.html',
-            parent: $(event.target).closest('md-tab-content'),
-            targetEvent: event,
-            clickOutsideToClose: true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-            .then(function () {
-                $scope.status = 'You said the information was.';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
-            });
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
     }
 
     function resetSlide() {
@@ -1342,8 +1327,13 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
     $rootScope.bodylayout = 'cover-layout';
 
     getCoverData.then(function (cover) {
-        $scope.coverdata = cover.data;
-        $scope.checkIfTimed();
+        if (cover.data.settings.disablecover != undefined && cover.data.settings.disablecover.condition && window.location.href.indexOf('create') == -1) {
+            $scope.gotoExperience('#/experience', null);
+        }
+        else {
+            $scope.coverdata = cover.data;
+            $scope.checkIfTimed();
+        }
     }, function myError(response) {
         $scope.status = response.statusText;
     });

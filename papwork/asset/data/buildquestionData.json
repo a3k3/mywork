@@ -19,6 +19,7 @@
       },
       "reset": {
         "name": "reset",
+        "type": "cover",
         "condition": false,
         "text": "Reset to Default."
       }
@@ -80,6 +81,7 @@
       },
       "reset": {
         "name": "reset",
+        "type": "success",
         "condition": false,
         "text": "Reset to Default."
       }
@@ -121,6 +123,12 @@
         "name": "acceptonly",
         "condition": "text",
         "text": "Please enter valid input."
+      },
+      "reset": {
+        "name": "reset",
+        "type": "question",
+        "condition": false,
+        "text": "Reset to Default."
       },
       "internal": {
         "name": "internal",
