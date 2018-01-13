@@ -1,0 +1,92 @@
+﻿<div class="addvia_layout" md-theme="mytheme">
+    <div class="makeQuiz_inner_layout">
+        <div class="workflow_left_table">
+            <table class="table">
+
+
+                <tr>
+                    <td>Slide</td>
+                    <td>Questions</td>
+                    <td>Correct Answer</td>
+                    <td>Score</td>
+                    <td>Instant Feedback</td>
+                </tr>
+                
+                <tr>
+                    <th scope="row">1</th>
+                    <td>How do you estimate the  distance between two planets?</td>
+                    <td>
+
+
+                        <div flex-gt-sm="50">
+                            <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                Scale
+                            </md-checkbox>
+                            <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                Traingulation
+                            </md-checkbox>
+                            <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                Google
+                            </md-checkbox>
+                            <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="" class="md-primary">
+                                Others
+                            </md-checkbox>
+                        </div>
+
+
+                    </td>
+
+
+                    <td>
+
+
+                        <div flex="" class="flex">
+                            <md-input-container>
+                                <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                            </md-input-container>
+                            <md-input-container class="md-mytheme-theme md-input-has-value">
+                                <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+
+                            </md-input-container>
+                        </div>
+
+
+                    </td>
+
+                    <td>
+
+                        <div flex="" class="flex">
+                            <md-input-container>
+                                <input type="text" name="score" min="" max="5" value="wrong" ng-model="" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                            </md-input-container>
+                            <md-input-container class="md-mytheme-theme md-input-has-value">
+                                <input type="text" name="score" min="" max="5" ng-model="" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                                <div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+                    </td>
+                </tr>
+                
+
+            </table>
+        </div>
+
+        <div class="workflow_right_table">
+            <h2>Grand Total Score</h2>
+            <div class="private_workflow">
+                <p class="left_slide_workflow">Select Email Template</p>
+                <p class="right_slide_workflow">Private</p>
+            </div>
+            <div class="workflow_checkbox_block">
+                <md-input class="green " aria-label="" name="" value="">Correct Answer Score</md-input><br>
+                <md-input class="green " aria-label="" name="" value="">Wrong Answer</md-input>
+
+            </div>
+            <hr>
+            <div class="conditional_flow">
+                <h4>Settings</h4>
+            </div>
+
+        </div>
+    </div>
+</div>

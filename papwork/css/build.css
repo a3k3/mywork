@@ -3096,3 +3096,7 @@ md-progress-circular + .counter{
     position:relative;
     overflow:hidden;
 }
+
+.workflow_left_table tr:first-child {
+    background: #e3e3e3;
+}
