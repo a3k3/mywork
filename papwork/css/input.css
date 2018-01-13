@@ -1,4 +1,7 @@
-﻿/***Input Styles***/
+﻿.inputContainer ng-form {
+    display: block;
+}
+/***Input Styles***/
 md-input-container .tick {
     position: absolute;
     right: -40px;

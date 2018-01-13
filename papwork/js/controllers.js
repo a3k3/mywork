@@ -571,12 +571,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $rootScope.$broadcast("DOWNLOAD_RECORD");
     }
     /*******Web Cam Functions********/
-
     $scope.submit = function () {
         console.log($scope.questionsObj.questions);
     }
 })
-
 
 function MyCtrl2() {
 }
@@ -1286,8 +1284,13 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
     $rootScope.bodylayout = 'cover-layout';
 
     getCoverData.then(function (cover) {
-        $scope.coverdata = cover.data;
-        $scope.checkIfTimed();
+        if (cover.data.settings.disablecover != undefined && cover.data.settings.disablecover.condition && window.location.href.indexOf('create') == -1) {
+            $scope.gotoExperience('#/experience', null);
+        }
+        else {
+            $scope.coverdata = cover.data;
+            $scope.checkIfTimed();
+        }
     }, function myError(response) {
         $scope.status = response.statusText;
     });
