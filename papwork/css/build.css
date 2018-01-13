@@ -1538,7 +1538,7 @@ md-progress-circular + .counter{
     border-bottom: 1px solid black;
 }
 
-.workflow_left_table tbody {
+.workflow_left_table {
     border: 1px solid black;
 }
 
@@ -1577,7 +1577,7 @@ md-progress-circular + .counter{
     border-bottom: 1px solid black;
 }
 
-.workflow_left_table tbody {
+.workflow_left_table{
     border: 1px solid black;
 }
 
@@ -1601,8 +1601,262 @@ md-progress-circular + .counter{
     overflow:hidden;
 }
 
+/***/
+
+.workflow_left_table tr:first-child {
+    background: #e3e3e3;
+}
+
+.buildpopup .master-settings{
+    margin-bottom:35px;
+}
+
+.workflow_layout .workflow_right_table h3{
+    margin-top:0;
+    margin-bottom:18px;
+}
+
+.workflow_left_table tr td{
+    text-align:center;
+}
+
+.workflow_checkbox_block{
+    border-radius:5px;
+}
+
+.workflow_right_table .workflow_checkbox_block .md-container{
+    margin-left:10px;
+}
+
+.workflow_checkbox_block .mdcheckbox .md-label{
+    width:90%;
+}
+
+.workflow_checkbox_block .mdcheckbox .md-label .number_private{
+    float:right;
+}
+
+.conditional_flow p{
+        display: inline-block;
+    margin: 0;
+    /* height: 30px; */
+    vertical-align: top;
+}
+
+.conditional_flow md-switch{
+        display: inline-block;
+    margin: 0;
+    margin-left: 120px;
+}
+
+.conditional_flow{
+    margin-top:40px;   
+     border-top: 1px solid #e2e2e2;
+    padding-top: 30px;
+}
+
+.workflow_left_table .btn-danger, .workflow_left_table .btn-default{
+        background: transparent;
+    border: 0px;
+    color: #000;
+}
+
+.private_workflow .right_slide_workflow{
+    color: rgb(76,175,80);
+}
+
+.add-slide-workflow{
+    box-shadow:none;
+}
+
+.workflow_left_table tr:last-child{
+    border-bottom:0;
+}
+
+.workflow_left_table tr:last-child td{
+    padding-top:10px;
+}
+
+.workflow_left_table .addstep{
+    display:inline-block;
+}
+
+.workflow_left_table .add-slide-workflow{
+    display:inline-block;
+    margin:0;
+}
 
 
+
+
+
+
+
+
+
+
+/*make quiz*/
+
+.quiz_layout {
+    width: 100%;
+    height: 100vh;
+    padding: 50px;
+}
+
+.quiz_Setting {
+    width: 40%;
+    float: left;
+    background: #fff;
+    padding: 12px;
+}
+
+.left_slide_workflow {
+    float: left;
+}
+
+.quiz_Edit {
+    width: 59%;
+    float: left;
+    margin-right: 1%;
+    background: #fff;
+    border: 1px solid black;
+}
+.quiz_Edit th{
+
+background-color:lightgrey;
+}
+.quiz_Setting md-input-container, .quiz_Edit md-input-container {
+    margin-top: 0px;
+}
+    .quiz_Edit md-checkbox {
+        margin-top:10px;
+    }
+    .quiz_Edit .next_step{
+        width:20%;
+        border-top:none;
+    }
+    .quiz_Edit .next_step md-card{
+        float:left;
+    }
+        .quiz_Edit .addstep {
+            margin:10px 0 0 0;
+        }
+    .workflow_inner_layout {
+        width: 100%;
+    }
+.quiz_Edit tr {
+    border-bottom: 1px solid #f2f2f2;
+}
+.quiz_score {
+    background-color: grey;
+}
+.quiz_score span {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+.workflow_left_table table {
+    width: 100%;
+}
+
+.workflow_left_table tr {
+    height: 40px;
+    border-bottom: 1px solid black;
+}
+
+.workflow_left_table tbody {
+    border: 1px solid black;
+}
+
+.right_slide_workflow {
+    float: right;
+}
+
+.workflow_checkbox_block {
+    border: 1px solid black;
+}
+
+    .workflow_checkbox_block md-checkbox {
+        border-bottom: 1px solid black;
+        margin-right: 0;
+        margin-bottom: 0;
+        padding: 10px;
+    }
+
+.private_workflow {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.workflow_left_table td {
+    width: 20%;
+}
+
+.workflow_left_table table {
+    width: 100%;
+}
+
+.workflow_left_table tr {
+    height: 40px;
+    border-bottom: 1px solid black;
+}
+
+.workflow_left_table tbody {
+    border: 1px solid black;
+}
+
+.right_slide_workflow {
+    float: right;
+}
+
+.workflow_checkbox_block {
+    border: 1px solid black;
+}
+
+    .workflow_checkbox_block md-checkbox {
+        border-bottom: 1px solid black;
+        margin-right: 0;
+        margin-bottom: 0;
+        padding: 10px;
+    }
+
+
+
+.workflow_left_table tr:first-child {
+    background: #e3e3e3;
+}
+
+
+
+/*formsettings*/
+
+.form_set_items ul{
+    list-style:none;
+}
+
+.form_set_items ul li{
+     height: 40px;
+    margin-bottom: 2px;
+    background: #fff;
+    padding: 12px;
+}
+
+.form_set_items{
+    width: 26%;
+    float: left;
+    margin-right:3%;
+}
+
+.form_set_items_display{
+    width: 70%;
+    float: left;
+    background:#fff;
+}
+
+.formsettings_layout .popup_layout{
+    padding:0;
+}
 /******tab specific******/
 .create-tabs #tab-content-2 {
     height: 96vh;
