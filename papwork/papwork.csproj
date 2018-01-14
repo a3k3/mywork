@@ -224,8 +224,9 @@
     <Content Include="partials\buildpopup_templates\Addviaslide.html" />
     <Content Include="partials\build.html" />
     <Content Include="partials\buildpopup_templates\FormSettings.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\makeQuiz.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\PublishPopup.html" />
-    <Content Include="partials\buildpopup_templates\MakeQuiz.html" />
+    <Content Include="partials\buildpopup_templates\makeQuiz.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
     <Content Include="partials\build_input_templates\email.html" />

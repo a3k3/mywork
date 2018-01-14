@@ -187,6 +187,105 @@ function guid() {
       s4() + '-' + s4() + s4() + s4();
 }
 
+function addviahtml(html) {
+    //var html = this.boxHTML.val();
+    //var css = this.boxCSS.val();
+    //var js = this.boxJS.val();
+
+    //convert to input expected by our theme
+    var othertypes = ['radio', 'select', 'checkbox'];
+    var questions = []
+    var allLabels = $(html).find("label");
+    var allCaptions = $(html).find(".caption");
+    var allHints = $(html).find(".hint");
+    var lbl_index = 0;
+    var setradioFlag = 0;
+    var setradioName = "";
+    $(html).find(':input').each(function (index, value) {
+        if ($(this).prop("tagName").toLowerCase() == 'input' && ($(this).attr('type').toLowerCase() == 'radio' || $(this).attr('type').toLowerCase() == 'checkbox') && setradioFlag && $(this).attr('name').toLowerCase() == setradioName) {
+            return true;
+        }
+        else {
+            setradioFlag = 0;
+            setradioName = "";
+            if ($(this).prop("tagName").toLowerCase() == 'input' && ($(this).attr('type').toLowerCase() == 'submit' || $(this).attr('type').toLowerCase() == 'hidden')) {
+            }
+            else {
+                var current_label = allLabels.eq(lbl_index);
+                var current_caption = allCaptions.eq(lbl_index);
+                var current_hint = allHints.eq(lbl_index);
+                var question = {
+                    "id": index + 1,
+                    "question": current_label.text(),
+                    "name": $(this).attr('name'),
+                    "modelname": "",
+                    "caption": current_caption.length == 0 ? "" : current_caption.text(),
+                    "answertype": $(this).prop("tagName").toLowerCase() == 'input' ? $(this).attr('type') : $(this).prop("tagName").toLowerCase(),
+                    "answertheme": "",
+                    "hint": current_hint.length == 0 ? "Please see the instructions" : current_hint.text(),
+                    "placeholder": $(this).attr('placeholder') != undefined ? $(this).attr('placeholder') : "Enter here",
+                    "value": $(this).attr('value'),
+                    "validations": {
+                        "required": {
+                            "condition": "true",
+                            "text": "Thats required!"
+                        }
+                    }
+                }
+                question.options = [];
+                if (question.answertype.toLowerCase() == "select") {
+                    $(this).find('option').each(function () {
+                        var option = {
+                            "key": $(this).text(),
+                            "value": $(this).attr('value')
+                        }
+                        question.options.push(option);
+                    });
+                }
+                else if (question.answertype.toLowerCase() == "radio" || question.answertype.toLowerCase() == "checkbox") {
+                    setradioFlag = 1;
+                    setradioName = question.name;
+                    $(this).closest('form').find('input:' + question.answertype.toLowerCase() + '[name=' + question.name + ']').each(function () {
+                        var option = {
+                            "key": $(this)[0].nextSibling.data,
+                            "value": $(this).attr('value')
+                        }
+                        question.options.push(option);
+                    });
+                }
+                else {
+                    var option = {
+                        "value": "",
+                        "placeholder":"Enter Value"
+                    }
+                    question.options.push(option);
+                }
+                questions.push(question);
+                lbl_index++
+            }
+        }
+    });
+    var action = $(html).attr('action');
+    //console.log(questions);
+
+    var result = 'http://localhost:2472/angular/#/experience';
+
+    writeResult(result, questions);
+}
+
+function writeResult(result, questions) {
+    var iframe = $('.buildpopup .preview_via iframe');
+    iframe.attr('src', result);
+
+    if (typeof (Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+        sessionStorage.questionsObj = JSON.stringify(questions);
+    } else {
+        // Sorry! No Web Storage support..
+        aler("Sorry! No Web Storage support..");
+    }
+}
+
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
@@ -224,6 +323,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         else {
             if (sessionStorage.questionsObj != undefined) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
+                angular.forEach($scope.questionsObj.questions, function (value, index) {
+                    value.enable = "true"; /*temporary should be removed*/
+                });
             }
             else {
                 $scope.questionsObj.questions = response.data;
@@ -232,7 +334,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                     value.enable = "true"; /*temporary should be removed*/
                     
                     //check for random options
-                    if (value.validations.randomize != undefined && value.validations.randomize.condition) {
+                    if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
                         value.options = shuffleArray(value.options);
                     }
                 });
@@ -319,7 +421,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkadvancedvalidation = function () {
         var index = $scope.questionsObj.activeNow-1;
-        if ($scope.questionsObj.questions[index] != undefined && window.location.href.indexOf('experience') != -1) {
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
             var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
             var answer = "";
             if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
@@ -359,7 +461,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkshowhidevalidation = function () {
         var index = $scope.questionsObj.activeNow;
-        if ($scope.questionsObj.questions[index] != undefined && window.location.href.indexOf('experience') != -1) {
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
             var showhide = $scope.questionsObj.questions[index].advancedvalidations.showhide;
             $scope.questionsObj.questions[index].enable = showhide.condition;
             var _condition = true;
@@ -729,6 +831,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.$on('questionsFormTheme', function (event, data) {
         $scope.buildQuestionsObj.theme = data;
+    });
+
+    $scope.$on('addviaquestions', function (event, data) {
+        angular.forEach(data, function (value, index) {
+            value.enable = "true"; /*temporary should be removed*/
+            $scope.buildQuestionsObj.questions.push(value);
+        });
+        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
     });
 
     getCoverData.then(function (cover) {
@@ -1103,22 +1213,37 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.getTemplateUrl = function () {
             return '../partials/buildpopup_templates/'+template+'.html';
         }
-
         $scope.hide = function () {
             $mdDialog.hide();
         };
-
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
 
+
+        /*******FormSettings********/
+        $scope.formsettingtemplate = 'makeQuiz';
         $scope.formSettingController = function (event, template) {
             $scope.formsettingtemplate = template;
         }
-
         $scope.getFormSettingTemplateUrl = function () {
-            return '../partials/buildpopup_templates/Formtemplates/' + $scope.formsettingtemplate + '.html'
+            return '../partials/buildpopup_templates/' + $scope.formsettingtemplate + '.html'
         }
+        /*******FormSettings********/
+
+        /*******Add Via Slide********/
+        $scope.runpreview = function () {
+            var _formdata = angular.element('.codeedit_via textarea').val();
+            addviahtml(_formdata);
+        }
+        $scope.saveQuestions = function () {
+            if (sessionStorage.questionsObj != undefined) {
+                var tempquestions = JSON.parse(sessionStorage.questionsObj);
+                $rootScope.$broadcast('addviaquestions', tempquestions);
+            }
+            $scope.hide();
+        }
+        /*******Add Via Slide********/
     }
 
     function resetSlide() {

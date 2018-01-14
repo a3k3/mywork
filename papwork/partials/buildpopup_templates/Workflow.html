@@ -51,29 +51,82 @@
         </table>
     </div>
     <div class="workflow_right_table">
-        <h3>Tasks for Ajay</h3>
-        <div class="private_workflow">
-            <p class="left_slide_workflow">Select Slide/Question</p>
-            <p class="right_slide_workflow">Private</p>
-        </div>
-        <div class="workflow_checkbox_block">
-            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
-                How do you define
-                <span class="number_private">12</span>
-            </md-checkbox>
-            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
-                Can he manage
-                <span class="number_private">12</span>
-            </md-checkbox>
-            <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
-                How do you rate
-                <span class="number_private">12</span>
-            </md-checkbox>
+        <div>
+            <h3>Tasks for Ajay</h3>
+            <div class="private_workflow">
+                <p class="left_slide_workflow">Select Slide/Question</p>
+                <p class="right_slide_workflow">Private</p>
+            </div>
+            <div class="workflow_checkbox_block">
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you define
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    Can he manage
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+            </div>
         </div>
         <div class="conditional_flow">
             <p>Conditional Step</p>
             <md-switch ng-model="data.cb1" aria-label="Switch 1">
             </md-switch>
+        </div>
+
+        <div class="execute">
+            <label>Excute this step if</label>
+            <div layout="row" layout-align="start center">
+                <div flex="20">
+                    <md-select name="question" ng-model="abcd">
+                        <md-option>Question</md-option>
+                        <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
+                    </md-select>
+                </div>
+                <div flex="20">
+                    <md-select name="question" ng-model="abcd">
+                        <md-option>Equals</md-option>
+                        <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
+                    </md-select>
+                </div>
+                <div flex="30">
+                    <md-select name="question" ng-model="abcd">
+                        <md-option>Answer</md-option>
+                        <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
+                    </md-select>
+                </div>
+                <div flex="20">
+                    <div ng-click="addAdvanceOption($event,setting.name)" class="advance-option">
+                        <md-button class="add" md-colors="{background: 'grey'}">Add</md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Slide/Question visibility</h3>
+            <div class="private_workflow">
+                <p class="left_slide_workflow">Select Slide/Question</p>
+                <p class="right_slide_workflow">Private</p>
+                <p class="right_slide_workflow">All</p>
+            </div>
+            <div class="workflow_checkbox_block">
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you define
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    Can he manage
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+            </div>
         </div>
 
     </div>

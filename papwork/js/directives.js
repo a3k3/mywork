@@ -152,7 +152,7 @@ myapp.directive("flip", function () {
         link: function (scope, element, attrs, ctrl) {
 
             var width = attrs.flipWidth || "100%",
-              height = attrs.flipHeight || "73vh";
+              height = attrs.flipHeight || "inherit";
 
             element.addClass("flip");
 

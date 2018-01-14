@@ -1,12 +1,12 @@
 ﻿<div class="formsettings_layout">
     <div class="form_set_items">
         <ul>
-            <li ng-click="formSettingController($event, 'MakeQuiz')">General</li>
+            <li ng-click="formSettingController($event, 'makeQuiz')" ng-class="{active: formsettingtemplate =='makeQuiz'}">General</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Slide</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Audience</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Integrations</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Admin</li>
-            <li ng-click="formSettingController($event, 'PublishPopup')">Share and Embed</li>
+            <li ng-click="formSettingController($event, 'PublishPopup')" ng-class="{active: formsettingtemplate =='PublishPopup'}">Share and Embed</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Email Notifications</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Processing</li>
         </ul>
