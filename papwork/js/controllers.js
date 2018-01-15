@@ -291,7 +291,7 @@ function writeResult(result, questions) {
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
-myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData) {
+myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -339,11 +339,13 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                         angular.element(tmp).find('span').each(function (index, value) {
                             if ($(value).hasClass('chip')) {
                                 var answerfor = $(value).data('question-id');
-                                $(value).html('<span ng-bind-html="questionsObj.questions['+answerfor+'].response"></span>')
+                                var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
+                                $(value).replaceWith(insertVal);
                             }
                         })
                     }
                     value.question = tmp.innerHTML;
+                    //$compile(value.question)($scope);
                     value.enable = "true"; /*temporary should be removed*/
                     
                     //check for random options
@@ -375,24 +377,6 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     $scope.$on('questionsData', function (event, data) {
         $scope.questionsObj.questions = data;
         angular.forEach($scope.questionsObj.questions, function (value, index) {
-            var temp = value.question;
-            var tmp = document.createElement("DIV");
-            tmp.innerHTML = temp;
-            angular.element(tmp).find('span').forEach(function (index, value) {
-                if ($(value).hasClass('chip')) {
-                    var answerfor = $(value).data('question-id');
-
-                    var answer = $scope.questionsObj.questions[index].options.filter(function (item) {
-                        if (item.selected != undefined)
-                            return item.selected == true
-                        else
-                            return item.value != ""
-                    })[0];
-
-                    $(value).html('{{questionsObj.questions['+(answerfor-1)+']}}')
-                }
-            })
-            temp = temp.replace(/<(?:.|\n)*?>/gm, '###');
             value.enable = "true"; /*temporary should be removed*/
 
             //check for random options
@@ -436,9 +420,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         var index = $scope.questionsObj.activeNow-1;
         if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
             var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
-            var answer = "";
+            var answer = {};
             if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
-                answer = $scope.questionsObj.questions[index].response;
+                answer.value = $scope.questionsObj.questions[index].response;
             }
             else if ($scope.questionsObj.questions[index].options != undefined) {
                 answer = $scope.questionsObj.questions[index].options.filter(function (item) {
@@ -449,7 +433,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 })[0];
             }
             var match = jumplogic.logic_options.filter(function (item) {
-                if (answer != undefined && answer != "" && item.answer != undefined)
+                if (answer != undefined && answer != "" && answer!= "NaN" && item.answer != undefined)
                     return item.answer.value.toLowerCase() === answer.value.toLowerCase();
             })[0];
 
@@ -525,12 +509,14 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.writeToResponse = function () {
         var index = $scope.questionsObj.activeNow - 1;
-        $scope.questionsObj.questions[index].response = "";
-        if ($scope.questionsObj.questions[index].options != undefined) {
-            var response = $scope.questionsObj.questions[index].options
-            angular.forEach(response, function (value, index) {
-                $scope.questionsObj.questions[index].response =  + value.value
-            });
+        if (index > -1) {
+            $scope.questionsObj.questions[index].response = "";
+            if ($scope.questionsObj.questions[index].options != undefined) {
+                var response = $scope.questionsObj.questions[index].options
+                angular.forEach(response, function (value, index) {
+                    $scope.questionsObj.questions[index].response = $scope.questionsObj.questions[index].response + value.value
+                });
+            }
         }
     };
 

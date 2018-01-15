@@ -93,7 +93,7 @@
   },
   {
     "id": 2,
-    "question": "Pleas<span class=\"chip\" data-question-id=\"1\" contenteditable=\"false\" readonly=\"\">Question#1<span class=\"removeChip\">-<\/span><\/span>",
+    "question": "Hi <span class=\"chip\" data-question-id=\"1\" contenteditable=\"false\" readonly=\"\">Question#1<span class=\"removeChip\">-<\/span><\/span>, How are you?",
     "name": "video",
     "modelname": "video",
     "caption": "You have 2 mins to record your response",
@@ -128,25 +128,6 @@
         "condition": true,
         "text": "Show/Hide Logic",
         "logic_options": [
-          {
-            "questionno": 1,
-            "operator": "equals",
-            "answer": {
-              "id": 1,
-              "value": "Abcd"
-            },
-            "answer_list": [
-              {
-                "id": 1,
-                "value": "Abcd"
-              },
-              {
-                "id": 2,
-                "value": "Female"
-              }
-            ],
-            "relation": ""
-          }
         ]
       },
       "jumplogic": {
