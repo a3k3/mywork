@@ -1,63 +1,91 @@
-﻿<div class="workflow_layout">
-    <div class="workflow_left_table">
-        <table>
-            <tr>
-                <td>steps</td>
-                <td>Activity name</td>
-                <td>Activity type</td>
-                <td>Assign to</td>
-                <td>Action</td>
-            </tr>
-            <tr>
-                <td>steps 0</td>
-                <td>Reception</td>
-                <td>status</td>
-                <td>Ajay</td>
-                <td>
-                    <button type="button" class="btn btn-default">
-                        <i class="glyphicon glyphicon-pencil">
-                        </i>
-                    </button>
-                    <button type="button" class="btn btn-danger">
-                        <i class="glyphicon glyphicon-trash">
-                        </i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>steps 1</td>
-                <td>Reception</td>
-                <td>status</td>
-                <td>Ajay</td>
-                <td>
-                    <button type="button" class="btn btn-default">
-                        <i class="glyphicon glyphicon-pencil">
-                        </i>
-                    </button>
-                    <button type="button" class="btn btn-danger">
-                        <i class="glyphicon glyphicon-trash">
-                        </i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <md-card class="add-slide-workflow">
-                        <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>                       
-                    </md-card>
-                    <p class="addstep">Step</p>
-                </td>
-            </tr>
-        </table>
+﻿<div class="workflow_layout" md-theme="mytheme">
+    <div class="actions-table workflow_left_table">
+        <div layout="row" class="table-head">
+            <div flex="10">
+                Steps
+            </div>
+            <div flex="30">
+                Activity Name
+            </div>
+            <div flex="25">
+                Activity type
+            </div>
+            <div flex="25">
+                Assign To
+            </div>
+            <div flex="10">
+                Action
+            </div>
+        </div>
+        <div layout="row" class="table-row">
+            <div flex="10">
+                Steps 0
+            </div>
+            <div flex="30">
+                Reception
+            </div>
+            <div flex="25">
+                Status
+            </div>
+            <div flex="25">
+                Ajay
+            </div>
+            <div flex="10">
+                <md-button class="md-icon-button" aria-label="edit">
+                    <md-tooltip md-direction="bottom">Edit</md-tooltip>
+                    <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="delete">
+                    <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                    <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <div layout="row" class="table-row">
+            <div flex="10">
+                Steps 1
+            </div>
+            <div flex="30">
+                Reception
+            </div>
+            <div flex="25">
+                Status
+            </div>
+            <div flex="25">
+                Ajay
+            </div>
+            <div flex="10">
+                <md-button class="md-icon-button" aria-label="edit">
+                    <md-tooltip md-direction="bottom">Edit</md-tooltip>
+                    <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="delete">
+                    <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                    <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <div layout="row" class="table-row">
+            <div flex="20">
+                <md-button class="md-icon-button" aria-label="add">
+                    <md-tooltip md-direction="bottom">Add Steps</md-tooltip>
+                    <md-icon class="md-primary" md-svg-icon="../../asset/img/md-icons/svg/ic_add_circle_black_24px.svg"></md-icon>
+                </md-button>
+                Steps
+            </div>
+        </div>
     </div>
     <div class="workflow_right_table">
-        <div>
+        <div class="task-table">
             <h3>Tasks for Ajay</h3>
             <div class="private_workflow">
                 <p class="left_slide_workflow">Select Slide/Question</p>
-                <p class="right_slide_workflow">Private</p>
+                <p class="right_slide_workflow active">Private</p>
             </div>
             <div class="workflow_checkbox_block">
+                <div class="search-box">
+                    <input type="text" placeholder="Slide No. or question name" />
+                </div>
                 <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
                     How do you define
                     <span class="number_private">12</span>
@@ -77,17 +105,16 @@
             <md-switch ng-model="data.cb1" aria-label="Switch 1">
             </md-switch>
         </div>
-
         <div class="execute">
             <label>Excute this step if</label>
             <div layout="row" layout-align="start center">
-                <div flex="20">
+                <div flex="25">
                     <md-select name="question" ng-model="abcd">
                         <md-option>Question</md-option>
                         <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
                     </md-select>
                 </div>
-                <div flex="20">
+                <div flex="25">
                     <md-select name="question" ng-model="abcd">
                         <md-option>Equals</md-option>
                         <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
@@ -106,14 +133,17 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="slide-visibility-table">
             <h3>Slide/Question visibility</h3>
             <div class="private_workflow">
                 <p class="left_slide_workflow">Select Slide/Question</p>
-                <p class="right_slide_workflow">Private</p>
-                <p class="right_slide_workflow">All</p>
+                <p class="right_slide_workflow ">All</p>
+                <p class="right_slide_workflow active">Private</p>                
             </div>
             <div class="workflow_checkbox_block">
+                <div class="search-box">
+                    <input type="text" placeholder="Slide No. or question name" />
+                </div>
                 <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
                     How do you define
                     <span class="number_private">12</span>
@@ -126,9 +156,63 @@
                     How do you rate
                     <span class="number_private">12</span>
                 </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
             </div>
         </div>
-
+        <div class="email-notification-table">
+            <h3>Trigger Email Notification</h3>
+            <div class="private_workflow">
+                <p class="left_slide_workflow">Select Email Template</p>
+            </div>
+            <div class="workflow_checkbox_block">
+                <div class="search-box">
+                    <input type="text" placeholder="Email Subject" />
+                </div>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you define
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    Can he manage
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+                <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">
+                    How do you rate
+                    <span class="number_private">12</span>
+                </md-checkbox>
+            </div>
+        </div>
     </div>
 </div>
 

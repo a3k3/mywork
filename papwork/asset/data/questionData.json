@@ -33,14 +33,14 @@
     "advancedvalidations": {
       "showhide": {
         "name": "showhide",
-        "condition": true,
+        "condition": false,
         "text": "Show/Hide Logic",
         "logic_options": [
         ]
       },
       "jumplogic": {
         "name": "jumplogic",
-        "condition": "jump",
+        "condition": "nojump",
         "text": "Jump Logic",
         "logic_options": [
           {
@@ -93,7 +93,7 @@
   },
   {
     "id": 2,
-    "question": "What are primary tenants of User Experience Design?",
+    "question": "Pleas<span class=\"chip\" data-question-id=\"1\" contenteditable=\"false\" readonly=\"\">Question#1<span class=\"removeChip\">-<\/span><\/span>",
     "name": "video",
     "modelname": "video",
     "caption": "You have 2 mins to record your response",

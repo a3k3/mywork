@@ -108,9 +108,10 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container {
     width: 100%;
     padding: 0 10px;
 }
-.controls .md-button.md-icon-button {
-    margin: 0;
-}
+
+    .controls .md-button.md-icon-button {
+        margin: 0;
+    }
 
     .controls .fcontrol > div {
         float: left;
@@ -815,41 +816,18 @@ label + md-input-container label {
 
 .apply-questions-container .file-option, .apply-questions-container .number-options {
     position: relative;
-    width:auto;
-    display:block;
+    width: auto;
+    display: block;
 }
 
 .apply-questions-container .file-option md-input-container, .apply-questions-container .number-options md-input-container {
     margin-top: 0;
 }
 
-.apply-questions-container .inputContainer .option > [ng-click] {
-    position: absolute;
-    left: 200px;
-    bottom: 16px !important;
+.apply-questions-container .add-option {
+    float: left;
 }
 
-.apply-questions-container .inputContainer .checkbox-block.option > [ng-click], .apply-questions-container .inputContainer md-radio-group.option > [ng-click] 
-.apply-questions-container .inputContainer .checkbox-block.option > [ng-click],
-.apply-questions-container .inputContainer md-radio-group.option > [ng-click]
-{
-    position: relative;
-    margin-left: 200px;
-    bottom: 40px !important;
-    left: auto;
-}
-
-@media all and (max-width:1024px) {
-    .apply-questions-container .inputContainer .checkbox-block.option > [ng-click], .apply-questions-container .inputContainer md-radio-group.option > [ng-click] {
-        bottom: 75px !important;
-    }
-}
-
-.apply-questions-container .inputContainer .add-option {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
 
 #tab-content-2 .cover-page {
     height: 88vh;
@@ -1067,7 +1045,7 @@ settings ng-include.showhide [layout="row"]:hover .remove {
                 margin-right: 0px;
                 padding: 0 10px;
                 cursor: pointer;
-                outline:none;
+                outline: none;
             }
 
         .more-options li img {
@@ -1159,6 +1137,12 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     }
 }
 
+@media screen and (min-width: 1400px) {
+    .apply-questions-container {
+        height: 73vh;
+    }
+}
+
 .upload-options {
     height: 164px;
     overflow-y: scroll;
@@ -1228,7 +1212,7 @@ ul.dropdown-menu a.dropdown-item {
 }
 
 @media(max-width:767px) {
-md-tooltip {
+    md-tooltip {
         display: none !important;
     }
 }
@@ -1405,7 +1389,7 @@ md-progress-circular + .counter {
     font-weight: bold;
     border: 1px solid #000;
     font-size: 13px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /********Build Popup generic********/
@@ -1424,10 +1408,9 @@ md-progress-circular + .counter {
     visibility: hidden;
 }
 
-    .buildpopup .more-options li.club {
-        visibility: visible;
-    }
-
+.buildpopup .more-options li.club {
+    visibility: visible;
+}
 
 .buildpopup .via_progressbar p, .buildpopup .via_progressbar md-icon {
     display: inline-block;
@@ -1437,19 +1420,15 @@ md-progress-circular + .counter {
     width: 80px;
 }
 
-.addvia_inner_layout .master-settings {
-    /* margin:29px; */
-}
-
 .buildpopup .more-options li.club {
     visibility: visible;
-   margin-top:4px;
+    margin-top: 4px;
 }
 
 .buildpopup .via_progressbar p, .buildpopup .via_progressbar md-icon {
     display: inline-block;
 }
-/********Build Popup generic********/
+
 .buildpopup .via_progressbar {
     width: 32%;
     margin: auto;
@@ -1464,31 +1443,34 @@ md-progress-circular + .counter {
     width: 100vw;
     height: 100vh;
     padding: 50px;
-    background: rgba(225,225,225,0.5);
+    background: rgba(248, 248, 248,.3);
 }
 
-    .buildpopup .inner_layout {
-        position: relative;
-    }
+.buildpopup .inner_layout {
+    position: relative;
+}
 
-        .buildpopup .inner_layout .close-tab {
-            position: absolute;
-            right: 0;
-            top: 0;
-            margin: 5px 0;
-            background-color: #fff;
-            padding: 5px;
-            border-radius: 50%;
-            box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-        }
+.buildpopup .inner_layout .close-tab {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px 0;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+}
 
-    .buildpopup ng-include {
-        display: inline-block;
-        width: 100%;
-        height: 68vh;
-        margin-top: 2vh;
-    }
+.buildpopup ng-include {
+    display: inline-block;
+    width: 100%;
+    height: 68vh;
+    margin-top: 2vh;
+}
 
+/********Build Popup generic********/
+
+/****Add Via Slide***/
 .codeedit_via {
     width: 49%;
     float: left;
@@ -1496,13 +1478,26 @@ md-progress-circular + .counter {
     height: inherit;
     position: relative;
     margin-right: 1%;
-    overflow:hidden;
+    overflow: hidden;
 }
-    .codeedit_via textarea {
-        width:100%;
-        height:100%;
-    }
-.option_via, .preview_via .run  {
+
+.codeedit_via textarea {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #EEEEEE;
+    box-shadow: 1px 1px 0 #DDDDDD;
+    display: block;
+    font-family: 'Roboto';
+    font: normal 14px verdana;
+    line-height: 26px;
+    resize: none;
+    background-image: -moz-linear-gradient(top, transparent, transparent 49px,#E7EFF8 0px);
+    background-image: -webkit-linear-gradient(top, transparent, transparent 25px,#E7EFF8 0);
+    -webkit-background-size: 100% 50px;
+    background-size: 100% 26px;
+}
+
+.option_via, .preview_via .run {
     position: absolute;
     top: 0;
     right: 0;
@@ -1515,6 +1510,12 @@ md-progress-circular + .counter {
     height: inherit;
     margin-left: 1%;
     position: relative;
+    background-image:url('../asset/img/no_preview.jpg');
+    background-repeat:no-repeat;
+    background-size:100%;
+}
+.preview_via iframe {
+    border:none!important;
 }
 
 .addvia_sectionblock {
@@ -1527,353 +1528,7 @@ md-progress-circular + .counter {
     margin-top: 20px;
     text-align: center;
 }
-
-
-.workflow_layout {
-    width: 100%;
-    height: 100vh;
-    /* padding:50px; */
-}
-
-.workflow_right_table {
-    width: 40%;
-    float: left;
-    background: #fff;
-    padding: 12px;
-}
-
-
-.left_slide_workflow {
-    float: left;
-}
-
-.workflow_left_table {
-    width: 59%;
-    float: left;
-    margin-right: 1%;
-    background: #fff;
-}
-
-.workflow_inner_layout {
-    width: 100%;
-}
-
-.workflow_left_table td {
-    width: 20%;
-}
-
-.workflow_left_table table {
-    width: 100%;
-}
-
-.workflow_left_table tr {
-    height: 40px;
-    border-bottom: 1px solid black;
-}
-
-.workflow_left_table {
-    border: 1px solid black;
-}
-
-.right_slide_workflow {
-    float: right;
-}
-
-.workflow_checkbox_block {
-    border: 1px solid black;
-}
-
-    .workflow_checkbox_block md-checkbox {
-        border-bottom: 1px solid black;
-        margin-right: 0;
-        margin-bottom: 0;
-        padding: 10px;
-    }
-
-.private_workflow {
-    position: relative;
-    overflow: hidden;
-}
-
-}
-
-.workflow_left_table td {
-    width: 20%;
-}
-
-.workflow_left_table table {
-    width: 100%;
-}
-
-.workflow_left_table tr {
-    height: 40px;
-    border-bottom: 1px solid black;
-}
-
-.workflow_left_table{
-    border: 1px solid black;
-}
-
-.right_slide_workflow {
-    float: right;
-}
-
-.workflow_checkbox_block {
-    border: 1px solid black;
-}
-
-    .workflow_checkbox_block md-checkbox {
-        border-bottom: 1px solid black;
-        margin-right: 0;
-        margin-bottom: 0;
-        padding: 10px;
-    }
-
-.private_workflow {
-    position: relative;
-    overflow: hidden;
-}
-
-.workflow_left_table tr:first-child {
-    background: #e3e3e3;
-}
-
-/*makeQuiz */
-
-.quiz_layout {
-    width: 100%;
-    height: 100vh;
-}
-
-.quiz_Setting {
-    width: 40%;
-    float: left;
-    background: #fff;
-    padding: 12px;
-}
-
-.left_slide_workflow {
-    float: left;
-}
-
-.quiz_Edit {
-    width: 59%;
-    float: left;
-    margin-right: 1%;
-    background: #fff;
-    border: 1px solid black;
-}
-
-    .quiz_Edit th {
-        background-color: lightgrey;
-    }
-
-    .quiz_Setting md-input-container, .quiz_Edit md-input-container {
-        margin-top: 0px;
-    }
-
-    .quiz_Edit md-checkbox {
-        margin-top: 10px;
-    }
-
-    .quiz_Edit .next_step {
-        width: 20%;
-        border-top: none;
-    }
-
-        .quiz_Edit .next_step md-card {
-            float: left;
-        }
-
-    .quiz_Edit .addstep {
-        margin: 10px 0 0 0;
-    }
-
-.workflow_inner_layout {
-    width: 100%;
-}
-
-.quiz_Edit tr {
-    border-bottom: 1px solid #f2f2f2;
-}
-
-.quiz_score {
-    margin-bottom: 10px;
-    border-bottom: 2px solid #f2f2f2;
-}
-
-.quiz_score span {
-        font-size: 17px;
-        margin-right: 10px;
-}
-
-
-
-.quiz_result {
-    margin-top: 20px;
-}
-
-
-.workflow_left_table table {
-    width: 100%;
-}
-
-.workflow_left_table tr {
-    height: 40px;
-    border-bottom: 1px solid black;
-}
-
-.workflow_left_table tbody {
-    border: 1px solid black;
-}
-
-.right_slide_workflow {
-    float: right;
-}
-
-.answer_block {
-    border-bottom: 2px solid #f2f2f2;
-    margin-top: 13px;
-}
-
-.workflow_checkbox_block md-checkbox {
-    border-bottom: 1px solid black;
-    margin-right: 0;
-    margin-bottom: 0;
-    padding: 10px;
-}
-
-.private_workflow {
-    position: relative;
-    overflow: hidden;
-}
-
-
-.workflow_left_table td {
-    width: 20%;
-}
-
-.workflow_left_table table {
-    width: 100%;
-}
-
-.workflow_left_table tr {
-    height: 40px;
-    border-bottom: 1px solid black;
-}
-
-.workflow_left_table tbody {
-    border: 1px solid black;
-}
-
-.right_slide_workflow {
-    float: right;
-}
-
-.quiz_setting_checkbox {
-    margin-top: 18px;
-    border-bottom: 2px solid #f2f2f2;
-}
-
- .quiz_setting_checkbox md-checkbox {
-        margin-right: 0;
-        margin-bottom: 0;
-        padding: 10px;
-    }
-
-.private_workflow {
-    position: relative;
-    overflow: hidden;
-}
-
-.workflow_left_table tr:first-child {
-    background: #e3e3e3;
-}
-
-/***/
-
-.workflow_left_table tr:first-child {
-    background: #e3e3e3;
-}
-
-/*.buildpopup .master-settings{
-    margin-bottom:35px;
-}*/
-
-.workflow_layout .workflow_right_table h3{
-    margin-top:0;
-    margin-bottom:18px;
-}
-
-.workflow_left_table tr td{
-    text-align:center;
-}
-
-.workflow_checkbox_block{
-    border-radius:5px;
-}
-
-.workflow_right_table .workflow_checkbox_block .md-container{
-    margin-left:10px;
-}
-
-.workflow_checkbox_block .mdcheckbox .md-label{
-    width:90%;
-}
-
-.workflow_checkbox_block .mdcheckbox .md-label .number_private{
-    float:right;
-}
-
-.conditional_flow p{
-        display: inline-block;
-    margin: 0;
-    /* height: 30px; */
-    vertical-align: top;
-}
-
-.conditional_flow md-switch{
-        display: inline-block;
-    margin: 0;
-    margin-left: 120px;
-}
-
-.conditional_flow{
-    margin-top:40px;   
-     border-top: 1px solid #e2e2e2;
-    padding-top: 30px;
-}
-
-.workflow_left_table .btn-danger, .workflow_left_table .btn-default{
-        background: transparent;
-    border: 0px;
-    color: #000;
-}
-
-.private_workflow .right_slide_workflow{
-    color: rgb(76,175,80);
-}
-
-.add-slide-workflow{
-    box-shadow:none;
-}
-
-.workflow_left_table tr:last-child{
-    border-bottom:0;
-}
-
-.workflow_left_table tr:last-child td{
-    padding-top:10px;
-}
-
-.workflow_left_table .addstep{
-    display:inline-block;
-}
-
-.workflow_left_table .add-slide-workflow{
-    display:inline-block;
-    margin:0;
-}
+/****Add Via Slide***/
 
 /*make quiz*/
 
@@ -1889,157 +1544,268 @@ md-progress-circular + .counter {
     padding: 12px;
 }
 
-.left_slide_workflow {
-    float: left;
-}
-
 .quiz_Edit {
     width: 59%;
     float: left;
     margin-right: 1%;
     background: #fff;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
-.quiz_Edit th{
 
-background-color:lightgrey;
-}
 .quiz_Setting md-input-container, .quiz_Edit md-input-container {
     margin-top: 0px;
 }
-    .quiz_Edit md-checkbox {
-        margin-top:10px;
-    }
-    .quiz_Edit .next_step{
-        width:20%;
-        border-top:none;
-    }
-    .quiz_Edit .next_step md-card{
-        float:left;
-    }
-        .quiz_Edit .addstep {
-            margin:10px 0 0 0;
-        }
-    .workflow_inner_layout {
-        width: 100%;
-    }
-.quiz_Edit tr {
-    border-bottom: 1px solid #f2f2f2;
+
+.quiz_Edit md-checkbox {
+    margin-top: 10px;
+}
+
+.quiz_score {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f2f2f2;
 }
 .quiz_score span {
-        font-size: 20px;
-        margin-right: 10px;
-    }
+    font-size: 20px;
+    margin-right: 10px;
+}
+.quiz_result {
+    margin-top: 20px;
+}
+.quiz_setting_checkbox {
+    margin-top: 18px;
+    border-bottom: 2px solid #f2f2f2;
+}
 
-.workflow_left_table table {
+.quiz_setting_checkbox md-checkbox {
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 10px;
+}
+/*make quiz*/
+
+/****actions table****/
+.actions-table .table-head {
+    padding: 10px 20px;
+    background-color: #EEEEEE;
+    border:1px solid #E4E4E4
+}
+.actions-table .table-row {
+    padding: 10px 20px;
+    border:1px solid #E4E4E4;
+    border-top: none;
+}
+.actions-table button.md-icon-button {
+    margin: 0;
+    padding: 0;
+    height: 24px;
+    vertical-align: top;
+    min-height: 0;
+    /* width: 24px; */
+    /* min-width: 0; */
+}
+/****actions table****/
+
+
+.search-box input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 10px 20px;
+    padding-left: 40px;
+    position: relative;
+    background-image: url('../asset/img/md-icons/svg/ic_search_black_24px.svg');
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.search-box input:after {
+    content: 'O';
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.search-box {
+    border-radius: 5px;
+}
+
+
+/******Work Flow*******/
+
+.workflow_layout {
+    width: 100%;
+    height: inherit;
+}
+
+.workflow_left_table {
+    width: 59%;
+    float: left;
+    background: #fff;
+    box-sizing: border-box;
+    overflow:hidden;
+    height: inherit;
+    overflow-y: scroll;
+}
+
+.workflow_right_table {
+    width: 40%;
+    float: left;
+    background: #fff;
+    padding: 12px;
+    margin-left: 1%;
+    box-sizing: border-box;
+    overflow:hidden;
+    height: inherit;
+    overflow-y: scroll;
+}
+
+.workflow_inner_layout {
     width: 100%;
 }
 
-.workflow_left_table tr {
-    height: 40px;
-    border-bottom: 1px solid black;
-}
-
-.workflow_left_table tbody {
-    border: 1px solid black;
+.left_slide_workflow {
+    float: left;
 }
 
 .right_slide_workflow {
     float: right;
+    margin-left:5px;
+}
+
+.right_slide_workflow.active {
+    color: rgb(76,175,80);
 }
 
 .workflow_checkbox_block {
-    border: 1px solid black;
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
 }
 
-    .workflow_checkbox_block md-checkbox {
-        border-bottom: 1px solid black;
-        margin-right: 0;
-        margin-bottom: 0;
-        padding: 10px;
-    }
+.workflow_checkbox_block md-checkbox {
+    border-bottom: 1px solid #e4e4e4;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+.workflow_checkbox_block  md-checkbox:last-of-type {
+    border: none;
+}
 
 .private_workflow {
     position: relative;
     overflow: hidden;
 }
 
-
-.workflow_left_table td {
-    width: 20%;
+.workflow_layout .workflow_right_table h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
 }
 
-.workflow_left_table table {
-    width: 100%;
+.workflow_left_table tr td {
+    text-align: center;
 }
 
-.workflow_left_table tr {
-    height: 40px;
-    border-bottom: 1px solid black;
+.workflow_right_table .workflow_checkbox_block .md-container {
+    margin-left: 10px;
 }
 
-.workflow_left_table tbody {
-    border: 1px solid black;
+.workflow_checkbox_block .mdcheckbox .md-label {
+    width: 95%;
 }
 
-.right_slide_workflow {
+.workflow_checkbox_block .mdcheckbox .md-label .number_private {
     float: right;
+    color:hotpink;
 }
 
-.workflow_checkbox_block {
-    border: 1px solid black;
+.conditional_flow p {
+    display: inline-block;
+    margin: 0;
+    /* height: 30px; */
+    vertical-align: top;
 }
 
-    .workflow_checkbox_block md-checkbox {
-        border-bottom: 1px solid black;
-        margin-right: 0;
-        margin-bottom: 0;
-        padding: 10px;
-    }
-
-
-
-.workflow_left_table tr:first-child {
-    background: #e3e3e3;
+.conditional_flow md-switch {
+    display: inline-block;
+    margin: 0;
+    margin-left: 120px;
 }
+
+.conditional_flow {
+    margin-top: 40px;
+    border-top: 1px solid #e2e2e2;
+    padding-top: 30px;
+}
+
+.execute .layout-row [flex] {
+    padding-right:3%;
+}
+
+.private_workflow {
+    position: relative;
+    overflow: hidden;
+}
+
+.workflow_left_table .btn-danger, .workflow_left_table .btn-default {
+    background: transparent;
+    border: 0px;
+    color: #000;
+}
+
+.add-slide-workflow {
+    box-shadow: none;
+}
+
+.answer_block {
+    border-bottom: 2px solid #f2f2f2;
+    margin-top: 13px;
+}
+.slide-visibility-table, .email-notification-table {
+    padding:20px 0;
+    border-top: 1px solid #e2e2e2;
+}
+/******Work Flow*******/
 
 
 
 /*formsettings*/
 
-.form_set_items ul{
-    list-style:none;
+.form_set_items ul {
+    list-style: none;
 }
 
-.form_set_items ul li{
-     height: 40px;
+.form_set_items ul li {
+    height: 40px;
     margin-bottom: 2px;
     background: #fff;
     padding: 12px;
 }
-.form_set_items ul li.active
-{
-    background-color:rgb(76,175,80)
+
+.form_set_items ul li.active {
+    background-color: rgb(76,175,80);
 }
 
-.form_set_items{
+.form_set_items {
     width: 26%;
     float: left;
-    margin-right:3%;
+    margin-right: 3%;
 }
 
-.form_set_items_display{
+.form_set_items_display {
     width: 70%;
     float: left;
-    background:#fff;
+    background: #fff;
 }
 
-.formsettings_layout .popup_layout{
-    padding:0;
+.formsettings_layout .popup_layout {
+    padding: 0;
 }
 /******tab specific******/
 .create-tabs #tab-content-2 {
     height: 96vh;
-    max-height: 100vh!important;
+    max-height: 100vh !important;
     overflow: hidden;
 }

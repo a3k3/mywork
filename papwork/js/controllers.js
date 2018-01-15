@@ -153,6 +153,7 @@ function upTo(el, tagName) {
 }
 
 function getCaretPosition(editableDiv) {
+    var nodeValue = "";
     var caretPos = 0,
       sel, range;
     if (window.getSelection) {
@@ -174,7 +175,7 @@ function getCaretPosition(editableDiv) {
             caretPos = tempRange.text.length;
         }
     }
-    return caretPos;
+    return { caretPos: caretPos, nodeValue: nodeValue };
 }
 
 function guid() {
@@ -321,7 +322,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             $scope.action = $location.search().actionurl;
         }
         else {
-            if (sessionStorage.questionsObj != undefined) {
+            if (sessionStorage.questionsObj != undefined && window.location.href.indexOf('experience') == -1) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
                 angular.forEach($scope.questionsObj.questions, function (value, index) {
                     value.enable = "true"; /*temporary should be removed*/
@@ -331,6 +332,18 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 $scope.questionsObj.questions = response.data;
                 angular.forEach($scope.questionsObj.questions, function (value, index) {
                     value.question = value.question;
+                    var temp = value.question;
+                    var tmp = document.createElement("DIV");
+                    tmp.innerHTML = temp;
+                    if (angular.element(tmp).find('span').length > 0) {
+                        angular.element(tmp).find('span').each(function (index, value) {
+                            if ($(value).hasClass('chip')) {
+                                var answerfor = $(value).data('question-id');
+                                $(value).html('<span ng-bind-html="questionsObj.questions['+answerfor+'].response"></span>')
+                            }
+                        })
+                    }
+                    value.question = tmp.innerHTML;
                     value.enable = "true"; /*temporary should be removed*/
                     
                     //check for random options
@@ -362,28 +375,28 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     $scope.$on('questionsData', function (event, data) {
         $scope.questionsObj.questions = data;
         angular.forEach($scope.questionsObj.questions, function (value, index) {
-            //var temp = value.question;
-            //var tmp = document.createElement("DIV");
-            //tmp.innerHTML = temp;
-            //angular.element(tmp).find('span').forEach(function (index, value) {
-            //    if ($(value).hasClass('chip')) {
-            //        var answerfor = $(value).data('question-id');
+            var temp = value.question;
+            var tmp = document.createElement("DIV");
+            tmp.innerHTML = temp;
+            angular.element(tmp).find('span').forEach(function (index, value) {
+                if ($(value).hasClass('chip')) {
+                    var answerfor = $(value).data('question-id');
 
-            //        var answer = $scope.questionsObj.questions[index].options.filter(function (item) {
-            //            if (item.selected != undefined)
-            //                return item.selected == true
-            //            else
-            //                return item.value != ""
-            //        })[0];
+                    var answer = $scope.questionsObj.questions[index].options.filter(function (item) {
+                        if (item.selected != undefined)
+                            return item.selected == true
+                        else
+                            return item.value != ""
+                    })[0];
 
-            //        $(value).html('{{questionsObj.questions['+(answerfor-1)+']}}')
-            //    }
-            //})
-            //temp = temp.replace(/<(?:.|\n)*?>/gm, '###');
+                    $(value).html('{{questionsObj.questions['+(answerfor-1)+']}}')
+                }
+            })
+            temp = temp.replace(/<(?:.|\n)*?>/gm, '###');
             value.enable = "true"; /*temporary should be removed*/
 
             //check for random options
-            if (value.validations.randomize != undefined && value.validations.randomize.condition) {
+            if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
                 value.options = shuffleArray(value.options);
             }
         });
@@ -507,7 +520,19 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     $scope.$watch('questionsObj.questions', function (newval, oldval) {
         $scope.checkadvancedvalidation();
         $scope.checkshowhidevalidation();
+        $scope.writeToResponse();
     }, true);
+
+    $scope.writeToResponse = function () {
+        var index = $scope.questionsObj.activeNow - 1;
+        $scope.questionsObj.questions[index].response = "";
+        if ($scope.questionsObj.questions[index].options != undefined) {
+            var response = $scope.questionsObj.questions[index].options
+            angular.forEach(response, function (value, index) {
+                $scope.questionsObj.questions[index].response =  + value.value
+            });
+        }
+    };
 
     $scope.changeslideArrangement = function () {
         if ($scope.changeslideorder) {
@@ -1162,29 +1187,34 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $mdDialog.hide();
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function (event) {
             $mdDialog.cancel();
         };
 
         $scope.addQuestion = function (event, samplequestion) {
-            var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
-            if (type[0] != "more" && type[0] != "less") {
-                angular.element('.content > .flex').removeClass('active');
-                $(event.target).data('type') == undefined ? $(event.target).parent().addClass('active') : $(event.target).addClass('active');
-                callback(type, samplequestion);
-                $scope.cancel();
-            }
-            else {
-                if (type[0] == "more") {
-                    $scope.query = {};
-                    angular.element('.content [data-type="more"]').hide()
-                    angular.element('.content [data-type="less"]').show();
+            if (event != null) {
+                var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
+                if (type[0] != "more" && type[0] != "less") {
+                    angular.element('.content > .flex').removeClass('active');
+                    $(event.target).data('type') == undefined ? $(event.target).parent().addClass('active') : $(event.target).addClass('active');
+                    callback(type, samplequestion);
+                    $scope.cancel();
                 }
                 else {
-                    $scope.query = { primary: true };
-                    angular.element('.content [data-type="less"]').hide();
-                    angular.element('.content [data-type="more"]').show();
+                    if (type[0] == "more") {
+                        $scope.query = {};
+                        angular.element('.content [data-type="more"]').hide()
+                        angular.element('.content [data-type="less"]').show();
+                    }
+                    else {
+                        $scope.query = { primary: true };
+                        angular.element('.content [data-type="less"]').hide();
+                        angular.element('.content [data-type="more"]').show();
+                    }
                 }
+            }
+            else {
+                callback("text", samplequestion);
             }
         }
     }
@@ -1432,9 +1462,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             list.push({
                 text: "Question#" + value.id,
                 click: function ($itemScope, $event, modelValue, text, $li) {
-                    var start = $itemScope.question.question.substring(0, $scope.questionCursor);
+                    var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
+                    var start = $itemScope.question.question.substring(startindex, startindex+$scope.questionCursor.caretPos);
                     var texttoAdd = '<span class="chip" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
-                    var end = $itemScope.question.question.substring($scope.questionCursor);
+                    var end = $itemScope.question.question.substring(startindex + $scope.questionCursor.caretPos);
                     $($event.target).html(start + texttoAdd + end);
                     angular.element('.removeChip').on('click', function (event) {
                         angular.element(event.target).parent().remove();
@@ -1449,12 +1480,20 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.calculatedVariableList = function () {
         var list = [];
         angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
-            if (value.advancedvalidations.calculatedvariable != undefined && value.advancedvalidations.calculatedvariable.logic_options.length > 0)
+            if (value.advancedvalidations != undefined && value.advancedvalidations.calculatedvariable != undefined && value.advancedvalidations.calculatedvariable.logic_options.length > 0)
                 angular.forEach(value.advancedvalidations.calculatedvariable.logic_options, function (innervalue, innerkey) {
                     if (innervalue.name != "") {
                         list.push({
                             text: innervalue.name,
                             click: function ($itemScope, $event, modelValue, text, $li) {
+                                var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
+                                var start = $itemScope.question.question.substring(startindex, startindex + $scope.questionCursor);
+                                var texttoAdd = '<span class="chip" data-question-id="' + innervalue.name + '" contenteditable="false" readonly>' + innervalue.name + '<span class="removeChip">-</span></span>';
+                                var end = $itemScope.question.question.substring(startindex + $scope.questionCursor);
+                                $($event.target).html(start + texttoAdd + end);
+                                angular.element('.removeChip').on('click', function (event) {
+                                    angular.element(event.target).parent().remove();
+                                })
                             },
                             hasBottomDivider: true
                         })
@@ -1486,9 +1525,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         ]
     };
 
-    $scope.calculationCursor = 0;
+    $scope.calculationCursor = {};
 
-    $scope.questionCursor = 0;
+    $scope.questionCursor = {};
 
     $scope.setcursorposition = function (event) {
         $scope.calculationCursor = getCaretPosition(event.target);
@@ -1500,9 +1539,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.addQuestionToCalculation = function (event, question) {
         var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
-        var start = calculationbox.html().substring(0, $scope.calculationCursor);
+        var startindex = calculationbox.html().indexOf($scope.questionCursor.nodeValue);
+        var start = calculationbox.html().substring(startindex, startindex+$scope.calculationCursor);
         var texttoAdd = '<span class="chip" data-question-id=' + question.id + ' contenteditable="false" readonly>' + angular.element(event.target).text() + '<span class="removeChip">-</span></span>';
-        var end = calculationbox.html().substring($scope.calculationCursor);
+        var end = calculationbox.html().substring(startindex+$scope.calculationCursor);
         calculationbox.html(start + texttoAdd + end);
         angular.element('.removeChip').on('click', function (event) {
             angular.element(event.target).parent().remove();
