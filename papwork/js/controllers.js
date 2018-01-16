@@ -2069,3 +2069,33 @@ myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event,
         element.media_src = clickedItem['src'];
     }
 })
+
+myapp.controller('mainCtrl', function ($scope, $mdSidenav) {
+
+    $scope.toggleLeftMenu = buildToggler('left');
+
+    function buildToggler(componentId) {
+        return function () {
+            $mdSidenav(componentId).toggle();
+        };
+    }
+
+    $scope.menuitems = [
+        {
+            name: "Log In",
+            enable: false
+        },
+        {
+            name: "My Profile",
+            enable: true
+        },
+        {
+            name: "Log Out",
+            enable: true
+        }
+    ];
+
+    $scope.openUserMenu = function ($mdOpenMenu,ev) {
+        $mdOpenMenu(ev);
+    }
+});
