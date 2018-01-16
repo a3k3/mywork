@@ -831,7 +831,68 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         activeNow: 0,
         percentComplete: function () {
             return (this.activeNow / this.maxCount()) * 100;
-        }
+        },
+        formSettings: [
+            {
+                name: "General",
+                enable: true,
+                active: true,
+                template: 'generalForm',
+                settings: [
+                    {
+                        name: "autocomplete",
+                        condition: false,
+                        time: 0,
+                        enable:true
+                    },
+                    {
+                        name: "status",
+                        options: [
+                            {
+                                name: "Enable",
+                                selected: false,
+                                type: ''
+                            },
+                            {
+                                name: "Disable",
+                                selected: false,
+                                type: ''
+                            },
+                            {
+                                name: "Enable after certain date",
+                                selected: false,
+                                type: 'input_calendar'
+                            },
+                            {
+                                name: "Disable after certain date",
+                                selected: false,
+                                type: 'input_calendar'
+                            },
+                            {
+                                name: "Disable after ",
+                                selected: false,
+                                type:'number'
+                            }
+                        ],
+                        enable: true
+                    },
+                    {
+                        name: "export",
+                        enable: true
+                    },
+                    {
+                        name: "duplicate",
+                        enable: true
+                    },
+                    {
+                        name: "kiosk",
+                        condition: true,
+                        enable:true
+                    }
+                ]
+            }
+        ]
+        
     };
 
     $rootScope.formid = $scope.buildQuestionsObj.id;
@@ -1208,7 +1269,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.buildpopup = function (event, template) {
         $mdDialog.show({
             locals: {
-                template: template
+                template: template,
+                buildQuestionsObj: $scope.buildQuestionsObj
             },
             controller: BuildPopupController,
             templateUrl: '../partials/buildpopup_templates/build_popup.html',
@@ -1224,7 +1286,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             });
     }
 
-    function BuildPopupController($scope, $mdDialog, template) {
+    function BuildPopupController($scope, $mdDialog, template, buildQuestionsObj) {
         $scope.template = template;
         $scope.getTemplateUrl = function () {
             return '../partials/buildpopup_templates/'+template+'.html';
@@ -1235,16 +1297,27 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
-
+        $scope.buildQuestionsObj = buildQuestionsObj;
 
         /*******FormSettings********/
         $scope.formsettingtemplate = 'makeQuiz';
         $scope.formSettingController = function (event, template) {
             $scope.formsettingtemplate = template;
         }
-        $scope.getFormSettingTemplateUrl = function () {
-            return '../partials/buildpopup_templates/' + $scope.formsettingtemplate + '.html'
+
+        $scope.formSetting = function (event, template, settings) {
+            $scope.formsettingtemplate = template;
+            $scope.internalSettings = settings;
         }
+
+        $scope.getFormSettingTemplateUrl = function () {
+            return '../partials/buildpopup_templates/Formtemplates/' + $scope.formsettingtemplate + '.html'
+        }
+
+        $scope.getSettingUrl = function (template) {
+            return '../partials/buildpopup_templates/Formtemplates/FormSettingsTemplate/' + template + '.html'
+        }
+
         /*******FormSettings********/
 
         /*******Add Via Slide********/

@@ -1,13 +1,16 @@
 ﻿<div class="formsettings_layout">
     <div class="form_set_items">
         <ul>
-            <li ng-click="formSettingController($event, 'makeQuiz')" ng-class="{active: formsettingtemplate =='makeQuiz'}">General</li>
-            <li ng-click="formSettingController($event, 'FormSettings')">Slide</li>
-            <li ng-click="formSettingController($event, 'FormSettings')">Audience</li>
+            <li ng-click="formSetting($event, fs.template, fs.settings)" ng-class="{active: fs.active}" ng-repeat="fs in buildQuestionsObj.formSettings" ng-if="fs.enable">{{fs.name}}</li>
+        </ul>
+        <ul>
+            <li ng-click="formSettingController($event, 'generalForm')" ng-class="{active: formsettingtemplate =='makeQuiz'}">General</li>
+            <li ng-click="formSettingController($event, 'slideForm')">Slide</li>
+            <li ng-click="formSettingController($event, 'audienceForm')">Audience</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Integrations</li>
-            <li ng-click="formSettingController($event, 'FormSettings')">Admin</li>
-            <li ng-click="formSettingController($event, 'PublishPopup')" ng-class="{active: formsettingtemplate =='PublishPopup'}">Share and Embed</li>
-            <li ng-click="formSettingController($event, 'FormSettings')">Email Notifications</li>
+            <li ng-click="formSettingController($event, 'adminForm')">Admin</li>
+            <li ng-click="formSettingController($event, 'shareEmbed')" ng-class="{active: formsettingtemplate =='PublishPopup'}">Share and Embed</li>
+            <li ng-click="formSettingController($event, 'emailForm')">Email Notifications</li>
             <li ng-click="formSettingController($event, 'FormSettings')">Processing</li>
         </ul>
     </div>

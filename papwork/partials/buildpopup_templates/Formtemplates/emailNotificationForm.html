@@ -1,0 +1,96 @@
+﻿
+<div class="container">
+    <div layout="row" layout-sm="column">
+        <div layout="row" layout-sm="column">
+            <div class="emailLayout">
+                <div class="email_left">
+
+
+                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+                        <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                            <input ng-model="user.firstName" placeholder="To" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+                        <div flex="" class="flex">
+                            <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                                <input ng-model="user.firstName" placeholder="Cc" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                            </md-input-container>
+                        </div>
+
+                        <div flex="" class="flex">
+                            <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                                <input ng-model="user.firstName" placeholder="Bcc" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style=""><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    <h5>Subject</h5>
+                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+                        <md-input-container>
+                            <textarea name="bio" rows="10" cols="88" placeholder="Type Your Message Here" ng-model="biography" required md-maxlength="1000"></textarea>
+                            <div ng-messages="" ng-show="">
+                            </div>
+                        </md-input-container>
+
+                    </div>
+
+
+                    <h5>Attachments</h5>
+                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+                        <input type="file" name="pic" placeholder="Attachements" accept="image/*">
+                    </div>
+
+
+                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+                        <span><h5>Trigger this mail</h5></span>  <div flex="20" class="flex=" 20">
+                            <md-input-container>
+                                <md-select ng-model="" placeholder="">
+                                    <md-option ng-value="surya" ng-repeat="">surya</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+
+
+
+                        <div class="cancel_save">
+
+                            <button class="md-raised hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="copy" ng-click="cancel()">
+                                <span class="ng-scope"> Cancel </span>
+                                <div class="md-ripple-container" style=""></div>
+                            </button>
+
+                            <button class="md-raised md-primary hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="save" ng-click="saveMail()">
+                                <span class="ng-scope">Save</span>
+                                <div class="md-ripple-container" style=""></div>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="email_right">
+                right
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
