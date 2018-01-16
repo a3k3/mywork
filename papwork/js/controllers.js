@@ -21,6 +21,7 @@ var entityMap = {
     '=': '&#x3D;'
 };
 
+
 function htmlDecode(input) {
     var e = document.createElement('div');
     e.innerHTML = input;
@@ -287,6 +288,70 @@ function writeResult(result, questions) {
     }
 }
 
+var customhtml = "";
+var names=[];
+
+function addviatext(text) {
+    //var str = "1. The ra2.in in SPAIN stays mainly in the plain?";
+    //var res = str.match(/^[1-9]\.(.*)\?$/);
+    //var customhtml = '<form action="/action_page.php"><label for="fname">'+res[1]+'</label><input type="text" id="fname" name="firstname" placeholder="Your name set.."> </form>';
+
+    //addviahtml(customhtml);
+
+    var str = "1. The ra?{CHECKBOX}ronaldo 2.in in SPAIN stays mainly in the plain? {CHECKBOX} one 3. ashwin? two4. ko? {CHECKBOX} three";
+    var question_sep = /\s*[1-9].\s*/;
+    var question_List = str.split(question_sep);
+    console.log(question_List);
+    //var res = str.match(/^[1-9]\.(.*)\?$/);
+    //var customhtml = '<form action="/action_page.php"><label for="fname">' + question_List[1] + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.."> </form>';
+    //console.log(customhtml);
+
+    var index = 1;
+
+    //question_List[i].each(function () {
+    //    alert();
+    //});
+
+    
+    $.each(question_List, function (index, value) {
+        
+        //console.log(question_List[index]);
+        //var Question_index = question_List[index].indexOf('?');
+        var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+        var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
+        //console.log(question_tag + ' --- ' + input_text);
+
+        if (question_List[index].indexOf('{') == -1) {
+            var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+            var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
+            customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+            console.log(customhtml);
+            names.push(customhtml);
+           
+        }
+        else {
+            var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+            var input_text = question_List[index].substr(question_List[index].indexOf("}") + 1);
+            var regExpne = /\{([^)]+)\}/;
+            var matches = regExpne.exec(question_List[index]);
+            console.log(matches[1]);
+            if (matches[1] == "CHECKBOX") {
+                customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                names.push(customhtml);
+            }else{
+            customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+            console.log(customhtml);
+            names.push(customhtml);
+            }            
+        }            
+    });
+
+    console.log(names);
+    var finalhtml_text = '<form action="/action_page.php">' + names + '</form>';
+    addviahtml(finalhtml_text);
+    
+}
+
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
@@ -322,7 +387,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             $scope.action = $location.search().actionurl;
         }
         else {
-            if (sessionStorage.questionsObj != undefined && window.location.href.indexOf('experience') == -1) {
+            if (sessionStorage.questionsObj != undefined) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
                 angular.forEach($scope.questionsObj.questions, function (value, index) {
                     value.enable = "true"; /*temporary should be removed*/
@@ -1248,9 +1313,22 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         /*******FormSettings********/
 
         /*******Add Via Slide********/
+        $scope.format = 'html';
+        $scope.addvia_text = function () {
+            $scope.format = 'text';
+        }
+        $scope.addvia_html = function () {
+            $scope.format = 'html';
+        }
         $scope.runpreview = function () {
             var _formdata = angular.element('.codeedit_via textarea').val();
-            addviahtml(_formdata);
+            if ($scope.format == "html") {
+                addviahtml(_formdata);
+            }
+            else {
+                addviatext(_formdata);
+            }
+           
         }
         $scope.saveQuestions = function () {
             if (sessionStorage.questionsObj != undefined) {
