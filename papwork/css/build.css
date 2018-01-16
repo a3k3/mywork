@@ -1,4 +1,37 @@
-﻿
+﻿/*******Menu Css*****/
+md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 200px !important;
+    width: 15%;
+    position:relative;
+    z-index:9999;
+    float:left;
+    height:100vh;
+}
+.main-navigation {
+    padding:0 30px;
+}
+.main-navigation.dark {    
+}
+.main-settings {
+    background-color:#000;
+}
+.main-settings .close
+{
+    width: 40px;
+    margin-top: 20px;
+    margin-right: 20px;
+    position: static;
+    clear: both;
+    opacity: 0.4;
+    transition: margin linear .5s;
+}
+.main-settings.dark .close, .main-settings.dark .close:hover {
+    background-color: #ffffff!important;
+}
+.main-settings md-content {
+    float: left;
+}
+/*******Menu Css*****/
 
 [contenteditable] {
     text-decoration: underline;

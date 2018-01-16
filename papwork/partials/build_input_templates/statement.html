@@ -1,11 +1,4 @@
 ﻿<h2 class="md-headline question font-size-24 font-color-000" contenteditable ng-model="question.question" style="margin-top:80px"></h2>
 <h3 class="md-subheading caption font-color-666 font-size-14" contenteditable ng-model="question.caption"></h3>
-
-<!--<md-button class="publish md-raised md-primary md-hue-1 md-accent hue-2 ng-pristine md-input ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-touched" contenteditable ng-model="question.placeholder"></md-button>-->
-<md-input-container>
-    <input class="md-accent hue-2" placeholder="{{option.placeholder}}" type="{{question.answertype}}" ng-disabled="true">
-    <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="true">
-        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
-    </md-button>
-</md-input-container>
+<md-button class="publish md-raised md-primary md-hue-1 md-accent hue-2 ng-pristine md-input ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-touched" contenteditable ng-model="question.placeholder"></md-button>
 <p contenteditable ng-model="question.hint" class="hint font-color-666 font-size-12"></p>
