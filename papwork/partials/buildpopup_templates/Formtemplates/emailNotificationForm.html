@@ -1,95 +1,135 @@
 ﻿
-<div class="container">
-    <div layout="row" layout-sm="column">
-        <div layout="row" layout-sm="column">
-            <div class="emailLayout">
-                <div class="email_left">
+<div layout="row" layout-sm="column">
+    <div class="emailLayout">
+        <div class="email_left">
 
 
-                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-                        <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
-                            <input ng-model="user.firstName" placeholder="To" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
-                        </md-input-container>
-                    </div>
-
-                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-                        <div flex="" class="flex">
-                            <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
-                                <input ng-model="user.firstName" placeholder="Cc" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
-                            </md-input-container>
-                        </div>
-
-                        <div flex="" class="flex">
-                            <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
-                                <input ng-model="user.firstName" placeholder="Bcc" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style=""><div class="md-errors-spacer"></div>
-                            </md-input-container>
-                        </div>
-                    </div>
-
-                    <h5>Subject</h5>
-                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-                        <md-input-container>
-                            <textarea name="bio" rows="10" cols="88" placeholder="Type Your Message Here" ng-model="biography" required md-maxlength="1000"></textarea>
-                            <div ng-messages="" ng-show="">
-                            </div>
-                        </md-input-container>
-
-                    </div>
-
-
-                    <h5>Attachments</h5>
-                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-                        <input type="file" name="pic" placeholder="Attachements" accept="image/*">
-                    </div>
-
-
-                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-                        <span><h5>Trigger this mail</h5></span>  <div flex="20" class="flex=" 20">
-                            <md-input-container>
-                                <md-select ng-model="" placeholder="">
-                                    <md-option ng-value="surya" ng-repeat="">surya</md-option>
-                                </md-select>
-                            </md-input-container>
-                        </div>
-                    </div>
-
-                    <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-
-
-
-                        <div class="cancel_save">
-
-                            <button class="md-raised hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="copy" ng-click="cancel()">
-                                <span class="ng-scope"> Cancel </span>
-                                <div class="md-ripple-container" style=""></div>
-                            </button>
-
-                            <button class="md-raised md-primary hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="save" ng-click="saveMail()">
-                                <span class="ng-scope">Save</span>
-                                <div class="md-ripple-container" style=""></div>
-                            </button>
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                <label>To</label>
+                <md-input-container class="md-mytheme-theme">
+                    <input class="md-accent hue-2 md-input" name="" ng-pattern="/^.+@.+\..+$/" type="email" id="input_25"><div class="md-errors-spacer"></div>
+                </md-input-container>
             </div>
 
-            <div class="email_right">
-                right
+            <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                <label>Cc</label>
+                <div flex="20" class="flex">
+
+                    <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                        <input type="text" ng-model="userf" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                    </md-input-container>
+                </div>
+                <label>Bcc</label>
+                <div flex="35" class="flex">
+                    <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                        <input type="text" ng-model="user" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" layout-align="start start" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                <label>Subject</label>
+                <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                    <input type="text" ng-model="user" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="start start" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                <md-input-container>
+                    <textarea name="bio" rows="6" cols="88" placeholder="Type Your Message Here" ng-model="biography" required md-maxlength="1000"></textarea>
+                    <div ng-messages="" ng-show="">
+                    </div>
+                </md-input-container>
+
+            </div>
+            <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                <label>Attachements</label>
+                <!-- <input type="file" name="pic" placeholder="Attachements" accept="image/*"> -->
+            </div>
+
+
+            <div layout="row" flex="70" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                <div flex="30" class="flex-30"><label>Trigger this email</label></div>
+                <div flex="30" class="flex-30">
+                    <md-input-container>
+                        <md-select name="question" ng-model="abcd" class="ng-pristine ng-valid md-mytheme-theme ng-empty ng-touched" tabindex="0" aria-disabled="false" role="listbox" aria-expanded="false" aria-multiselectable="false" id="select_851" aria-owns="select_container_852" aria-invalid="false" style="">
+                            <md-select-value class="md-select-value md-select-placeholder" id="select_value_label_847"><span></span><span class="md-select-icon" aria-hidden="true"></span></md-select-value><div class="md-select-menu-container" aria-hidden="true" id="select_container_852">
+                                <md-select-menu class="_md md-mytheme-theme">
+                                    <md-content class="_md md-mytheme-theme">
+                                        <md-option tabindex="0" md-option-empty="" class="md-ink-ripple" role="option" aria-selected="false" id="select_option_850">
+                                            <div class="md-text">None</div>
+                                        </md-option>
+                                        <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
+                                    </md-content>
+                                </md-select-menu>
+                                u>
+                            </div>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+
+
+
+            <div layout="row" flex="100" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                <div class="cancel_save">
+                    <div layout="row" flex="70" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+                        <button class="md-raised hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="copy" ng-click="cancel()">
+                            <span class="ng-scope"> Cancel </span>
+                            <div class="md-ripple-container" style=""></div>
+                        </button>
+
+                        <button class="md-raised md-primary hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="save" ng-click="saveMail()">
+                            <span class="ng-scope">Save</span>
+                            <div class="md-ripple-container" style=""></div>
+                        </button>
+                    </div>
+                </div>
             </div>
 
         </div>
+        <div class="email_right">
 
+            <div class="answer">
+                <label>Answer of</label>
+                <ul>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                </ul>
+            </div>
+
+            <div class="answer">
+                <label>Calculated Variable</label>
+                <ul>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                </ul>
+            </div>
+            <div class="answer">
+                <label>Documents</label>
+                <ul>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+                </ul>
+
+            </div>
+            <div class="answer">
+                <label>Auto Generated Fields</label>
+                <ul>
+                    <li>Question1?</li>
+                    <li>Question1?</li>
+
+                </ul>
+
+            </div>
+
+        </div>
     </div>
 </div>
-
-    </div>
-
-
-</div>
-
 
 
 

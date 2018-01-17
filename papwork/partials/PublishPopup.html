@@ -7,9 +7,9 @@
             </div>
             <div class="share_text_url">
                 <md-input-container>
-                    <input class="md-accent hue-2" ng-model="publishUrl">
+                    <input class="md-accent hue-2" ng-model="publish.publishUrl">
                 </md-input-container>
-                <md-button class="md-raised md-primary hue-2" aria-label="copy" ng-click="">
+                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="">
                     COPY
                 </md-button>
             </div>
@@ -20,18 +20,19 @@
                 <p>Hint</p>
             </div>
             <div class="embed_text_url">
-                <md-radio-group ng-model="question.response">
+                <md-radio-group ng-model="publish.type" ng-change="updatePublishIframe()">
                     <md-radio-button value="banner" class="md-primary">Banner</md-radio-button>
-                    <md-radio-button value="pafter" class="md-primary">Pop Up window after</md-radio-button>
-                    <md-radio-button value="pbefore" class="md-primary">Pop Up window after</md-radio-button>
+                    <md-radio-button value="load" class="md-primary">Pop Up window after <input type="number" ng-model="publish.afterload"/> on Page Load</md-radio-button>
+                    <md-radio-button value="scroll" class="md-primary">Pop Up window after<input type="number" ng-model="publish.afterScroll" /> on Page Load</md-radio-button>
                 </md-radio-group>
                 <div class="checkbox-block">
                     <md-checkbox class="green mdcheckbox" ng-click="" aria-label="" name="" value="appear once">Appear once per user session on website</md-checkbox>
                 </div>
                 <md-input-container>
-                    <input class="md-accent hue-2" row="4" ng-model="embedUrl">
+                    <!--<input class="md-accent hue-2" row="4" ng-model="embedUrl">-->
+                    <textarea name="textarea" ng-model="publish.embedUrl" rows="4" ></textarea>
                 </md-input-container>
-                <md-button class="md-raised md-primary hue-2" aria-label="copy" ng-click="">
+                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="">
                     COPY
                 </md-button>
                 </div>
