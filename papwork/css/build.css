@@ -230,7 +230,7 @@ settings md-switch {
 .navigation-slide {
     position: fixed;
     overflow: hidden;
-    height: 18vh;
+    height: 23vh;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -1872,16 +1872,7 @@ formsettings ng-include [layout="row"] {
     padding: 0;
 }
 
-.modalpop{
-background-color:light-grey;
-border:2px solid grey;
-display:block;
-position:relative;
-padding:30px;
-border-radius: 5px;
-height: 22vh;
-width: 35vw;
-}
+.modalpop{background-color:light-grey;/* border:2px solid grey; */display:block;position: absolute;padding:30px;border-radius: 5px;width: 35vw;background: #FFf;display: inline-block;box-shadow: 5px 5px 5px #d2d2d2;border-radius: 10px;top: 50%;left: 50%;transform: translate(-50%,-50%);}
 
 .modalpop .search-box input {
     width: 100%;
@@ -1916,8 +1907,8 @@ width: 35vw;
     border: 1px solid #d2d0d0;
     width: 80%;
     border-radius: 5px;
-    position: absolute;
-
+    position: static;
+    display: inline-block;
 }
 .modalpop .btn{
     float:right;
@@ -1928,7 +1919,7 @@ width: 35vw;
     max-height: 100vh !important;
     overflow: hidden;
 }
-.create-tabs tab-content-2 > .md-dialog-container {
+.create-tabs #tab-content-2 > .md-dialog-container {
     top:0!important;
 }
 
@@ -1977,6 +1968,7 @@ width: 35vw;
 
 /*emailform*/
 .email_layout {
+    position:relative;
 }
 
 .email_table .table-head {
@@ -2180,14 +2172,14 @@ color:white;
 margin-right:15px;
 }
 .Docgen{
-background-color:#6eb56ed9;
+background-color:#72a032d9;
 padding:15px;
 color:white;
 float:left;
 margin-right:15px;
 }
 .DocScan{
-background-color:#85dae2;
+background-color:#6ddee8;
 padding:15px;
 color:white;
 float:left;
@@ -2204,10 +2196,10 @@ float:left;
   margin-top: 30px;
 
 }
-.templateEdit .actions-table.table-row{
-padding: 5px 5px;
+    .templateEdit .actions-table {
+        padding:5px;
+    }
 
-}
 
 .templateEdit .table-row{
 padding: 10px 20px;

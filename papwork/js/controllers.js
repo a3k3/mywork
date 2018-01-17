@@ -336,14 +336,14 @@ function addviatext(text) {
             var regExpne = /\{([^)]+)\}/;
             var matches = regExpne.exec(question_List[index]);
             console.log(matches[1]);
-            if (matches[1] == "CHECKBOX") {
-                customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
-                names.push(customhtml);
-            }else{
-            customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
-            console.log(customhtml);
-            names.push(customhtml);
-            }            
+            //if (matches[1] == "CHECKBOX") {
+            //    customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+            //    names.push(customhtml);
+            //}else{
+            //customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+            //console.log(customhtml);
+            //names.push(customhtml);
+            //}            
         }            
     });
 
@@ -1007,13 +1007,13 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 name: "Email Notifications",
                 enable: true,
                 active: false,
-                template: 'emailNotificationForm',
+                template: 'emailForm',
             },
             {
                 name: "Processing",
                 enable: true,
                 active: false,
-                template: 'processForm',
+                template: 'processingForm',
             }
         ]
         
@@ -1751,6 +1751,17 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.operation = function (event, operator) {
         var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
         calculationbox.html(calculationbox.html() + operator);
+    }
+
+    $scope.contentEdit = function (e) {
+        var keycode = e.which ? e.which : e.keyCode;
+        if (keycode == 13) {
+            if (!e.shiftKey) {
+                $timeout(function () {
+                    angular.element(e.target).closest("md-radio-button").next().triggerHandler('click');
+                });
+            }
+        }
     }
 });
 

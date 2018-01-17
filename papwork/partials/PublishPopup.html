@@ -22,8 +22,38 @@
             <div class="embed_text_url">
                 <md-radio-group ng-model="publish.type" ng-change="updatePublishIframe()">
                     <md-radio-button value="banner" class="md-primary">Banner</md-radio-button>
-                    <md-radio-button value="load" class="md-primary">Pop Up window after <input type="number" ng-model="publish.afterload"/> on Page Load</md-radio-button>
-                    <md-radio-button value="scroll" class="md-primary">Pop Up window after<input type="number" ng-model="publish.afterScroll" /> on Page Load</md-radio-button>
+                    <div layout="row" layout-align="start center">
+                        <div flex="35">
+                            <md-radio-button value="pafter" class="md-primary">Pop Up window after</md-radio-button>
+                        </div>
+                        <div flex="20">
+                            <md-select name="time" ng-model="publish.afterload">
+                                <md-option>0 Sec</md-option>
+                                <md-option>5 Sec</md-option>
+                                <!--<md-option ng-value="{{time}}" ng-repeat="time in ">{{time}}</md-option>-->
+                            </md-select>
+                        </div>
+                        <div flex="45">
+                            on page Load
+                        </div>
+
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <div flex="35">
+                            <md-radio-button value="pafter1" class="md-primary">Pop Up window after</md-radio-button>
+                        </div>
+                        <div flex="20">
+                            <md-select name="percentage" ng-model="publish.afterScroll">
+                                <md-option>% Sec</md-option>
+                                <md-option>1% Sec</md-option>
+                                <!--<md-option ng-value="{{time}}" ng-repeat="time in ">{{time}}</md-option>-->
+                            </md-select>
+                        </div>
+                        <div flex="45">
+                            of page Scroll
+                        </div>
+
+                    </div>
                 </md-radio-group>
                 <div class="checkbox-block">
                     <md-checkbox class="green mdcheckbox" ng-click="" aria-label="" name="" value="appear once">Appear once per user session on website</md-checkbox>

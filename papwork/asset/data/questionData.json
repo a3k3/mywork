@@ -12,7 +12,7 @@
     "placeholder": "Enter your name",
     "validations": {
       "mustanswer": {
-        "condition": true,
+        "condition": false,
         "text": "Thats required!"
       },
       "maxlength": {
@@ -25,7 +25,7 @@
       },
       "autocomplete": {
         "name": "autocomplete",
-        "condition": false,
+        "condition": true,
         "time": 5,
         "text": "This response is timed."
       }
