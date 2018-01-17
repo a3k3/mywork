@@ -2039,3 +2039,49 @@ top:0;
     background: #fff;
     color: #000;
 }*/
+
+/*Processing Form*/
+.Calculated{
+background-color:#7f1db1;
+padding:15px;
+color:white;
+margin-right:15px;
+}
+.Docgen{
+background-color:#6eb56ed9;
+padding:15px;
+color:white;
+float:left;
+margin-right:15px;
+}
+.DocScan{
+background-color:#85dae2;
+padding:15px;
+color:white;
+float:left;
+margin-right:10px;
+}
+
+.Url{
+background-color:#7c8ca9;
+padding:15px;
+color:white;
+float:left;
+}
+.templateEdit{
+  margin-top: 30px;
+
+}
+.templateEdit .actions-table.table-row{
+padding: 5px 5px;
+
+}
+
+.templateEdit .table-row{
+padding: 10px 20px;
+    border:1px solid #E4E4E4;
+    border-top: none;
+}
+.color-section md-icon.md-mytheme-theme.md-primary {
+    color: rgb(238, 242, 239);
+}

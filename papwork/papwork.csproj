@@ -242,6 +242,7 @@
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\status.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\generalForm.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\makeQuiz.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\ProcessingForm.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\PublishPopup.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\shareEmbed.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\slideForm.html" />
