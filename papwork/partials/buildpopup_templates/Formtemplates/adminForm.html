@@ -1,0 +1,120 @@
+﻿<div class="admin_layout" md-theme="mytheme">
+    <div class="publish_layout">
+        <div class="actions-table">
+            <div layout="row" class="table-head">
+                <div flex="10">
+                    Sl.No
+                </div>
+                <div flex="40">
+                    User Name
+                </div>
+                <div flex="30">
+                    Access Type
+                </div>
+
+                <div flex="20">
+                    Action
+                </div>
+            </div>
+            <div layout="row" class="table-row">
+                <div flex="10">
+                    1
+                </div>
+                <div flex="40">
+                    Amit
+                </div>
+                <div flex="30">
+                    Admin
+                </div>
+                <div flex="20">
+                    <md-button class="md-icon-button" aria-label="delete">
+                        <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+                    <div layout="row" class="table-row">
+                        <div flex="10">
+                            2
+                        </div>
+                        <div flex="40">
+                            Sanjay Kumar
+                        </div>
+                        <div flex="30">
+                            Viewer
+                        </div>
+                        <div flex="20">
+                            <md-button class="md-icon-button" aria-label="delete">
+                                <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+            <div layout="row" class="table-row">
+                <div flex="10">
+                    3
+                </div>
+                <div flex="40">
+                    Surya
+                </div>
+                <div flex="30">
+                    Collaborator
+                </div>
+                <div flex="20">
+                    <md-button class="md-icon-button" aria-label="delete">
+                        <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+
+                    <div layout="row" class="table-row" ng-init="show=false">
+                        <div flex="20">
+                            <md-button class="md-icon-button" ng-click="show=true" aria-label="add">
+                                <md-tooltip md-direction="bottom">Add User</md-tooltip>
+                                <md-icon class="md-primary" md-svg-icon="../../asset/img/md-icons/svg/ic_add_circle_black_24px.svg"></md-icon>
+                            </md-button>
+                            Add User
+                        </div>
+                    </div>
+          <!--modal Popup -->
+            <div class="modalpop" ng-if="show">
+                <div class="close-tab" layout="row" layout-align="center center">
+                    <div flex>
+                        <md-icon class="close-modal" ng-click="show=false" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+                    </div>
+                </div>
+                <h5>Add User</h5>
+                <div class="search_pop">
+                    <div class="search-box" flex="20">
+                        <input type="text" placeholder="Search User">
+                    </div>
+                    <div layout="row" layout-align="start center" class="layout-align-start-center layout-row">
+                        <div flex="20" class="flex=" 20">
+                            <md-input-container>
+                                <md-select ng-model="abc">
+                                    <md-option>UserName</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <div flex="20">
+                            Give Access
+                        </div>
+
+                        <div flex="20">
+                            <md-input-container>
+                                <md-select ng-model="abc">
+                                    <md-option>Viewer</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <div flex="20" class="btn">
+                            <md-button class="adduser" ng-click="">Add</md-button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+</div></div>

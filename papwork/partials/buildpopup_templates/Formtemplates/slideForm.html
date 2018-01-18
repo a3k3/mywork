@@ -1,0 +1,98 @@
+﻿<div class="slide_layout" md-theme="mytheme">
+    <div class="publish_layout">
+        <!--Appearance-->
+        <div class="slide_window">
+            <h3>Appearance</h3>
+        
+
+        
+        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+            <div flex="" class="flex"><h4>Next Question Prompts</h4><p>Hint:Any Text</p></div>
+            <div flex="" class="flex">
+                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="NextQuestion" aria-label="Next Question Prompts"
+                           tabindex="0" type="" role="NQ" aria-checked="true" aria-invalid="">
+                </md-switch>
+                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
+            </div>
+        </div>
+        
+        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+            <div flex="" class="flex"><h4>Question Serial No</h4><p>Hint:Any Text</p></div>
+            <div flex="" class="flex">
+                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="Question" aria-label="Question Serial No"
+                           tabindex="0" type="" role="QS" aria-checked="true" aria-invalid="">
+                </md-switch>
+                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
+            </div>
+        </div>
+        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+            <div flex="" class="flex"><h4>Progress Bar</h4><p>Hint:Any Text</p></div>
+            <div flex="" class="flex">
+                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="Progress" aria-label="Progress Bar"
+                           tabindex="0" type="" role="df" aria-checked="true" aria-invalid="">
+                </md-switch>    
+                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
+            </div>
+        </div>
+
+ <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+            <div flex="" class="flex"><h4>Randomize Question</h4><p>Hint:Any Text</p></div>
+            <div flex="" class="flex">
+                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="random" aria-label="Randomize Ques"
+                  tabindex="0" type="" role="rQ" aria-checked="true" aria-invalid="">
+                    
+                </md-switch>
+                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
+            </div>
+        </div>
+
+        <!--Access table-->
+        <h3>Access</h3>
+
+        <div class="workflow_checkbox_block">
+            <div class="search-box">
+                <input type="text" placeholder="Slide No. or question name" />
+            </div>
+            <div class="email_table">
+                <div layout="row" class="table-head">
+                    <div flex="20">
+                        Slide.No.
+                    </div>
+                    <div flex="60">
+                        Question
+                    </div>
+                    <div flex="20">
+                        Access
+                        
+                    </div>
+
+           </div>
+                    <div layout="row" class="table-row">
+                        <div flex="20">
+                            1
+                        </div>
+                        <div flex="60">
+                            How do you define his body Language during the interview?
+                        </div>
+                        <div flex="20">
+                            <md-input-container>
+                                <md-select ng-model="">
+                                    <!--  <md-option ng-repeat="" ng-value="">
+               {{type of acess}}
+              Private
+             </md-option>-->
+                                    <md-option>Private</md-option>
+                                    <md-option>Public</md-option>
+                                </md-select>
+                            </md-input-container> 
+                        </div>
+                    
+                    </div>
+
+
+
+                    </div>
+            </div>
+    </div>
+</div>
+</div>

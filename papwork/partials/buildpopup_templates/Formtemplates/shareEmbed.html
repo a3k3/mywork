@@ -1,4 +1,4 @@
-﻿<div class="popup_layout" md-theme="mytheme">
+﻿<div class="share_layout" md-theme="mytheme">
     <div class="publish_layout">
         <div class="sharelink_block">
             <div class="share_text">
@@ -7,9 +7,9 @@
             </div>
             <div class="share_text_url">
                 <md-input-container>
-                    <input class="md-accent hue-2" ng-model="publish.publishUrl">
+                    <input class="md-accent hue-2" ng-model="publishUrl">
                 </md-input-container>
-                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="">
+                <md-button class="md-raised md-primary hue-2" aria-label="copy" ng-click="">
                     COPY
                 </md-button>
             </div>
@@ -20,30 +20,31 @@
                 <p>Hint</p>
             </div>
             <div class="embed_text_url">
-                <md-radio-group ng-model="publish.type" ng-change="updatePublishIframe()">
+                <md-radio-group ng-model="question.response">
                     <md-radio-button value="banner" class="md-primary">Banner</md-radio-button>
+                   
                     <div layout="row" layout-align="start center">
                         <div flex="35">
                             <md-radio-button value="pafter" class="md-primary">Pop Up window after</md-radio-button>
                         </div>
                         <div flex="20">
-                            <md-select name="time" ng-model="publish.afterload">
+                            <md-select name="time" ng-model="abcd">
                                 <md-option>0 Sec</md-option>
                                 <md-option>5 Sec</md-option>
                                 <!--<md-option ng-value="{{time}}" ng-repeat="time in ">{{time}}</md-option>-->
                             </md-select>
                         </div>
                         <div flex="45">
-                            on page Load
+                           on page Load
                         </div>
-
+                        
                     </div>
                     <div layout="row" layout-align="start center">
                         <div flex="35">
                             <md-radio-button value="pafter1" class="md-primary">Pop Up window after</md-radio-button>
                         </div>
                         <div flex="20">
-                            <md-select name="percentage" ng-model="publish.afterScroll">
+                            <md-select name="percentage" ng-model="abcg">
                                 <md-option>% Sec</md-option>
                                 <md-option>1% Sec</md-option>
                                 <!--<md-option ng-value="{{time}}" ng-repeat="time in ">{{time}}</md-option>-->
@@ -59,13 +60,12 @@
                     <md-checkbox class="green mdcheckbox" ng-click="" aria-label="" name="" value="appear once">Appear once per user session on website</md-checkbox>
                 </div>
                 <md-input-container>
-                    <!--<input class="md-accent hue-2" row="4" ng-model="embedUrl">-->
-                    <textarea name="textarea" ng-model="publish.embedUrl" rows="4" ></textarea>
+                    <input class="md-accent hue-2" row="4" ng-model="embedUrl">
                 </md-input-container>
-                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="">
+                <md-button class="md-raised md-primary hue-2" aria-label="copy" ng-click="">
                     COPY
                 </md-button>
-                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,56 @@
+﻿<div class="generalForm_layout" md-theme="mytheme">
+    <div class="publish_layout">
+        <div class="general_table">
+            <formsettings>
+                <md-content class="md-padding">
+                    <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in internalSettings"></ng-include>
+                </md-content>
+            </formsettings>
+            <!--<table class="">
+                <tr>
+                    <td><h3>Duration</h3><small>Hint:Any Text</small></td>
+                    <td>
+
+                        <md-switch ng-model="data" aria-label="Switch 1">
+                        </md-switch>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><h3>Status</h3><small>Hint:Form Status</small></td>
+                    <td>
+                        <md-input-container class="md-mytheme-theme md-input-has-value">
+                            <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+
+                        </md-input-container>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><h3>Export</h3></td>
+                    <td><md-button class="primary">Export</md-button></td>
+                </tr>
+
+                <tr>
+                    <td><h3>Duplicate</h3></td>
+                    <td><md-button class="primary">Duplicate</md-button></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h3>Kiosk Mode</h3><small>
+                            Hint:This automatically disables from sharing as the form is being  filled  by all
+                            in a single  location
+                        </small>
+                    </td>
+                    <td>
+                        <md-switch ng-model="isActive" aria-label="Finished?">
+                        </md-switch>
+                    </td>
+                </tr>
+
+            </table>-->
+        </div>
+    </div>
+</div>
