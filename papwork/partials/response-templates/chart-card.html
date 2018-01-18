@@ -1,6 +1,20 @@
-﻿<div class="md-card">
-    <h5>djfghdhg bkjdbb nbjdkhj vbnjdb vbnjnb</h5>
-    <span>546 answered</span>
-    <svg width="100%" height="100%" preserveAspectRatio="xMinYMin"></svg>
-    <div class="legend"></div>
+﻿<div class="md-card " ng-click="expandChart($event,$index)">
+    <h4 ng-bind-html="card"></h4>
+    <span>{{totAns[$index+1]}} Answered</span> 
+    <div class="svg-container">
+        <svg width="80%" height="80%" viewBox="0 0 50 50" class="donut" datavalue="{{totCount[$index][0]}}">
+            <circle class="donut-hole" cx="25" cy="25" r="15.91549430918954" fill="#fff"></circle>
+            <circle class="donut-ring" cx="25" cy="25" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="13"></circle>
+        </svg>
+    </div>    
+    <div class="legend-container">
+        <div class="legend" datalabel="{{totCount[$index][1]}}">
+
+        </div>
+        <div class="chart-social">
+            <md-icon class="facebook" md-svg-src="../asset/img/if_facebook.svg" aria-label="Share"></md-icon>
+            <md-icon class="twitter" md-svg-src="../asset/img/if_twitter.svg" aria-label="Share"></md-icon>
+        </div>
+    </div>
+    <md-button class="chart-close" ng-click="collapseChart($event,$index)"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_close_black_24px.svg" aria-label="Share"></md-icon></md-button>
 </div>

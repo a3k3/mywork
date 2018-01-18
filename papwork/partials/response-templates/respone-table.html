@@ -1,8 +1,7 @@
 ﻿
-<div class="tablebody">
-    <div class="tablerow" ng-repeat="row in rows">
+<div class="tablebody" >
+    <div class="tablerow" ng-repeat="row in rows" ng-click="showResponse()">
         <div class="tablecell" ng-repeat="dataval in row"><p ng-bind-html="dataval"></p></div>        
     </div>
 </div>
-
 
