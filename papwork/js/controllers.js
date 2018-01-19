@@ -2525,9 +2525,27 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
             });
 
     }
-    $scope.showResponse = function () {
-        console.log("hiiii");
+    $scope.showResponse = function (evt) {
+        //console.log("hiiii");
+        $mdDialog.show({
+            controller: ReviewerController,
+            templateUrl: '../partials/PublishPopup.html',
+            parent: $(evt.target).closest('body'),
+            targetEvent: evt,
+            clickOutsideToClose: true,
+            //fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
     }
+
+    function ReviewerController($scope, $mdDialog) {
+
+    }
+
     setTimeout(chartHeight,5000);
     //chartHeight();
     $scope.openmenu = function (evt, index) {

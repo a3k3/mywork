@@ -760,6 +760,7 @@ doughnut-chart:nth-child(n+5){display:none;}
 }
 .action-bar md-datepicker .md-datepicker-input-container {
     position:absolute;
+    border: none;
 }
 .action-bar button.md-datepicker-button.md-icon-button.md-button {
     right: 0;
@@ -979,8 +980,8 @@ hr {
 .tablehead .md-icon-button {
     float: right;
     /* margin-top: -35px; */
-    width: 23px;
-    height: 23px;
+    width: 25px;
+    height: 25px;
     min-height: 23px;
     padding: 0;
 }

@@ -44,7 +44,12 @@
                     </md-button>
                 </div>                
             </div>
-            <tbl rows="answerlist"></tbl>
+            <!--<tbl rows="answerlist"></tbl>-->
+            <div class="tablebody">
+                <div class="tablerow" ng-repeat="row in answerlist" ng-click="showResponse($event)">
+                    <div class="tablecell" ng-repeat="dataval in row"><p ng-bind-html="dataval"></p></div>
+                </div>
+            </div>
         </div>
     </section>    
 </section>

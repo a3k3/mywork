@@ -51,6 +51,20 @@ md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-a
 .md-open-menu-container.md-active {
     z-index:9999;
 }
+.md-menu .md-button.md-icon-button{
+    border-radius:50%;
+    background-color:grey;
+    padding:0 0;
+    height: 30px;
+    width:30px;
+    min-height:0
+}
+.md-menu md-icon{
+    padding:0;
+}
+.md-menu button svg{
+    fill:#fff;
+}
 @media screen and (max-width:767px) {
     .experience-screen {
         display: initial;
@@ -68,23 +82,6 @@ md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-a
     }
     .mobile-project-title{
         display:none;
-    }
-    .md-menu{
-        
-    }
-    .md-menu .md-button.md-icon-button{
-        border-radius:50%;
-        background-color:grey;
-        padding:0 0;
-        height: 30px;
-        width:30px;
-        min-height:0
-    }
-    .md-menu md-icon{
-        padding:0;
-    }
-    .md-menu button svg{
-        fill:#fff;
     }
     .main-navigation .logo img {
         max-height:50px;
