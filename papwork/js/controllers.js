@@ -299,8 +299,8 @@ function addviatext(text) {
 
     //addviahtml(customhtml);
 
-    var str = "1. The ra?{CHECKBOX}ronaldo 2.in in SPAIN stays mainly in the plain? {CHECKBOX} one 3. ashwin? two4. ko? {CHECKBOX} three";
-    var question_sep = /\s*[1-9].\s*/;
+    var str = $('.codeedit_via textarea').val();
+    var question_sep = /\s*[1-9]\.\s*/;
     var question_List = str.split(question_sep);
     console.log(question_List);
     //var res = str.match(/^[1-9]\.(.*)\?$/);
@@ -322,28 +322,45 @@ function addviatext(text) {
         var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
         //console.log(question_tag + ' --- ' + input_text);
 
-        if (question_List[index].indexOf('{') == -1) {
-            var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
-            var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
-            customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
-            console.log(customhtml);
-            names.push(customhtml);
-           
-        }
-        else {
-            var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
-            var input_text = question_List[index].substr(question_List[index].indexOf("}") + 1);
-            var regExpne = /\{([^)]+)\}/;
-            var matches = regExpne.exec(question_List[index]);
-            console.log(matches[1]);
-            //if (matches[1] == "CHECKBOX") {
-            //    customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
-            //    names.push(customhtml);
-            //}else{
-            //customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
-            //console.log(customhtml);
-            //names.push(customhtml);
-            //}            
+
+        if (question_List[index] != "") {
+            if (question_List[index].indexOf('{') == -1) {
+                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
+                customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                console.log(customhtml);
+                names.push(customhtml);
+
+            }
+            else {
+                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var input_text = question_List[index].substr(question_List[index].indexOf("}") + 1);
+                var regExpne = /\{([^)]+)\}/;
+                var matches = regExpne.exec(question_List[index]);
+                console.log(matches[1]);
+                switch (matches[1]) {
+                    case "checkbox":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "radio":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="radio" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "date":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="date" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "email":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="email" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "paragraph":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><textarea name="message" rows="10" cols="30" placeholder="Your name set.."> ' + input_text + '</textarea>';
+                        console.log(customhtml);
+                        break;
+                }
+            }
         }            
     });
 
