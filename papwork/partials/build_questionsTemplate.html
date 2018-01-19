@@ -1,14 +1,14 @@
 ﻿<div id="slide-{{question.id}}" class="questionPanel" data-question-id="{{question.id}}" ng-if="question.answertype != 'statement'">
     <div contenteditable ng-model="question.category" class="category col-xs-12 text-center font-color-222 font-size-14">{{question.category}}</div>
     <div class="questionContainer">
-        <h2 class="question font-size-24 font-color-000" contenteditable ng-model="question.question" ng-mouseup="highlightSelection($event)" ng-touchstart="highlightSelection($event)">{{question.question}}</h2>
+        <h2 class="question font-size-24 font-color-000" contenteditable ng-model="question.question"  context-menu="menuOptions()" selection="">{{question.question}}</h2>
     </div>
     <div class="answerContainer">
-        <p class="caption font-color-666 font-size-14" contenteditable ng-model="question.caption" ng-mouseup="highlightSelection($event)" ng-touchstart="highlightSelection($event)">{{question.caption}}</p>
+        <p class="caption font-color-666 font-size-14" contenteditable ng-model="question.caption">{{question.caption}}</p>
         <div class="inputContainer {{question.answertheme}}_class">
             <ng-include src="dynamicTemplateUrl(question)"></ng-include>
         </div>
-        <p class="hint font-color-666 font-size-12" contenteditable ng-model="question.hint" ng-mouseup="highlightSelection($event)" ng-touchstart="highlightSelection($event)">Hint: {{question.hint}}</p>
+        <p class="hint font-color-666 font-size-12" contenteditable ng-model="question.hint">Hint: {{question.hint}}</p>
     </div>
 </div>
 <div id="slide-{{question.id}}" class="questionPanel" data-question-id="{{question.id}}" ng-if="question.answertype == 'statement'">

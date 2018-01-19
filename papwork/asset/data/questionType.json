@@ -1,77 +1,162 @@
 ﻿{
-  "name": "Field Type",
-  "options": [
-    {
-      "primary": true,
-      "name": "Type Box",
-      "type": "text",
-      "img_src": "../asset/img/md-icons/svg/text-box.svg"
-    },
-    {
-      "primary": true,
-      "name": "Long Type Box",
-      "type": "textarea",
-      "img_src": "../asset/img/md-icons/svg/long-text-box.svg"
-    },
-    {
-      "primary": true,
-      "name": "Statement",
-      "type": "statement",
-      "img_src": "../asset/img/md-icons/svg/statement.svg"
-    },
-    {
-      "primary": true,
-      "name": "Radio",
-      "type": "radio",
-      "img_src": "../asset/img/md-icons/svg/radio.svg"
-    },
-    {
-      "primary": true,
-      "name": "Checkbox",
-      "type": "checkbox",
-      "img_src": "../asset/img/md-icons/svg/checkbox.svg"
-    },
-    {
-      "primary": true,
-      "name": "Drop Down",
-      "type": "select",
-      "img_src": "../asset/img/md-icons/svg/dropdown.svg"
-    },
-    {
-      "primary": true,
-      "name": "Star Rating",
-      "type": "rating_star",
-      "img_src": "../asset/img/md-icons/svg/star-rating.svg"
-    },
-    {
-      "primary": true,
-      "name": "Scale Rating",
-      "type": "radio_size",
-      "img_src": "../asset/img/md-icons/svg/scale-rating.svg"
-    },
-    {
-      "primary": true,
-      "name": "More Fields",
-      "type": "more",
-      "img_src": "../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg"
-    },
-    {
-      "primary": false,
-      "name": "Star Rating 2",
-      "type": "rating_star",
-      "img_src": "../asset/img/md-icons/svg/star-rating.svg"
-    },
-    {
-      "primary": false,
-      "name": "Scale Rating 2",
-      "type": "radio_size",
-      "img_src": "../asset/img/md-icons/svg/scale-rating.svg"
-    },
-    {
-      "primary": false,
-      "name": "Less Fields",
-      "type": "less",
-      "img_src": "../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg"
-    }
-  ]
+  "field_type": {
+    "name": "Field Type",
+    "options": [
+      {
+        "primary": true,
+        "name": "Type Box",
+        "type": "text",
+        "img_src": "../asset/img/md-icons/svg/text-box.svg"
+      },
+      {
+        "primary": true,
+        "name": "Long Type Box",
+        "type": "textarea",
+        "img_src": "../asset/img/md-icons/svg/long-text-box.svg"
+      },
+      {
+        "primary": true,
+        "name": "Statement",
+        "type": "statement",
+        "img_src": "../asset/img/md-icons/svg/statement.svg"
+      },
+      {
+        "primary": true,
+        "name": "Radio",
+        "type": "radio",
+        "img_src": "../asset/img/md-icons/svg/radio.svg"
+      },
+      {
+        "primary": true,
+        "name": "Checkbox",
+        "type": "checkbox",
+        "img_src": "../asset/img/md-icons/svg/checkbox.svg"
+      },
+      {
+        "primary": true,
+        "name": "Drop Down",
+        "type": "select",
+        "img_src": "../asset/img/md-icons/svg/dropdown.svg"
+      },
+      {
+        "primary": true,
+        "name": "Star Rating",
+        "type": "rating_star",
+        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+      },
+      {
+        "primary": true,
+        "name": "Scale Rating",
+        "type": "radio_size",
+        "img_src": "../asset/img/md-icons/svg/scale-rating.svg"
+      },
+      {
+        "primary": true,
+        "name": "More Fields",
+        "type": "more",
+        "img_src": "../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg"
+      },
+      {
+        "primary": false,
+        "name": "Smiley Rating",
+        "type": "rating_smiley",
+        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+      },
+      {
+        "primary": false,
+        "name": "Video Interview",
+        "type": "video",
+        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+      },
+      {
+        "primary": false,
+        "name": "Less Fields",
+        "type": "less",
+        "img_src": "../asset/img/md-icons/svg/ic_more_horiz_black_24px.svg"
+      }
+    ]
+  },
+    "question_type": {
+    "name": "Question Type",
+    "options": [
+      {
+        "primary": true,
+        "name": "Name",
+        "key": "name",
+        "type": "text"
+      },
+      {
+        "primary": true,
+        "name": "Father's Name",
+        "key": "father",
+        "type": "text"
+      },
+      {
+        "primary": true,
+        "name": "Mother's Name",
+        "key": "mother",
+        "type": "text"
+      },
+      {
+        "primary": true,
+        "name": "Spouse Name",
+        "key": "spouse",
+        "type": "text"
+      },
+      {
+        "primary": true,
+        "name": "Age",
+        "key": "age",
+        "type": "number"
+      },
+      {
+        "primary": true,
+        "name": "DOB",
+        "key": "dob",
+        "type": "input_calendar"
+      },
+      {
+        "primary": true,
+        "name": "Current Address",
+        "key": "current_address",
+        "type": "textarea"
+      },
+      {
+        "primary": true,
+        "name": "Permanent Address",
+        "key": "permanent_address",
+        "type": "textarea"
+      },
+      {
+        "primary": true,
+        "name": "Office Address",
+        "key": "office_address",
+        "type": "textarea"
+      },
+      {
+        "primary": true,
+        "name": "Email",
+        "key": "email",
+        "type": "email"
+      },
+      {
+        "primary": true,
+        "name": "Official Email",
+        "key": "official_email",
+        "type": "email"
+      },
+      {
+        "primary": true,
+        "name": "Phone Number",
+        "key": "phone_number",
+        "type": "number"
+      },
+      {
+        "primary": true,
+        "name": "URL",
+        "key": "url",
+        "type": "url"
+      }
+    ]
+  }
 }

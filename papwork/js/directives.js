@@ -431,6 +431,7 @@ myapp.directive('webcam', function () {
                 media.ondataavailable = function (event) {
                     if (event.data.size > 0) {
                         recordedChunks.push(event.data);
+                        downloadRec();
                     } else {
                         console.log("No data Available");
                     }
@@ -452,13 +453,19 @@ myapp.directive('webcam', function () {
                     type: 'video/webm'
                 });
                 var url = URL.createObjectURL(blob);
-                var a = document.createElement('a');
-                document.body.appendChild(a);
-                a.style = 'display: none';
-                a.href = url;
-                a.download = 'test.webm';
-                a.click();
-                window.URL.revokeObjectURL(url);
+                var recVid = document.getElementById("playRecVid")
+                angular.element(recVid).show();
+                angular.element(recVid).attr('src', url);
+                angular.element(recVid).attr('controls', 'controls');
+                angular.element(recVid).attr('autoplay', true);
+                angular.element(recVid).css({ 'width': '100%', 'height': 'auto' });
+                //var a = document.createElement('a');
+                //document.body.appendChild(a);
+                //a.style = 'display: none';
+                //a.href = url;
+                //a.download = 'test.webm';
+                //a.click();
+                //window.URL.revokeObjectURL(url);
             }
 
             $scope.$on('$destroy', onDestroy);

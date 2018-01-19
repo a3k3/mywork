@@ -6,7 +6,7 @@
         <div class="products" ng-repeat="option in question.options" ng-click="selectProduct($index,$event,question.options)">
             <img src="{{option.media_src}}">
             <img class="selected-icon" src="../../asset/img/checked.jpg">
-            <p>{{option.name}}</p>
+            <p>{{option.value}}</p>
             <input class="checkbox" type="checkbox" value="{{option.value}}" ng-hide="true" />
         </div>
     </div>

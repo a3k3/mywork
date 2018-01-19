@@ -8,9 +8,9 @@
     </div>
     <div flex="20">
         <md-input-container>
-            <md-select name="type" ng-model="logic.answer" ng-model-options="{trackBy: '$value.value'}">
+            <md-select name="type" ng-model="logic.answer" ng-model-options="{trackBy: '$value.id'}" ng-change="updateAdvanceJumpAnswers(logic)">
                 <md-option>Answer</md-option>
-                <md-option ng-value="{{answer}}" ng-repeat="answer in question.options">{{answer.value}}</md-option>
+                <md-option ng-value="{{answer}}" ng-repeat="answer in logic.answer_list">{{answer.value}}</md-option>
             </md-select>
         </md-input-container>
     </div>
@@ -21,12 +21,15 @@
     </div>
     <div flex="30">
         <md-input-container>
-            <md-select name="type" ng-model="logic.slide_to_show" ng-change="updateAdvanceAnswers(logic)">
+            <md-select name="type" ng-model="logic.slide_to_show">
                 <md-option>Question</md-option>
                 <md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>
             </md-select>
         </md-input-container>
     </div>
+    <md-button class="md-fab md-mini remove" md-colors="{background: 'grey'}" aria-label="Remove" ng-click="removeAdvanceOption(setting.name, $index)" ng-if="$index != 0">
+        <md-icon md-svg-src="../../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+    </md-button>
 </div>
 
 <div ng-click="addAdvanceOption($event,setting.name)" class="advance-option">
