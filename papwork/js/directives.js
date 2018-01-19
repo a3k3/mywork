@@ -502,11 +502,8 @@ myapp.directive('webcam', function () {
         }
     };
 });
-function drawChart() {
 
-}
-
-myapp.directive('doughnutChart', ['$window', function ($window) {
+myapp.directive('doughnutChar', ['$window', function ($window) {
     return {
         restrict: 'E',
         replace: false,
@@ -559,62 +556,30 @@ myapp.directive('doughnutChart', ['$window', function ($window) {
 
 }])
 
-myapp.directive('doughnutChar', function () {
+myapp.directive('doughnutChart', function () {
     return {
         restrict: 'E',
         replace: false,
-        
+        startDrawing:'=',
         templateUrl: "../partials/response-templates/chart-card.html",
         link: function (scope, element, attrs) {
-            var data = JSON.parse(attrs.dataval);
-            //var label = JSON.parse(attrs.datalabel);
-            var label = attrs.datalabel.replace("[", "").replace("]", "").split(",");
-
-            var svg = d3.select(element[0]).select("svg"),
-                //width = svg.attr("width"),
-                width = svg.node().clientWidth,
-                height = svg.node().clientHeight,
-                radius = Math.min(width, height) / 2,
-                holeradius = radius * 0.55,
-                g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-            //svg.attr("width", '100%')
-                //.attr("height", '100%')
-                //.attr('viewBox', (-width / 2) + ' ' + (-height / 2) + ' ' + width + ' ' + height)
-                //.attr('preserveAspectRatio', 'xMinYMin');
-                
-            //svg.attr("viewbox", "0 0 " + width + " " + height);
-            var color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c']);
-
-            // Generate the pie
-            var pie = d3.pie();
-
-            // Generate the arcs
-            var arc = d3.arc()
-                .innerRadius(holeradius)
-                .outerRadius(radius);
-
-            //Generate groups
-            var arcs = g.selectAll("arc")
-                .data(pie(data))
-                .enter()
-                .append("g")
-                .attr("class", "arc")
-
-            //Draw arc paths
-            var labelColor = [];
-            arcs.append("path")
-                .attr("fill", function (d, i) {
-                    var thisColor = color(i);
-                    labelColor.push(thisColor);
-                    return color(i);
-                })
-                .attr("d", arc);
-            var legendCtr = d3.select(element[0]).select("div.legend");
-            label.forEach(function (d, i) {
-                legendCtr.append("strong").style("color", labelColor[i]).text(label[i]);
-
-            })
-
+            scope.$watch('startDrawing', function (val) {
+                //if (val) {
+                    var svg = element[0].querySelector("svg");
+                    //var arr = [50, 40, 10];
+                    var arr = svg.getAttribute("datavalue").replace("[", "").replace("]", "").split(",");
+                    drawChart(arr, svg);
+                    var legendCtr = element[0].querySelector("div.legend");
+                    var label = JSON.parse(legendCtr.getAttribute("datalabel"));
+                    //var label = legendCtr.getAttribute("datalabel").replace("[", "").replace("]", "").split(",");
+                    var labels = '';
+                    label.forEach(function (d, i) {
+                        labels += "<strong style=color:" + chartcolors[i] + "><h4>" + label[i][0] + "<b>, </b></h4><h4>" + label[i][1] + "<b>, </b></h4><small>" + label[i][2] + "</small></strong>";
+                    })
+                    legendCtr.insertAdjacentHTML('beforeend', labels);                    
+               // }
+            },true)
+            
 
         }
     }

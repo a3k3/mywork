@@ -133,12 +133,16 @@
     <Content Include="asset\font\optima.png" />
     <Content Include="asset\img\avg.png" />
     <Content Include="asset\img\avg_active.png" />
+    <Content Include="asset\img\calender.svg" />
     <Content Include="asset\img\checked.JPG" />
     <Content Include="asset\img\coverpage_media.JPG" />
     <Content Include="asset\img\excellent.png" />
     <Content Include="asset\img\excellent_active.png" />
+    <Content Include="asset\img\export.svg" />
     <Content Include="asset\img\good.png" />
     <Content Include="asset\img\good_active.png" />
+    <Content Include="asset\img\if_facebook.svg" />
+    <Content Include="asset\img\if_twitter.svg" />
     <Content Include="asset\img\md-icons\svg\attachment.svg" />
     <Content Include="asset\img\md-icons\svg\checkbox.svg" />
     <Content Include="asset\img\md-icons\svg\code.svg" />
@@ -211,8 +215,10 @@
     <Content Include="asset\img\product_B.JPG" />
     <Content Include="asset\img\product_C.JPG" />
     <Content Include="asset\img\product_D.JPG" />
+    <Content Include="asset\img\scan.svg" />
     <Content Include="asset\img\submitted_icon.JPG" />
     <Content Include="asset\img\success.png" />
+    <Content Include="asset\img\table-sort.svg" />
     <Content Include="asset\img\tax.JPG" />
     <Content Include="asset\img\verypoor.png" />
     <Content Include="asset\img\verypoor_active.png" />
@@ -220,6 +226,7 @@
     <Content Include="asset\img\visa.JPG" />
     <Content Include="css\build.css" />
     <Content Include="css\input.css" />
+    <Content Include="lib\html2canvas\html2canvas.js" />
     <Content Include="js\mdCarousel.js" />
     <Content Include="js\swipe.js" />
     <Content Include="lib\aws-sdk\aws-sdk.js" />
@@ -301,8 +308,11 @@
     <Content Include="partials\input_templates\video.html" />
     <Content Include="partials\PublishPopup.html" />
     <Content Include="partials\questionType.tmpl.html" />
+    <Content Include="partials\response-templates\donut.html" />
     <Content Include="partials\response-templates\chart-card.html" />
+    <Content Include="partials\response-templates\filter-audience.html" />
     <Content Include="partials\response-templates\respone-table.html" />
+    <Content Include="partials\response-templates\response-user-details.html" />
     <Content Include="partials\response-templates\tablefitltermenu.html" />
     <Content Include="partials\response.html" />
     <Content Include="partials\settings_templates\calculatedlogic.html" />
@@ -376,6 +386,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

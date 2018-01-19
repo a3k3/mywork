@@ -3,98 +3,48 @@
         <div class="chartbox-headers">
             <div class="chartbox-header-values">
                 <h4 class="md-title">MySurvey</h4>
-                <h4>600<small>Completed</small></h4>
-                <h4>950<small>Engaged</small></h4>
-                <h4>1200<small>Visited</small></h4>
-                <h4>79%<small>Audience Interest</small></h4>
-                <h4>63%<small>Papform Quality</small></h4>
+                <h4>{{surveyCompleted}}<small>Completed</small></h4>
+                <h4>{{surveyEngaged}}<small>Engaged</small></h4>
+                <h4>{{surveyVisited}}<small>Visited</small></h4>
+                <h4>{{audienceInterest}}%<small>Audience Interest</small></h4>
+                <h4>{{papformQuality}}%<small>Papform Quality</small></h4>
             </div>
-            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_filter_list_black_24px.svg" aria-label="Filter Audience"></md-icon>Filter Audience</md-button>
-            <md-button class="md-icon-button share"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_share_black_24px.svg" aria-label="Share"></md-icon></md-button>
+            <md-button class="md-raised filter-audience" ng-click="openfilterMenu($event,$index)"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_filter_list_black_24px.svg" aria-label="Filter Audience"></md-icon>Filter Audience</md-button>
+            <md-button class="share" ng-click="snap($event)"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_share_black_24px.svg" aria-label="Share"></md-icon><span>Share</span></md-button>
         </div>
         <div class="chart-body">
-            <md-grid-list md-cols-gt-md="12" md-cols="4" md-cols-md="8"
-                          md-row-height-gt-md="1:1" md-row-height="4:3"
-                          md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px">
-                <doughnut-chart dataval="[2,5,6,8]" datalabel="['2%Item1','5%Item2','6%Item3','8%Item4']"></doughnut-chart>
-                <doughnut-chart dataval="[4,1,10,20,15]" datalabel="['4%Item1','1%Item2','10%Item3','20%Item4','15%Item5']"></doughnut-chart>-->
-                <doughnut-chart dataval="[100,150,200]" datalabel="['100%Item1','150%Item2','200%Item3']"></doughnut-chart>
-                <doughnut-chart dataval="[12,15,20,5]" datalabel="['12%Item1','15%Item2','20%Item3','5%Item4']"></doughnut-chart>
-
-                <!--<md-grid-tile md-colspan-gt-sm="3" md-rowspan-gt-sm="1" ng-style="{'backgroundColor':'#fff'}">
-            jfghdkughdfbgdfjgh
-        </md-grid-tile>
-        <md-grid-tile md-colspan-gt-sm="3" md-rowspan-gt-sm="1" ng-style="{'backgroundColor':'#fff'}">
-            jfghdkughdfbgdfjgh
-        </md-grid-tile>
-        <md-grid-tile md-colspan-gt-sm="3" md-rowspan-gt-sm="1" ng-style="{'backgroundColor':'#fff'}">
-            jfghdkughdfbgdfjgh
-        </md-grid-tile>-->
-            </md-grid-list>
-            <md-button class="md-raised show-insights">Show all insights</md-button>
+            <div layout="row" layout-xs="column">
+                <doughnut-chart flex="25" flex-xs="100" strokecolors dataquest="" dataanswered="{{totAns[$index]}}" ng-repeat="card in cards track by $index" dataval="[2,5,6,8]" datalabel="['2%Item1','5%Item2','6%Item3','8%Item4']"></doughnut-chart>
+            </div>
+            <md-button class="md-raised show-insights" ng-click="showallinsights()">Show all insights</md-button>
+            <md-button class="md-raised hide-insights" ng-click="hideinsights()" style="display:none">Hide insights</md-button>
         </div>
     </section>
     <hr/>
     <section class="response-data-table">
         <div class="action-bar">
-            <md-button class="md-raised filter-audience">Scan QR</md-button>
-            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_crop_square_black_24px.svg" aria-label=""></md-icon></md-button>
-            <md-input-container md-no-float class="md-block">
+            <md-button class="md-raised scan-qr"><md-icon md-svg-src="../asset/img/scan.svg" aria-label=""></md-icon>Scan QR</md-button>
+
+            <md-input-container md-no-float class="md-block search-box">
                 <md-icon md-svg-src="../asset/img/md-icons/svg/ic_search_black_24px.svg"></md-icon>
-                <input type="text" placeholder="Search by keyword or ID">
+                <input type="text" placeholder="Search by keyword or ID" ng-model="searchtext">
             </md-input-container>
-            <!--<md-button class="md-icon-button" aria-label="More">
-                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_email_black_24px.svg"></md-icon>
-            </md-button>-->
-            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_email_black_24px.svg" aria-label=""></md-icon></md-button>
-            <md-button class="md-raised filter-audience"><md-icon md-svg-src="../asset/img/md-icons/svg/ic_delete_black_24px.svg" aria-label=""></md-icon></md-button>
-           
+            <md-datepicker ng-model="dt"></md-datepicker>
+            <md-icon md-svg-src="../asset/img/md-icons/svg/ic_crop_square_black_24px.svg" aria-label=""></md-icon>
+            <md-icon md-svg-src="../asset/img/md-icons/svg/ic_email_black_24px.svg" aria-label=""></md-icon>
+            <md-icon md-svg-src="../asset/img/md-icons/svg/ic_delete_black_24px.svg" aria-label=""></md-icon>
+
         </div>
         <div class="table">
             <div class="tablehead">
                 <div class="tablecell" ng-repeat="dataval in questlist">
                     <p ng-bind-html="dataval"></p>
                     <md-button class="md-icon-button md-primary" aria-label="" ng-click="openmenu($event, $index)">
-                        <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_arrow_drop_down_circle_black_24px.svg"></md-icon>
+                        <md-icon md-svg-icon="../asset/img/table-sort.svg"></md-icon>
                     </md-button>
                 </div>                
             </div>
             <tbl rows="answerlist"></tbl>
         </div>
-    </section>
-    <section class="response-review">
-        <section class="response-questions">
-            <h3 class="responseid">{{responseid}}</h3>
-            <div class="reviewers">
-                <div class="reviewer">
-                    <div class="table">
-                        <tbl rows="reviewer1"></tbl>
-                    </div>
-                    <div class="quest-answ">
-                        <div class="quest-block" ng-repeat="(key,val) in qblock1">
-                            <h5>{{key}}.{{val.Q}}</h5>
-                            <p><b>{{val.A}}</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviewer">
-                    <div class="table">
-                        <tbl rows="reviewer2"></tbl>
-                    </div>
-                    <div class="quest-answ">
-                        <div class="quest-block" ng-repeat="(key,val) in qblock2">
-                            <h5>{{key}}.{{val.Q}}</h5>
-                            <p><b>{{val.A}}</b></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="response-rating">
-            <!--<ng-include src="'../partials/experience.html'"></ng-include>-->
-        </section>
-        
-        
-
-    </section>
+    </section>    
 </section>

@@ -1289,6 +1289,21 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         questionTemp.logic_options.splice(removeindex, 1);
     }
 
+    $scope.contentEdit = function (e) {       
+        var keycode = e.which ? e.which : e.keyCode;
+        var el = angular.element(e.target);
+            if (keycode == 13) {
+                if (!e.shiftKey) {
+                    el.blur();
+                    $timeout(function () {
+                        el.closest("md-radio-button").next().triggerHandler('click');
+                        $timeout(function () {
+                            el.next().focus();
+                        }, 500);
+                    });                    
+                }
+            }        
+    }
     $scope.updateAdvanceAnswers = function (logic) {
         var index = logic.questionno == 0 ? logic.questionno : logic.questionno - 1;
         if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
@@ -1939,8 +1954,11 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
 });
 
 var table = {
+    "surveyCompleted": 600,
+    "surveyEngaged": 950,
+    "surveyVisited":1200,
     '1':{
-        "ResponseID":"345hfgdgxf",
+        "ResponseID":"345hfgqt",
         "userResponses": [
             {
                 'Q': "What is your Name?",
@@ -1957,6 +1975,10 @@ var table = {
             {
                 'Q': "Which language you Speak?",
                 'A': "Hindi"
+            },
+            {
+                'Q': "your Address?",
+                'A': "Bangalore"
             }
         ],
         "reviewerResponses": {
@@ -2015,6 +2037,10 @@ var table = {
             {
                 'Q': "Which language you Speak?",
                 'A': "Hindi"
+            },
+            {
+                'Q': "your Address?",
+                'A': "Hyderabad"
             }
         ],
         "reviewerResponses": {
@@ -2056,7 +2082,7 @@ var table = {
         }
     },
     '3':{
-    "ResponseID":"345hfgdgxf",
+    "ResponseID":"345hfggty",
         "userResponses": [
             {
                 'Q': "What is your Name?",
@@ -2073,6 +2099,10 @@ var table = {
             {
                 'Q': "Which language you Speak?",
                 'A': "Marathi"
+            },
+            {
+                'Q': "your Address?",
+                'A': "Bangalore"
             }
         ],
     "reviewerResponses": {
@@ -2112,7 +2142,70 @@ var table = {
         "value": "review",
             "state":"enabled"
     }
-}
+    },
+    '4': {
+        "ResponseID": "345hfggtx",
+        "userResponses": [
+            {
+                'Q': "What is your Name?",
+                'A': "Arjun Reddy"
+            },
+            {
+                'Q': "Your Age?",
+                'A': "27"
+            },
+            {
+                'Q': "Do you have Aadhar?",
+                'A': "Yes"
+            },
+            {
+                'Q': "Which language you Speak?",
+                'A': "Telugu"
+            },
+            {
+                'Q': "your Address?",
+                'A': "Hyderabad"
+            }
+        ],
+        "reviewerResponses": {
+            "1": {
+                'reviewerId': "rev1",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    },
+                    {
+                        'Q': "Answer Q3",
+                        'A': "Answer3"
+                    }
+                ]
+            },
+            "2": {
+                'reviewerId': "rev2",
+                'responses': [
+                    {
+                        'Q': "Plz answer Q1",
+                        'A': "Answer1"
+                    },
+                    {
+                        'Q': "Answer Q2",
+                        'A': "Answer2"
+                    }
+
+                ]
+            }
+        },
+        "Action": {
+            "value": "review",
+            "state": "enabled"
+        }
+    }
+    
 };
 
 function JSONToArray(jsonVal) {
@@ -2131,9 +2224,10 @@ function chartResize() {
         newDCel.setAttribute("dataval", el);
         newDCel.setAttribute("datalabel", dLabl[i]);
         dc.append(newDCel);
-    })
+    });
     console.log(dval);
     console.log(dLabl);
+    chartHeight();
 
 }
 //window.addEventListener('resize', chartResize);
@@ -2169,52 +2263,290 @@ function getAnswer(tbl) {
     var rowList = [];
     var tblProp = Object.getOwnPropertyNames(tbl);
     tblProp.forEach(function (el, i) {
-        var row = [];
-        row.push(tbl[el].ResponseID);
-        tbl[el].userResponses.forEach(function (elm, indx) {
-            row.push(elm.A);
-        });
-        rowList.push(row);
+        if (el != "surveyCompleted" && el != "surveyEngaged" && el != "surveyVisited") {
+            var row = [];
+            row.push(tbl[el].ResponseID);
+            tbl[el].userResponses.forEach(function (elm, indx) {
+                row.push(elm.A);
+            });
+            rowList.push(row);
+        }
     });
     return rowList;
 }
 function getFilterAnswer(answList) {
-    var col = [];
+    var col = [],cls=[];
     for (var i = 0; i < answList[0].length; i++){
-        var arr = [];
+        var arr = [],arr1=[];
         for (var j = 0; j < answList.length; j++){
             var val = answList[j][i];
+            arr1.push(val);
             if (arr.indexOf(val) == -1) {
                 arr.push(val);
             } 
         }        
         col.push(arr);
+        cls.push(arr1);
     }
-    return col;
+    return [col,cls];
+}
+var chartcolors = ["#ce4b99", "#A44C3A", "#57B425", "#25A5B4"];
+function getValue(uniqArr) {
+    uniqArr.forEach(function (el, i) {
+        el.forEach(function (elm, indx) {
+
+        })
+    })
+
+}
+function drawChart(arr,elm) {
+    var crclgrp = "";
+    var initOff = 25, nxtOff = 25;
+    arr.forEach(function (el, i) {
+        var k = 100 - el;
+        var offs = k + nxtOff;        
+        crclgrp += "<circle class='donut-segment' cx='25' cy='25' r='15.91549430918954' fill='transparent' stroke='" + chartcolors[i] + "' stroke-width='13' stroke-dasharray='" + el + ' ' + k + "' stroke-dashoffset='" + nxtOff+"'></circle>";
+        nxtOff = (offs <= 100) ? offs : offs - 100;
+        
+    });
+    elm.insertAdjacentHTML('beforeend', crclgrp);
+
 }
 
+function getlabels(uniqueArr, totalArr) {
+    var countTot = [];
+    uniqueArr.forEach(function (el, i) {
+        if (i > 0) {
+            var countArr = [],percentage=[],label=[],sum;
+            uniqueArr[i].forEach(function (elm, ind) {
+                var count = 0;
+                totalArr[i].forEach(function (e, id) {
+                    if (elm === e) {
+                        count += 1;
+                    }
+                });
+                countArr.push(count);
+            })
+            sum = countArr.reduce(function (tot, num) {
+                return tot +  num;
+            },0);
+            countArr.forEach(function (em, indx) {
+                var pc = (em / sum) * 100;
+                var eachLabel = [];
+                percentage.push(pc);
+                eachLabel.push(em);
+                eachLabel.push((+pc.toFixed(2)) + "%");
+                eachLabel.push(el[indx]);
+                label.push(eachLabel);
+            })
+            countTot.push([percentage,label]);
+        }
+        //countTot.push(countArr);
+    });
+    return countTot;
 
+}
+
+function chartHeight() {
+    var dcs = document.querySelectorAll('doughnut-chart');
+    $(dcs).css("min-height", "");
+    var maxHT = [];
+    dcs.forEach(function (el, ind) {        
+        maxHT.push(el.height);
+    });
+    var maxheight = Math.max(maxHT);
+    $(dcs).css("min-height", maxheight);
+}
+
+function startdrawing() {
+    var dcs = document.querySelectorAll('doughnut-chart');
+    //var maxHT = [];
+    dcs.forEach(function (el, ind) {
+        el.querySelectorAll("svg circle").forEach(function (elm, idx) {
+            if (idx > 1) { elm.remove(); }
+        });
+        el.querySelectorAll(".legend strong").forEach(function (elm, idx) {
+            elm.remove();
+        });
+        var svg = el.querySelector("svg");
+        var arr = svg[0].getAttribute("datavalue").replace("[", "").replace("]", "").split(",");
+        drawChart(arr, svg[0]);
+        var legendCtr = el.querySelector("div.legend");
+        //var label = legendCtr.getAttribute("datalabel").replace("[", "").replace("]", "").split(",");
+        var label = JSON.parse(legendCtr.getAttribute("datalabel"));
+        var labels = '';
+        label.forEach(function (d, i) {
+            labels += "<strong style=color:" + chartcolors[i] + "><h4>"+label[i][0]+"<b>, </b></h4><h4>" + label[i][1] + "<b>, </b></h4><small>" + label[i][2] + "</small></strong>";
+        })
+        legendCtr.insertAdjacentHTML('beforeend', labels);
+        //maxHT.push(el.height);
+    });
+    //var maxheight = Math.max(maxHT);
+    //$(dcs).css("min-height", maxheight);
+}
+
+function take(targetElem) {
+    // First render all SVGs to canvases
+    var elements = targetElem.find('svg').map(function () {
+        var svg = $(this);
+        var canvas = $('<canvas></canvas>');
+        svg.replaceWith(canvas);
+
+        // Get the raw SVG string and curate it
+        var content = svg.wrap('<p></p>').parent().html();
+        content = content.replace(/xlink:title="hide\/show"/g, "");
+        content = encodeURIComponent(content);
+        svg.unwrap();
+
+        // Create an image from the svg
+        var image = new Image();
+        image.src = 'data:image/svg+xml,' + content;
+        image.onload = function () {
+            canvas[0].width = image.width;
+            canvas[0].height = image.height;
+
+            // Render the image to the canvas
+            var context = canvas[0].getContext('2d');
+            context.drawImage(image, 0, 0);
+        };
+        return {
+            svg: svg,
+            canvas: canvas
+        };
+    });
+    setTimeout(captureSnap(targetElem[0]), 6000);
+    //html2canvas(targetElem[0], {
+    //    onrendered: function (canvas) {
+    //        // Put the SVGs back in place
+    //        elements.each(function () {
+    //            this.canvas.replaceWith(this.svg);
+    //        });
+
+    //        // Do something with the canvas, for example put it at the bottomva
+    //        $(canvas).appendTo('body');
+    //    }
+    //});
+    //targetElem.imagesLoaded(function () {
+        // At this point the container has no SVG, it only has HTML and Canvases.
+
+        
+    //})
+}
+
+function captureSnap(element) {
+    var canvas = html2canvas(document.body, { logging: true, async: true, allowTaint: true }).then(function (canvas) {
+        document.body.appendChild(canvas);
+    });
+    console.log(canvas);
+    
+}
 myapp.controller('responsectrl', function ($scope, $mdDialog) {
-    //var ctrltable = [];
+    $scope.surveyCompleted = table.surveyCompleted;
+    $scope.surveyEngaged = table.surveyEngaged;
+    $scope.surveyVisited = table.surveyVisited;
+    $scope.audienceInterest = Math.round((Number($scope.surveyEngaged) / Number($scope.surveyVisited))*100);
+    $scope.papformQuality = Math.round((Number($scope.surveyCompleted) / Number($scope.surveyEngaged))*100);
     $scope.questlist = getQ(table);
-    //JSON.parse(table);
+    var qt = $scope.questlist.slice();
+    qt.splice(0, 1);
+    $scope.cards = qt;
+    $scope.expandChart = function (evt, indx) {        
+        if (!($(evt.target).hasClass("chart-close") || $(evt.target).closest(".chart-close").length)) {
+            $(evt.target).closest("doughnut-chart").parent().addClass("pap-zoom");
+        }        
+    }
     $scope.answerlist = getAnswer(table);
-    $scope.uniqueArr=getFilterAnswer($scope.answerlist);
-    setTimeout(tableFilter, 5000);
+    $scope.uniqueArr = getFilterAnswer($scope.answerlist)[0];
+    $scope.totalAnsCol = getFilterAnswer($scope.answerlist)[1];
+    //console.log($scope.totalAnsCol);
+    var answeredCount = [];
+    $scope.totalAnsCol.forEach(function (el, i) {
+        answeredCount.push(el.length);
+    });
+    $scope.totAns = answeredCount;
+    $scope.collapseChart = function (evt, indx) {        
+        $(evt.target).closest("doughnut-chart").parent().removeClass("pap-zoom");
+    }
+    //setTimeout(tableFilter, 5000);
+    $scope.snap = function (event) {
+        var elm = $("body");
+        //captureSnap(elm);
+        //take(elm);
+    }
 
+    $scope.showallinsights = function () {
+        $("doughnut-chart,.hide-insights").show();
+        $(".show-insights").hide();
+    }
+    $scope.hideinsights = function () {
+        $("doughnut-chart,.show-insights").removeAttr("style");
+        $(".hide-insights").hide();
+        setTimeout(function () {
+            //$(document).scrollTop(0);
+            window.scrollTo(0,0);
+        }, 500);
+        
+    }
+    $scope.refresh = function (totCount,totAnsCol) {        
+        $scope.totCount = totCount;
+        $scope.totAnsCol = totAnsCol;
+        var ac = [];
+        $scope.totAnsCol.forEach(function (el, i) {
+            ac.push(el.length);
+        });
+        $scope.totAns = ac;
+        setTimeout(function () {
+            startdrawing()
+        }, 1000);
+        
+    }
+    $scope.showdetailresponse = function (evt, indx) {
+        console.log($(evt.target));
+        //var button = angular.element(evt.target).get(0);
+        //var rect = button.getBoundingClientRect();
+        //var position = { top: rect.top, left: rect.left };
+        $mdDialog.show({
+            locals: {
+                //cards: $scope.cards,
+                //uniqueArr: $scope.uniqueArr,
+                callback: $scope.responseTable,
+                //position: position
+            },
+            controller: userDetailsController,
+            templateUrl: '../partials/response-templates/response-user-details.html',
+            parent: $(evt.target).closest('.response-section'),
+            targetEvent: evt,
+            clickOutsideToClose: true
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+
+    }
+    $scope.showResponse = function () {
+        console.log("hiiii");
+    }
+    setTimeout(chartHeight,5000);
+    //chartHeight();
     $scope.openmenu = function (evt, index) {
         //$(evt.currentTarget).siblings(".filterbox").find(".filter-menu").show();
+        var button = angular.element(evt.target);
+        //var rect = button.getBoundingClientRect();
+        var position = { top: evt.screenY, left: evt.screenX};
         $mdDialog.show({
             locals: {
                 uniqueArr: $scope.uniqueArr[index],
-                callback: $scope.filterTableData
+                callback: $scope.filterTableData,
+                position: position
             },
             controller: TableFilterController,
             templateUrl: '../partials/response-templates/tablefitltermenu.html',
-            parent: $(evt.target).closest('.table'),
+            parent: $(evt.target).closest('.tablecell'),
             targetEvent: evt,
             clickOutsideToClose: true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            //fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
         })
             .then(function () {
                 $scope.status = 'You said the information was.';
@@ -2222,12 +2554,90 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
                 $scope.status = 'You cancelled the dialog.';
             });
     };
-
-    $scope.filterTableData = function (option) {
-        $scope.filterQuery = option
+    $scope.totCount = getlabels($scope.uniqueArr, $scope.totalAnsCol);
+    //console.log("----Total Count-----");
+    //console.log($scope.totCount);
+    $scope.numvalue = $scope.totCount[0];
+    $scope.percentage = $scope.totCount[1];
+    $scope.label = $scope.totCount[2];
+    $scope.startDrawing = true;
+    $scope.openfilterMenu = function (evt, index) {
+        var button = angular.element(evt.target).get(0);
+        var rect = button.getBoundingClientRect();
+        var position = { top: rect.top, left: rect.left };
+        $mdDialog.show({
+            locals: {
+                cards: $scope.cards,
+                uniqueArr: $scope.uniqueArr,
+                callback: $scope.popQuest,
+                position: position
+            },
+            controller: filterAudienceController,
+            templateUrl: '../partials/response-templates/filter-audience.html',
+            parent: $(evt.target).closest('.chartbox-headers'),
+            targetEvent: evt,
+            clickOutsideToClose: true
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
     }
 
-    function TableFilterController($scope, $mdDialog, uniqueArr, callback) {
+    $scope.popQuest = function (query) {
+        //$scope.filteraudquestions = query;
+        //console.log(query);
+        var newAnswerList = $scope.answerlist.slice();
+        var Answarr = [];
+        newAnswerList.forEach(function (el, i) {
+            if (query.operator == "equals" && el.indexOf(query.answer) != -1) {
+                Answarr.push(el);
+            } else if (query.operator == "not" && el.indexOf(query.answer) ==-1) {
+                Answarr.push(el);
+            }
+        });
+        //console.log(Answarr);
+        $scope.uniqueArrFilt = getFilterAnswer(Answarr)[0];
+        $scope.totalAnsColFilt = getFilterAnswer(Answarr)[1];
+        //console.log($scope.uniqueArrFilt);
+        //console.log($scope.totalAnsColFilt);
+        $scope.totCount = getlabels($scope.uniqueArrFilt, $scope.totalAnsColFilt);
+        $scope.refresh($scope.totCount, $scope.totalAnsColFilt);
+        $scope.hide();
+        /*function getfilteredAnswerList(answer, list) {
+
+        }*/
+    }
+    $scope.filterTableData = function (option) {
+        $scope.filterQuery = option;
+        $(".table-row").each(function () {
+            var $this = $(this);
+            $this.find("p").each(function () {
+                if ($(this).text() == option) {
+                    $(this).closest(".table-row").addClass("searched");
+                }
+            })
+        })
+    }
+
+    function userDetailsController($scope, $mdDialog) {
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+    }
+
+    function TableFilterController($scope, $mdDialog, uniqueArr, callback, position, $timeout) {
+        $timeout(function () {
+            var el = $('md-dialog');
+            var rect = el.get(0).getBoundingClientRect();
+            el.css('position', 'fixed');
+            el.css('top', position['top'] + el.height);
+            el.css('left', (position['left'] - el.width));
+        });
         $scope.uniqueArr = uniqueArr;
         $scope.hide = function () {
             $mdDialog.hide();
@@ -2239,6 +2649,33 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
 
         $scope.filterTableData = function (option) {
             callback(option);
+        }
+    }
+
+    function filterAudienceController($scope, $mdDialog, cards, uniqueArr, callback, position, $timeout) {
+        $timeout(function () {
+            var el = $('md-dialog');
+            el.css('top', position['top']);
+            el.css('left', position['left']);
+        });
+        $scope.cards = cards;
+        $scope.getAnswers = function () {
+            $scope.answers = uniqueArr[$scope.query.question+1];
+        }
+
+        $scope.query = {};
+        $scope.filteraudquestions = $scope.cards;
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.popQuest = function () {
+            $scope.hide();
+            callback($scope.query);
+
         }
     }
     //$scope.totaltable = table;

@@ -1,0 +1,29 @@
+﻿<div layout="column" layout-align="start center">
+    <div flex="30">
+        If <md-input-container>
+            <label>Questions</label>
+             <md-select ng-model="query.question" ng-change="getAnswers()">
+        <md-option ng-value="$index" ng-repeat="item in filteraudquestions">{{item}}</md-option>
+    </md-select>
+        </md-input-container>
+    </div>
+    <div flex="30">
+        <md-input-container>
+            <label>Operator</label>
+            <md-select name="operator" ng-model="query.operator">
+                <md-option value="not">Is Not</md-option>
+                <md-option value="equals">Equals</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div flex="30">
+        <md-input-container>
+            <label>Option</label>
+            <md-select ng-model="query.answer" ng-change="popQuest()">
+                <md-optgroup label="items">
+                    <md-option ng-value="item" ng-repeat="item in answers">{{item}}</md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
+        </div>
+</div>
