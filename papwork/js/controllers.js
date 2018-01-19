@@ -21,6 +21,8 @@ var entityMap = {
     '=': '&#x3D;'
 };
 
+var tempQuestionObj = {};
+
 function htmlDecode(input) {
     var e = document.createElement('div');
     e.innerHTML = input;
@@ -153,6 +155,7 @@ function upTo(el, tagName) {
 }
 
 function getCaretPosition(editableDiv) {
+    var nodeValue = "";
     var caretPos = 0,
       sel, range;
     if (window.getSelection) {
@@ -174,14 +177,203 @@ function getCaretPosition(editableDiv) {
             caretPos = tempRange.text.length;
         }
     }
-    return caretPos;
+    return { caretPos: caretPos, nodeValue: nodeValue };
+}
+
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+}
+
+function addviahtml(html) {
+    //var html = this.boxHTML.val();
+    //var css = this.boxCSS.val();
+    //var js = this.boxJS.val();
+
+    //convert to input expected by our theme
+    var othertypes = ['radio', 'select', 'checkbox'];
+    var questions = []
+    var allLabels = $(html).find("label");
+    var allCaptions = $(html).find(".caption");
+    var allHints = $(html).find(".hint");
+    var lbl_index = 0;
+    var setradioFlag = 0;
+    var setradioName = "";
+    $(html).find(':input').each(function (index, value) {
+        if ($(this).prop("tagName").toLowerCase() == 'input' && ($(this).attr('type').toLowerCase() == 'radio' || $(this).attr('type').toLowerCase() == 'checkbox') && setradioFlag && $(this).attr('name').toLowerCase() == setradioName) {
+            return true;
+        }
+        else {
+            setradioFlag = 0;
+            setradioName = "";
+            if ($(this).prop("tagName").toLowerCase() == 'input' && ($(this).attr('type').toLowerCase() == 'submit' || $(this).attr('type').toLowerCase() == 'hidden')) {
+            }
+            else {
+                var current_label = allLabels.eq(lbl_index);
+                var current_caption = allCaptions.eq(lbl_index);
+                var current_hint = allHints.eq(lbl_index);
+                var question = {
+                    "id": index + 1,
+                    "question": current_label.text(),
+                    "name": $(this).attr('name'),
+                    "modelname": "",
+                    "caption": current_caption.length == 0 ? "" : current_caption.text(),
+                    "answertype": $(this).prop("tagName").toLowerCase() == 'input' ? $(this).attr('type') : $(this).prop("tagName").toLowerCase(),
+                    "answertheme": "",
+                    "hint": current_hint.length == 0 ? "Please see the instructions" : current_hint.text(),
+                    "placeholder": $(this).attr('placeholder') != undefined ? $(this).attr('placeholder') : "Enter here",
+                    "value": $(this).attr('value'),
+                    "validations": {
+                        "required": {
+                            "condition": "true",
+                            "text": "Thats required!"
+                        }
+                    }
+                }
+                question.options = [];
+                if (question.answertype.toLowerCase() == "select") {
+                    $(this).find('option').each(function () {
+                        var option = {
+                            "key": $(this).text(),
+                            "value": $(this).attr('value')
+                        }
+                        question.options.push(option);
+                    });
+                }
+                else if (question.answertype.toLowerCase() == "radio" || question.answertype.toLowerCase() == "checkbox") {
+                    setradioFlag = 1;
+                    setradioName = question.name;
+                    $(this).closest('form').find('input:' + question.answertype.toLowerCase() + '[name=' + question.name + ']').each(function () {
+                        var option = {
+                            "key": $(this)[0].nextSibling.data,
+                            "value": $(this).attr('value')
+                        }
+                        question.options.push(option);
+                    });
+                }
+                else {
+                    var option = {
+                        "value": "",
+                        "placeholder":"Enter Value"
+                    }
+                    question.options.push(option);
+                }
+                questions.push(question);
+                lbl_index++
+            }
+        }
+    });
+    var action = $(html).attr('action');
+    //console.log(questions);
+
+    var result = 'http://localhost:2472/angular/#/experience';
+
+    writeResult(result, questions);
+}
+
+function writeResult(result, questions) {
+    var iframe = $('.buildpopup .preview_via iframe');
+    iframe.attr('src', result);
+
+    if (typeof (Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+        sessionStorage.questionsObj = JSON.stringify(questions);
+    } else {
+        // Sorry! No Web Storage support..
+        aler("Sorry! No Web Storage support..");
+    }
+}
+
+var customhtml = "";
+var names=[];
+
+function addviatext(text) {
+    //var str = "1. The ra2.in in SPAIN stays mainly in the plain?";
+    //var res = str.match(/^[1-9]\.(.*)\?$/);
+    //var customhtml = '<form action="/action_page.php"><label for="fname">'+res[1]+'</label><input type="text" id="fname" name="firstname" placeholder="Your name set.."> </form>';
+
+    //addviahtml(customhtml);
+
+    var str = $('.codeedit_via textarea').val();
+    var question_sep = /\s*[1-9]\.\s*/;
+    var question_List = str.split(question_sep);
+    console.log(question_List);
+    //var res = str.match(/^[1-9]\.(.*)\?$/);
+    //var customhtml = '<form action="/action_page.php"><label for="fname">' + question_List[1] + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.."> </form>';
+    //console.log(customhtml);
+
+    var index = 1;
+
+    //question_List[i].each(function () {
+    //    alert();
+    //});
+
+    
+    $.each(question_List, function (index, value) {
+        
+        //console.log(question_List[index]);
+        //var Question_index = question_List[index].indexOf('?');
+        var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+        var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
+        //console.log(question_tag + ' --- ' + input_text);
+
+
+        if (question_List[index] != "") {
+            if (question_List[index].indexOf('{') == -1) {
+                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
+                customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                console.log(customhtml);
+                names.push(customhtml);
+
+            }
+            else {
+                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var input_text = question_List[index].substr(question_List[index].indexOf("}") + 1);
+                var regExpne = /\{([^)]+)\}/;
+                var matches = regExpne.exec(question_List[index]);
+                console.log(matches[1]);
+                switch (matches[1]) {
+                    case "checkbox":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "radio":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="radio" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "date":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="date" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "email":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="email" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        console.log(customhtml);
+                        break;
+                    case "paragraph":
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><textarea name="message" rows="10" cols="30" placeholder="Your name set.."> ' + input_text + '</textarea>';
+                        console.log(customhtml);
+                        break;
+                }
+            }
+        }            
+    });
+
+    console.log(names);
+    var finalhtml_text = '<form action="/action_page.php">' + names + '</form>';
+    addviahtml(finalhtml_text);
 }
 
 /* App Controllers */
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
-myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter) {
+myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -191,7 +383,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.questionsObj = {
         name: "Untitled",
-        id: null,
+        id: guid(),
         theme: "default",
         questions: [],
         maxCount: function () {
@@ -217,27 +409,44 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             }
             else {
                 $scope.questionsObj.questions = response.data;
-                angular.forEach($scope.questionsObj.questions, function (value, index) {
-                    value.question = htmlDecode(value.question);
-                    value.caption = htmlDecode(value.caption);
-                    value.hint = htmlDecode(value.hint);
-                    value.placeholder = htmlDecode(value.placeholder);
-                    value.enable = "true";
-                    
-                    //check for random options
-                    if (value.validations.randomize != undefined && value.validations.randomize.condition) {
-                        value.options = shuffleArray(value.options);
-                    }
-                });
             }
-        }
-        $scope.questionsObj.activeNow = 1;
+            angular.forEach($scope.questionsObj.questions, function (value, index) {
+                value.question = value.question;
+                var temp = value.question;
+                var tmp = document.createElement("DIV");
+                tmp.innerHTML = temp;
+                if (angular.element(tmp).find('span').length > 0) {
+                    angular.element(tmp).find('span').each(function (index, value) {
+                        if ($(value).hasClass('chip')) {
+                            var answerfor = $(value).data('question-id');
+                            var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
+                            $(value).replaceWith(insertVal);
+                        }
+                    })
+                }
+                value.question = tmp.innerHTML;
+                //$compile(value.question)($scope);
+                value.enable = true;
+                if (value.validations != undefined && value.validations.internal != undefined && value.validations.internal.condition) {
+                    value.enable = false;
+                }
 
+                //check for random options
+                if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
+                    value.options = shuffleArray(value.options);
+                }
+            });
+        }
+        $scope.questionsObj.activeNow = 0;
         $scope.checkIfTimed();
 
         $timeout(function () {
             if (angular.element('.top-row').length > 0) {
                 angular.element('.top-row').css('width', (angular.element('.top-row').find('.products').length * angular.element('.top-row').find('.products').outerWidth(true)) / 2)
+            }
+
+            if (angular.element('.question').length > 0) {
+                $scope.questionsObj.activeNow = 1;
             }
         }, 1000)
 
@@ -252,6 +461,32 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.$on('questionsData', function (event, data) {
         $scope.questionsObj.questions = data;
+        angular.forEach($scope.questionsObj.questions, function (value, index) {
+            value.question = value.question;
+            var temp = value.question;
+            var tmp = document.createElement("DIV");
+            tmp.innerHTML = temp;
+            if (angular.element(tmp).find('span').length > 0) {
+                angular.element(tmp).find('span').each(function (index, value) {
+                    if ($(value).hasClass('chip')) {
+                        var answerfor = $(value).data('question-id');
+                        var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
+                        $(value).replaceWith(insertVal);
+                    }
+                })
+            }
+            value.question = tmp.innerHTML;
+            //$compile(value.question)($scope);
+            value.enable = true;
+            if (value.validations != undefined && value.validations.internal != undefined && value.validations.internal.condition) {
+                value.enable = false;
+            }
+
+            //check for random options
+            if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
+                value.options = shuffleArray(value.options);
+            }
+        });
     });
 
     $scope.dynamicTemplateUrl = function (data) {
@@ -272,7 +507,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         _active = angular.element(_active);
         if (_active.find('.inputContainer input').hasClass('ng-invalid')) return;
         $timeout(function () {
-            if (_active.index() < $scope.questionsObj.maxCount()) {
+            if (_active.index() >= 0 && _active.index() < $scope.questionsObj.maxCount()) {
                 _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
                 var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
                 if (autocomplete != undefined && autocomplete.start > 0) {
@@ -286,11 +521,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkadvancedvalidation = function () {
         var index = $scope.questionsObj.activeNow-1;
-        if ($scope.questionsObj.questions[index] != undefined && window.location.href.indexOf('experience') != -1) {
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
             var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
-            var answer = "";
+            var answer = {};
             if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
-                answer = $scope.questionsObj.questions[index].response;
+                answer.value = $scope.questionsObj.questions[index].response;
             }
             else if ($scope.questionsObj.questions[index].options != undefined) {
                 answer = $scope.questionsObj.questions[index].options.filter(function (item) {
@@ -301,7 +536,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 })[0];
             }
             var match = jumplogic.logic_options.filter(function (item) {
-                if (answer != undefined && answer != "" && item.answer != undefined)
+                if (answer != undefined && answer != "" && answer!= "NaN" && item.answer != undefined)
                     return item.answer.value.toLowerCase() === answer.value.toLowerCase();
             })[0];
 
@@ -326,7 +561,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkshowhidevalidation = function () {
         var index = $scope.questionsObj.activeNow;
-        if ($scope.questionsObj.questions[index] != undefined && window.location.href.indexOf('experience') != -1) {
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
             var showhide = $scope.questionsObj.questions[index].advancedvalidations.showhide;
             $scope.questionsObj.questions[index].enable = showhide.condition;
             var _condition = true;
@@ -372,7 +607,23 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     $scope.$watch('questionsObj.questions', function (newval, oldval) {
         $scope.checkadvancedvalidation();
         $scope.checkshowhidevalidation();
+        $scope.writeToResponse();
     }, true);
+
+    $scope.writeToResponse = function () {
+        var index = $scope.questionsObj.activeNow - 1;
+        if (index > -1) {
+            $scope.questionsObj.questions[index].response = "";
+            if ($scope.questionsObj.questions[index].options != undefined) {
+                var response = $scope.questionsObj.questions[index].options
+                angular.forEach(response, function (value, index) {
+                    if ($scope.questionsObj.questions[index] != undefined) {
+                        $scope.questionsObj.questions[index].response = $scope.questionsObj.questions[index].response + value.value
+                    }
+                });
+            }
+        }
+    };
 
     $scope.changeslideArrangement = function () {
         if ($scope.changeslideorder) {
@@ -393,23 +644,25 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkIfTimed = function () {
         var index = $scope.questionsObj.activeNow - 1;
-        var _autocomplete = $scope.questionsObj.questions[index].validations.autocomplete;
-        if (_autocomplete != undefined && _autocomplete.condition) {
-            if (_autocomplete.start > 0) return;
-            _autocomplete.start = 0;
-            _autocomplete.seconds = '0s';
-            _autocomplete.interval = $interval(function () {
-                _autocomplete.start += 1;
-                _autocomplete.seconds = parseInt(_autocomplete.start / (100 / _autocomplete.time)) + 's';
-                if (_autocomplete.start >= 100) {
-                    $scope.questionsObj.next();
-                    $interval.cancel(_autocomplete.interval);
-                }
-            }, _autocomplete.time * 10);
+        if (index >= 0) {
+            var _autocomplete = $scope.questionsObj.questions[index].validations.autocomplete;
+            if (_autocomplete != undefined && _autocomplete.condition) {
+                if (_autocomplete.start > 0) return;
+                _autocomplete.start = 0;
+                _autocomplete.seconds = '0s';
+                _autocomplete.interval = $interval(function () {
+                    _autocomplete.start += 1;
+                    _autocomplete.seconds = parseInt(_autocomplete.start / (100 / _autocomplete.time)) + 's';
+                    if (_autocomplete.start >= 100) {
+                        $scope.questionsObj.next();
+                        $interval.cancel(_autocomplete.interval);
+                    }
+                }, _autocomplete.time * 10);
 
-            //$timeout(function () {
-            //    $scope.questionsObj.next();
-            //}, _autocomplete.time * 1000)
+                //$timeout(function () {
+                //    $scope.questionsObj.next();
+                //}, _autocomplete.time * 1000)
+            }
         }
     }
 
@@ -517,10 +770,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         var reader = new FileReader();
         reader.onload = function (loadEvent) {
             $scope.$apply(function () {
-                element.response = loadEvent.target.result;
+                element.value = loadEvent.target.result;
                 var data = loadEvent.target.result.substr(loadEvent.target.result.indexOf(",") + 1, loadEvent.target.result.length);
                 $scope.uploadFiles(data, function (output) {
-                    element.response = output;
+                    element.value = output;
+                    element.name = $files[0].name;
                 });
             });
         }
@@ -571,12 +825,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $rootScope.$broadcast("DOWNLOAD_RECORD");
     }
     /*******Web Cam Functions********/
-
     $scope.submit = function () {
         console.log($scope.questionsObj.questions);
     }
 })
-
 
 function MyCtrl2() {
 }
@@ -611,7 +863,11 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
     });
 });
 
-myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
+myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
+
+    $scope.child = {}
+
+    $scope.$watch('child', function () { $scope.$evalAsync(); });
 
     $rootScope.bodylayout = 'create-layout';
 
@@ -622,7 +878,23 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
         $rootScope.$broadcast('questionsFormTheme', theme);
     }
 
-    function DialogController($scope, $mdDialog, callback) {
+    function publishController($scope, $mdDialog) {
+        $scope.publish = {};
+        $scope.publish.publishUrl = window.location.host.replace('create', 'cover') + '?id=' + $rootScope.formid
+
+        $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+
+        $scope.updatePublishIframe = function () {
+            if ($scope.publish.type == "banner") {
+                $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+            }
+            else if ($scope.publish.type == "load") {
+                $scope.publish.embedUrl = '<script type="text/javascript">setTimeout(function(){ alert("load after load"); }, 3000);</script>';
+            }
+            else {
+                $scope.publish.embedUrl = '<script type="text/javascript">setTimeout(function(){ alert("load after scroll"); }, 3000);</script>';
+            }
+        }
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -635,7 +907,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
 
     $scope.PublishPopup = function (event) {
         $mdDialog.show({
-            controller: DialogController,
+            controller: publishController,
             templateUrl: '../partials/PublishPopup.html',
             parent: $(event.target).closest('body'),
             targetEvent: event,
@@ -660,20 +932,35 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog) {
     $scope.getPartial = function () {
         return $rootScope.previewURL;
     }
+
+    $scope.$on('questionsData', function (event, data) {
+        $scope.buildQuestionsObj = data;
+    });
+
+    $scope.onPublishTabSelect = function () {
+        $rootScope.previewURL = "../partials/cover.html";
+
+        sessionStorage.questionsObj = JSON.stringify($scope.buildQuestionsObj);
+    }
 });
 
 myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet) {
+
+    $scope.$watch('buildQuestionsObj', function () {
+        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj);
+    });
+
     var sampleQuestion = {};
 
     getSampleQuestionData.then(function (response) {
         sampleQuestion = response.data;
     }, function myError(response) {
         $scope.status = response.statusText;
-    });
+    },true);
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
-        id: null,
+        id: guid(),
         theme: "default",
         questions: [],
         maxCount: function () {
@@ -683,8 +970,135 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         activeNow: 0,
         percentComplete: function () {
             return (this.activeNow / this.maxCount()) * 100;
-        }
+        },
+        formSettings: [
+            {
+                name: "General",
+                enable: true,
+                active: true,
+                template: 'generalForm',
+                settings: [
+                    {
+                        name: "autocomplete",
+                        condition: false,
+                        time: 0,
+                        enable:true
+                    },
+                    {
+                        name: "status",
+                        options: [
+                            {
+                                name: "Enable",
+                                selected: false,
+                                type: ''
+                            },
+                            {
+                                name: "Disable",
+                                selected: false,
+                                type: ''
+                            },
+                            {
+                                name: "Enable after certain date",
+                                selected: false,
+                                type: 'input_calendar'
+                            },
+                            {
+                                name: "Disable after certain date",
+                                selected: false,
+                                type: 'input_calendar'
+                            },
+                            {
+                                name: "Disable after ",
+                                selected: false,
+                                type:'number'
+                            }
+                        ],
+                        enable: true
+                    },
+                    {
+                        name: "export",
+                        enable: true
+                    },
+                    {
+                        name: "duplicate",
+                        enable: true
+                    },
+                    {
+                        name: "kiosk",
+                        condition: true,
+                        enable:true
+                    }
+                ]
+            },
+            {
+                name: "Slide",
+                enable: true,
+                active: false,
+                template: 'slideForm',
+                settings: [
+                    {
+                        name: "nextquestionprompts",
+                        condition: false,
+                        enable: true
+                    },
+                    {
+                        name: "questionserialno",
+                        condition: false,
+                        enable: true
+                    },
+                    {
+                        name: "progressbar",
+                        condition: false,
+                        enable: true
+                    },
+                    {
+                        name: "randomizequestion",
+                        condition: false,
+                        enable: true
+                    }
+                ]
+            },
+            {
+                name: "Audience",
+                enable: true,
+                active: false,
+                template: 'audienceForm',
+            },
+            {
+                name: "Integrations",
+                enable: true,
+                active: false,
+                template: 'integrationsForm',
+            },
+            {
+                name: "Admin",
+                enable: true,
+                active: false,
+                template: 'adminForm',
+            },
+            {
+                name: "Share and Embed",
+                enable: true,
+                active: false,
+                template: 'shareEmbed',
+            },
+            {
+                name: "Email Notifications",
+                enable: true,
+                active: false,
+                template: 'emailForm',
+            },
+            {
+                name: "Processing",
+                enable: true,
+                active: false,
+                template: 'processingForm',
+            }
+        ]
+        
     };
+
+    $rootScope.formid = $scope.buildQuestionsObj.id;
 
     $scope.$parent.$watch('projectname', function (value) {
         $scope.buildQuestionsObj.name = value;
@@ -692,6 +1106,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.$on('questionsFormTheme', function (event, data) {
         $scope.buildQuestionsObj.theme = data;
+    });
+    
+    $scope.$on('addviaquestions', function (event, data) {
+        angular.forEach(data, function (value, index) {
+            value.enable = "true"; /*temporary should be removed*/
+            $scope.buildQuestionsObj.questions.push(value);
+        });
+        $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
     });
 
     getCoverData.then(function (cover) {
@@ -701,6 +1123,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         getSettings.then(function (response) {
             $scope.buildcoverdata.settings = response.data.cover.settings;
             //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
+            $scope.buildcoverdata.defaultsettings = angular.copy($scope.buildcoverdata.settings);
             if ($scope.buildcoverdata.settings.covertemplate.condition) {
                 $scope.buildcoverdata.cover_template = 'official';
             }
@@ -718,6 +1141,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         //settings
         getSettings.then(function (response) {
             $scope.buildsuccessdata.settings = response.data.success.settings;
+            $scope.buildsuccessdata.defaultsettings = angular.copy($scope.buildsuccessdata.settings);
             //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
             if ($scope.buildsuccessdata.settings.successtemplate.condition) {
                 $scope.buildsuccessdata.success_template = 'official';
@@ -730,6 +1154,16 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.status = response.statusText;
     });
 
+    $scope.resetToDefault = function (type) {
+        var index = $scope.buildQuestionsObj.activeNow - 1;
+        if (type == 'cover')
+            $scope.buildcoverdata.settings = $scope.buildcoverdata.defaultsettings;
+        else if (type == 'success')
+            $scope.buildsuccessdata.settings = $scope.buildsuccessdata.defaultsettings;
+        else
+            $scope.buildQuestionsObj.questions[index].validations = $scope.buildQuestionsObj.questions[index].defaultsettings;
+    }
+
     //add slide
     $scope.addSlide = function () {
         var tempQuestion = {
@@ -738,6 +1172,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.questions.push(tempQuestion);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
+        tempQuestionObj = $scope.buildQuestionsObj;
 
         resetSlide();
         setActiveSlide($scope.buildQuestionsObj.maxCount());
@@ -753,7 +1188,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         $timeout(function () {
             angular.element('.apply-questions-container').find('.flip').eq($scope.buildQuestionsObj.maxCount()).find('.type button').trigger('click');
-            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
+            setNavigationTrack(slidewidth);
         }, 0);
     };
 
@@ -768,14 +1203,18 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         if (qtype != null) {
             $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion[qtype]);
         }
-        $scope.buildQuestionsObj.questions[index].id = id
+        $scope.buildQuestionsObj.questions[index].id = id;
+        $scope.buildQuestionsObj.questions[index].response = "";
         $scope.buildQuestionsObj.questions[index].draggable = false;
         $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
         $scope.buildQuestionsObj.questions[index].questiontype = type[0];
+        $scope.buildQuestionsObj.questions[index].enable = true;
         if (type[1] != undefined) {
             $scope.buildQuestionsObj.questions[index].questiontype = $scope.buildQuestionsObj.questions[index].questiontype + '_' + type[1];
         }
+
+        tempQuestionObj = $scope.buildQuestionsObj;
 
         //settings
         getSettings.then(function (response) {
@@ -788,7 +1227,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             var typedata = response.data[type];
             //add validations 
             $scope.buildQuestionsObj.questions[index].validations = angular.copy(typedata.settings);
-
+            $scope.buildQuestionsObj.questions[index].defaultsettings = angular.copy($scope.buildQuestionsObj.questions[index].validations);
             //add advanced validations 
             $scope.buildQuestionsObj.questions[index].advancedvalidations = angular.copy(typedata.advsettings);
 
@@ -834,9 +1273,12 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     //add advance setting option
     $scope.addAdvanceOption = function (event, type) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        var questionTemp = $scope.buildQuestionsObj.questions[index].advancedvalidations[type];
+        var questionTemp = tempQuestionObj.questions[index].advancedvalidations[type];
         var copyObj = angular.copy(questionTemp.logic_options[0]);
-        copyObj.slide_to_show = 0;
+        if (type == "jumplogic")
+            copyObj.slide_to_show = 0;
+        else
+            copyObj.questionno = 0;
         questionTemp.logic_options.push(copyObj);
     }
 
@@ -863,8 +1305,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             }        
     }
     $scope.updateAdvanceAnswers = function (logic) {
-        var index = logic.slide_to_show == 0 ? logic.slide_to_show : logic.slide_to_show - 1;
-        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
+        var index = logic.questionno == 0 ? logic.questionno : logic.questionno - 1;
+        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
             logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
         }
         else {
@@ -874,7 +1316,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.updateAdvanceJumpAnswers = function (logic) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        if ($scope.buildQuestionsObj.questions[index].options.length > 0) {
+        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
             logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
         }
         else {
@@ -908,7 +1350,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 resetSlide();
                 setActiveSlide($scope.buildQuestionsObj.activeNow);
                 var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
-                angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
+                setNavigationTrack(slidewidth);
             }, 0);
         }, function () {
             //nothing to do
@@ -926,9 +1368,25 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         $timeout(function () {
             var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
-            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length);
+            setNavigationTrack(slidewidth);
         }, 0);
     };
+
+    var setNavigationTrack = function (slidewidth) {
+        var _slideLength = angular.element('.navigating_blocks > md-card').length + 1;
+        //set scroll
+        if (angular.element('.navigating_blocks').width() > angular.element('body').width()) {
+            angular.element('.navigation-slide').css('overflow-x', 'scroll');
+        } else {
+            angular.element('.navigation-slide').css('overflow-x', 'hidden');
+        }
+        if (angular.element('body').width()<= 767) {
+            angular.element('.navigating_blocks').css('width', slidewidth * _slideLength);
+        }
+        else {
+            angular.element('.navigating_blocks').css('width', slidewidth * _slideLength + angular.element('.add-slide').offset().left + 10);
+        }
+    }
 
     //show slide
     $scope.showSlide = function (event) {
@@ -1014,40 +1472,46 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $mdDialog.hide();
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function (event) {
             $mdDialog.cancel();
         };
 
         $scope.addQuestion = function (event, samplequestion) {
-            var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
-            if (type[0] != "more" && type[0] != "less") {
-                angular.element('.content > .flex').removeClass('active');
-                $(event.target).data('type') == undefined ? $(event.target).parent().addClass('active') : $(event.target).addClass('active');
-                callback(type, samplequestion);
-                $scope.cancel();
-            }
-            else {
-                if (type[0] == "more") {
-                    $scope.query = {};
-                    angular.element('.content [data-type="more"]').hide()
-                    angular.element('.content [data-type="less"]').show();
+            if (event != null) {
+                var type = $(event.target).data('type') == undefined ? $(event.target).parent().data('type').split('_') : $(event.target).data('type').split('_');
+                if (type[0] != "more" && type[0] != "less") {
+                    angular.element('.content > .flex').removeClass('active');
+                    $(event.target).data('type') == undefined ? $(event.target).parent().addClass('active') : $(event.target).addClass('active');
+                    callback(type, samplequestion);
+                    $scope.cancel();
                 }
                 else {
-                    $scope.query = { primary: true };
-                    angular.element('.content [data-type="less"]').hide();
-                    angular.element('.content [data-type="more"]').show();
+                    if (type[0] == "more") {
+                        $scope.query = {};
+                        angular.element('.content [data-type="more"]').hide()
+                        angular.element('.content [data-type="less"]').show();
+                    }
+                    else {
+                        $scope.query = { primary: true };
+                        angular.element('.content [data-type="less"]').hide();
+                        angular.element('.content [data-type="more"]').show();
+                    }
                 }
+            }
+            else {
+                callback("text", samplequestion);
             }
         }
     }
 
-    $scope.workflow = function (event) {
+    $scope.buildpopup = function (event, template) {
         $mdDialog.show({
             locals: {
-                callback: $scope.addQuestion
+                template: template,
+                buildQuestionsObj: $scope.buildQuestionsObj
             },
-            controller: DialogController,
-            templateUrl: '../partials/Workflow.html',
+            controller: BuildPopupController,
+            templateUrl: '../partials/buildpopup_templates/build_popup.html',
             parent: $(event.target).closest('md-tab-content'),
             targetEvent: event,
             clickOutsideToClose: true,
@@ -1060,44 +1524,68 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             });
     }
 
-    // addViaSlide  
-    $scope.addviaSlide = function (event) {
-        $mdDialog.show({
-            locals: {
-                callback: $scope.addQuestion
-            },
-            controller: DialogController,
-            templateUrl: '../partials/Addviaslide.html',
-            parent: $(event.target).closest('md-tab-content'),
-            targetEvent: event,
-            clickOutsideToClose: true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-            .then(function () {
-                $scope.status = 'You said the information was.';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
-            });
-    }
+    function BuildPopupController($scope, $mdDialog, template, buildQuestionsObj, $timeout) {
+        $scope.template = template;
+        $scope.getTemplateUrl = function () {
+            return '../partials/buildpopup_templates/'+template+'.html';
+        }
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.buildQuestionsObj = buildQuestionsObj;
 
-    //Make Quiz
-    $scope.makeQuiz = function (event) {
-        $mdDialog.show({
-            locals: {
-                callback: $scope.addQuestion
-            },
-            controller: DialogController,
-            templateUrl: '../partials/makeQuiz.html',
-            parent: $(event.target).closest('md-tab-content'),
-            targetEvent: event,
-            clickOutsideToClose: true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-            .then(function () {
-                $scope.status = 'You said the information was.';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
-            });
+        /*******FormSettings********/
+        $scope.formsettingtemplate = 'generalForm';
+
+        $timeout(function () {
+            angular.element('.formsettings_layout').find('ul li:first-child').trigger('click');
+        }, 500)
+
+        $scope.formSetting = function (event, template, settings) {
+            $scope.formsettingtemplate = template;
+            $scope.internalSettings = settings;
+            angular.element(event.target).addClass('active').siblings().removeClass('active');
+        }
+
+        $scope.getFormSettingTemplateUrl = function () {
+            return '../partials/buildpopup_templates/Formtemplates/' + $scope.formsettingtemplate + '.html'
+        }
+
+        $scope.getSettingUrl = function (template) {
+            return '../partials/buildpopup_templates/Formtemplates/FormSettingsTemplate/' + template + '.html'
+        }
+
+        /*******FormSettings********/
+
+        /*******Add Via Slide********/
+        $scope.format = 'html';
+        $scope.addvia_text = function () {
+            $scope.format = 'text';
+        }
+        $scope.addvia_html = function () {
+            $scope.format = 'html';
+        }
+        $scope.runpreview = function () {
+            var _formdata = angular.element('.codeedit_via textarea').val();
+            if ($scope.format == "html") {
+                addviahtml(_formdata);
+            }
+            else {
+                addviatext(_formdata);
+            }
+           
+        }
+        $scope.saveQuestions = function () {
+            if (sessionStorage.questionsObj != undefined) {
+                var tempquestions = JSON.parse(sessionStorage.questionsObj);
+                $rootScope.$broadcast('addviaquestions', tempquestions);
+            }
+            $scope.hide();
+        }
+        /*******Add Via Slide********/
     }
 
     function resetSlide() {
@@ -1210,7 +1698,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         angular.element('.navigation-slide').css('overflow-x', 'scroll');
     }
 
-    //ng-drag-move=
     $scope.dragContainer = function (ev) {
         var scrollPostion = $('.navigation-slide').scrollLeft();
         if (ev.tx > 0) {
@@ -1224,7 +1711,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.itemOnLongPress = function (event, question) {
         question.draggable = true;
-        angular.element('.navigation-slide').css('overflow-x', 'hidden')
+        if (event.target.className.indexOf('dragging') != -1) {
+            angular.element('.navigation-slide').css('overflow-x', 'hidden');
+        }
+    }
+
+    $scope.onDragStop = function (event, question) {
+        question.draggable = false;
+        angular.element('.navigation-slide').css('overflow-x', 'scroll');
     }
 
     $scope.onSwipeLeft = function () {
@@ -1286,6 +1780,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             list.push({
                 text: "Question#" + value.id,
                 click: function ($itemScope, $event, modelValue, text, $li) {
+                    var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
+                    var start = $itemScope.question.question.substring(startindex, startindex+$scope.questionCursor.caretPos);
+                    var texttoAdd = '<span class="chip" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
+                    var end = $itemScope.question.question.substring(startindex + $scope.questionCursor.caretPos);
+                    $($event.target).html(start + texttoAdd + end);
+                    angular.element('.removeChip').on('click', function (event) {
+                        angular.element(event.target).parent().remove();
+                    })
                 },
                 hasBottomDivider: true
             })
@@ -1296,12 +1798,20 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.calculatedVariableList = function () {
         var list = [];
         angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
-            if (value.advancedvalidations.calculatedvariable != undefined && value.advancedvalidations.calculatedvariable.logic_options.length > 0)
+            if (value.advancedvalidations != undefined && value.advancedvalidations.calculatedvariable != undefined && value.advancedvalidations.calculatedvariable.logic_options.length > 0)
                 angular.forEach(value.advancedvalidations.calculatedvariable.logic_options, function (innervalue, innerkey) {
                     if (innervalue.name != "") {
                         list.push({
                             text: innervalue.name,
                             click: function ($itemScope, $event, modelValue, text, $li) {
+                                var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
+                                var start = $itemScope.question.question.substring(startindex, startindex + $scope.questionCursor.caretPos);
+                                var texttoAdd = '<span class="chip" data-question-id="' + innervalue.name + '" contenteditable="false" readonly>' + innervalue.name + '<span class="removeChip">-</span></span>';
+                                var end = $itemScope.question.question.substring(startindex + $scope.questionCursor.caretPos);
+                                $($event.target).html(start + texttoAdd + end);
+                                angular.element('.removeChip').on('click', function (event) {
+                                    angular.element(event.target).parent().remove();
+                                })
                             },
                             hasBottomDivider: true
                         })
@@ -1333,19 +1843,44 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         ]
     };
 
-    $scope.calculationCursor = 0;
+    $scope.calculationCursor = {};
 
-    $scope.questionCursor = 0;
+    $scope.questionCursor = {};
 
     $scope.setcursorposition = function (event) {
         $scope.calculationCursor = getCaretPosition(event.target);
     }
 
+    $scope.setquestioncursorposition = function (event) {
+        $scope.questionCursor = getCaretPosition(event.target);
+    }
+
     $scope.addQuestionToCalculation = function (event, question) {
-        var start = angular.element('.calculations').html().substring(0, $scope.calculationCursor);
-        var texttoAdd = '<span class="chip" data-question-id=' + question.id + '>' + angular.element(event.target).text() + '<span class="removeChip" ng-click="removeQuestion()">-</span></span>';
-        var end = angular.element('.calculations').html().substring($scope.calculationCursor);
-        angular.element('.calculations').html(start + texttoAdd + end);
+        var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
+        var startindex = calculationbox.html().indexOf($scope.questionCursor.nodeValue);
+        var start = calculationbox.html().substring(startindex, startindex+$scope.calculationCursor);
+        var texttoAdd = '<span class="chip" data-question-id=' + question.id + ' contenteditable="false" readonly>' + angular.element(event.target).text() + '<span class="removeChip">-</span></span>';
+        var end = calculationbox.html().substring(startindex+$scope.calculationCursor);
+        calculationbox.html(start + texttoAdd + end);
+        angular.element('.removeChip').on('click', function (event) {
+            angular.element(event.target).parent().remove();
+        })
+    }
+
+    $scope.operation = function (event, operator) {
+        var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
+        calculationbox.html(calculationbox.html() + operator);
+    }
+
+    $scope.contentEdit = function (e) {
+        var keycode = e.which ? e.which : e.keyCode;
+        if (keycode == 13) {
+            if (!e.shiftKey) {
+                $timeout(function () {
+                    angular.element(e.target).closest("md-radio-button").next().triggerHandler('click');
+                });
+            }
+        }
     }
 });
 
@@ -1354,8 +1889,13 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
     $rootScope.bodylayout = 'cover-layout';
 
     getCoverData.then(function (cover) {
-        $scope.coverdata = cover.data;
-        $scope.checkIfTimed();
+        if (cover.data.settings.disablecover != undefined && cover.data.settings.disablecover.condition && window.location.href.indexOf('create') == -1) {
+            $scope.gotoExperience('#/experience', null);
+        }
+        else {
+            $scope.coverdata = cover.data;
+            $scope.checkIfTimed();
+        }
     }, function myError(response) {
         $scope.status = response.statusText;
     });
@@ -1412,6 +1952,7 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
         $scope.status = response.statusText;
     });
 });
+
 var table = {
     "surveyCompleted": 600,
     "surveyEngaged": 950,
@@ -2294,3 +2835,33 @@ myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event,
         element.media_src = clickedItem['src'];
     }
 })
+
+myapp.controller('mainCtrl', function ($scope, $mdSidenav) {
+
+    $scope.toggleLeftMenu = buildToggler('left');
+
+    function buildToggler(componentId) {
+        return function () {
+            $mdSidenav(componentId).toggle();
+        };
+    }
+
+    $scope.menuitems = [
+        {
+            name: "Log In",
+            enable: false
+        },
+        {
+            name: "My Profile",
+            enable: true
+        },
+        {
+            name: "Log Out",
+            enable: true
+        }
+    ];
+
+    $scope.openUserMenu = function ($mdOpenMenu,ev) {
+        $mdOpenMenu(ev);
+    }
+});

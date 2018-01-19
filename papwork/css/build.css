@@ -1,4 +1,106 @@
-﻿[contenteditable] {
+﻿/*******Menu Css*****/
+md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 200px !important;
+    width: 15%;
+    position: relative;
+    z-index: 9999;
+    float: left;
+    height: 100vh;
+}
+
+.main-navigation {
+    padding: 0 30px;
+}
+
+.main-navigation .logo img {
+    width:auto;
+    height:auto;
+    max-height: 56px;
+}
+
+.main-navigation > div {
+    padding: 0 8px;
+}
+
+.main-navigation.dark {
+}
+
+.main-settings {
+    background-color: #000;
+}
+
+.main-settings .close {
+    width: 40px;
+    margin-top: 20px;
+    margin-right: 20px;
+    position: absolute;
+    clear: both;
+    opacity: 0.4;
+    transition: margin linear .5s;
+    right: 0;
+}
+
+.main-settings.dark .close, .main-settings.dark .close:hover {
+    background-color: #ffffff !important;
+}
+
+.main-settings md-content {
+    float: left;
+    margin-top: 100px;
+}
+.md-open-menu-container.md-active {
+    z-index:9999;
+}
+@media screen and (max-width:767px) {
+    .experience-screen {
+        display: initial;
+    }
+    .main-navigation{
+        margin-top: -20px;
+    }
+    .main-navigation, .main-navigation > div {
+        padding: 0 0;
+    }
+    md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-active {
+        width: 15%;
+        max-width:150px;
+        position: absolute;
+    }
+    .mobile-project-title{
+        display:none;
+    }
+    .md-menu{
+        
+    }
+    .md-menu .md-button.md-icon-button{
+        border-radius:50%;
+        background-color:grey;
+        padding:0 0;
+        height: 30px;
+        width:30px;
+        min-height:0
+    }
+    .md-menu md-icon{
+        padding:0;
+    }
+    .md-menu button svg{
+        fill:#fff;
+    }
+    .main-navigation .logo img {
+        max-height:50px;
+    }
+    .create-tabs form .submit {
+        width:100%;
+    }
+    .welcometext {
+        display:none;
+    }
+}
+/*******Menu Css*****/
+flip-panel > .md-dialog-container {
+    top:0!important;
+}
+[contenteditable] {
     text-decoration: underline;
     outline: none;
     text-decoration-color: #999999 !important;
@@ -87,13 +189,12 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container {
     display: inherit;
 }
 
-.navigation-slide .cover-container, .navigation-slide .default-container {
+.navigation-slide .cover-container, .navigation-slide .default-container, .navigation-slide .variant-container {
     height: 43vh;
     transform: scale(.2);
     transform-origin: 0 0;
     width: 495%;
     overflow: hidden;
-    position: absolute;
 }
 
 .navigation-slide .cover-page img {
@@ -107,6 +208,10 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container {
     width: 100%;
     padding: 0 10px;
 }
+
+    .controls .md-button.md-icon-button {
+        margin: 0;
+    }
 
     .controls .fcontrol > div {
         float: left;
@@ -127,7 +232,7 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container {
         background-color: rgba(0,0,0,0.6);
         color: #fff;
         border-radius: 50%;
-        margin-left: 15px;
+        /*margin-left: 15px;*/
     }
 
 settings .md-tab {
@@ -178,7 +283,7 @@ settings md-switch {
 .navigation-slide {
     position: fixed;
     overflow: hidden;
-    height: 14vh;
+    height: 23vh;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -233,20 +338,20 @@ settings md-switch {
     top: 0;
 }
 
-    .navigation-slide question.question-slide .questionPanel {
-        transform: scale(.2);
-        transform-origin: 0 0;
-        position: absolute;
-        top: 15px;
-        width: 495%;
-        height: 42vh;
-        overflow: hidden;
-    }
+.navigation-slide question.question-slide .questionPanel {
+    transform: scale(.2);
+    transform-origin: 0 0;
+    position: absolute;
+    top: 15px;
+    width: 495%;
+    height: 42vh;
+    overflow: hidden;
+}
 
 .navigation-slide .add-slide {
     position: fixed;
-    left: calc(100vw - 70px);
-    z-index: 999;
+    left: calc(100vw - 62px);
+    z-index: 999999;
 }
 
     .navigation-slide .add-slide md-icon {
@@ -281,6 +386,9 @@ md-card buildquestion.question-slide, md-card question.question-slide {
 
 md-card settings {
     height: 73vh;
+    max-height: 73vh;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .type {
@@ -611,14 +719,21 @@ md-input-container.md-mytheme-theme label {
 @media (min-width: 992px) {
     .publish-panel + ng-include > form question {
         margin-left: 12.666667%;
+        width: 75%;
+    }
+    .publish-panel + ng-include > form question.next_active {
+        top:70vh
+    }
+    .publish-panel + ng-include > form question.next_next_active {
+        top:75vh
     }
 }
 
 .publish-panel + ng-include > form {
-    margin-top: 8vh;
-    display: inline-block;
+    margin-top: 5vh;
     width: 100%;
-    height: 100vh;
+    height: 77vh;
+    position: relative;
 }
 
 .type button {
@@ -689,7 +804,7 @@ buildquestion .category {
     margin-top: 0px;
 }
 
-.navigation-slide .default-container md-card {
+.navigation-slide .default-container md-card, .navigation-slide .variant-container md-card {
     width: 100%;
     height: auto;
 }
@@ -799,39 +914,32 @@ label + md-input-container label {
 
 .apply-questions-container .inputContainer .checkbox-block {
     margin: 0;
-    height:200px;
-    overflow-y:scroll;
+    height: 200px;
+    overflow-y: scroll;
 }
-.apply-questions-container md-radio-group{
+
+.apply-questions-container md-radio-group {
     margin: 0;
-    height:200px;
-    overflow-y:scroll;
+    height: 200px;
+    overflow-y: scroll;
 }
 
-.apply-questions-container .inputContainer .option > [ng-click] {
-    position: absolute;
-    left: 200px;
-    bottom: 16px !important;
-}
-
-.apply-questions-container .inputContainer .checkbox-block.option > [ng-click],.apply-questions-container .inputContainer md-radio-group.option > [ng-click]{
+.apply-questions-container .file-option, .apply-questions-container .number-options {
     position: relative;
-    margin-left: 200px;
-    bottom: 40px!important;
-    left:auto;
-}
-@media all and (max-width:1024px){
-    .apply-questions-container .inputContainer .checkbox-block.option > [ng-click], .apply-questions-container .inputContainer md-radio-group.option > [ng-click] {
-        bottom: 75px!important;
-    }
-}
-.apply-questions-container .inputContainer .add-option {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    width: auto;
+    display: block;
 }
 
-#tab-content-2 .cover-page {
+    .apply-questions-container .file-option md-input-container, .apply-questions-container .number-options md-input-container {
+        margin-top: 0;
+    }
+
+.apply-questions-container .add-option {
+    float: left;
+}
+
+
+#tab-content-3  .cover-page {
     height: 88vh;
     display: block;
 }
@@ -975,6 +1083,7 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     .build {
         padding: 30px 40px;
         background-color: #f8f8f8;
+        padding-bottom: 0;
     }
 
     .publish-panel + .ng-scope .cover-page {
@@ -1000,7 +1109,8 @@ settings ng-include.showhide [layout="row"]:hover .remove {
         z-index: 999;
         float: left !important;
         margin-right: 3px;
-        height: 68%;
+        /* height: 68%; */
+        margin-left: 46px;
     }
 
     .create-tabs > md-tabs-wrapper md-pagination-wrapper {
@@ -1015,7 +1125,7 @@ settings ng-include.showhide [layout="row"]:hover .remove {
 
     .publish-panel {
         padding: 0 38%;
-        height: 7vh;
+        height: 5vh;
     }
 
         .publish-panel .publish-btn-container {
@@ -1047,6 +1157,7 @@ settings ng-include.showhide [layout="row"]:hover .remove {
                 margin-right: 0px;
                 padding: 0 10px;
                 cursor: pointer;
+                outline: none;
             }
 
         .more-options li img {
@@ -1103,11 +1214,11 @@ settings ng-include.showhide [layout="row"]:hover .remove {
         }
 
     md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
-        height: 100vh;
+        height: 94vh;
     }
 
     .apply-questions-container {
-        height: 76vh;
+        height: 68vh;
     }
 
     .basic.mustanswer {
@@ -1117,10 +1228,11 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     .publish-panel + ng-include > form {
         width: 92%;
         margin-left: 4%;
+        height: 84vh;
     }
 
         .publish-panel + ng-include > form .progressContainer {
-            width: 92%;
+            width: 100%;
         }
 
         .publish-panel + ng-include > form .nextprev {
@@ -1138,9 +1250,16 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     }
 }
 
+@media screen and (min-width: 1400px) {
+    .apply-questions-container {
+        height: 73vh;
+    }
+}
+
 .upload-options {
     height: 164px;
     overflow-y: scroll;
+    width: 100%;
 }
 
 .navigating_blocks md-card {
@@ -1168,7 +1287,7 @@ ul.dropdown-menu a.dropdown-item {
 
 @media screen and (max-width:1023px) {
     .publish-panel + ng-include question.active {
-        top: 8vh;
+        /* top: 8vh; */
     }
 
     .publish-panel + ng-include question.question-slide {
@@ -1176,11 +1295,11 @@ ul.dropdown-menu a.dropdown-item {
     }
 
     .publish-panel + ng-include question.next_active {
-        top: 70vh;
+        top: 60vh;
     }
 
     .publish-panel + ng-include question.next_next_active {
-        top: 75vh;
+        top:66vh;
     }
 
     flip-panel .inputContainer {
@@ -1202,6 +1321,25 @@ ul.dropdown-menu a.dropdown-item {
 
     .navigation-slide .cover-page, .navigation-slide .app-submit-page {
         height: 8.5vh;
+    }
+}
+
+@media(max-width:767px) {
+    md-tooltip {
+        display: none !important;
+    }
+    ng-include .nextprev {
+        bottom:20px
+    }
+    .publish-panel + ng-include > form{
+        margin-top: 0;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        height: 77vh;
+    }
+    .publish-panel{
+        position:static;
     }
 }
 
@@ -1281,11 +1419,11 @@ ul.tools {
         }
 /*******Context Menu Tool******/
 
-md-progress-circular + .counter{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+md-progress-circular + .counter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 /*****Table Styles*****/
@@ -1294,9 +1432,11 @@ md-progress-circular + .counter{
     border: 1px solid #d2d2d2;
     border-radius: 5px;
 }
+
 .build .tablerow {
     display: table-row;
 }
+
 .build .tablecell {
     display: table-cell;
     border: 0.05px solid #d2d2d2;
@@ -1304,12 +1444,15 @@ md-progress-circular + .counter{
     border-bottom: 0px;
     padding: 15px 5px;
 }
+
 .build .tablerow:nth-child(odd) {
     background-color: #d2d2d2;
 }
+
 .build .tablerow:first-child {
     background-color: #d2d2d2;
 }
+
 .build .tablerow:nth-child(even) {
     background-color: #fff;
 }
@@ -1318,6 +1461,7 @@ md-progress-circular + .counter{
 .calculatedvariable .layout-row [flex] {
     padding: 0 15px;
 }
+
 .calculatedvariable .operation {
     width: 30px;
     height: 30px;
@@ -1329,25 +1473,29 @@ md-progress-circular + .counter{
     float: left;
     margin: 5px;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.calculatedvariable .operation:nth-child(odd) {clear: left;}
+    .calculatedvariable .operation:nth-child(odd) {
+        clear: left;
+    }
 
 .calculatedvariable .calculations {
-    width:66%;
-    vertical-align:top;
+    width: 66%;
+    vertical-align: top;
     text-decoration: none;
-    max-width:100px;
-}
-.calculatedvariable .operators {
-    width:34%;
-}
-.answerof .tablecell{
-    cursor:pointer;
+    max-width: 100px;
 }
 
-.calculations .chip {
+.calculatedvariable .operators {
+    width: 34%;
+}
+
+.answerof .tablecell {
+    cursor: pointer;
+}
+
+.chip {
     padding: 5px;
     border: 1px solid #d2d2d2;
     background-color: #D9EBBC;
@@ -1357,7 +1505,7 @@ md-progress-circular + .counter{
     display: inline-block;
 }
 
-.calculations .removeChip {
+.removeChip {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -1367,190 +1515,774 @@ md-progress-circular + .counter{
     font-weight: bold;
     border: 1px solid #000;
     font-size: 13px;
+    cursor: pointer;
 }
 
-.create-tabs md-tab-content > .md-dialog-container md-dialog{
-    max-width:100%;
-    max-height:100vh;
-    width:100%;
+/********Build Popup generic********/
+.create-tabs md-tab-content > .md-dialog-container md-dialog {
+    max-width: 100%;
+    max-height: 100vh;
+    width: 100%;
+    background-color: rgba(255,255,255,.6);
 }
 
-.addvia_layout .via_progressbar button {
+.buildpopup .via_progressbar button {
     width: 80px;
 }
 
-.addvia_inner_layout .master-settings {
-   margin:29px;
+.buildpopup .more-options li, .buildpopup .project-title {
+    visibility: hidden;
 }
 
-.addvia_inner_layout .more-options li.club {
-   visibility: visible;
-}
+    .buildpopup .more-options li.club {
+        visibility: visible;
+    }
 
-
-.addvia_layout .via_progressbar p, .addvia_layout .via_progressbar md-icon {
+.buildpopup .via_progressbar p, .buildpopup .via_progressbar md-icon {
     display: inline-block;
 }
 
-  .addvia_layout .via_progressbar button {
-       width: 80px;
-   }
-
-.addvia_inner_layout .master-settings {
-   margin:29px;
+.buildpopup .via_progressbar button {
+    width: 80px;
 }
 
-.addvia_inner_layout .more-options li.club {
-   visibility: visible;
+.buildpopup .more-options li.club {
+    visibility: visible;
 }
 
-.addvia_layout .via_progressbar p, .addvia_layout .via_progressbar md-icon{
-       display: inline-block;
-}
-.addvia_layout, .workflow_layout{
-   width: 98vw;
-   height: 100vh;
-   background: rgba(225,225,225,0.5);
-}
-   .addvia_layout .via_progressbar {
-       width: 32%;
-       margin: auto;
-       margin-bottom: 40px;
-       background: #fff;
-       text-align: center;
-       border-radius: 10%;
-       margin-top:10px;
-   }
-   
-   .addvia_layout .via_progressbar button {
-       width: 80px;
-   }
-
-.addvia_layout, .workflow_layout{
-   width: 98vw;
-   height: 100vh;
-   padding:50px;
-   background: rgba(225,225,225,0.5);
-}
-   .addvia_layout .via_progressbar {
-       width: 32%;
-       margin: auto;
-       margin-bottom: 40px;
-       background: #fff;
-       text-align: center;
-       border-radius: 10%;
-       margin-top:10px;
-   }
-   
-
-.addvia_layout .via_progressbar p, .addvia_layout .via_progressbar md-icon{
-       display: inline-block;
+.buildpopup .via_progressbar p, .buildpopup .via_progressbar md-icon {
+    display: inline-block;
 }
 
+.buildpopup .via_progressbar {
+    width: 32%;
+    margin: auto;
+    margin-bottom: 40px;
+    background: #fff;
+    text-align: center;
+    border-radius: 10%;
+    margin-top: 10px;
+}
+
+.buildpopup {
+    width: 100%;
+    height: 100vh;
+    padding: 50px;
+    background: rgba(64, 64, 64, 0.41);
+}
+
+    .buildpopup .inner_layout {
+        position: relative;
+    }
+
+        .buildpopup .inner_layout .close-tab {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin: 5px 0;
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+        }
+
+    .buildpopup ng-include.popupcontainer {
+        display: inline-block;
+        width: 100%;
+        height: 68vh;
+        margin-top: 2vh;
+    }
+
+formsettings md-content {
+    background: #fff !important;
+}
+
+formsettings ng-include [layout="row"] {
+    position: relative;
+    padding: 10px 0;
+}
+/********Build Popup generic********/
+
+/****Add Via Slide***/
 .codeedit_via {
-   width: 44%;
-   float: left;
-   background: #fff;
-   height: 54vh;
-   margin-right: 2%;
-   margin-left:4%;
-   position:relative;
+    width: 49%;
+    float: left;
+    background: #fff;
+    height: inherit;
+    position: relative;
+    margin-right: 1%;
+    overflow: hidden;
 }
 
-.option_via {
-   position:absolute;
-   top:0;
-   right:0;
+    .codeedit_via textarea {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #EEEEEE;
+        box-shadow: 1px 1px 0 #DDDDDD;
+        display: block;
+        font-family: 'Roboto';
+        font: normal 14px verdana;
+        line-height: 26px;
+        resize: none;
+        background-image: -moz-linear-gradient(top, transparent, transparent 49px,#E7EFF8 0px);
+        background-image: -webkit-linear-gradient(top, transparent, transparent 25px,#E7EFF8 0);
+        -webkit-background-size: 100% 50px;
+        background-size: 100% 26px;
+    }
+
+.option_via, .preview_via .run {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .preview_via {
-   width: 44%;
-   float: left;
-   background: #fff;
-   height: 54vh;
-   margin-left: 2%;
-   margin-right: 4%;
+    width: 49%;
+    float: left;
+    background: #fff;
+    height: inherit;
+    margin-left: 1%;
+    position: relative;
+    background-image: url('../asset/img/no_preview.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-.addvia_sectionblock{
-   position:relative;
-   overflow:hidden;
+    .preview_via iframe {
+        border: none !important;
+    }
+
+.addvia_sectionblock {
+    position: relative;
+    overflow: hidden;
+    height: inherit;
 }
 
-.cancel_save_via{
-   margin-top:20px;
-   text-align:center;
+.cancel_save_via {
+    margin-top: 20px;
+    text-align: center;
+}
+/****Add Via Slide***/
+
+/*make quiz*/
+
+.quiz_layout {
+    width: 100%;
+    height: 100vh;
+}
+
+.quiz_Setting {
+    width: 40%;
+    float: left;
+    background: #fff;
+    padding: 12px;
+}
+
+.quiz_Edit {
+    width: 59%;
+    float: left;
+    margin-right: 1%;
+    background: #fff;
+    /* border: 1px solid black; */
+}
+
+    .quiz_Setting md-input-container, .quiz_Edit md-input-container {
+        margin-top: 0px;
+    }
+
+    .quiz_Edit md-checkbox {
+        margin-top: 10px;
+    }
+
+.quiz_score {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f2f2f2;
+}
+
+    .quiz_score span {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+.quiz_result {
+    margin-top: 20px;
+}
+
+.quiz_setting_checkbox {
+    margin-top: 18px;
+    border-bottom: 2px solid #f2f2f2;
+}
+
+    .quiz_setting_checkbox md-checkbox {
+        margin-right: 0;
+        margin-bottom: 0;
+        padding: 10px;
+    }
+/*make quiz*/
+
+/****actions table****/
+.actions-table .table-head {
+    padding: 10px 20px;
+    background-color: #EEEEEE;
+    border: 1px solid #E4E4E4;
+}
+
+.actions-table .table-row {
+    padding: 10px 20px;
+    border: 1px solid #E4E4E4;
+    border-top: none;
+}
+
+.actions-table button.md-icon-button {
+    margin: 0;
+    padding: 0;
+    height: 24px;
+    vertical-align: top;
+    min-height: 0;
+    /* width: 24px; */
+    /* min-width: 0; */
+}
+/****actions table****/
+
+
+.search-box input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 10px 20px;
+    padding-left: 40px;
+    position: relative;
+    background-image: url('../asset/img/md-icons/svg/ic_search_black_24px.svg');
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+    .search-box input:after {
+        content: 'O';
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+.search-box {
+    border-radius: 5px;
 }
 
 
-.workflow_layout{
-    width:100%;
-    height:100vh;
-    padding:50px;
-        background: #e2e2e2;
-}
+/******Work Flow*******/
 
-.workflow_layout .close-tab, .addvia_layout .close-tab{
-    text-align:right;
-}
-
-.workflow_right_table {
-    width:35%;
-    float:left;
-    background:#fff;
-    padding:12px;
-}
-
-.left_slide_workflow {
-    float:left;
+.workflow_layout {
+    width: 100%;
+    height: inherit;
 }
 
 .workflow_left_table {
-    width: 55%;
+    width: 59%;
     float: left;
-    margin-right: 5%;
-     background:#fff;
+    background: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: inherit;
+    overflow-y: scroll;
+}
+
+.workflow_right_table {
+    width: 40%;
+    float: left;
+    background: #fff;
+    padding: 12px;
+    margin-left: 1%;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: inherit;
+    overflow-y: scroll;
 }
 
 .workflow_inner_layout {
     width: 100%;
-    /* position: relative; */
-    /* overflow: hidden; */
 }
 
-.workflow_left_table td {
-    width: 20%;
-}
-
-.workflow_left_table table {
-    width: 100%;
-}
-
-.workflow_left_table tr {
-    height: 40px;
-    border-bottom: 1px solid black;
-}
-
-.workflow_left_table tbody {
-    border: 1px solid black;
+.left_slide_workflow {
+    float: left;
 }
 
 .right_slide_workflow {
     float: right;
+    margin-left: 5px;
 }
 
-.workflow_checkbox_block{
-    border:1px solid black;
+    .right_slide_workflow.active {
+        color: rgb(76,175,80);
+    }
+
+.workflow_checkbox_block {
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
 }
 
-.workflow_checkbox_block md-checkbox{
-    border-bottom:1px solid black;
-    margin-right:0;
+    .workflow_checkbox_block md-checkbox {
+        border-bottom: 1px solid #e4e4e4;
+        margin-right: 0;
         margin-bottom: 0;
-    padding: 10px;
+        padding: 10px;
+    }
+
+        .workflow_checkbox_block md-checkbox:last-of-type {
+            border: none;
+        }
+
+.private_workflow {
+    position: relative;
+    overflow: hidden;
 }
 
-.private_workflow{
+.workflow_layout .workflow_right_table h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.workflow_left_table tr td {
+    text-align: center;
+}
+
+.workflow_right_table .workflow_checkbox_block .md-container {
+    margin-left: 10px;
+}
+
+.workflow_checkbox_block .mdcheckbox .md-label {
+    width: 95%;
+}
+
+    .workflow_checkbox_block .mdcheckbox .md-label .number_private {
+        float: right;
+        color: hotpink;
+    }
+
+.conditional_flow p {
+    display: inline-block;
+    margin: 0;
+    /* height: 30px; */
+    vertical-align: top;
+}
+
+.conditional_flow md-switch {
+    display: inline-block;
+    margin: 0;
+    margin-left: 120px;
+}
+
+.conditional_flow {
+    margin-top: 40px;
+    border-top: 1px solid #e2e2e2;
+    padding-top: 30px;
+}
+
+.execute .layout-row [flex] {
+    padding-right: 3%;
+}
+
+.private_workflow {
+    position: relative;
+    overflow: hidden;
+}
+
+.workflow_left_table .btn-danger, .workflow_left_table .btn-default {
+    background: transparent;
+    border: 0px;
+    color: #000;
+}
+
+.add-slide-workflow {
+    box-shadow: none;
+}
+
+.answer_block {
+    border-bottom: 2px solid #f2f2f2;
+    margin-top: 13px;
+}
+
+.slide-visibility-table, .email-notification-table {
+    padding: 20px 0;
+    border-top: 1px solid #e2e2e2;
+}
+/******Work Flow*******/
+
+
+
+/*formsettings*/
+
+.form_set_items ul {
+    list-style: none;
+    padding-left:0px;
+}
+
+.form_set_items ul li {
+    height: 40px;
+    margin-bottom: 2px;
+    background: #fff;
+    padding: 12px;
+}
+
+.form_set_items ul li.active {
+    background-color: rgb(76,175,80);
+}
+
+.form_set_items {
+    width: 26%;
+    float: left;
+    margin-right: 3%;
+}
+
+.form_set_items_display {
+    width: 70%;
+    float: left;
+    background: #fff;
+}
+
+.formsettings_layout .popup_layout {
+    padding: 0;
+}
+
+.modalpop{background-color:light-grey;/* border:2px solid grey; */display:block;position: absolute;padding:30px;border-radius: 5px;width: 35vw;background: #FFf;display: inline-block;box-shadow: 5px 5px 5px #d2d2d2;border-radius: 10px;top: 50%;left: 50%;transform: translate(-50%,-50%);}
+
+.modalpop .search-box input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 10px 20px;
+    padding-left: 40px;
+    position: relative;
+    background-image: url('../asset/img/md-icons/svg/ic_search_black_24px.svg');
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modalpop .search-box input:after {
+    content: 'O';
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.modalpop .search-box {
+    border-radius: 5px;
+	width: 100%;
+	
+
+	
+}
+
+.modalpop .search_pop {
+    border: 1px solid #d2d0d0;
+    width: 80%;
+    border-radius: 5px;
+    position: static;
+    display: inline-block;
+}
+.modalpop .btn{
+    float:right;
+}
+/******tab specific******/
+.create-tabs #tab-content-2 {
+    height: 96vh;
+    max-height: 100vh !important;
+    overflow: hidden;
+}
+.create-tabs #tab-content-2 > .md-dialog-container {
+    top:0!important;
+}
+
+
+
+/*Form Settings/ audience_popup*/
+.audience_layout {
+    padding: 40px;
+}
+
+    .audience_layout .sharelink_block {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .audience_layout .Auidience_text {
+        width: 50%;
+        float: left;
+    }
+
+        .audience_layout .Auidience_text h3 {
+            margin-bottom: 0;
+        }
+
+.audience_type {
+    width: 40%;
+    float: left;
+    background: #fff;
+    padding: 12px;
+}
+
+.audience_type {
+    white-space: nowrap;
+}
+
+
+/*General_Form*/
+.generalForm_layout, .slide_layout {
+    padding: 40px;
+}
+
+.general_table {
+    margin: 0;
+    top: 0;
+}
+
+.general_table md-input-container {
+    margin-top: 0;
+}
+
+/*emailform*/
+.email_layout {
     position:relative;
-    overflow:hidden;
+}
+
+.email_table .table-head {
+    padding: 10px 20px;
+    background-color: #EEEEEE;
+    border: 1px solid #E4E4E4;
+}
+
+.email_table .table-row {
+    padding: 10px 20px;
+    border: 1px solid #E4E4E4;
+    border-top: none;
+}
+
+.email_table button.md-icon-button {
+    margin: 0;
+    padding: 0;
+    height: 24px;
+    vertical-align: top;
+    min-height: 0;
+    /* width: 24px; */
+    /* min-width: 0; */
+}
+
+
+
+
+
+/*emailNotificationForm*/
+.emailLayout {
+    width: 100%;
+    height: inherit;
+}
+
+.email_left {
+    width: 79%;
+    float: left;
+    background: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: inherit;
+    /* background-color: #f2f2f2; */
+}
+
+.email_right {
+    width: 20%;
+    float: left;
+    background: #fff;
+    padding: 12px;
+    margin-left: 1%;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: inherit;
+    background-color: #F3F3F3;
+}
+
+.cancel_save {
+    text-align: center;
+    margin-left: 300px;
+    float: right;
+}
+
+.emailLayout .md-button.md-mytheme-theme.md-primary.md-raised, .md-button.md-mytheme-theme.md-primary.md-fab {
+    color: rgb(255,255,255);
+    background-color: rgb(76,175,80);
+}
+
+.email_right .answer ul {
+    padding-left: 0;
+}
+
+.answer label {
+    font-size: 1.2em;
+    font-weight: lighter;
+    padding: 5px 0;
+}
+
+email_left textarea {
+    border: 0px 2px 5px 1px solid;
+    height: inherit;
+    width: inherit;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    border-left: none;
+    border-right: none;
+}
+
+.email_left label {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.answer {
+    margin-bottom: 5px;
+    border-bottom: 5px;
+}
+
+.answer ul li {
+    list-style: none;
+    padding: 8px 5px;
+    display: block;
+    margin-bottom: 1px;
+    background-color: #FBFBFB;
+}
+/*emailNotificationForm*/
+
+
+
+/*Slide/Accces table*/
+
+.slide_window {
+    padding: 6px 0;
+    /* width: 50%; */
+    text-transform: capitalize;
+    margin-left: 34px;
+}
+
+    .slide_window p {
+        font-size: 0.9em;
+    }
+
+    .slide_window h3 {
+        font-weight: bold;
+    }
+
+.access-table .table-head {
+    padding: 10px 20px;
+    background-color: #EEEEEE;
+    border: 1px solid #E4E4E4;
+}
+
+.access-table .table-row {
+    padding: 10px 20px;
+    border: 1px solid #E4E4E4;
+    border-top: none;
+}
+
+.access-table button.md-icon-button {
+    margin: 0;
+    padding: 0;
+    height: 24px;
+    vertical-align: top;
+    min-height: 0;
+    /* width: 24px; */
+    /* min-width: 0; */
+}
+/*share and embed pop up*/
+/*Publishpop*/
+.share_layout {
+    padding: 40px;
+}
+
+.share_layout .sharelink_block, .share_layout .embedlink_block {
+    width: 100%;
+    display: inline-block;
+}
+
+.share_layout .share_text, .share_layout .share_text_url, .share_layout .embed_text_url, .share_layout .embed_text {
+    width: 50%;
+    float: left;
+}
+
+.share_layout .share_text h2, .share_layout .embed_text h2 {
+    margin-bottom: 0;
+}
+
+.share_layout .embedlink_block h2 {
+    margin-top: 0;
+}
+
+.embedlink_block {
+    margin-top: 50px;
+}
+
+.checkbox-block {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width:767px) {
+.share_layout .share_text, .share_layout .share_text_url, .share_layout .embed_text_url, .share_layout .embed_text {
+    width: 100%;
+    float: none;
+}
+
+.share_layout .share_text_url md-input-container, .share_layout .share_text_url button {
+    display: inline-block;
+}
+}
+
+/*body > ng-view ~ .md-dialog-container .md-transition-in {
+    background: #fff;
+    color: #000;
+}*/
+
+/*Processing Form*/
+.Calculated{
+background-color:#7f1db1;
+padding:15px;
+color:white;
+margin-right:15px;
+}
+.Docgen{
+background-color:#72a032d9;
+padding:15px;
+color:white;
+float:left;
+margin-right:15px;
+}
+.DocScan{
+background-color:#6ddee8;
+padding:15px;
+color:white;
+float:left;
+margin-right:10px;
+}
+
+.Url{
+background-color:#7c8ca9;
+padding:15px;
+color:white;
+float:left;
+}
+.templateEdit{
+  margin-top: 30px;
+
+}
+.templateEdit .actions-table {
+    padding:5px;
+}
+
+
+.templateEdit .table-row{
+padding: 10px 20px;
+    border:1px solid #E4E4E4;
+    border-top: none;
+}
+.color-section md-icon.md-mytheme-theme.md-primary {
+    color: rgb(238, 242, 239);
 }

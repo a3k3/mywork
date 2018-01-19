@@ -1,4 +1,30 @@
 <div ng-controller="tabCtrl" md-theme="mytheme">
+    <div class="main-navigation" layout="row" layout-align="start center">
+        <div layout="column" flex="33" layout-align="start start" layout-padding>
+            <md-button class="md-icon-button md-primary" aria-label="main menu" ng-click="toggleLeftMenu()">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_menu_black_24px.svg"></md-icon>
+            </md-button>
+        </div>
+        <div class="logo" layout="column" flex="33" layout-align="start center" layout-padding>
+            <img src="../asset/img/pap-logo.png" />
+        </div>
+        <div layout="row" flex="33" layout-align="end center" layout-padding>
+            <md-button aria-label="sign in" class="md-icon-button" ng-click="openUserMenu($mdOpenMenu, $event)">
+                <md-icon md-menu-origin md-svg-icon="../asset/img/md-icons/svg/ic_search_black_24px.svg"></md-icon>
+            </md-button>
+            <md-menu md-position-mode="target-left bottom" md-offset="-5 10">
+                <md-button aria-label="sign in" class="md-icon-button" ng-click="openUserMenu($mdOpenMenu, $event)">
+                    <md-icon md-menu-origin md-svg-icon="../asset/img/md-icons/svg/ic_person_black_24px.svg"></md-icon>
+                </md-button>
+                <md-menu-content width="3">
+                    <md-menu-item ng-repeat="item in menuitems" ng-if="item.enable">
+                        <md-button ng-click=""> <span md-menu-align-target>Option</span> {{item.name}} </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <div class="welcometext">Welcome<user ng-bind="username">Amit</user>!</div>
+        </div>
+    </div>
     <div flex class="mobile-project-title">
         <md-icon class="build_back" md-svg-icon="../asset/img/md-icons/svg/ic_arrow_back_black_24px.svg"></md-icon>
         <md-input-container style="margin-top:0;">
@@ -9,7 +35,7 @@
         <md-tab label="Build" class="md-primary md-hue-1">
             <ng-include src="'../partials/build.html'"></ng-include>
         </md-tab>
-        <md-tab label="Preview & Publish">
+        <md-tab label="Preview & Publish" md-on-select="onPublishTabSelect()">
             <div class="publish-panel" layout="row">
                 <div flex="70" class="themes">
                     <div class="circle {{theme}}" data-theme="{{theme}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>

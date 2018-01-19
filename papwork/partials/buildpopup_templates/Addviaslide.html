@@ -1,0 +1,29 @@
+﻿<div class="addvia_sectionblock" md-theme="mytheme">
+    <div class="codeedit_via">
+        <textarea class="md-accent hue-2" ng-model="formdata" placeholder="Enter Html" name="formdata"></textarea>
+        <div class="option_via">
+            <md-button class="md-raised hue-2" aria-label="copy" ng-click="addvia_text()">
+                Text
+            </md-button>
+            <md-button class="md-raised hue-2 md-primary" aria-label="copy" ng-click="addvia_html()">
+                HTML
+            </md-button>
+        </div>
+    </div>
+    <div class="preview_via">
+        <iframe src="" width="100%" height="100%"></iframe>
+        <md-button class="md-raised hue-2 md-primary run" aria-label="run" ng-click="runpreview()">
+            RUN
+        </md-button>
+    </div>
+</div>
+<div class="cancel_save_via">
+
+    <md-button class="md-raised hue-2" aria-label="copy" ng-click="cancel()">
+        Cancel
+    </md-button>
+
+    <md-button class="md-raised md-primary hue-2" aria-label="save" ng-click="saveQuestions()">
+        Save
+    </md-button>
+</div>

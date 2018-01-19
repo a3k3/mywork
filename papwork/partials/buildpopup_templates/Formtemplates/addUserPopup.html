@@ -1,0 +1,35 @@
+﻿<div class="modalpop" ng-if="show">
+        <h5>Add User</h5>
+        <div class="search_pop">
+            <div class="search-box" class="flex-20">
+                <input type="text" placeholder="Search User">
+            </div>
+            <div layout="row" layout-align="start center" class="layout-align-start-center layout-row">
+                <div flex="20" class="flex=" 20">
+                    <md-input-container>
+                        <md-select>
+                            <md-option>UserName</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <div flex="20" class="flex=20">
+                    Give Access
+                </div>
+
+                <div flex="20" class="flex=" 20">
+                    <md-input-container>
+                        <md-select>
+                            <md-option>Viewer</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <div flex="20" class="flex-20 btn">
+                    <button class="md-raised md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="">
+                        <span class="ng-scope">Add</span><div class="md-ripple-container" style=""></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> 

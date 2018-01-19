@@ -10,7 +10,7 @@ app.config(['$routeProvider', '$controllerProvider', '$mdThemingProvider', funct
     $controllerProvider.allowGlobals();
 
     $mdThemingProvider.extendPalette('green', {
-        'hue1': "#81c784"
+        'hue1': "#bece66"
     });
 
     //themeing

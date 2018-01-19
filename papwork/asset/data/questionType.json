@@ -42,7 +42,7 @@
         "primary": true,
         "name": "Star Rating",
         "type": "rating_star",
-        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+        "img_src": "../asset/img/md-icons/svg/star.svg"
       },
       {
         "primary": true,
@@ -60,13 +60,19 @@
         "primary": false,
         "name": "Smiley Rating",
         "type": "rating_smiley",
-        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+        "img_src": "../asset/img/md-icons/svg/smily.svg"
       },
       {
         "primary": false,
         "name": "Video Interview",
         "type": "video",
-        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+        "img_src": "../asset/img/md-icons/svg/live-video.svg"
+      },
+      {
+        "primary": false,
+        "name": "Attach",
+        "type": "file",
+        "img_src": "../asset/img/md-icons/svg/attachment.svg"
       },
       {
         "primary": false,

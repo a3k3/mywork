@@ -1,0 +1,231 @@
+﻿<div class="email_layout" md-theme="mytheme">
+    <div class="publish_layout">
+        <div class="email_table">
+            <div layout="row" class="table-head">
+                <div flex="10">
+                    Sl.NO
+                </div>
+                <div flex="30">
+                    Email Subject
+                </div>
+                <div flex="20">
+                    To
+                </div>
+                <div flex="15">
+                    CC
+                </div>
+                <div flex="15">
+                    BCC
+                </div>
+                <div flex="10">
+                   Action
+                </div>
+            </div>
+            <div layout="row" class="table-row">
+                <div flex="10">
+                    1
+                </div>
+                <div flex="30">
+                    Thanks for your response
+                </div>
+                <div flex="20">
+                    Amit,Sunil,mrs..
+                </div>
+                <div flex="15">
+                    Sanjay,Anil,r..
+                </div>
+                <div flex="15">
+                    abhishek
+                </div>
+                <div flex="10">
+                    <md-button class="md-icon-button" aria-label="edit">
+                        <md-tooltip md-direction="bottom">Edit</md-tooltip>
+                        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="delete">
+                        <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <div layout="row" class="table-row">
+                <div flex="10">
+                    2
+                </div>
+                <div flex="30">
+                    Interview feedback by Amit for FullStack UX
+                </div>
+                <div flex="20">
+                    Ajinkya,Surya,kundan..
+                </div>
+                <div flex="15">
+                    Ashwin,Anavar,r..
+                </div>
+                <div flex="15">
+                    abhishek
+                </div>
+                <div flex="10">
+                    <md-button class="md-icon-button" aria-label="edit">
+                        <md-tooltip md-direction="bottom">Edit</md-tooltip>
+                        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="delete">
+                        <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <div layout="row" class="table-row" ng-init="showEmail=false">
+                <div flex="20">
+                    <md-button class="md-icon-button"  ng-click="showEmail=true" aria-label="add">
+                        <md-tooltip md-direction="bottom">Add Email Template</md-tooltip>
+                        <md-icon class="md-primary" md-svg-icon="../../asset/img/md-icons/svg/ic_add_circle_black_24px.svg"></md-icon>
+                    </md-button>
+                    Add Email Template
+                </div>
+            </div>
+
+            <div layout="row" layout-sm="column" ng-if="showEmail" style="position: absolute;top: 0;z-index: 999;width: 100%;">
+                <div class="close-tab" layout="row" layout-align="center center">
+                    <div flex>
+                        <md-icon class="close-modal" ng-click="showEmail=false" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+                    </div>
+                </div>
+                <div class="emailLayout">
+                    <div class="email_left">
+                        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                            <label>To</label>
+                            <md-input-container class="md-mytheme-theme">
+                                <input class="md-accent hue-2 md-input" name="" ng-pattern="/^.+@.+\..+$/" type="email" id="input_25"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                            <label>Cc</label>
+                            <div flex="20" class="flex">
+
+                                <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                                    <input type="text" ng-model="userf" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                                </md-input-container>
+                            </div>
+                            <label>Bcc</label>
+                            <div flex="35" class="flex">
+                                <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                                    <input type="text" ng-model="user" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div layout="row" layout-align="start start" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                            <label>Subject</label>
+                            <md-input-container class="md-block flex-gt-sm" flex-gt-sm="">
+                                <input type="text" ng-model="user" class="ng-pristine ng-valid md-input ng-empty ng-touched" id="input_25" aria-invalid="false" style="">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-align="start start" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                            <md-input-container>
+                                <textarea name="bio" rows="6" cols="88" placeholder="Type Your Message Here" ng-model="biography" required md-maxlength="1000"></textarea>
+                                <div ng-messages="" ng-show="">
+                                </div>
+                            </md-input-container>
+
+                        </div>
+                        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                            <label>Attachements</label>
+                            <!-- <input type="file" name="pic" placeholder="Attachements" accept="image/*"> -->
+                        </div>
+
+
+                        <div layout="row" flex="70" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                            <div flex="30" class="flex-30"><label>Trigger this email</label></div>
+                            <div flex="30" class="flex-30">
+                                <md-input-container>
+                                    <md-select name="question" ng-model="abcd" class="ng-pristine ng-valid md-mytheme-theme ng-empty ng-touched" tabindex="0" aria-disabled="false" role="listbox" aria-expanded="false" aria-multiselectable="false" id="select_851" aria-owns="select_container_852" aria-invalid="false" style="">
+                                        <md-select-value class="md-select-value md-select-placeholder" id="select_value_label_847"><span></span><span class="md-select-icon" aria-hidden="true"></span></md-select-value><div class="md-select-menu-container" aria-hidden="true" id="select_container_852">
+                                            <md-select-menu class="_md md-mytheme-theme">
+                                                <md-content class="_md md-mytheme-theme">
+                                                    <md-option tabindex="0" md-option-empty="" class="md-ink-ripple" role="option" aria-selected="false" id="select_option_850">
+                                                        <div class="md-text">None</div>
+                                                    </md-option>
+                                                    <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
+                                                </md-content>
+                                            </md-select-menu>
+                                            u>
+                                        </div>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                        </div>
+
+
+
+                        <div layout="row" flex="100" layout-align="start center" class="ng-scope layout-align-start-center layout-row" layout-padding>
+                            <div class="cancel_save">
+                                <div layout="row" flex="70" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
+                                    <!--<button class="md-raised hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="copy">
+                                        <span class="ng-scope"> Cancel </span>
+                                        <div class="md-ripple-container" style=""></div>
+                                    </button>-->
+
+                                    <!--<button class="md-raised md-primary hue-2 md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="save">
+                                        <span class="ng-scope">Save</span>
+                                        <div class="md-ripple-container" style=""></div>
+                                    </button>-->
+                                    <md-button class="cancel" ng-click="">Cancel</md-button>
+                                    <md-button class="save md-primary hue-1 md-raised" ng-click="">Save</md-button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="email_right">
+
+                        <div class="answer">
+                            <label>Answer of</label>
+                            <ul>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                            </ul>
+                        </div>
+
+                        <div class="answer">
+                            <label>Calculated Variable</label>
+                            <ul>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                            </ul>
+                        </div>
+                        <div class="answer">
+                            <label>Documents</label>
+                            <ul>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+                            </ul>
+
+                        </div>
+                        <div class="answer">
+                            <label>Auto Generated Fields</label>
+                            <ul>
+                                <li>Question1?</li>
+                                <li>Question1?</li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        </div>
+</div>

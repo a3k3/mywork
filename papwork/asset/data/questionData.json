@@ -12,7 +12,7 @@
     "placeholder": "Enter your name",
     "validations": {
       "mustanswer": {
-        "condition": true,
+        "condition": false,
         "text": "Thats required!"
       },
       "maxlength": {
@@ -25,7 +25,7 @@
       },
       "autocomplete": {
         "name": "autocomplete",
-        "condition": false,
+        "condition": true,
         "time": 5,
         "text": "This response is timed."
       }
@@ -33,14 +33,14 @@
     "advancedvalidations": {
       "showhide": {
         "name": "showhide",
-        "condition": true,
+        "condition": false,
         "text": "Show/Hide Logic",
         "logic_options": [
         ]
       },
       "jumplogic": {
         "name": "jumplogic",
-        "condition": "jump",
+        "condition": "nojump",
         "text": "Jump Logic",
         "logic_options": [
           {
@@ -93,7 +93,7 @@
   },
   {
     "id": 2,
-    "question": "What are primary tenants of User Experience Design?",
+    "question": "Hi <span class=\"chip\" data-question-id=\"1\" contenteditable=\"false\" readonly=\"\">Question#1<span class=\"removeChip\">-<\/span><\/span>, How are you?",
     "name": "video",
     "modelname": "video",
     "caption": "You have 2 mins to record your response",
@@ -128,25 +128,6 @@
         "condition": true,
         "text": "Show/Hide Logic",
         "logic_options": [
-          {
-            "questionno": 1,
-            "operator": "equals",
-            "answer": {
-              "id": 1,
-              "value": "Abcd"
-            },
-            "answer_list": [
-              {
-                "id": 1,
-                "value": "Abcd"
-              },
-              {
-                "id": 2,
-                "value": "Female"
-              }
-            ],
-            "relation": ""
-          }
         ]
       },
       "jumplogic": {
@@ -203,7 +184,7 @@
     "modelname": "aadhar",
     "caption": "Will not share your number to anyone",
     "category": "Category",
-    "answertype": "text",
+    "answertype": "file",
     "answertheme": "",
     "hint": "Upload your adhar card",
     "placeholder": "Upload",
@@ -222,14 +203,17 @@
     "options": [
       {
         "value": "",
+        "name": "",
         "placeholder": "Your Name"
       },
       {
         "value": "",
+        "name": "",
         "placeholder": "Age"
       },
       {
         "value": "",
+        "name": "",
         "placeholder": "Phone No."
       }
     ],

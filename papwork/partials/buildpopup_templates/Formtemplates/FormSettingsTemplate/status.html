@@ -1,0 +1,14 @@
+﻿<div layout="row" layout-align="start center">
+    <div flex><p>Status</p><small>Hint:Form Status</small></div>
+    <div flex>
+        <div layout="row" layout-align="start center">
+            <div flex>
+                <md-input-container class="autocomplete">
+                    <md-select ng-model="option.selected">
+                        <md-option value="{{option.name}}" ng-repeat="option in setting.options">{{option.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>

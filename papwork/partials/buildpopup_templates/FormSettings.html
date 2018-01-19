@@ -1,0 +1,11 @@
+﻿<div class="formsettings_layout">
+    <div class="form_set_items">
+        <ul>
+            <li ng-click="formSetting($event, fs.template, fs.settings)" ng-repeat="fs in buildQuestionsObj.formSettings" ng-if="fs.enable">{{fs.name}}</li>
+        </ul>
+    </div>
+    <div class="form_set_items_display">
+        <ng-include src="getFormSettingTemplateUrl()"></ng-include>
+        <div class="admin_popup" ng-show="showme"><div>ashwin</div></div>
+    </div>
+</div>

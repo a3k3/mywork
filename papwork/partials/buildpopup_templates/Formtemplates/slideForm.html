@@ -1,0 +1,61 @@
+﻿<div class="slide_layout" md-theme="mytheme">
+    <div class="publish_layout">
+        <!--Appearance-->
+        <div class="slide_window">
+            <div class="title">Appearance</div>
+            <formsettings>
+                <md-content>
+                    <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in internalSettings"></ng-include>
+                </md-content>
+            </formsettings>
+
+        <!--Access table-->
+        <div class="title">Access</div>
+
+        <div class="workflow_checkbox_block">
+            <div class="search-box">
+                <input type="text" placeholder="Slide No. or question name" />
+            </div>
+            <div class="email_table">
+                <div layout="row" class="table-head">
+                    <div flex="20">
+                        Slide.No.
+                    </div>
+                    <div flex="60">
+                        Question
+                    </div>
+                    <div flex="20">
+                        Access
+                        
+                    </div>
+
+           </div>
+                    <div layout="row" class="table-row">
+                        <div flex="20">
+                            1
+                        </div>
+                        <div flex="60">
+                            How do you define his body Language during the interview?
+                        </div>
+                        <div flex="20">
+                            <md-input-container>
+                                <md-select ng-model="">
+                                    <!--  <md-option ng-repeat="" ng-value="">
+               {{type of acess}}
+              Private
+             </md-option>-->
+                                    <md-option>Private</md-option>
+                                    <md-option>Public</md-option>
+                                </md-select>
+                            </md-input-container> 
+                        </div>
+                    
+                    </div>
+
+
+
+                    </div>
+            </div>
+    </div>
+</div>
+</div>

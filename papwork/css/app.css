@@ -274,6 +274,8 @@ question.next_active .questionPanel h2{
     height: 30px;
     overflow: hidden;
     font-family:Optima;
+    color: #999999;
+    font-weight: bold;
 }
 question.next_next_active {
     opacity: 0.5;
@@ -284,6 +286,8 @@ question.next_next_active .questionPanel h2{
     height: 30px;
     overflow: hidden;
     font-family:Optima;
+    color: #999999;
+    font-weight: bold;
 }
 question.active .questionPanel {
     position: relative;
@@ -1035,6 +1039,11 @@ doughnut-chart svg > g {
 .checkbox-block{
     margin-top:40px;
     margin-bottom:40px;
+}
+
+.share_text_url md-input-container, .embed_text_url md-input-container {
+    width: 70%!important;
+    max-width: none;
 }
 
 @media screen and (max-width:767px) {

@@ -4,4 +4,17 @@
 @section Script{
     <script src="~/js/swipe.js"></script>
 }
-<ng-view class="row experience-screen"></ng-view>
+<div class="body-container" ng-controller="mainCtrl">
+    <md-sidenav class="md-sidenav-left main-settings dark" md-component-id="left" md-disable-backdrop md-whiteframe="4" mode="push">
+        <md-button class="md-icon-button close" ng-click="toggleLeftMenu()">
+            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+        </md-button>
+        <md-content layout-margin>
+            <p>
+                This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+            </p>
+        </md-content>
+    </md-sidenav>
+    <ng-view class="row experience-screen">
+    </ng-view>
+</div>
