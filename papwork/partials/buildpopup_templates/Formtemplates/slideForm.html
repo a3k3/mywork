@@ -2,52 +2,15 @@
     <div class="publish_layout">
         <!--Appearance-->
         <div class="slide_window">
-            <h3>Appearance</h3>
-        
-
-        
-        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-            <div flex="" class="flex"><h4>Next Question Prompts</h4><p>Hint:Any Text</p></div>
-            <div flex="" class="flex">
-                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="NextQuestion" aria-label="Next Question Prompts"
-                           tabindex="0" type="" role="NQ" aria-checked="true" aria-invalid="">
-                </md-switch>
-                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
-            </div>
-        </div>
-        
-        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-            <div flex="" class="flex"><h4>Question Serial No</h4><p>Hint:Any Text</p></div>
-            <div flex="" class="flex">
-                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="Question" aria-label="Question Serial No"
-                           tabindex="0" type="" role="QS" aria-checked="true" aria-invalid="">
-                </md-switch>
-                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
-            </div>
-        </div>
-        <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-            <div flex="" class="flex"><h4>Progress Bar</h4><p>Hint:Any Text</p></div>
-            <div flex="" class="flex">
-                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="Progress" aria-label="Progress Bar"
-                           tabindex="0" type="" role="df" aria-checked="true" aria-invalid="">
-                </md-switch>    
-                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
-            </div>
-        </div>
-
- <div layout="row" layout-align="start center" class="ng-scope layout-align-start-center layout-row">
-            <div flex="" class="flex"><h4>Randomize Question</h4><p>Hint:Any Text</p></div>
-            <div flex="" class="flex">
-                <md-switch class="md-primary ng-pristine ng-untouched ng-valid md-mytheme-theme ng-empty" ng-model="random" aria-label="Randomize Ques"
-                  tabindex="0" type="" role="rQ" aria-checked="true" aria-invalid="">
-                    
-                </md-switch>
-                <div class="md-thumb md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-ripple-container"></div></div>
-            </div>
-        </div>
+            <div class="title">Appearance</div>
+            <formsettings>
+                <md-content>
+                    <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in internalSettings"></ng-include>
+                </md-content>
+            </formsettings>
 
         <!--Access table-->
-        <h3>Access</h3>
+        <div class="title">Access</div>
 
         <div class="workflow_checkbox_block">
             <div class="search-box">

@@ -350,7 +350,6 @@ function addviatext(text) {
     console.log(names);
     var finalhtml_text = '<form action="/action_page.php">' + names + '</form>';
     addviahtml(finalhtml_text);
-    
 }
 
 /* App Controllers */
@@ -390,44 +389,47 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         else {
             if (sessionStorage.questionsObj != undefined) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
-                angular.forEach($scope.questionsObj.questions, function (value, index) {
-                    value.enable = "true"; /*temporary should be removed*/
-                });
             }
             else {
                 $scope.questionsObj.questions = response.data;
-                angular.forEach($scope.questionsObj.questions, function (value, index) {
-                    value.question = value.question;
-                    var temp = value.question;
-                    var tmp = document.createElement("DIV");
-                    tmp.innerHTML = temp;
-                    if (angular.element(tmp).find('span').length > 0) {
-                        angular.element(tmp).find('span').each(function (index, value) {
-                            if ($(value).hasClass('chip')) {
-                                var answerfor = $(value).data('question-id');
-                                var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
-                                $(value).replaceWith(insertVal);
-                            }
-                        })
-                    }
-                    value.question = tmp.innerHTML;
-                    //$compile(value.question)($scope);
-                    value.enable = "true"; /*temporary should be removed*/
-                    
-                    //check for random options
-                    if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
-                        value.options = shuffleArray(value.options);
-                    }
-                });
             }
-        }
-        $scope.questionsObj.activeNow = 1;
+            angular.forEach($scope.questionsObj.questions, function (value, index) {
+                value.question = value.question;
+                var temp = value.question;
+                var tmp = document.createElement("DIV");
+                tmp.innerHTML = temp;
+                if (angular.element(tmp).find('span').length > 0) {
+                    angular.element(tmp).find('span').each(function (index, value) {
+                        if ($(value).hasClass('chip')) {
+                            var answerfor = $(value).data('question-id');
+                            var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
+                            $(value).replaceWith(insertVal);
+                        }
+                    })
+                }
+                value.question = tmp.innerHTML;
+                //$compile(value.question)($scope);
+                value.enable = true;
+                if (value.validations != undefined && value.validations.internal != undefined && value.validations.internal.condition) {
+                    value.enable = false;
+                }
 
+                //check for random options
+                if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
+                    value.options = shuffleArray(value.options);
+                }
+            });
+        }
+        $scope.questionsObj.activeNow = 0;
         $scope.checkIfTimed();
 
         $timeout(function () {
             if (angular.element('.top-row').length > 0) {
                 angular.element('.top-row').css('width', (angular.element('.top-row').find('.products').length * angular.element('.top-row').find('.products').outerWidth(true)) / 2)
+            }
+
+            if (angular.element('.question').length > 0) {
+                $scope.questionsObj.activeNow = 1;
             }
         }, 1000)
 
@@ -443,7 +445,25 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     $scope.$on('questionsData', function (event, data) {
         $scope.questionsObj.questions = data;
         angular.forEach($scope.questionsObj.questions, function (value, index) {
-            value.enable = "true"; /*temporary should be removed*/
+            value.question = value.question;
+            var temp = value.question;
+            var tmp = document.createElement("DIV");
+            tmp.innerHTML = temp;
+            if (angular.element(tmp).find('span').length > 0) {
+                angular.element(tmp).find('span').each(function (index, value) {
+                    if ($(value).hasClass('chip')) {
+                        var answerfor = $(value).data('question-id');
+                        var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
+                        $(value).replaceWith(insertVal);
+                    }
+                })
+            }
+            value.question = tmp.innerHTML;
+            //$compile(value.question)($scope);
+            value.enable = true;
+            if (value.validations != undefined && value.validations.internal != undefined && value.validations.internal.condition) {
+                value.enable = false;
+            }
 
             //check for random options
             if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
@@ -470,7 +490,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         _active = angular.element(_active);
         if (_active.find('.inputContainer input').hasClass('ng-invalid')) return;
         $timeout(function () {
-            if (_active.index() < $scope.questionsObj.maxCount()) {
+            if (_active.index() >= 0 && _active.index() < $scope.questionsObj.maxCount()) {
                 _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
                 var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
                 if (autocomplete != undefined && autocomplete.start > 0) {
@@ -580,7 +600,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             if ($scope.questionsObj.questions[index].options != undefined) {
                 var response = $scope.questionsObj.questions[index].options
                 angular.forEach(response, function (value, index) {
-                    $scope.questionsObj.questions[index].response = $scope.questionsObj.questions[index].response + value.value
+                    if ($scope.questionsObj.questions[index] != undefined) {
+                        $scope.questionsObj.questions[index].response = $scope.questionsObj.questions[index].response + value.value
+                    }
                 });
             }
         }
@@ -605,23 +627,25 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkIfTimed = function () {
         var index = $scope.questionsObj.activeNow - 1;
-        var _autocomplete = $scope.questionsObj.questions[index].validations.autocomplete;
-        if (_autocomplete != undefined && _autocomplete.condition) {
-            if (_autocomplete.start > 0) return;
-            _autocomplete.start = 0;
-            _autocomplete.seconds = '0s';
-            _autocomplete.interval = $interval(function () {
-                _autocomplete.start += 1;
-                _autocomplete.seconds = parseInt(_autocomplete.start / (100 / _autocomplete.time)) + 's';
-                if (_autocomplete.start >= 100) {
-                    $scope.questionsObj.next();
-                    $interval.cancel(_autocomplete.interval);
-                }
-            }, _autocomplete.time * 10);
+        if (index >= 0) {
+            var _autocomplete = $scope.questionsObj.questions[index].validations.autocomplete;
+            if (_autocomplete != undefined && _autocomplete.condition) {
+                if (_autocomplete.start > 0) return;
+                _autocomplete.start = 0;
+                _autocomplete.seconds = '0s';
+                _autocomplete.interval = $interval(function () {
+                    _autocomplete.start += 1;
+                    _autocomplete.seconds = parseInt(_autocomplete.start / (100 / _autocomplete.time)) + 's';
+                    if (_autocomplete.start >= 100) {
+                        $scope.questionsObj.next();
+                        $interval.cancel(_autocomplete.interval);
+                    }
+                }, _autocomplete.time * 10);
 
-            //$timeout(function () {
-            //    $scope.questionsObj.next();
-            //}, _autocomplete.time * 1000)
+                //$timeout(function () {
+                //    $scope.questionsObj.next();
+                //}, _autocomplete.time * 1000)
+            }
         }
     }
 
@@ -824,6 +848,10 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
 
 myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
 
+    $scope.child = {}
+
+    $scope.$watch('child', function () { $scope.$evalAsync(); });
+
     $rootScope.bodylayout = 'create-layout';
 
     $scope.themes = ['default', 'green', 'black', 'pink', 'blue', 'yellow', 'orange'];
@@ -882,24 +910,36 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
 
     $scope.gotoExperience = function () {
         $rootScope.previewURL = "../partials/experience.html";
-        $timeout(function () {
-            $rootScope.$broadcast('updateQuestions', true);
-        }, 500)
     }
 
     $scope.getPartial = function () {
         return $rootScope.previewURL;
     }
+
+    $scope.$on('questionsData', function (event, data) {
+        $scope.buildQuestionsObj = data;
+    });
+
+    $scope.onPublishTabSelect = function () {
+        $rootScope.previewURL = "../partials/cover.html";
+
+        sessionStorage.questionsObj = JSON.stringify($scope.buildQuestionsObj);
+    }
 });
 
 myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet) {
+
+    $scope.$watch('buildQuestionsObj', function () {
+        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj);
+    });
+
     var sampleQuestion = {};
 
     getSampleQuestionData.then(function (response) {
         sampleQuestion = response.data;
     }, function myError(response) {
         $scope.status = response.statusText;
-    });
+    },true);
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
@@ -978,6 +1018,28 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 enable: true,
                 active: false,
                 template: 'slideForm',
+                settings: [
+                    {
+                        name: "nextquestionprompts",
+                        condition: false,
+                        enable: true
+                    },
+                    {
+                        name: "questionserialno",
+                        condition: false,
+                        enable: true
+                    },
+                    {
+                        name: "progressbar",
+                        condition: false,
+                        enable: true
+                    },
+                    {
+                        name: "randomizequestion",
+                        condition: false,
+                        enable: true
+                    }
+                ]
             },
             {
                 name: "Audience",
@@ -1027,10 +1089,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.$on('questionsFormTheme', function (event, data) {
         $scope.buildQuestionsObj.theme = data;
-    });
-
-    $scope.$on('updateQuestions', function (event, data) {
-        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
     });
     
     $scope.$on('addviaquestions', function (event, data) {
@@ -1113,7 +1171,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         $timeout(function () {
             angular.element('.apply-questions-container').find('.flip').eq($scope.buildQuestionsObj.maxCount()).find('.type button').trigger('click');
-            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length + angular.element('.add-slide').css('margin-left'));
+            setNavigationTrack(slidewidth);
         }, 0);
     };
 
@@ -1128,7 +1186,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         if (qtype != null) {
             $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion[qtype]);
         }
-        $scope.buildQuestionsObj.questions[index].id = id
+        $scope.buildQuestionsObj.questions[index].id = id;
+        $scope.buildQuestionsObj.questions[index].response = "";
         $scope.buildQuestionsObj.questions[index].draggable = false;
         $scope.buildQuestionsObj.questions[index].answertype = (type[0] != undefined ? type[0] : "text");
         $scope.buildQuestionsObj.questions[index].answertheme = (type[1] != undefined ? type[1] : "");
@@ -1259,7 +1318,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 resetSlide();
                 setActiveSlide($scope.buildQuestionsObj.activeNow);
                 var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
-                angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length + angular.element('.add-slide').css('margin-left'));
+                setNavigationTrack(slidewidth);
             }, 0);
         }, function () {
             //nothing to do
@@ -1277,9 +1336,25 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         $timeout(function () {
             var slidewidth = angular.element('.navigating_blocks md-card').outerWidth(true);
-            angular.element('.navigating_blocks').css('width', slidewidth * angular.element('.navigating_blocks md-card').length + angular.element('.add-slide').css('margin-left'));
+            setNavigationTrack(slidewidth);
         }, 0);
     };
+
+    var setNavigationTrack = function (slidewidth) {
+        var _slideLength = angular.element('.navigating_blocks > md-card').length + 1;
+        //set scroll
+        if (angular.element('.navigating_blocks').width() > angular.element('body').width()) {
+            angular.element('.navigation-slide').css('overflow-x', 'scroll');
+        } else {
+            angular.element('.navigation-slide').css('overflow-x', 'hidden');
+        }
+        if (angular.element('body').width()<= 767) {
+            angular.element('.navigating_blocks').css('width', slidewidth * _slideLength);
+        }
+        else {
+            angular.element('.navigating_blocks').css('width', slidewidth * _slideLength + angular.element('.add-slide').offset().left + 10);
+        }
+    }
 
     //show slide
     $scope.showSlide = function (event) {
@@ -1417,7 +1492,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             });
     }
 
-    function BuildPopupController($scope, $mdDialog, template, buildQuestionsObj) {
+    function BuildPopupController($scope, $mdDialog, template, buildQuestionsObj, $timeout) {
         $scope.template = template;
         $scope.getTemplateUrl = function () {
             return '../partials/buildpopup_templates/'+template+'.html';
@@ -1432,9 +1507,15 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         /*******FormSettings********/
         $scope.formsettingtemplate = 'generalForm';
+
+        $timeout(function () {
+            angular.element('.formsettings_layout').find('ul li:first-child').trigger('click');
+        }, 500)
+
         $scope.formSetting = function (event, template, settings) {
             $scope.formsettingtemplate = template;
             $scope.internalSettings = settings;
+            angular.element(event.target).addClass('active').siblings().removeClass('active');
         }
 
         $scope.getFormSettingTemplateUrl = function () {
@@ -1585,7 +1666,6 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         angular.element('.navigation-slide').css('overflow-x', 'scroll');
     }
 
-    //ng-drag-move=
     $scope.dragContainer = function (ev) {
         var scrollPostion = $('.navigation-slide').scrollLeft();
         if (ev.tx > 0) {
@@ -1599,7 +1679,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.itemOnLongPress = function (event, question) {
         question.draggable = true;
-        angular.element('.navigation-slide').css('overflow-x', 'hidden')
+        if (event.target.className.indexOf('dragging') != -1) {
+            angular.element('.navigation-slide').css('overflow-x', 'hidden');
+        }
+    }
+
+    $scope.onDragStop = function (event, question) {
+        question.draggable = false;
+        angular.element('.navigation-slide').css('overflow-x', 'scroll');
     }
 
     $scope.onSwipeLeft = function () {
@@ -1833,6 +1920,7 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
         $scope.status = response.statusText;
     });
 });
+
 var table = {
     '1':{
         "ResponseID":"345hfgdgxf",

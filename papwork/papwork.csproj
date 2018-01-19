@@ -196,6 +196,7 @@
     <Content Include="asset\img\md-icons\svg\scale-rating.svg" />
     <Content Include="asset\img\md-icons\svg\smily.svg" />
     <Content Include="asset\img\md-icons\svg\star-rating.svg" />
+    <Content Include="asset\img\md-icons\svg\star.svg" />
     <Content Include="asset\img\md-icons\svg\statement.svg" />
     <Content Include="asset\img\md-icons\svg\text-box.svg" />
     <Content Include="asset\img\md-icons\svg\themes.svg" />
@@ -203,6 +204,7 @@
     <Content Include="asset\img\md-icons\svg\work-flow.svg" />
     <Content Include="asset\img\no_preview.JPG" />
     <Content Include="asset\img\pancard.JPG" />
+    <Content Include="asset\img\pap-logo.png" />
     <Content Include="asset\img\poor.png" />
     <Content Include="asset\img\poor_active.png" />
     <Content Include="asset\img\product_A.JPG" />
@@ -242,6 +244,10 @@
     <Content Include="partials\buildpopup_templates\Formtemplates\audienceForm.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\emailForm.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\emailNotificationForm.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\nextquestionprompts.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\questionserialno.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\progressbar.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\randomizequestion.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\autocomplete.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\duplicate.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\export.html" />

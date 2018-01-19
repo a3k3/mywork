@@ -233,7 +233,7 @@
                 <md-card ng-class="{slideactive:buildQuestionsObj.activeNow == 0, slideleft: buildQuestionsObj.activeNow != 0 }" ng-click="showSlide($event)">
                     <ng-include src="'../partials/build_input_templates/cover.html'"></ng-include>
                 </md-card>
-                <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)" ng-drag="question.draggable" ng-drag-data="question" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)" on-long-press="itemOnLongPress($event, question)">
+                <md-card ng-repeat="question in buildQuestionsObj.questions" ng-class="{slideactive: $last, slideleft: !$last}" ng-click="showSlide($event)" ng-drag="question.draggable" ng-drag-data="question" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)" on-long-press="itemOnLongPress($event, question)" ng-drag-stop="onDragStop($event, question)" ng-mousedown="itemOnLongPress($event, question)">
                     <question class="question-slide col-xs-12 col-md-8 col-md-offset-2 text-center">
                     </question>
                 </md-card>

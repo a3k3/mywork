@@ -42,7 +42,7 @@
         "primary": true,
         "name": "Star Rating",
         "type": "rating_star",
-        "img_src": "../asset/img/md-icons/svg/star-rating.svg"
+        "img_src": "../asset/img/md-icons/svg/star.svg"
       },
       {
         "primary": true,
