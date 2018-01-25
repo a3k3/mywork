@@ -5,14 +5,17 @@
     <script src="~/js/swipe.js"></script>
 }
 <div class="body-container" ng-controller="mainCtrl">
-    <md-sidenav class="md-sidenav-left main-settings dark" md-component-id="left" md-disable-backdrop md-whiteframe="4" mode="push">
+    <md-sidenav class="md-sidenav-left main-settings dark" md-component-id="left" md-disable-backdrop md-whiteframe="4" mode="push" md-is-locked-open="isSideNavOpen">
         <md-button class="md-icon-button close" ng-click="toggleLeftMenu()">
             <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
         </md-button>
         <md-content layout-margin>
-            <p>
-                This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
-            </p>
+            <div class="title">
+                <a href="">Dashboard</a>
+            </div>
+            <div id="scroller" class="col-xs-12 col-sm-6 full-height scrollable">
+                <div id="SAC1" sir-accordion collection="accordionArray" config="accordionConfig"></div>
+            </div>
         </md-content>
     </md-sidenav>
     <ng-view class="row experience-screen">

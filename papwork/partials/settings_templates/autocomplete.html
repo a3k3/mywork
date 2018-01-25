@@ -5,10 +5,11 @@
             <div flex>
                 <md-switch class="md-primary" ng-model="setting.condition" aria-label="Auto Complete"></md-switch>
             </div>
-            <div flex>
+            <div flex="30">
                 <md-input-container class="autocomplete">
                     <input type="number" step="any" name="timer" min="1" max="200" ng-model="setting.time" ng-disabled="!setting.condition" aria-label="Auto Complete"/>
                 </md-input-container>
+                sec
             </div>
         </div>
     </div>
