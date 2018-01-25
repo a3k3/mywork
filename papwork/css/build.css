@@ -47,6 +47,11 @@ md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-a
 .main-settings md-content {
     float: left;
     margin-top: 100px;
+    margin: 0;
+    width: 100%;
+    background: 000;
+    color: #fff;
+    margin-top: 100px;
 }
 .md-open-menu-container.md-active {
     z-index:9999;
@@ -65,6 +70,7 @@ md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-a
 .md-menu button svg{
     fill:#fff;
 }
+
 @media screen and (max-width:767px) {
     .experience-screen {
         display: initial;
@@ -153,6 +159,7 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container {
 
     .apply-questions-container md-card {
         margin: 3px 3px;
+        height: 100%;
     }
 
     .apply-questions-container .slideactive {
@@ -177,7 +184,7 @@ md-progress-linear.md-mytheme-theme.md-hue-1.md-warn .md-container {
 }
 
 .apply-questions-container .cover-page, .apply-questions-container .app-submit-page {
-    height: 73vh;
+    height: inherit;
 }
 
 .navigation-slide .cover-page, .navigation-slide .app-submit-page {
@@ -280,8 +287,8 @@ settings md-switch {
 .navigation-slide {
     position: fixed;
     overflow: hidden;
-    height: 23vh;
-    bottom: 0;
+    height: 19vh;
+    bottom: 30px;
     left: 0;
     width: 100%;
     padding: 0 8px;
@@ -301,6 +308,7 @@ settings md-switch {
     /*width:30000px;*/
     /*overscroll-behavior-x: inherit;*/
     margin: 0 !important;
+    padding-bottom: 10px;
 }
 
 .navigation-slide md-card:nth-child(2) {
@@ -382,7 +390,7 @@ md-card buildquestion.question-slide, md-card question.question-slide {
 }
 
 md-card settings {
-    height: 73vh;
+    height: 68vh;
     max-height: 73vh;
     overflow: hidden;
     overflow-y: scroll;
@@ -845,6 +853,7 @@ buildquestion .category {
     position: relative;
     width: 100%;
     display: inline-block;
+    height: 100%;
 }
 
 label + md-input-container label {
@@ -974,7 +983,7 @@ settings ng-include.advanced {
         bottom: 21px;
     }
 
-settings md-input-container.autocomplete:after {
+/*settings md-input-container.autocomplete:after {
     content: 'sec';
     position: absolute;
     right: 0;
@@ -982,7 +991,7 @@ settings md-input-container.autocomplete:after {
     color: rgba(101,101,101,0.8);
     line-height: 35px;
     font-size: 14px;
-}
+}*/
 
 settings ng-include.showhide [layout="row"] .remove {
     position: absolute;
@@ -1009,6 +1018,17 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     display: none;
 }
 
+md-tab-content > div > ng-include {
+    width: 100%;
+    height: inherit;
+    display: inline-block;
+}
+
+md-tab-content > div {
+    height: inherit;
+    width: inherit;
+}
+
 @media screen and (min-width:1024px) {
     .mobile-project-title {
         display: none;
@@ -1024,15 +1044,19 @@ settings ng-include.showhide [layout="row"]:hover .remove {
         right: 0;
     }
 
-        flip-panel.flipBasic.flipHideBack md-tabs.md-mytheme-theme md-ink-bar {
-            width: 50%;
-        }
+    flip-panel.flipBasic.flipHideBack md-tabs.md-mytheme-theme md-ink-bar {
+        width: 50%;
+    }
 
     flip-panel.flipBasic {
         width: 59% !important;
     }
 
     flip-panel.flipHideBack .controls, flip-panel .fcontrol, flip-panel .settings {
+        display: none!important;
+    }
+
+    .flipBasic:not(.flipHideFront) .controls button:last-child {
         display: none;
     }
 
@@ -1042,9 +1066,9 @@ settings ng-include.showhide [layout="row"]:hover .remove {
         right: 10px;
     }
 
-        flip-panel .controls .flex-50 {
-            max-width: 100%;
-        }
+    flip-panel .controls .flex-50 {
+        max-width: 100%;
+    }
 
     .apply-questions-container .slideleft {
         left: -4000px;
@@ -1078,9 +1102,10 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     }
 
     .build {
-        padding: 30px 40px;
+        padding: 2vh 40px;
         background-color: #f8f8f8;
         padding-bottom: 0;
+        height: inherit;
     }
 
     .publish-panel + .ng-scope .cover-page {
@@ -1191,7 +1216,7 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     }
 
     .navigation-slide {
-        bottom: 0;
+        bottom: 60px;
     }
 
     .create-tabs > md-tabs-wrapper .md-tab:after {
@@ -1215,7 +1240,7 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     }
 
     .apply-questions-container {
-        height: 68vh;
+        height: 55vh;
     }
 
     .basic.mustanswer {
@@ -1246,10 +1271,48 @@ settings ng-include.showhide [layout="row"]:hover .remove {
         margin-left: 13%;
     }
 }
-
+@media screen and (min-width: 1024px) {
+    .apply-questions-container {
+        height: 63vh;
+    }
+    .navigation-slide {
+        bottom: 60px;
+    }
+    .navigation-slide md-card {
+        width:55px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .apply-questions-container {
+        height: 62vh;
+    }
+    .build {
+        padding: 3.2vh 40px;
+    }
+    .navigation-slide {
+        bottom: 40px;
+    }
+    .navigation-slide md-card {
+        width:70px;
+    }
+}
 @media screen and (min-width: 1400px) {
     .apply-questions-container {
-        height: 73vh;
+        height: 68vh;
+    }
+    .navigation-slide {
+        bottom: 20px;
+    }
+    .navigation-slide md-card {
+        width:82px;
+    }
+}
+@media screen and (min-width: 1600px) {
+    .navigation-slide {
+        bottom: 0px;
+    }
+    .navigation-slide md-card {
+        width:99px;
     }
 }
 
@@ -1282,7 +1345,70 @@ ul.dropdown-menu a.dropdown-item {
     padding: 16px;
 }
 
+@media screen and (max-width:1023px) and (min-width:768px){
+        .apply-questions-container {
+        height: 73vh;
+    }
+    .navigation-slide .add-slide {
+        left: calc(100vw - 90px);
+    }
+    .navigation-slide md-card {
+        width:73px;
+    }
+
+}
 @media screen and (max-width:1023px) {
+    .mobile-project-title {
+        display:none;
+    }
+    .experience-screen{
+        display:initial;
+    }
+    .publish-panel + ng-include question.active {
+        /* top: 8vh; */
+    }
+
+    .publish-panel + ng-include question.question-slide {
+        height: 60vh;
+    }
+
+    .publish-panel + ng-include question.next_active {
+        top: 60vh;
+    }
+
+    .publish-panel + ng-include question.next_next_active {
+        top:66vh;
+    }
+
+    flip-panel .inputContainer {
+        max-height: 135px;
+        overflow: hidden;
+        overflow-y: scroll;
+        height: auto;
+    }
+
+    .navigation-slide .inputContainer {
+        height: auto;
+        max-height: 70px;
+        overflow: hidden;
+    }
+
+    .navigation-slide md-card {
+        height: 8.997vh;
+    }
+
+    .navigation-slide .cover-page, .navigation-slide .app-submit-page {
+        height: 8.5vh;
+    }
+}
+
+@media screen and (max-width:1100px) and (orientation:potrait) {
+    .mobile-project-title {
+        display:none;
+    }
+    .experience-screen{
+        display:initial;
+    }
     .publish-panel + ng-include question.active {
         /* top: 8vh; */
     }
@@ -1642,7 +1768,7 @@ formsettings ng-include [layout="row"] {
     position: relative;
     background-image: url('../asset/img/no_preview.jpg');
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-position:center;
 }
 
     .preview_via iframe {
@@ -2283,3 +2409,163 @@ padding: 10px 20px;
 .color-section md-icon.md-mytheme-theme.md-primary {
     color: rgb(238, 242, 239);
 }
+
+
+/********Accordian*******/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+.content-wrap{
+  position: absolute;
+  top: 213px;
+  left: 15px;
+  right: 15px;
+  bottom: 10px;
+}
+
+.no-padding-left{
+  padding-left: 0px;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+blockquote{
+  text-align: justify;
+}
+
+.full-height{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.scrollable{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drop-icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 18px;
+}
+
+.drop-icon-wrapper i{
+  transition: 0.3s transform;
+  transform: rotate(0deg);
+  font-weight: 100;
+  margin-right: 15px;
+}
+
+.active-header .drop-icon-wrapper i{
+  transform: rotate(180deg); 
+}
+
+.sir-accordion-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.sir-accordion-wrapper>div+div {
+  /* border-top: 1px solid #EEE; */
+}
+
+.sir-accordion-group{
+  overflow: hidden;
+  width: 100%;
+  padding-left: 15px;
+  /* border-left: 2px dotted #d3d3d3; */
+}
+
+.sir-accordion-group>div+div {
+  /* border-top: 1px solid #EEE; */
+}
+
+.sir-accordion-header{
+  height: 40px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 2px;
+  color: #999999;
+  position: relative;
+  z-index: 1;
+  padding: 0 15px;
+  outline: none;
+}
+
+.sir-accordion-header.active-header{
+  font-weight: bold;
+}
+
+.sir-accordion-content{
+  overflow: hidden;
+  /* padding-left: 15px; */
+}
+
+.sir-accordion-content > div{
+  height: 0px;
+}
+
+.sir-accordion-content > div > div{
+  overflow: auto;
+}
+
+.sir-accordion-vertical-align{
+  height: 100%;
+}
+
+.sir-accordion-vertical-align:before{
+  content: '';
+  height: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.sir-accordion-vertical-align > * {
+  margin: 0;        
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.main-settings .title a {
+    color: #999999;
+    font-size: 22px;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px 5px;
+    outline:none;
+}
+.main-settings .content {
+    height: 40px;
+    display: table;
+    width: 100%;
+    padding: 0 15px;
+    border-left:4px solid #252525;
+    outline:none;
+}
+
+.main-settings .content:hover{
+    background-color:#333;
+    box-sizing:border-box;
+    border-left:4px solid rgb(129,199,132)
+}
+
+.main-settings .content a{
+    color:#999999;
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration:none;
+}
+.sir-accordion-wrapper > div {
+    /* padding: 0 15px; */
+    background: #252525;
+}
+
+/********Accordian*******/

@@ -226,9 +226,9 @@
     <Content Include="asset\img\visa.JPG" />
     <Content Include="css\build.css" />
     <Content Include="css\input.css" />
-    <Content Include="lib\html2canvas\html2canvas.js" />
     <Content Include="js\mdCarousel.js" />
     <Content Include="js\swipe.js" />
+    <Content Include="lib\accordian\sirAccordian.js" />
     <Content Include="lib\aws-sdk\aws-sdk.js" />
     <Content Include="lib\contextmenu\contextMenu.js" />
     <Content Include="lib\draggable\ngDraggable.js" />
@@ -334,6 +334,7 @@
     <Content Include="partials\settings_templates\acceptonly.html" />
     <Content Include="partials\settings_templates\mustanswer.html" />
     <Content Include="partials\settings_templates\successtemplate.html" />
+    <Content Include="partials\settings_templates\videoquestions.html" />
     <Content Include="partials\success.html" />
     <Content Include="partials\buildpopup_templates\Workflow.html" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -386,7 +387,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="lib\html2canvas\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

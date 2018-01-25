@@ -573,6 +573,9 @@ md-pagination-wrapper {
 .answerContainer .interview {
     text-align:center;
 }
+.answerContainer .interview button {
+    margin:0;
+}
 .answerContainer .interview img{
     display: block;
     margin: 0 auto;
@@ -608,6 +611,13 @@ md-pagination-wrapper {
     .variant-container .recomends{
         width:auto;
         padding:0px;
+    }
+    .answerContainer .interview {
+        text-align:left;
+    }
+    .answerContainer .interview img{
+        display: block;
+        margin: 0;
     }
 }
 

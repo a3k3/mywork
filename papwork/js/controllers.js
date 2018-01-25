@@ -271,13 +271,14 @@ function addviahtml(html) {
     var action = $(html).attr('action');
     //console.log(questions);
 
-    var result = 'http://localhost:2472/angular/#/experience';
+    var result = window.location.href.split('#')[0] + '#/experience';
 
     writeResult(result, questions);
 }
 
 function writeResult(result, questions) {
     var iframe = $('.buildpopup .preview_via iframe');
+    iframe.attr('src', '');
     iframe.attr('src', result);
 
     if (typeof (Storage) !== "undefined") {
@@ -373,7 +374,7 @@ function addviatext(text) {
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
-myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile) {
+myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile, $window) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -944,7 +945,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet, $window) {
 
     $scope.$watch('buildQuestionsObj', function () {
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj);
@@ -1166,11 +1167,12 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     //add slide
     $scope.addSlide = function () {
-        var tempQuestion = {
-            "id": $scope.buildQuestionsObj.maxCount() + 1,
-        };
+        var tempQuestion = {};
+        tempQuestion.id = $scope.buildQuestionsObj.maxCount() + 1;
         $scope.buildQuestionsObj.questions.push(tempQuestion);
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+        $scope.addQuestion(['text'], null);
+
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
         tempQuestionObj = $scope.buildQuestionsObj;
 
@@ -1185,7 +1187,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 marginLeft: '-=' + slidewidth + 'px'
             }, 500);
         }
-
+        $timeout(function () {
+            angular.element('.apply-questions-container').find('.flip').eq($scope.buildQuestionsObj.maxCount()).find('.field-type [data-type="text"]').addClass('active');
+        }, 1000);
         $timeout(function () {
             angular.element('.apply-questions-container').find('.flip').eq($scope.buildQuestionsObj.maxCount()).find('.type button').trigger('click');
             setNavigationTrack(slidewidth);
@@ -1199,7 +1203,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var tempoptions = [];
         if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0)
             tempoptions = $scope.buildQuestionsObj.questions[index].options;
-        $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
+        if ($scope.buildQuestionsObj.questions[index].question == undefined || $scope.buildQuestionsObj.questions[index].question == "" || $scope.buildQuestionsObj.questions[index].question == "undefined")
+            $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
         if (qtype != null) {
             $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion[qtype]);
         }
@@ -1304,6 +1309,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 }
             }        
     }
+
     $scope.updateAdvanceAnswers = function (logic) {
         var index = logic.questionno == 0 ? logic.questionno : logic.questionno - 1;
         if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
@@ -1562,11 +1568,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         /*******Add Via Slide********/
         $scope.format = 'html';
-        $scope.addvia_text = function () {
-            $scope.format = 'text';
-        }
-        $scope.addvia_html = function () {
-            $scope.format = 'html';
+        $scope.addvia = function (event, format) {
+            $scope.format = format;
+            var target = angular.element(event.target).hasClass('md-button') ? angular.element(event.target) : angular.element(event.target).closest('.md-button');
+            target.addClass('md-primary').siblings().removeClass('md-primary');
         }
         $scope.runpreview = function () {
             var _formdata = angular.element('.codeedit_via textarea').val();
@@ -1882,6 +1887,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             }
         }
     }
+
+    angular.element($window).bind('resize', function () {
+        console.log('resize');
+        angular.element('.navigation-slide md-card').css('width', angular.element('.navigation-slide md-card').css('height'));
+    });
 });
 
 myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller, $interval) {
@@ -2882,4 +2892,36 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav) {
     $scope.openUserMenu = function ($mdOpenMenu,ev) {
         $mdOpenMenu(ev);
     }
+
+    $scope.activeArray = 1;
+    $scope.coord = '';
+    $scope.accordionConfig = {
+        debug: false,
+        animDur: 300,
+        expandFirst: false,
+        autoCollapse: true,
+        watchInternalChanges: false,
+        headerClass: '',
+        beforeHeader: '',
+        afterHeader: '<div class="drop-icon-wrapper sir-accordion-vertical-align"><i class="glyphicon glyphicon-menu-down"></i></div>',
+        topContentClass: '',
+        beforeTopContent: '',
+        afterTopContent: '',
+        bottomContentClass: '',
+        beforeBottomContent: '',
+        afterBottomContent: ''
+    };
+
+    $scope.accordionArray =
+    [
+      {
+          "title": "My PapForms", "topContent": null, "bottomContent": '<div class="content"><a href="#">market survey</a></div><div class="content"><a href="#">digital marketing</a></div>'
+      },
+      {
+          "title": "My PapTemplates", "topContent": null, "bottomContent": '<div class="content"><a href="#">market survey</a></div><div class="content"><a href="#">digital marketing</a></div>'
+      },
+      {
+          "title": "Tutorials/FAQ", "topContent": null, "bottomContent": '<div class="content"><a href="#">market survey</a></div><div class="content"><a href="#">digital marketing</a></div>'
+      }
+    ];
 });

@@ -3,7 +3,7 @@
   "name": "PapWork",
   "icons": [
     {
-      "src": "launcher-icon-4x.png",
+      "src": "../img/pap-logo.png",
       "sizes": "192x192",
       "type": "image/png"
     }
