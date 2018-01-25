@@ -10,12 +10,13 @@
             </md-card>
         </user-card>
         <div class="content-section">
-            <img class="success_media" src="{{buildsuccessdata.default.media_src}}" />
+          
             <h2 class="font-size-18 font-color-999" contenteditable ng-model="buildsuccessdata.default.content.headline_text">{{buildsuccessdata.default.content.headline_text}}</h2>
             <p class="font-color-666 font-size-14" contenteditable ng-model="buildsuccessdata.default.content.mail_text">{{buildsuccessdata.default.content.mail_text}}</p>
             <h6 class="font-color-ccc font-size-14" contenteditable ng-model="buildsuccessdata.default.content.poweredby_text">{{buildsuccessdata.default.content.poweredby_text}}</h6>
             <div class="home_button">
-                <md-button class="home md-raised" md-colors="{::background: '{{theme}}-primary-hue-1'}" contenteditable ng-model="buildsuccessdata.default.content.home_button.text">{{buildsuccessdata.default.content.home_button.text}}</md-button>
+                <md-button class="home md-raised" md-colors="{::background: '{{theme}}-primary-hue-1'}" contenteditable ng-model="buildsuccessdata.default.content.home_button.text">
+                {{buildsuccessdata.default.content.home_button.text}}</md-button>
             </div>
         </div>
         <div class="recomends">

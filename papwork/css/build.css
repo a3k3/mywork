@@ -808,6 +808,7 @@ buildquestion .category {
 
 .apply-questions-container .app-submit-page .success_media {
     padding-top: 5px;
+
 }
 
 .apply-questions-container .app-submit-page .content-section > * {
@@ -819,6 +820,9 @@ buildquestion .category {
 .apply-questions-container .app-submit-page .content-section h6 {
     margin: 0;
 }
+
+
+
 
 .mobile-project-title md-input-container {
     width: 45%;
@@ -1942,7 +1946,8 @@ formsettings ng-include [layout="row"] {
     padding: 0;
 }
 
-.modalpop{background-color:light-grey;/* border:2px solid grey; */display:block;position: absolute;padding:30px;border-radius: 5px;width: 35vw;background: #FFf;display: inline-block;box-shadow: 5px 5px 5px #d2d2d2;border-radius: 10px;top: 50%;left: 50%;transform: translate(-50%,-50%);}
+.modalpop{background-color:light-grey;/* border:2px solid grey; */display:block;position: absolute;padding:45px;border-radius: 5px;width: 40vw;background: #FFf;
+          display: inline-block;box-shadow: 5px 5px 5px #d2d2d2;border-radius: 10px;top: 33%;left: 62%;transform: translate(-50%,-50%);}
 
 .modalpop .search-box input {
     width: 100%;
@@ -1975,7 +1980,7 @@ formsettings ng-include [layout="row"] {
 
 .modalpop .search_pop {
     border: 1px solid #d2d0d0;
-    width: 80%;
+    width: 100%;
     border-radius: 5px;
     position: static;
     display: inline-block;
@@ -2042,7 +2047,7 @@ formsettings ng-include [layout="row"] {
 
 /*emailform*/
 .email_layout {
-    position:relative;
+    padding:40px;
 }
 
 .email_table .table-head {
@@ -2054,7 +2059,7 @@ formsettings ng-include [layout="row"] {
 .email_table .table-row {
     padding: 10px 20px;
     border: 1px solid #E4E4E4;
-    border-top: none;
+   
 }
 
 .email_table button.md-icon-button {
@@ -2239,47 +2244,251 @@ email_left textarea {
 }*/
 
 /*Processing Form*/
-.Calculated{
-background-color:#7f1db1;
-padding:15px;
-color:white;
-margin-right:15px;
+.processing_layout{
+    padding:25px;
+}
+.Calculated {
+    background-color: #7f1db1;
+    padding: 6px;
+    height: 130px;
+    color: white;
+    margin-right: 11px;
 }
 .Docgen{
-background-color:#72a032d9;
-padding:15px;
-color:white;
-float:left;
-margin-right:15px;
+    background-color: #72a032d9;
+    padding: 3px;
+    height: 130px;
+    color: white;
+    margin-right: 11px;
 }
 .DocScan{
-background-color:#6ddee8;
-padding:15px;
-color:white;
-float:left;
-margin-right:10px;
+    background-color: #6ddee8;
+    padding: 6px;
+    height: 130px;
+    color: white;
+    margin-right: 11px;
 }
 
 .Url{
-background-color:#7c8ca9;
-padding:15px;
-color:white;
-float:left;
+    background-color: #7c8ca9;
+    padding: 6px;
+    height: 130px;
+    color: white;
+   
 }
 .templateEdit{
-  margin-top: 30px;
-
 }
 .templateEdit .actions-table {
     padding:5px;
 }
 
 
-.templateEdit .table-row{
-padding: 10px 20px;
-    border:1px solid #E4E4E4;
-    border-top: none;
-}
+    .templateEdit .table-row {
+        padding: 10px 5px;
+        border: 1px solid #E4E4E4;
+    }
 .color-section md-icon.md-mytheme-theme.md-primary {
     color: rgb(238, 242, 239);
+}
+
+/*Calculated Variable Popup*/
+.Calculate_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;s
+}
+.inner_content {
+background-color:white;
+padding:20px;
+}
+.doc_section  {
+    display:flex;
+}
+
+
+.type_variable {
+    margin-top: 20px;
+}
+.type_variable h4{
+    display:inline-block;
+}
+
+
+.type_variable md-input-container {
+    display: inline-block;
+    margin: 0;
+    margin-left: 300px;
+}
+
+.variable_setting{
+    margin-top:40px;
+}
+.left_varible {
+    display: inline-block;
+   width:50%
+}
+ .left_varible .actions-table .table-head {
+      border-radius:8px 8px 0 0;
+}
+    
+.right_varible {
+        display: inline-block;
+        width: 50%;
+        margin-left: 20px;
+       
+}
+.right_varible .actions-table .table-head {
+    border-radius: 8px 8px 0 0;
+}
+.left-table-cell .table-row {
+    border: none;
+    /* width: 22%; */
+    text-align: center;
+    display: inline;
+    padding:5px;
+   
+}
+.right-table-cell {
+   border-left:1px solid #E4E4E4;
+    margin-left:120px;
+    float: left;
+    width:25vh;
+   
+
+}  
+ .right-table-cell .table-row{
+     border:none;
+ }
+.cancel_save_variable {
+        align-content: center;
+        margin-left: 200px;
+        margin-top: 20px;
+        color: white;
+    }
+.cancel_save_variable .md-button{
+    background-color:grey;
+}
+
+/*Docgen Popup*/
+.Docgen_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;
+    height:450px;
+    
+}
+
+.cancel_save_variable {
+    align-content: center;
+    margin-left: 200px;
+    margin-top: 20px;
+    color: white;
+}
+
+ .cancel_save_variable .md-button {
+        background-color: grey;
+ }
+
+/*Docscan_Popup */
+.Docscan_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;
+    height: 450px;
+}
+
+.Url_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;
+    height: 450px;
+}
+
+/*Generate_doc */
+.document_section {
+    background-color: #efefef;
+}
+
+.document_section_inner {
+    background-color: #ada8a8;
+    width: 815px;
+    height: 500px;
+    margin-left: 125px;
+}
+
+.cancel_save_section {
+    padding: 5px;
+    margin-top: 60px;
+    margin-left: 70px;
+}
+/*
+.document_section .md-button.md-mytheme-theme.md-primary.md-raised, .md-button.md-mytheme-theme.md-primary.md-fab {
+    color: rgb(255,255,255);
+    background-color: rgb(76,175,80);
+}
+
+.document_section .md-button.md-raised hue-2 .md-button, .md-mytheme-theme.md-ink-ripple {
+    color: rgb(255,255,255);
+    background-color: grey;
+}
+*/
+.line .input[type=text] {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid grey;
+}
+
+.line.md-input-container.md-input {
+    display: block;
+    margin-top: 0;
+    background: none;
+    padding: 2px 2px 1px;
+    border-width: 0 0 1px;
+    line-height: 26px;
+    height: 30px;
+    border-radius: 0;
+    border-style: solid;
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+}
+
+.document_section_inner .Property {
+    display: flex;
+}
+
+.document_section_inner .input_line {
+    display: flex;
+}
+
+.line1 {
+    display: flex;
+}
+
+.first-row {
+    display: flex;
 }

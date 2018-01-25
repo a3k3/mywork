@@ -35,28 +35,34 @@
             <md-card md-colors="::{backgroundColor: '{{theme}}-primary-hue-1'}">
                 <md-card-title>
                     <md-card-title-text>
-                        <img class="success_media_logo" src="{{successdata.default.media_src}}" />
-                        <span class="md-headline text-center font-color-000 font-size-18">{{successdata.default.headline}}</span>
+                        <img class="success_media_logo" src="{{successdata.official.media_src}}" />
+                        <span class="md-headline text-center font-color-000 font-size-18">{{successdata.official.headline}}</span>
                     </md-card-title-text>
                 </md-card-title>
             </md-card>
         </user-card>
         <div class="content-section">
-            <img class="success_media" src="{{successdata.default.media_src}}" />
-            <h2>{{successdata.default.content.headline_text}}</h2>
-            <p class="font-color-000 font-size-24">{{successdata.default.content.mail_text}}</p>
-            <h6 class="font-color-666 font-size-14">{{successdata.default.content.poweredby_text}}</h6>
+            <img class="success_media" src="{{successdata.official.media_src}}" />
+            <h2>{{successdata.official.content.headline_text}}</h2>
+            <p class="font-color-000 font-size-24">{{successdata.official.content.mail_text}}</p>
+            <h6 class="font-color:rgb(88, 80, 80) font-size-16 margin-top:20px margin-bottom:35px;">{{successdata.official.content.cheer_text}}</h6>
+
         </div>
         <div class="recomends">
-            <h4 class="font-size-16 font-color-000">{{successdata.default.content.reccomend_text}}</h4>
+            <h4 class="font-size-16 font-color-000 margin-bottom:20px;">{{successdata.official.content.share_text}}</h4>
             <ul>
-                <li ng-repeat="reccomendation in successdata.settings.reccomendations.options">
-                    <a href="{{reccomendation.link_url}}">
-                        <img class="selected-icon" src="{{reccomendation.link_icon}}">
-                        <p class="font-size-12 font-color-444">{{reccomendation.link_title}}</p>
+                <li ng-repeat="social in successdata.settings.share.options">
+                    <a href="{{social.link_url}}">
+                        <img class="selected-icon" src="{{social.link_icon}}">
+                        <p class="font-size-12 font-color-444">{{social.link_title}}</p>
                     </a>
                 </li>
             </ul>
+
         </div>
+
+    </div>
+    <div class="powered_text">
+        <h6 class="font-color-666 font-size-14">{{successdata.official.content.poweredby_text}}</h6>
     </div>
 </div>

@@ -390,8 +390,35 @@ question.active .questionPanel {
      bottom:0;
      width:100%;
 }
-.recomends ul{
-	display:inline-block;
+
+.Social_section {
+    border-top: 2px solid #eeeeee;
+    margin-top: 16px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+ .Social_section ul {
+   display: inline-block;
+}
+ .Social_section ul li {
+list-style: none;
+float: left;
+width: 100px;
+}
+
+.Social_section {
+    width: 100%;
+}
+
+    .Social_section md-input-container {
+        width: 30%;
+    }
+
+
+.recomends ul {
+ display: inline-block;
 }
 .recomends ul li{
 	list-style:none;
@@ -403,6 +430,7 @@ question.active .questionPanel {
 /****Success Page*****/
 .app-submit-page .success_media {
     padding-top: 48px;
+
 }
 
 .app-submit-page .content-section h2 {
@@ -412,9 +440,14 @@ question.active .questionPanel {
     margin-bottom:34px;
 }
 
+.app-submit-page .variant-container .content-section h6 {
+    margin-top: 8px;
+    color: rgb(208,208,208);
+    text-align: center;
+}
 .app-submit-page user-card .md-headline {
-    text-align: left;
-    padding-left: 54px;
+    color:white;
+    padding-left: 15px;
 }
 
 .app-submit-page .content-section{
@@ -429,9 +462,10 @@ question.active .questionPanel {
     margin-top: 10px;
     margin-bottom:0;
 }
-.app-submit-page .recomends ul li .selected-icon{
-    margin-bottom: 2px;
-}
+    .app-submit-page .recomends ul li .selected-icon {
+        margin-bottom: 10px;
+        
+    }
 .app-submit-page .content-section p {
     margin-bottom: 0;
 }
@@ -453,11 +487,23 @@ question.active .questionPanel {
 .app-submit-page .variant-container .success_media{
     padding-top:30px;
 }
-.variant-container .recomends{
-    border:none;
-    text-align:left;
-    padding:0 12%;
+
+.powered_text {
+    margin-bottom:20px;
+    position:absolute;
+    bottom:0;
+    margin-left:570px;
+    align-items:center;
+}
+
+
+.variant-container .recomends {
+    border: none;
+    text-align: left;
+    padding: 0 8%;
     width: 20000px;
+    margin-bottom:0px;
+    margin-top:35px;
 }
 .variant-container .recomends ul{
     padding-left:0px;
@@ -474,11 +520,17 @@ question.active .questionPanel {
 .app-submit-page .variant-container .content-section p{
     font-family:'Optima Bold';
 }
-.success_media_logo{
-    height:40px;
-    width:40px;
+.success_media_logo {
+    height: 45px;
+    width: 45px;
+    border-radius: 25px;
 }
-.variant-container .content-section p,.variant-container .content-section h6{
+.variant-container .content-section p{
+
+
+}
+
+.variant-container .content-section h6{
     text-align:initial;
 }
 /****Success Page*****/
