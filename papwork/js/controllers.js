@@ -884,6 +884,13 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
     }, function myError(response) {
         $scope.status = response.statusText;
     });
+
+    if (window.location.href.indexOf('#/success') >= 0 && $(window).width() < 768) {
+        angular.element('.experience-screen').css('display', 'inherit');
+    }
+    else {
+        angular.element('.experience-screen').css('display', '');
+    }
 });
 
 myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
