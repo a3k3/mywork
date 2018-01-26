@@ -2618,3 +2618,162 @@ padding:20px;
 .first-row {
     display: flex;
 }
+
+/********Accordian*******/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+.content-wrap{
+  position: absolute;
+  top: 213px;
+  left: 15px;
+  right: 15px;
+  bottom: 10px;
+}
+
+.no-padding-left{
+  padding-left: 0px;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+blockquote{
+  text-align: justify;
+}
+
+.full-height{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.scrollable{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drop-icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 18px;
+}
+
+.drop-icon-wrapper i{
+  transition: 0.3s transform;
+  transform: rotate(0deg);
+  font-weight: 100;
+  margin-right: 15px;
+}
+
+.active-header .drop-icon-wrapper i{
+  transform: rotate(180deg); 
+}
+
+.sir-accordion-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.sir-accordion-wrapper>div+div {
+  /* border-top: 1px solid #EEE; */
+}
+
+.sir-accordion-group{
+  overflow: hidden;
+  width: 100%;
+  padding-left: 15px;
+  /* border-left: 2px dotted #d3d3d3; */
+}
+
+.sir-accordion-group>div+div {
+  /* border-top: 1px solid #EEE; */
+}
+
+.sir-accordion-header{
+  height: 40px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 2px;
+  color: #999999;
+  position: relative;
+  z-index: 1;
+  padding: 0 15px;
+  outline: none;
+}
+
+.sir-accordion-header.active-header{
+  font-weight: bold;
+}
+
+.sir-accordion-content{
+  overflow: hidden;
+  /* padding-left: 15px; */
+}
+
+.sir-accordion-content > div{
+  height: 0px;
+}
+
+.sir-accordion-content > div > div{
+  overflow: auto;
+}
+
+.sir-accordion-vertical-align{
+  height: 100%;
+}
+
+.sir-accordion-vertical-align:before{
+  content: '';
+  height: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.sir-accordion-vertical-align > * {
+  margin: 0;        
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.main-settings .title a {
+    color: #999999;
+    font-size: 22px;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px 5px;
+    outline:none;
+}
+.main-settings .content {
+    height: 40px;
+    display: table;
+    width: 100%;
+    padding: 0 15px;
+    border-left:4px solid #252525;
+    outline:none;
+}
+
+.main-settings .content:hover{
+    background-color:#333;
+    box-sizing:border-box;
+    border-left:4px solid rgb(129,199,132)
+}
+
+.main-settings .content a{
+    color:#999999;
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration:none;
+}
+.sir-accordion-wrapper > div {
+    /* padding: 0 15px; */
+    background: #252525;
+}
+
+/********Accordian*******/
