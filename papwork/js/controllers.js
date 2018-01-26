@@ -1963,8 +1963,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     angular.element($window).bind('resize', function () {
-        console.log('resize');
-        angular.element('.navigation-slide md-card').css('width', angular.element('.navigation-slide md-card').css('height'));
+        //console.log('resize');
+        if($(window).width() > 797)
+            angular.element('.navigation-slide md-card').css('width', angular.element('.navigation-slide md-card').css('height'));
+        else
+            angular.element('.navigation-slide md-card').css('width','');
     });
 });
 
