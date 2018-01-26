@@ -6,7 +6,7 @@ app.config(['$routeProvider', '$controllerProvider', '$mdThemingProvider', funct
     $routeProvider.when('/create', { templateUrl: '/partials/create.html'});
     $routeProvider.when('/cover', { templateUrl: '/partials/cover.html'});
     $routeProvider.when('/success', { templateUrl: '/partials/success.html'});
-    $routeProvider.otherwise({ redirectTo: '/experience' });
+    $routeProvider.otherwise({ redirectTo: '/create' });
     $controllerProvider.allowGlobals();
 
     $mdThemingProvider.extendPalette('green', {

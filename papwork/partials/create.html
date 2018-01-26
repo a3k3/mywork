@@ -18,11 +18,11 @@
                 </md-button>
                 <md-menu-content width="3">
                     <md-menu-item ng-repeat="item in menuitems" ng-if="item.enable">
-                        <md-button ng-click=""> <span md-menu-align-target>Option</span> {{item.name}} </md-button>
+                        <md-button ng-click="menuClick($event, item.action)">{{item.name}} </md-button>
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>
-            <div class="welcometext">Welcome<user ng-bind="username">Amit</user>!</div>
+            <div class="welcometext">Welcome <user ng-bind="user.name"></user></div>
         </div>
     </div>
     <div flex class="mobile-project-title">
@@ -50,4 +50,13 @@
             <ng-include src="'../partials/response.html'"></ng-include>
         </md-tab>
     </md-tabs>
+</div>
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="myDialog">
+        <md-dialog layout-padding>
+            <h2>Sign In</h2>
+            <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" login_text="Log in"></div>
+            <span id="googleSignIn"><span id="signInButton"></span></span>
+        </md-dialog>
+    </div>
 </div>

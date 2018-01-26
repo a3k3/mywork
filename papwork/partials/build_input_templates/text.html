@@ -1,7 +1,7 @@
 ﻿<div ng-repeat="option in question.options" class="text-options">
     <label class="text_placeholder" contenteditable ng-model="option.placeholder" style="position: absolute; top: 6px;z-index:999">{{option.placeholder}}</label>
     <md-input-container>
-        <input class="md-accent hue-2" placeholder="{{option.placeholder}}" type="{{question.answertype}}" ng-disabled="true">
+        <input class="md-accent hue-2" type="{{question.answertype}}" ng-disabled="true">
         <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="true">
             <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
         </md-button>

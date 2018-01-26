@@ -1,3 +1,5 @@
+/// <reference path="C:\Users\0004062\Source\Repos\mywork\papwork\partials/channel.html" />
+/// <reference path="C:\Users\0004062\Source\Repos\mywork\papwork\partials/channel.html" />
 var KeyCodes = {
     BACKSPACE: 8,
     TABKEY: 9,
@@ -164,6 +166,7 @@ function getCaretPosition(editableDiv) {
             range = sel.getRangeAt(0);
             if (range.commonAncestorContainer.parentNode == editableDiv) {
                 caretPos = range.endOffset;
+                nodeValue = range.commonAncestorContainer.nodeValue;
             }
         }
     } else if (document.selection && document.selection.createRange) {
@@ -175,9 +178,10 @@ function getCaretPosition(editableDiv) {
             tempRange.moveToElementText(tempEl);
             tempRange.setEndPoint("EndToEnd", range);
             caretPos = tempRange.text.length;
+            nodeValue = range.commonAncestorContainer.nodeValue;
         }
     }
-    return { caretPos: caretPos, nodeValue: nodeValue };
+    return { caretPos: caretPos, nodeValue: nodeValue, selection: sel };
 }
 
 function guid() {
@@ -417,11 +421,29 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 var tmp = document.createElement("DIV");
                 tmp.innerHTML = temp;
                 if (angular.element(tmp).find('span').length > 0) {
-                    angular.element(tmp).find('span').each(function (index, value) {
-                        if ($(value).hasClass('chip')) {
-                            var answerfor = $(value).data('question-id');
-                            var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
-                            $(value).replaceWith(insertVal);
+                    angular.element(tmp).find('span').each(function (index, innervalue) {
+                        if ($(innervalue).hasClass('chip')) {
+                            var answerfor = $(innervalue).data('question-id');
+                            if ($(innervalue).data('type') == 'question') {
+                                var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
+                                $(innervalue).replaceWith(insertVal);
+                            }
+                            else if ($(innervalue).data('type') == 'cv'){
+                                var option = value.advancedvalidations.calculatedvariable.logic_options.filter(function (item) { return item.name == answerfor })[0];
+                                var tmpOption = document.createElement("DIV");
+                                tmpOption.innerHTML = option.calculation;
+                                if (angular.element(tmpOption).find('span').length > 0) {
+                                    angular.element(tmp).find('span').each(function (index, optionvalue) {
+                                        var optionanswerfor = $(optionvalue).data('question-id');
+                                        var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (optionanswerfor - 1) + '].response"></span>');
+                                        $(optionvalue).replaceWith(insertVal);
+                                    });
+                                }
+                                option.calculation = tmpOption.innerHTML;
+                                var Obj = new BigEval();
+                                var result = Obj.exec(option.calculation);
+                                $(innervalue).replaceWith(result);
+                            }
                         }
                     })
                 }
@@ -586,10 +608,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
                 switch (option.operator) {
                     case "equals": if (answer.value == option.answer.value) _condition = true
-                                   else _condition = false;
+                    else _condition = false;
                         break
                     case "notequals": if (answer.value != option.answer.value) _condition = true
-                                    else _condition = false;
+                    else _condition = false;
                         break
                     default: _condition = true;
                 }
@@ -1095,9 +1117,52 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 active: false,
                 template: 'processingForm',
             }
-        ]
-        
-    };
+        ],
+        metadata:{
+            timeOpened:new Date(),
+            timezone:(new Date()).getTimezoneOffset()/60,
+
+            pageon(){return window.location.pathname},
+            referrer(){return document.referrer},
+            previousSites(){return history.length},
+
+            browserName(){return navigator.appName},
+            browserEngine(){return navigator.product},
+            browserVersion1a(){return navigator.appVersion},
+            browserVersion1b(){return navigator.userAgent},
+            browserLanguage(){return navigator.language},
+            browserOnline(){return navigator.onLine},
+            browserPlatform(){return navigator.platform},
+            javaEnabled(){return navigator.javaEnabled()},
+            dataCookiesEnabled(){return navigator.cookieEnabled},
+            dataCookies1(){return document.cookie},
+            dataCookies2(){return decodeURIComponent(document.cookie.split(";"))},
+            dataStorage(){return localStorage},
+
+            sizeScreenW(){return screen.width},
+            sizeScreenH(){return screen.height},
+            sizeDocW(){return document.width},
+            sizeDocH(){return document.height},
+            sizeInW(){return innerWidth},
+            sizeInH(){return innerHeight},
+            sizeAvailW(){return screen.availWidth},
+            sizeAvailH(){return screen.availHeight},
+            scrColorDepth(){return screen.colorDepth},
+            scrPixelDepth(){return screen.pixelDepth},
+
+
+            latitude(){return position.coords.latitude},
+            longitude(){return position.coords.longitude},
+            accuracy(){return position.coords.accuracy},
+            altitude(){return position.coords.altitude},
+            altitudeAccuracy(){return position.coords.altitudeAccuracy},
+            heading(){return position.coords.heading},
+            speed(){return position.coords.speed},
+            timestamp(){return position.timestamp},
+
+
+        }
+};
 
     $rootScope.formid = $scope.buildQuestionsObj.id;
 
@@ -1241,7 +1306,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 if (tempoptions.length > 0) {
                     $scope.buildQuestionsObj.questions[index].options = tempoptions;
                     angular.forEach($scope.buildQuestionsObj.questions[index].options, function (option, i) {
-                        if (option.value == "") {
+                        if (option.value == "" && option.answertype != "text") {
                             option.value = "Edit This";
                         }
                     })
@@ -1297,17 +1362,17 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.contentEdit = function (e) {       
         var keycode = e.which ? e.which : e.keyCode;
         var el = angular.element(e.target);
-            if (keycode == 13) {
-                if (!e.shiftKey) {
-                    el.blur();
+        if (keycode == 13) {
+            if (!e.shiftKey) {
+                el.blur();
+                $timeout(function () {
+                    el.closest("md-radio-button").next().triggerHandler('click');
                     $timeout(function () {
-                        el.closest("md-radio-button").next().triggerHandler('click');
-                        $timeout(function () {
-                            el.next().focus();
-                        }, 500);
-                    });                    
-                }
-            }        
+                        el.next().focus();
+                    }, 500);
+                });                    
+            }
+        }        
     }
 
     $scope.updateAdvanceAnswers = function (logic) {
@@ -1786,8 +1851,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 text: "Question#" + value.id,
                 click: function ($itemScope, $event, modelValue, text, $li) {
                     var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
-                    var start = $itemScope.question.question.substring(startindex, startindex+$scope.questionCursor.caretPos);
-                    var texttoAdd = '<span class="chip" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
+                    var start = $itemScope.question.question.substring(0, startindex + $scope.questionCursor.caretPos);
+                    var texttoAdd = '<span class="chip" data-type="question" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
                     var end = $itemScope.question.question.substring(startindex + $scope.questionCursor.caretPos);
                     $($event.target).html(start + texttoAdd + end);
                     angular.element('.removeChip').on('click', function (event) {
@@ -1810,8 +1875,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                             text: innervalue.name,
                             click: function ($itemScope, $event, modelValue, text, $li) {
                                 var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
-                                var start = $itemScope.question.question.substring(startindex, startindex + $scope.questionCursor.caretPos);
-                                var texttoAdd = '<span class="chip" data-question-id="' + innervalue.name + '" contenteditable="false" readonly>' + innervalue.name + '<span class="removeChip">-</span></span>';
+                                var start = $itemScope.question.question.substring(0, startindex + $scope.questionCursor.caretPos);
+                                var texttoAdd = '<span class="chip" data-type="cv" data-question-id="' + innervalue.name + '" contenteditable="false" readonly>' + innervalue.name + '<span class="removeChip">-</span></span>';
                                 var end = $itemScope.question.question.substring(startindex + $scope.questionCursor.caretPos);
                                 $($event.target).html(start + texttoAdd + end);
                                 angular.element('.removeChip').on('click', function (event) {
@@ -1821,34 +1886,37 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                             hasBottomDivider: true
                         })
                     }
-            });
+                });
         });
         return list;
     }
 
     $scope.menuOptions = function () {
-       return [
-              {
-                  text: 'Highlight',
-                  click: function ($itemScope, $event) {
-                      $scope.highlightSelection($event)
-                  },
-                  hasBottomDivider: true
-              },
-              {
-                  text: 'Insert Answer of',
-                  click: function ($itemScope) { },
-                  children: $scope.questionList()
-              },
-              {
-                  text: 'Calculated Variable',
-                  click: function ($itemScope) { },
-                  children: $scope.calculatedVariableList()
-              },
+        return [
+               {
+                   text: 'Highlight',
+                   click: function ($itemScope, $event) {
+                       $scope.highlightSelection($event)
+                   },
+                   hasBottomDivider: true
+               },
+               {
+                   text: 'Insert Answer of',
+                   click: function ($itemScope) { },
+                   children: $scope.questionList()
+               },
+               {
+                   text: 'Calculated Variable',
+                   click: function ($itemScope) { },
+                   children: $scope.calculatedVariableList()
+               },
         ]
     };
 
-    $scope.calculationCursor = {};
+    $scope.calculationCursor = {
+        caretPos: 0,
+        nodeValue: ""
+    };
 
     $scope.questionCursor = {};
 
@@ -1861,11 +1929,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     }
 
     $scope.addQuestionToCalculation = function (event, question) {
-        var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
-        var startindex = calculationbox.html().indexOf($scope.questionCursor.nodeValue);
-        var start = calculationbox.html().substring(startindex, startindex+$scope.calculationCursor);
+        var calculationbox = angular.element(event.target).closest('.logic_options').find('.calculations');
+        var startindex = calculationbox.html().indexOf($scope.calculationCursor.nodeValue);
+        var start = calculationbox.html().substring(0, startindex + $scope.calculationCursor.caretPos);
         var texttoAdd = '<span class="chip" data-question-id=' + question.id + ' contenteditable="false" readonly>' + angular.element(event.target).text() + '<span class="removeChip">-</span></span>';
-        var end = calculationbox.html().substring(startindex+$scope.calculationCursor);
+        var end = calculationbox.html().substring(startindex + $scope.calculationCursor.caretPos);
         calculationbox.html(start + texttoAdd + end);
         angular.element('.removeChip').on('click', function (event) {
             angular.element(event.target).parent().remove();
@@ -1993,22 +2061,22 @@ var table = {
         ],
         "reviewerResponses": {
             "1": { 
-                  'reviewerId':"rev1",
-                  'responses': [
-                      {
+                'reviewerId':"rev1",
+                'responses': [
+                    {
                         'Q': "Plz answer Q1",
                         'A':"Answer1"
-                      },
-                      {
+                    },
+                    {
                         'Q': "Answer Q2",
                         'A':"Answer2"
-                      },
-                      {
+                    },
+                    {
                         'Q': "Answer Q3",
                         'A': "Answer3"
-                      }
-                  ]
-        },
+                    }
+                ]
+            },
             "2": {
                 'reviewerId': "rev2",
                 'responses': [
@@ -2092,7 +2160,7 @@ var table = {
         }
     },
     '3':{
-    "ResponseID":"345hfggty",
+        "ResponseID":"345hfggty",
         "userResponses": [
             {
                 'Q': "What is your Name?",
@@ -2115,9 +2183,9 @@ var table = {
                 'A': "Bangalore"
             }
         ],
-    "reviewerResponses": {
-        "1": {
-            'reviewerId':"rev1",
+        "reviewerResponses": {
+            "1": {
+                'reviewerId':"rev1",
                 'responses': [
                     {
                         'Q': "Plz answer Q1",
@@ -2132,9 +2200,9 @@ var table = {
                         'A': "Answer3"
                     }
                 ]
-        },
-        "2": {
-            'reviewerId': "rev2",
+            },
+            "2": {
+                'reviewerId': "rev2",
                 'responses': [
                     {
                         'Q': "Plz answer Q1",
@@ -2146,12 +2214,12 @@ var table = {
                     }
 
                 ]
-        }
-    },
-    "Action": {
-        "value": "review",
+            }
+        },
+        "Action": {
+            "value": "review",
             "state":"enabled"
-    }
+        }
     },
     '4': {
         "ResponseID": "345hfggtx",
@@ -2437,7 +2505,7 @@ function take(targetElem) {
     //    }
     //});
     //targetElem.imagesLoaded(function () {
-        // At this point the container has no SVG, it only has HTML and Canvases.
+    // At this point the container has no SVG, it only has HTML and Canvases.
 
         
     //})
@@ -2864,9 +2932,10 @@ myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event,
     }
 })
 
-myapp.controller('mainCtrl', function ($scope, $mdSidenav) {
+myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, $window, $mdDialog, $interval) {
 
     $scope.toggleLeftMenu = buildToggler('left');
+    $rootScope.loginstatus = false;
 
     function buildToggler(componentId) {
         return function () {
@@ -2874,23 +2943,62 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav) {
         };
     }
 
-    $scope.menuitems = [
+    $rootScope.$watch('loginstatus', function (newval, oldval) {
+        $scope.menuitems = [
         {
             name: "Log In",
-            enable: false
+            enable: !$rootScope.loginstatus,
+            action: 'logIn'
         },
         {
             name: "My Profile",
-            enable: true
+            enable: $rootScope.loginstatus,
+            action: 'showProfile'
         },
         {
             name: "Log Out",
-            enable: true
+            enable: $rootScope.loginstatus,
+            action: 'logOut'
         }
-    ];
+        ];
+        if (newval == true) {
+            $mdDialog.cancel()
+        }
+    },true)
 
     $scope.openUserMenu = function ($mdOpenMenu,ev) {
         $mdOpenMenu(ev);
+    }
+
+    $scope.menuClick = function (evt, action) {
+        if (action == 'logIn') {
+            $mdDialog.show({
+                contentElement: '#myDialog',
+                parent: angular.element(document.body),
+                targetEvent: evt,
+                clickOutsideToClose: true
+            })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        }
+        if (action == 'logOut') {
+            if($rootScope.user.logintype == 'fb')
+                FBLogin.logout();
+            else if ($rootScope.user.logintype == 'google')
+                gapi.auth.signOut();
+        }
+    }
+
+    function userLogInController($scope, $mdDialog) {
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
     }
 
     $scope.activeArray = 1;
@@ -2924,4 +3032,121 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav) {
           "title": "Tutorials/FAQ", "topContent": null, "bottomContent": '<div class="content"><a href="#">market survey</a></div><div class="content"><a href="#">digital marketing</a></div>'
       }
     ];
+
+    /********Login Section********/
+    $rootScope.user = {};
+
+    $window.fbAsyncInit = function () {
+        // Executed when the SDK is loaded
+
+        FB.init({
+            appId: '160699188044730',
+            channelUrl: '../partials/channel.html',
+            status: true,
+            cookie: true,
+            xfbml: true,
+            version: 'v2.11'
+        });
+
+        FBLogin.watchLoginChange();
+    };
+
+    (function (d) {
+        // load the Facebook javascript SDK
+
+        var js,
+        id = 'facebook-jssdk',
+        ref = d.getElementsByTagName('script')[0];
+
+        if (d.getElementById(id)) {
+            return;
+        }
+
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.11&appId=160699188044730&autoLogAppEvents=1';
+
+        ref.parentNode.insertBefore(js, ref);
+
+    }(document));
+
+    (function () {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/client:plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+    /********Login Section********/
+
+    /********Google Login*******/
+    // Here we do the authentication processing and error handling.
+    // Note that authResult is a JSON object.
+    $scope.processAuth = function (authResult) {
+        // Do a check if authentication has been successful.
+        if (authResult['access_token']) {
+            // Successful sign in.
+            $scope.loginstatus = true;
+            $scope.getUserInfo();
+        } else if (authResult['error']) {
+            // Error while signing in.
+            $scope.loginstatus = false;
+
+            // Report error.
+        }
+    };
+
+    // When callback is received, we need to process authentication.
+    $scope.signInCallback = function (authResult) {
+        $scope.processAuth(authResult);
+    };
+
+    // Render the sign in button.
+    $scope.renderSignInButton = function () {
+        gapi.signin.render('signInButton',
+            {
+                'callback': $scope.signInCallback, // Function handling the callback.
+                'clientid': '1055571027314-qo369uaquc3rjapkhnrtrnp5c3pa0n2g.apps.googleusercontent.com', // CLIENT_ID from developer console which has been explained earlier.
+                'requestvisibleactions': 'http://schemas.google.com/AddActivity', // Visible actions, scope and cookie policy wont be described now,
+                // as their explanation is available in Google+ API Documentation.
+                'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+                'cookiepolicy': 'single_host_origin'
+            }
+        );
+    }
+
+    // Start function in this example only renders the sign in button.
+    $scope.start = function () {
+        $scope.renderSignInButton();
+    };
+
+    // Call start function on load.
+    $scope.load = function () {
+        var gt = $interval(function () {
+            if (gapi != undefined) {
+                $interval.cancel(gt);
+                $scope.start();
+            }
+        }, 100);
+    };
+
+    // When callback is received, process user info.
+    $scope.userInfoCallback = function (userInfo) {
+        // You can check user info for domain.
+        $rootScope.user.name = userInfo.displayName;
+        $rootScope.user.logintype = 'google';
+        $rootScope.user.id = userInfo.id;
+        $rootScope.loginstatus = true;
+    };
+
+    // Request user info.
+    $scope.getUserInfo = function () {
+        gapi.client.request(
+            {
+                'path': '/plus/v1/people/me',
+                'method': 'GET',
+                'callback': $scope.userInfoCallback
+            }
+        );
+    };
+    /********Google Login*******/
 });
