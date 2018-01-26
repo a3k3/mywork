@@ -1268,8 +1268,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var tempoptions = [];
         if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0)
             tempoptions = $scope.buildQuestionsObj.questions[index].options;
-        if ($scope.buildQuestionsObj.questions[index].question == undefined || $scope.buildQuestionsObj.questions[index].question == "" || $scope.buildQuestionsObj.questions[index].question == "undefined")
-            $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
+        $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
         if (qtype != null) {
             $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion[qtype]);
         }

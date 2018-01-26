@@ -816,6 +816,7 @@ buildquestion .category {
 
 .apply-questions-container .app-submit-page .success_media {
     padding-top: 5px;
+
 }
 
 .apply-questions-container .app-submit-page .content-section > * {
@@ -827,6 +828,9 @@ buildquestion .category {
 .apply-questions-container .app-submit-page .content-section h6 {
     margin: 0;
 }
+
+
+
 
 .mobile-project-title md-input-container {
     width: 45%;
@@ -2068,7 +2072,8 @@ formsettings ng-include [layout="row"] {
     padding: 0;
 }
 
-.modalpop{background-color:light-grey;/* border:2px solid grey; */display:block;position: absolute;padding:30px;border-radius: 5px;width: 35vw;background: #FFf;display: inline-block;box-shadow: 5px 5px 5px #d2d2d2;border-radius: 10px;top: 50%;left: 50%;transform: translate(-50%,-50%);}
+.modalpop{background-color:light-grey;/* border:2px solid grey; */display:block;position: absolute;padding:45px;border-radius: 5px;width: 40vw;background: #FFf;
+          display: inline-block;box-shadow: 5px 5px 5px #d2d2d2;border-radius: 10px;top: 33%;left: 62%;transform: translate(-50%,-50%);}
 
 .modalpop .search-box input {
     width: 100%;
@@ -2101,7 +2106,7 @@ formsettings ng-include [layout="row"] {
 
 .modalpop .search_pop {
     border: 1px solid #d2d0d0;
-    width: 80%;
+    width: 100%;
     border-radius: 5px;
     position: static;
     display: inline-block;
@@ -2168,7 +2173,7 @@ formsettings ng-include [layout="row"] {
 
 /*emailform*/
 .email_layout {
-    position:relative;
+    padding:40px;
 }
 
 .email_table .table-head {
@@ -2180,7 +2185,7 @@ formsettings ng-include [layout="row"] {
 .email_table .table-row {
     padding: 10px 20px;
     border: 1px solid #E4E4E4;
-    border-top: none;
+   
 }
 
 .email_table button.md-icon-button {
@@ -2365,207 +2370,251 @@ email_left textarea {
 }*/
 
 /*Processing Form*/
-.Calculated{
-background-color:#7f1db1;
-padding:15px;
-color:white;
-margin-right:15px;
+.processing_layout{
+    padding:25px;
+}
+.Calculated {
+    background-color: #7f1db1;
+    padding: 6px;
+    height: 130px;
+    color: white;
+    margin-right: 11px;
 }
 .Docgen{
-background-color:#72a032d9;
-padding:15px;
-color:white;
-float:left;
-margin-right:15px;
+    background-color: #72a032d9;
+    padding: 3px;
+    height: 130px;
+    color: white;
+    margin-right: 11px;
 }
 .DocScan{
-background-color:#6ddee8;
-padding:15px;
-color:white;
-float:left;
-margin-right:10px;
+    background-color: #6ddee8;
+    padding: 6px;
+    height: 130px;
+    color: white;
+    margin-right: 11px;
 }
 
 .Url{
-background-color:#7c8ca9;
-padding:15px;
-color:white;
-float:left;
+    background-color: #7c8ca9;
+    padding: 6px;
+    height: 130px;
+    color: white;
+   
 }
 .templateEdit{
-  margin-top: 30px;
-
 }
 .templateEdit .actions-table {
     padding:5px;
 }
 
 
-.templateEdit .table-row{
-padding: 10px 20px;
-    border:1px solid #E4E4E4;
-    border-top: none;
-}
+    .templateEdit .table-row {
+        padding: 10px 5px;
+        border: 1px solid #E4E4E4;
+    }
 .color-section md-icon.md-mytheme-theme.md-primary {
     color: rgb(238, 242, 239);
 }
 
-
-/********Accordian*******/
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+/*Calculated Variable Popup*/
+.Calculate_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;s
 }
-.content-wrap{
-  position: absolute;
-  top: 213px;
-  left: 15px;
-  right: 15px;
-  bottom: 10px;
+.inner_content {
+background-color:white;
+padding:20px;
 }
-
-.no-padding-left{
-  padding-left: 0px;
-}
-
-.clickable{
-  cursor: pointer;
-}
-
-blockquote{
-  text-align: justify;
+.doc_section  {
+    display:flex;
 }
 
-.full-height{
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+
+.type_variable {
+    margin-top: 20px;
+}
+.type_variable h4{
+    display:inline-block;
 }
 
-.scrollable{
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+
+.type_variable md-input-container {
+    display: inline-block;
+    margin: 0;
+    margin-left: 300px;
 }
 
-.drop-icon-wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  font-size: 18px;
+.variable_setting{
+    margin-top:40px;
+}
+.left_varible {
+    display: inline-block;
+   width:50%
+}
+ .left_varible .actions-table .table-head {
+      border-radius:8px 8px 0 0;
+}
+    
+.right_varible {
+        display: inline-block;
+        width: 50%;
+        margin-left: 20px;
+       
+}
+.right_varible .actions-table .table-head {
+    border-radius: 8px 8px 0 0;
+}
+.left-table-cell .table-row {
+    border: none;
+    /* width: 22%; */
+    text-align: center;
+    display: inline;
+    padding:5px;
+   
+}
+.right-table-cell {
+   border-left:1px solid #E4E4E4;
+    margin-left:120px;
+    float: left;
+    width:25vh;
+   
+
+}  
+ .right-table-cell .table-row{
+     border:none;
+ }
+.cancel_save_variable {
+        align-content: center;
+        margin-left: 200px;
+        margin-top: 20px;
+        color: white;
+    }
+.cancel_save_variable .md-button{
+    background-color:grey;
 }
 
-.drop-icon-wrapper i{
-  transition: 0.3s transform;
-  transform: rotate(0deg);
-  font-weight: 100;
-  margin-right: 15px;
+/*Docgen Popup*/
+.Docgen_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;
+    height:450px;
+    
 }
 
-.active-header .drop-icon-wrapper i{
-  transform: rotate(180deg); 
+.cancel_save_variable {
+    align-content: center;
+    margin-left: 200px;
+    margin-top: 20px;
+    color: white;
 }
 
-.sir-accordion-wrapper {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-  display: block;
+ .cancel_save_variable .md-button {
+        background-color: grey;
+ }
+
+/*Docscan_Popup */
+.Docscan_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;
+    height: 450px;
 }
 
-.sir-accordion-wrapper>div+div {
-  /* border-top: 1px solid #EEE; */
+.Url_Popup {
+    background-color: white;
+    /* width: 70%; */
+    position: absolute;
+    /* display: inline-block; */
+    margin-top: 4%;
+    margin-left: -2%;
+    width: 71%;
+    position: absolute;
+    padding: 0;
+    height: 450px;
 }
 
-.sir-accordion-group{
-  overflow: hidden;
-  width: 100%;
-  padding-left: 15px;
-  /* border-left: 2px dotted #d3d3d3; */
+/*Generate_doc */
+.document_section {
+    background-color: #efefef;
 }
 
-.sir-accordion-group>div+div {
-  /* border-top: 1px solid #EEE; */
+.document_section_inner {
+    background-color: #ada8a8;
+    width: 815px;
+    height: 500px;
+    margin-left: 125px;
 }
 
-.sir-accordion-header{
-  height: 40px;
-  cursor: pointer;
-  overflow: hidden;
-  margin-bottom: 2px;
-  color: #999999;
-  position: relative;
-  z-index: 1;
-  padding: 0 15px;
-  outline: none;
+.cancel_save_section {
+    padding: 5px;
+    margin-top: 60px;
+    margin-left: 70px;
+}
+/*
+.document_section .md-button.md-mytheme-theme.md-primary.md-raised, .md-button.md-mytheme-theme.md-primary.md-fab {
+    color: rgb(255,255,255);
+    background-color: rgb(76,175,80);
 }
 
-.sir-accordion-header.active-header{
-  font-weight: bold;
+.document_section .md-button.md-raised hue-2 .md-button, .md-mytheme-theme.md-ink-ripple {
+    color: rgb(255,255,255);
+    background-color: grey;
 }
-
-.sir-accordion-content{
-  overflow: hidden;
-  /* padding-left: 15px; */
-}
-
-.sir-accordion-content > div{
-  height: 0px;
-}
-
-.sir-accordion-content > div > div{
-  overflow: auto;
-}
-
-.sir-accordion-vertical-align{
-  height: 100%;
-}
-
-.sir-accordion-vertical-align:before{
-  content: '';
-  height: 100%;
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.sir-accordion-vertical-align > * {
-  margin: 0;        
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.main-settings .title a {
-    color: #999999;
-    font-size: 22px;
+*/
+.line .input[type=text] {
     width: 100%;
-    text-decoration: none;
-    padding: 10px 5px;
-    outline:none;
+    border: none;
+    border-bottom: 2px solid grey;
 }
-.main-settings .content {
-    height: 40px;
-    display: table;
+
+.line.md-input-container.md-input {
+    display: block;
+    margin-top: 0;
+    background: none;
+    padding: 2px 2px 1px;
+    border-width: 0 0 1px;
+    line-height: 26px;
+    height: 30px;
+    border-radius: 0;
+    border-style: solid;
     width: 100%;
-    padding: 0 15px;
-    border-left:4px solid #252525;
-    outline:none;
+    box-sizing: border-box;
+    float: left;
 }
 
-.main-settings .content:hover{
-    background-color:#333;
-    box-sizing:border-box;
-    border-left:4px solid rgb(129,199,132)
+.document_section_inner .Property {
+    display: flex;
 }
 
-.main-settings .content a{
-    color:#999999;
-    display: table-cell;
-    vertical-align: middle;
-    text-decoration:none;
-}
-.sir-accordion-wrapper > div {
-    /* padding: 0 15px; */
-    background: #252525;
+.document_section_inner .input_line {
+    display: flex;
 }
 
-/********Accordian*******/
+.line1 {
+    display: flex;
+}
+
+.first-row {
+    display: flex;
+}

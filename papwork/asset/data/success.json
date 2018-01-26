@@ -14,7 +14,19 @@
     }
   },
   "official": {
-
+    "headline": "Application Submitted",
+    "media_src": "../asset/img/submitted_icon.JPG",
+    "content": {
+      "headline_text": "Thanks a lot Your response will be very helpful in my efforts.",
+      "mail_text": "Can you please cheer for me?",
+      "cheer_text": "I am looking for 400 responses.A SINGLE SHARE will  definitely help me get more responses from people in your social network.",
+      "poweredby_text": "Powered by pap work",
+      "home_button": {
+        "url": "#/cover",
+        "text": "Home"
+      },
+      "share_text": "Please Help & Share"
+    }
   },
   "settings": {
     "successtemplate": {
@@ -49,6 +61,32 @@
         {
           "link_icon": "../asset/img//pancard.jpg",
           "link_title": "Tax",
+          "link_url": "#"
+        }
+
+      ]
+    },
+    "share": {
+      "name": "share",
+      "options": [
+        {
+          "link_icon": "../asset/img//facebook.png",
+          "link_title": "facebook",
+          "link_url": "#"
+        },
+        {
+          "link_icon": "../asset/img//twitter.png",
+          "link_title": "twitter",
+          "link_url": "#"
+        },
+        {
+          "link_icon": "../asset/img//link.png",
+          "link_title": "link",
+          "link_url": "#"
+        },
+        {
+          "link_icon": "../asset/img//mail.png",
+          "link_title": "Mail",
           "link_url": "#"
         }
 
