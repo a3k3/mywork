@@ -1,5 +1,3 @@
-/// <reference path="C:\Users\0004062\Source\Repos\mywork\papwork\partials/channel.html" />
-/// <reference path="C:\Users\0004062\Source\Repos\mywork\papwork\partials/channel.html" />
 var KeyCodes = {
     BACKSPACE: 8,
     TABKEY: 9,
@@ -1169,7 +1167,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
 
         }
-};
+    };
 
     $rootScope.formid = $scope.buildQuestionsObj.id;
 
@@ -1203,6 +1201,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             else {
                 $scope.buildcoverdata.cover_template = 'default';
             }
+            $timeout(function () {
+                hideProgressBar();
+            }, 500)
         })
     }, function myError(response) {
         $scope.status = response.statusText;
@@ -1275,7 +1276,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var tempoptions = [];
         if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0)
             tempoptions = $scope.buildQuestionsObj.questions[index].options;
-        $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
+        if ($scope.buildQuestionsObj.questions[index].question == undefined || $scope.buildQuestionsObj.questions[index].question == "" || $scope.buildQuestionsObj.questions[index].question == "undefined")
+            $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion.dummyQuestion);
         if (qtype != null) {
             $scope.buildQuestionsObj.questions[index] = angular.copy(sampleQuestion[qtype]);
         }
@@ -1309,10 +1311,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
             //add options if exist
             if (typedata.options) {
-                if (tempoptions.length > 0) {
+                if (tempoptions.length > 0 && (type == "radio" || type == "checkbox" || type == "select")) {
                     $scope.buildQuestionsObj.questions[index].options = tempoptions;
                     angular.forEach($scope.buildQuestionsObj.questions[index].options, function (option, i) {
-                        if (option.value == "" && option.answertype != "text") {
+                        if (option.value == "") {
                             option.value = "Edit This";
                         }
                     })
@@ -1344,6 +1346,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var copyObj = angular.copy(activequestion.options[activequestion.options.length - 1]);
         copyObj.id += 1;
         activequestion.options.push(copyObj);
+        $timeout(function () {
+            angular.element(event.target).prev().find('[contenteditable]').focus();
+        }, 1000)
     }
 
     //add advance setting option
@@ -1484,6 +1489,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             if ($scope.buildQuestionsObj.activeNow <= $scope.buildQuestionsObj.maxCount())
                 $scope.buildQuestionsObj.activeNow++;
         }
+
+        hideProgressBar();
+
         if ($('.navigating_blocks .slideactive').offset().left > 220 && $('.navigating_blocks .slideactive').offset().left < 230 && $('.navigating_blocks .slideactive').nextAll().length > 0) {
             $(".navigating_blocks").animate({
                 marginLeft: '-=54px'
@@ -1501,10 +1509,21 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             if ($scope.buildQuestionsObj.activeNow > 1)
                 $scope.buildQuestionsObj.activeNow--;
         }
+        hideProgressBar();
         if ($('.navigating_blocks .slideactive').offset().left < 15 && $('.navigating_blocks .slideactive').prevAll().length) {
             $(".navigating_blocks").animate({
                 marginLeft: '+=54px'
             }, 500);
+        }
+    }
+
+    //hide progressbar in build
+    function hideProgressBar() {
+        if ($('.apply-questions-container .slideactive').find('.cover-page').length > 0 || $('.apply-questions-container .slideactive').find('.app-submit-page').length > 0) {
+            angular.element('.build .progressContainer .status').css('display', 'none');
+        }
+        else {
+            angular.element('.build .progressContainer .status').css('display', '');
         }
     }
 
@@ -1684,6 +1703,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         for (var i = index + 1; i <= $scope.buildQuestionsObj.maxCount() + 1; i++) {
             angular.element('.navigating_blocks md-card').find('.flip').eq(i).removeClass('slideleft')
         }
+        hideProgressBar();
     }
 
     var formdata = new FormData();
@@ -1955,8 +1975,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         var keycode = e.which ? e.which : e.keyCode;
         if (keycode == 13) {
             if (!e.shiftKey) {
+                e.preventDefault();
                 $timeout(function () {
-                    angular.element(e.target).closest("md-radio-button").next().triggerHandler('click');
+                    angular.element(e.target).closest(".option").parent().find('.add-option').triggerHandler('click');
                 });
             }
         }

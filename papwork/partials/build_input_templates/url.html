@@ -1,13 +1,19 @@
-﻿<div ng-repeat="option in question.options" class="text-options">
-    <label class="text_placeholder" contenteditable ng-model="option.placeholder" style="position: absolute; top: 6px;z-index:999">{{option.placeholder}}</label>
-    <md-input-container>
-        <input class="md-accent hue-2" placeholder="{{option.placeholder}}" ng-pattern="/^.+@.+\..+$/" type="{{question.answertype}}">
-        <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="true">
-            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
-        </md-button>
-    </md-input-container>
-</div>
-<div class="add-option" ng-click="addOption($event)">
-    <md-tooltip md-direction="top">Add Options</md-tooltip>
-    <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+﻿<div class="options-block">
+    <div ng-repeat="option in question.options" class="text-options option">
+        <label class="text_placeholder" contenteditable ng-model="option.placeholder" style="position: absolute; top: 6px;z-index:999">{{option.placeholder}}</label>
+        <md-input-container>
+            <input class="md-accent hue-2" placeholder="{{option.placeholder}}" ng-pattern="/^.+@.+\..+$/" type="{{question.answertype}}">
+            <md-button class="tick md-icon-button md-primary hue-2" aria-label="Tick" ng-click="questionsObj.next()" ng-disabled="true">
+                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_check_circle_black_24px.svg"></md-icon>
+            </md-button>
+        </md-input-container>
+        <div class="delete-option" ng-click="deleteOption($event)">
+            <md-tooltip md-direction="top">Delete Option</md-tooltip>
+            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+        </div>
+    </div>
+    <div class="add-option" ng-click="addOption($event)">
+        <md-tooltip md-direction="top">Add Options</md-tooltip>
+        <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+    </div>
 </div>

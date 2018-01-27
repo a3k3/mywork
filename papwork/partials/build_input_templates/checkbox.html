@@ -1,17 +1,27 @@
-﻿<div class="option checkbox-block" ng-if="!question.validations.enableMedia.condition">
-    <md-checkbox class="green" ng-repeat="option in question.options"><span contenteditable ng-model="option.value">{{option.value}}</span></md-checkbox>
+﻿<div class="default checkbox-block" ng-if="!question.validations.enableMedia.condition">
+    <div class="option" ng-repeat="option in question.options">
+        <md-checkbox class="green"><span contenteditable ng-model="option.value" ng-keydown="contentEdit($event)">{{option.value}}</span></md-checkbox>
+        <div class="delete-option" ng-click="deleteOption($event)">
+            <md-tooltip md-direction="top">Delete Option</md-tooltip>
+            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+        </div>
+    </div>
     <div class="add-option" ng-click="addOption($event)">
         <md-tooltip md-direction="top">Add Options</md-tooltip>
         <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
     </div>
+
 </div>
 <div class="image-product-type"  ng-if="question.validations.enableMedia.condition">
     <div class="top-row">
-        <div class="products" ng-repeat="option in question.options">
+        <div class="products option" ng-repeat="option in question.options">
             <img src="{{option.media_src}}">
             <img class="selected-icon" src="../../asset/img/checked.jpg">
             <p class="font-size-12">{{option.name}}</p>
             <input class="checkbox" type="checkbox" value="{{option.value}}" ng-hide="true" />
+            <div class="delete-option" ng-click="deleteOption($event)">
+                <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+            </div>
         </div>
     </div>
     <div class="add-option" ng-click="addOption($event)">

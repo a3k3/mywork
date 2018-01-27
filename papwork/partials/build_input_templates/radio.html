@@ -1,5 +1,11 @@
-﻿<md-radio-group class="option">
-    <md-radio-button ng-repeat="option in question.options" class="md-primary"><span contenteditable ng-keydown="contentEdit($event)" ng-model="option.value">{{option.value}}</span></md-radio-button>
+﻿<md-radio-group class="radio-block">
+    <div class="option" ng-repeat="option in question.options">
+        <md-radio-button class="md-primary"><span contenteditable ng-keydown="contentEdit($event)" ng-model="option.value">{{option.value}}</span></md-radio-button>
+        <div class="delete-option" ng-click="deleteOption($event)">
+            <md-tooltip md-direction="top">Delete Option</md-tooltip>
+            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+        </div>
+    </div>
     <div ng-click="addOption($event)" class="add-option">
         <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
     </div>

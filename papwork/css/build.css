@@ -922,7 +922,7 @@ label + md-input-container label {
     padding-top: 5px;
 }
 
-.apply-questions-container .inputContainer .checkbox-block {
+.apply-questions-container .inputContainer .checkbox-block,.apply-questions-container .inputContainer .radio-block,.apply-questions-container .inputContainer .options-block {
     margin: 0;
     height: 200px;
     overflow-y: scroll;
@@ -932,6 +932,13 @@ label + md-input-container label {
     margin: 0;
     height: 200px;
     overflow-y: scroll;
+    display: block;
+}
+.navigating_blocks md-card question .questionPanel .answerContainer
+{
+    height: 200px;
+    overflow-y: scroll;
+    width:90%;
 }
 
 .apply-questions-container .file-option, .apply-questions-container .number-options {
@@ -940,14 +947,44 @@ label + md-input-container label {
     display: block;
 }
 
-    .apply-questions-container .file-option md-input-container, .apply-questions-container .number-options md-input-container {
-        margin-top: 0;
-    }
+.apply-questions-container .file-option md-input-container, .apply-questions-container .number-options md-input-container {
+    margin-top: 0;
+}
+
+.apply-questions-container md-checkbox, .apply-questions-container md-radio-button {
+    float: left;
+    margin: 3px 0;
+}
 
 .apply-questions-container .add-option {
     float: left;
 }
-
+.apply-questions-container .delete-option, .navigating_blocks .delete-option{
+    display: inline-block;
+    margin-left: 40px;
+}
+.navigating_blocks md-checkbox, .navigating_blocks md-radio-button {
+    float: left;
+    margin: 3px 0;
+    clear:left;
+}
+.navigating_blocks .delete-option{
+    float:left;
+}
+.navigating_blocks .add-option {
+    float: left;
+}
+.apply-questions-container .inputContainer .products.option {
+    width: 200px;
+}
+.apply-questions-container .inputContainer .products.option .delete-option{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.inputContainer .option:first-child .delete-option {
+    visibility: hidden;
+}
 
 #tab-content-3  .cover-page {
     height: 88vh;
@@ -1010,13 +1047,13 @@ settings ng-include.showhide [layout="row"]:hover .remove {
     transition: left .2s ease-out;
 }
 
-.text-options {
+.text-options, .email-options, .textarea-options {
     position: relative;
 }
 
-    .text-options md-input-container {
-        margin-top: 0;
-    }
+.text-options md-input-container, .email-options md-input-container, .textarea-options md-input-container {
+    margin-top: 0;
+}
 
 .basic.mustanswer {
     display: none;

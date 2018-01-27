@@ -1,11 +1,16 @@
-﻿<div ng-repeat="option in question.options" class="textarea-options">
-    <label contenteditable ng-model="option.placeholder" style="position: absolute; top: 6px;z-index:999">{{option.placeholder}}</label>
-    <md-input-container>
-        <label>{{option.placeholder}}</label>
-        <textarea name="textarea" rows="4" ng-disabled="true"></textarea>
-    </md-input-container>
-</div>
-<div class="add-option" ng-click="addOption($event)">
-    <md-tooltip md-direction="top">Add Options</md-tooltip>
-    <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+﻿<div class="options-block">
+    <div ng-repeat="option in question.options" class="textarea-options option">
+        <label contenteditable ng-model="option.placeholder" style="position: absolute; top: 6px;z-index:999">{{option.placeholder}}</label>
+        <md-input-container>
+            <label>{{option.placeholder}}</label>
+            <textarea name="textarea" rows="4" ng-disabled="true"></textarea>
+        </md-input-container>
+        <div class="delete-option" ng-click="deleteOption($event)">
+            <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+        </div>
+    </div>
+    <div class="add-option" ng-click="addOption($event)">
+        <md-tooltip md-direction="top">Add Options</md-tooltip>
+        <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_add_circle_black_24px.svg" class="md-primary md-hue-1"></md-icon>
+    </div>
 </div>

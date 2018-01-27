@@ -1215,5 +1215,89 @@
         ]
       }
     }
+  },
+  "input_calendar": {
+    "options": [
+      {
+        "id": 1,
+        "value": "",
+        "placeholder": "Placeholder Text"
+      }
+    ],
+    "settings": {
+      "mustanswer": {
+        "name": "mustanswer",
+        "condition": false,
+        "text": "Thats required!"
+      },
+      "maxlength": {
+        "name": "maxlength",
+        "condition": 10,
+        "text": "Thats too long!"
+      },
+      "autocomplete": {
+        "name": "autocomplete",
+        "condition": false,
+        "time": 0,
+        "text": "This response is timed."
+      },
+      "acceptonly": {
+        "name": "acceptonly",
+        "condition": "text",
+        "text": "Please enter valid input."
+      },
+      "reset": {
+        "name": "reset",
+        "type": "question",
+        "condition": false,
+        "text": "Reset to Default."
+      },
+      "internal": {
+        "name": "internal",
+        "condition": false,
+        "text": "Internal Field."
+      }
+    },
+    "advsettings": {
+      "showhide": {
+        "name": "showhide",
+        "condition": "true",
+        "text": "Show/Hide Logic",
+        "logic_options": [
+          {
+            "questionno": 0,
+            "operator": "not",
+            "answer": "",
+            "answer_list": [ ],
+            "relation": "and"
+          }
+        ]
+      },
+      "jumplogic": {
+        "name": "jumplogic",
+        "condition": "jump",
+        "text": "Jump Logic",
+        "logic_options": [
+          {
+            "jump_text": "If this slide answer is",
+            "operator": "Jump to",
+            "answer": "",
+            "answer_list": [ ],
+            "slide_to_show": 0
+          }
+        ]
+      },
+      "calculatedvariable": {
+        "name": "calculatedvariable",
+        "condition": "calculate",
+        "text": "Calculated Variable Logic",
+        "logic_options": [
+          {
+            "name": "",
+            "calculation": ""
+          }
+        ]
+      }
+    }
   }
 }

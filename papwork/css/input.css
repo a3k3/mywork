@@ -204,14 +204,16 @@ fieldset, label {
     display: inline-block;
     width: 60px;
     height: 55px;
-    margin-right: 5px;
+    /* margin-right: 5px; */
 }
 
 .smiley_content {
     text-align: center;
     font-family:'Optima';
     font-weight:bold;
-    float:left;
+    /* float:left; */
+    width: 100%;
+    margin: 0;
 }
 
 .verypoor {
@@ -265,17 +267,20 @@ fieldset, label {
     -moz-box-shadow: inset 0 0 10px #eaeaea;
     -webkit-box-shadow: inset 0 0 10px #eaeaea;
     box-shadow:         inset 0 0 10px #eaeaea;
+    display: table;
 }
 
 .size-chart ul li {
     list-style: none;
-    float: left;
+    /* float: left; */
     width:20%;
     position: relative;
     outline: none;
     border-left: 1px solid #eaeaea;
     background-color:#fcfcfc;
     /*box-shadow:inset 0 0 20px #eaeaea;*/
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .size-chart ul li:first-child {
@@ -290,12 +295,15 @@ fieldset, label {
 }
 
 .size-chart ul li p {
-    padding: 8px 35%;
+    padding: 8px 5%;
     margin: 0;
     text-align:center;
     font-weight:bold;
     font-family:'Optima';
     font-size:18px;
+    display: inline-block;
+    word-wrap: break-word;
+    width: 90%;
 }
 
 .size-chart li.active {
