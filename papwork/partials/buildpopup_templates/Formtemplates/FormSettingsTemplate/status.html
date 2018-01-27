@@ -3,10 +3,15 @@
     <div flex>
         <div layout="row" layout-align="start center">
             <div flex>
-                <md-input-container class="autocomplete">
-                    <md-select ng-model="option.selected">
-                        <md-option value="{{option.name}}" ng-repeat="option in setting.options">{{option.name}}</md-option>
+                <md-input-container class="">
+                    <md-select ng-model="setting.selected">
+                        <md-option value="{{option}}" ng-repeat="option in setting.options">{{option.name}}</md-option>
                     </md-select>
+                </md-input-container>
+            </div>
+            <div flex ng-if="setting.selected.type == 'date'">
+                <md-input-container>
+                    <md-datepicker ng-model="option.date" md-placeholder="Enter date" aria-label="Calendar"></md-datepicker>
                 </md-input-container>
             </div>
         </div>

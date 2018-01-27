@@ -1,4 +1,7 @@
-﻿/*******Menu Css*****/
+﻿.md-dialog-container {
+    z-index:99999!important;
+}
+/*******Menu Css*****/
 md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-active {
     min-width: 200px !important;
     width: 15%;
@@ -736,7 +739,7 @@ md-input-container.md-mytheme-theme label {
 }
 
 .publish-panel + ng-include > form {
-    margin-top: 5vh;
+    margin-top: 54px;
     width: 100%;
     height: 77vh;
     position: relative;
@@ -1190,6 +1193,7 @@ md-tab-content > div {
     .publish-panel {
         padding: 0 38%;
         height: 5vh;
+        min-height: 50px;
     }
 
         .publish-panel .publish-btn-container {
@@ -2187,8 +2191,14 @@ formsettings ng-include [layout="row"] {
     top: 0;
 }
 
-.general_table md-input-container {
+.general_table md-input-container, .general_table md-switch {
     margin-top: 0;
+}
+
+.slide_layout .title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 
 /*emailform*/
@@ -2345,7 +2355,12 @@ email_left textarea {
 .share_layout {
     padding: 40px;
 }
-
+.publish_layout md-input-container,.publish_layout md-select,.publish_layout .layout-row md-radio-button {
+    margin:0;
+}
+.publish_layout md-radio-group .layout-row{
+  margin-bottom:20px  
+}
 .share_layout .sharelink_block, .share_layout .embedlink_block {
     width: 100%;
     display: inline-block;

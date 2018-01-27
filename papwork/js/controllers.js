@@ -408,7 +408,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         }
         else {
             if (sessionStorage.questionsObj != undefined) {
-                $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj);
+                $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj).questions;
             }
             else {
                 $scope.questionsObj.questions = response.data;
@@ -480,35 +480,35 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $scope.questionsObj.theme = data;
     });
 
-    $scope.$on('questionsData', function (event, data) {
-        $scope.questionsObj.questions = data;
-        angular.forEach($scope.questionsObj.questions, function (value, index) {
-            value.question = value.question;
-            var temp = value.question;
-            var tmp = document.createElement("DIV");
-            tmp.innerHTML = temp;
-            if (angular.element(tmp).find('span').length > 0) {
-                angular.element(tmp).find('span').each(function (index, value) {
-                    if ($(value).hasClass('chip')) {
-                        var answerfor = $(value).data('question-id');
-                        var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
-                        $(value).replaceWith(insertVal);
-                    }
-                })
-            }
-            value.question = tmp.innerHTML;
-            //$compile(value.question)($scope);
-            value.enable = true;
-            if (value.validations != undefined && value.validations.internal != undefined && value.validations.internal.condition) {
-                value.enable = false;
-            }
+    //$scope.$on('questionsData', function (event, data) {
+    //    $scope.questionsObj.questions = data;
+    //    angular.forEach($scope.questionsObj.questions, function (value, index) {
+    //        value.question = value.question;
+    //        var temp = value.question;
+    //        var tmp = document.createElement("DIV");
+    //        tmp.innerHTML = temp;
+    //        if (angular.element(tmp).find('span').length > 0) {
+    //            angular.element(tmp).find('span').each(function (index, value) {
+    //                if ($(value).hasClass('chip')) {
+    //                    var answerfor = $(value).data('question-id');
+    //                    var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
+    //                    $(value).replaceWith(insertVal);
+    //                }
+    //            })
+    //        }
+    //        value.question = tmp.innerHTML;
+    //        //$compile(value.question)($scope);
+    //        value.enable = true;
+    //        if (value.validations != undefined && value.validations.internal != undefined && value.validations.internal.condition) {
+    //            value.enable = false;
+    //        }
 
-            //check for random options
-            if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
-                value.options = shuffleArray(value.options);
-            }
-        });
-    });
+    //        //check for random options
+    //        if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
+    //            value.options = shuffleArray(value.options);
+    //        }
+    //    });
+    //});
 
     $scope.dynamicTemplateUrl = function (data) {
         return "../partials/input_templates/" + getTemplate(data) + ".html"
@@ -1028,12 +1028,12 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                             {
                                 name: "Enable after certain date",
                                 selected: false,
-                                type: 'input_calendar'
+                                type: 'date'
                             },
                             {
                                 name: "Disable after certain date",
                                 selected: false,
-                                type: 'input_calendar'
+                                type: 'date'
                             },
                             {
                                 name: "Disable after ",
@@ -1053,7 +1053,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                     },
                     {
                         name: "kiosk",
-                        condition: true,
+                        condition: false,
                         enable:true
                     }
                 ]
@@ -1246,7 +1246,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
         $scope.addQuestion(['text'], null);
 
-        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj.questions);
+        $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj);
         tempQuestionObj = $scope.buildQuestionsObj;
 
         resetSlide();
