@@ -12,7 +12,7 @@
         </div>
     </div>
     <div layout="row" layout-align="start start">
-        <div flex="50">
+        <!--<div flex="50">
             <div class="table answerof">
                 <div class="tablerow">
                     <div class="tablecell">Answer of</div>
@@ -21,16 +21,13 @@
                     <div class="tablecell questionchip" ng-click="addQuestionToCalculation($event, tempquestion)">Question#{{tempquestion.id}}</div>
                 </div>
             </div>
-            </div>
-        <div flex="50">
-            <div class="table">
-                <div class="tablerow">
-                    <div class="tablecell">Calculation</div>
-                    <div class="tablecell"></div>
-                </div>
-                <div class="tablerow">
-                    <div class="tablecell calculations" contenteditable ng-model="logic.calculation" ng-mousedown="setcursorposition($event)" ng-mouseup="setcursorposition($event)" ng-keydown="setcursorposition($event)" ng-keyup="setcursorposition($event)"></div>
-                    <div class="tablecell operators">
+        </div>-->
+        <div flex="100">
+            <div class="ctable" layout="column" layout-align="start start">
+                <div class="cheader" flex="100">Calculation</div>
+                <div class="crow" layout="row" layout-align="start start">
+                    <div flex="80" class="calculations" contenteditable ng-model="logic.calculation" context-menu="menuOptions2()" ng-mousedown="setcursorposition($event)" ng-mouseup="setcursorposition($event)" ng-keydown="setcursorposition($event)" ng-keyup="setcursorposition($event)"></div>
+                    <div flex="20" class="operators">
                         <div class="operation addition" ng-click="operation($event,'+')">+</div>
                         <div class="operation subtraction" ng-click="operation($event,'-')">-</div>
                         <div class="operation multiplication" ng-click="operation($event,'*')">*</div>

@@ -4,7 +4,7 @@
 @section Script{
     <script src="~/js/swipe.js"></script>
 }
-<div class="body-container" ng-controller="mainCtrl">
+<div class="body-container" ng-controller="mainCtrl" md-theme="mytheme">
     <md-sidenav class="md-sidenav-left main-settings dark" md-component-id="left" md-disable-backdrop md-whiteframe="4" mode="push" md-is-locked-open="isSideNavOpen">
         <md-button class="md-icon-button close" ng-click="toggleLeftMenu()">
             <md-icon md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
@@ -16,6 +16,7 @@
             <div id="scroller" class="col-xs-12 col-sm-6 full-height scrollable">
                 <div id="SAC1" sir-accordion collection="accordionArray" config="accordionConfig"></div>
             </div>
+            <md-button class="build md-raised md-primary md-hue-1">Build New PapForm</md-button>
         </md-content>
     </md-sidenav>
     <ng-view class="row experience-screen" ng-init="load()">

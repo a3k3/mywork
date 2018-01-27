@@ -26,7 +26,7 @@ md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-a
 }
 
 .main-settings {
-    background-color: #000;
+    background-color: #000!important;
 }
 
 .main-settings .close {
@@ -52,6 +52,7 @@ md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-a
     background: 000;
     color: #fff;
     margin-top: 100px;
+    background-color: #000!important;
 }
 .md-open-menu-container.md-active {
     z-index:9999;
@@ -1590,40 +1591,9 @@ md-progress-circular + .counter {
     transform: translate(-50%,-50%);
 }
 
-/*****Table Styles*****/
-.build .table {
-    display: table;
-    border: 1px solid #d2d2d2;
-    border-radius: 5px;
-}
-
-.build .tablerow {
-    display: table-row;
-}
-
-.build .tablecell {
-    display: table-cell;
-    border: 0.05px solid #d2d2d2;
-    border-collapse: collapse;
-    border-bottom: 0px;
-    padding: 15px 5px;
-}
-
-.build .tablerow:nth-child(odd) {
-    background-color: #d2d2d2;
-}
-
-.build .tablerow:first-child {
-    background-color: #d2d2d2;
-}
-
-.build .tablerow:nth-child(even) {
-    background-color: #fff;
-}
-/*****Table Styles*****/
-
+/*****CV Styles*****/
 .calculatedvariable .layout-row [flex] {
-    padding: 0 15px;
+    padding: 0 0px;
 }
 
 .calculatedvariable .operation {
@@ -1640,19 +1610,30 @@ md-progress-circular + .counter {
     cursor: pointer;
 }
 
-    .calculatedvariable .operation:nth-child(odd) {
-        clear: left;
-    }
-
-.calculatedvariable .calculations {
-    width: 66%;
-    vertical-align: top;
-    text-decoration: none;
-    max-width: 100px;
+.calculatedvariable .operation:nth-child(odd) {
+    clear: left;
 }
 
-.calculatedvariable .operators {
-    width: 34%;
+.calculatedvariable .layout-row .cheader {
+    border: 0.05px solid #d2d2d2;
+    border-collapse: collapse;
+    padding: 15px 5px;
+    width: 100%;
+    background-color: #d2d2d2;
+}
+
+.calculatedvariable .layout-row .ctable {
+    border: 1px solid #d2d2d2;
+    border-radius: 5px;
+}
+
+.calculatedvariable .layout-row .crow {
+    width:100%;
+    padding: 0;
+}
+
+.calculatedvariable .layout-row .operators {
+    border-left: 1px solid #d2d2d2;
 }
 
 .answerof .tablecell {
@@ -1681,6 +1662,8 @@ md-progress-circular + .counter {
     font-size: 13px;
     cursor: pointer;
 }
+
+/*****CV Styles*****/
 
 /********Build Popup generic********/
 .create-tabs md-tab-content > .md-dialog-container md-dialog {

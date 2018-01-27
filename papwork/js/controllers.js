@@ -1891,6 +1891,27 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         return list;
     }
 
+    $scope.questionList2 = function () {
+        var list = [];
+        angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
+            list.push({
+                text: "Question#" + value.id,
+                click: function ($itemScope, $event, modelValue, text, $li) {
+                    var startindex = $($event.target).html().indexOf($scope.calculationCursor.nodeValue);
+                    var start = $($event.target).html().substring(0, startindex + $scope.calculationCursor.caretPos);
+                    var texttoAdd = '<span class="chip" data-type="question" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
+                    var end = $($event.target).html().substring(startindex + $scope.calculationCursor.caretPos);
+                    $($event.target).html(start + texttoAdd + end);
+                    angular.element('.removeChip').on('click', function (event) {
+                        angular.element(event.target).parent().remove();
+                    })
+                },
+                hasBottomDivider: true
+            })
+        });
+        return list;
+    }
+
     $scope.calculatedVariableList = function () {
         var list = [];
         angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
@@ -1937,6 +1958,14 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                    children: $scope.calculatedVariableList()
                },
         ]
+    };
+
+    $scope.menuOptions2 = function () {
+        return [{
+                   text: 'Insert Answer of',
+                   click: function ($itemScope) { },
+                   children: $scope.questionList2()
+               }]
     };
 
     $scope.calculationCursor = {
