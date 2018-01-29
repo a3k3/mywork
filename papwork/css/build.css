@@ -2087,15 +2087,15 @@ formsettings ng-include [layout="row"] {
 }
 
 .form_set_items {
-    width: 17%;
+    width: 20%;
     float: left;
-    margin-right: 3%;
+    margin-right: 2%;
     height: 65vh;
     background-color: #fff;
 }
 
 .form_set_items_display {
-    width: 70%;
+    width: 78%;
     float: left;
     background: #fff;
     overflow-y: scroll;
@@ -2197,8 +2197,7 @@ formsettings ng-include [layout="row"] {
 
 /*General_Form*/
 .generalForm_layout, .slide_layout {
-    padding: 40px;
-    padding-top: 20px;
+    padding: 20px 25px;
 }
 
 .general_table {
@@ -2218,7 +2217,7 @@ formsettings ng-include [layout="row"] {
 
 /*emailform*/
 .email_layout {
-    padding:40px;
+    padding: 40px 25px;
 }
 
 .email_table .table-head {
@@ -2366,7 +2365,15 @@ email_left textarea {
 /*share and embed pop up*/
 /*Publishpop*/
 .share_layout {
-    padding: 40px;
+    padding: 40px 25px;
+}
+.publish_layout .actions-table {
+    padding: 40px 25px;
+}
+.share_layout .title{
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 .publish_layout md-input-container,.publish_layout md-select,.publish_layout .layout-row md-radio-button {
     margin:0;
@@ -2419,7 +2426,7 @@ email_left textarea {
 
 /*Processing Form*/
 .processing_layout{
-    padding:25px;
+    padding: 40px 25px;
 }
 .Calculated {
     background-color: #7f1db1;
@@ -2451,16 +2458,21 @@ email_left textarea {
    
 }
 .templateEdit{
+    margin: 20px;
+    margin-top: 0;
+    padding-top: 25px;
+    border-top: 1px solid #d2d2d2;
 }
-.templateEdit .actions-table {
-    padding:5px;
+.templateEdit .flex-25 {
+    padding: 5px;
 }
-
-
-    .templateEdit .table-row {
-        padding: 10px 5px;
-        border: 1px solid #E4E4E4;
-    }
+.templateEdit .flex-25 .title{
+    padding-bottom:5px;
+}
+.templateEdit .table-row {
+    padding: 10px 5px;
+    border: 1px solid #E4E4E4;
+}
 .color-section md-icon.md-mytheme-theme.md-primary {
     color: rgb(238, 242, 239);
 }
