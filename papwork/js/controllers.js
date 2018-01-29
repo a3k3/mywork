@@ -113,7 +113,7 @@ function highlightRange(range) {
 
 function disableRange(range) {
     if (range.startOffset < range.endOffset) {
-        console.log("hiiii");
+        range.startContainer.parentElement.replaceWith(range.startContainer)
     }
 }
 
@@ -479,10 +479,26 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     });
 
     $scope.applyFormSettings = function () {
-        $scope.slideSettings = {}
+        $scope.slideSettings = {},
+        $scope.generalSettings = {},
         angular.forEach($scope.questionsObj.formSettings, function (value, index) {
             if (value.name == "Slide") {
                 $scope.slideSettings = value.settings;
+                if (value.settings.randomizequestion.condition) {
+                    $scope.questionsObj.questions = shuffleArray($scope.questionsObj.questions);
+                }
+            }
+            else if (value.name == "General") {
+                if (value.settings.autocomplete.condition) {
+                    $timeout(function () {
+                        var reload_url = window.location.href.replace(/\#\/.*\?/gi, '#/cover?')
+                        window.location.href = reload_url;
+                    }, value.settings.autocomplete.time * 60 * 1000);
+                }
+
+                if (value.settings.status) {
+                    $scope.questionsObj.enable = value.settings.status.selected.name.toLowerCase() == 'enable' ? true : false;
+                }
             }
         });
     }
@@ -717,6 +733,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             else
                 value.selected = false;
         })
+
+        $timeout(function () {
+            $scope.questionsObj.next();
+        }, 1000);
     }
 
     $scope.sizeSelection = function (index, event, options) {
@@ -753,6 +773,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             _clicked.find('.checkbox').attr('checked', false);
             options[index].selected = false;
         }
+
+        $timeout(function () {
+            $scope.questionsObj.next();
+        }, 1000);
     }
 
     $scope.smileySelection = function (index, event, options) {
@@ -1016,58 +1040,69 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 enable: true,
                 active: true,
                 template: 'generalForm',
-                settings: [
-                    {
+                settings: {
+                    autocomplete: {
                         name: "autocomplete",
                         condition: false,
                         time: 0,
                         enable: true
                     },
-                    {
+                    status: {
                         name: "status",
                         options: [
                             {
                                 name: "Enable",
                                 selected: false,
-                                type: ''
+                                type: '',
+                                enable: true
                             },
                             {
                                 name: "Disable",
                                 selected: false,
-                                type: ''
+                                type: '',
+                                enable: true
                             },
                             {
                                 name: "Enable after certain date",
                                 selected: false,
-                                type: 'date'
+                                type: 'date',
+                                enable: false
                             },
                             {
                                 name: "Disable after certain date",
                                 selected: false,
-                                type: 'date'
+                                type: 'date',
+                                enable: false
                             },
                             {
                                 name: "Disable after ",
                                 selected: false,
-                                type: 'number'
+                                type: 'number',
+                                enable: false
                             }
                         ],
+                        selected: {
+                            name: "Enable",
+                            selected: false,
+                            type: '',
+                            enable: true
+                        },
                         enable: true
                     },
-                    {
+                    export: {
                         name: "export",
-                        enable: true
+                        enable: false
                     },
-                    {
+                    duplicate: {
                         name: "duplicate",
-                        enable: true
+                        enable: false
                     },
-                    {
+                    kiosk: {
                         name: "kiosk",
                         condition: false,
-                        enable: true
+                        enable: false
                     }
-                ]
+                }
             },
             {
                 name: "Slide",
@@ -1077,17 +1112,17 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 settings: {
                     nextquestionprompts: {
                         name: "nextquestionprompts",
-                        condition: false,
+                        condition: true,
                         enable: true
                     },
                     questionserialno: {
                         name: "questionserialno",
-                        condition: false,
+                        condition: true,
                         enable: true
                     },
                     progressbar: {
                         name: "progressbar",
-                        condition: false,
+                        condition: true,
                         enable: true
                     },
                     randomizequestion: {
@@ -1849,7 +1884,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.highlightSelection = function (event) {
         $scope.userSelection = window.getSelection().getRangeAt(0);
-        $scope.addActionWord();
+        if (!$(event.target).hasClass('action-word'))
+            $scope.addActionWord();
+        else
+            $scope.removeActionWord();
     }
 
     $scope.addActionWord = function () {
@@ -1887,10 +1925,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             list.push({
                 text: "Question#" + value.id,
                 click: function ($itemScope, $event, modelValue, text, $li) {
-                    var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
-                    var start = $itemScope.question.question.substring(0, startindex + $scope.questionCursor.caretPos);
+                    var type = $($event.target).data('contenttype');
+                    var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
+                    var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
                     var texttoAdd = '<span class="chip" data-type="question" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
-                    var end = $itemScope.question.question.substring(startindex + $scope.questionCursor.caretPos);
+                    var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
                     $($event.target).html(start + texttoAdd + end);
                     angular.element('.removeChip').on('click', function (event) {
                         angular.element(event.target).parent().remove();
@@ -1902,26 +1941,26 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         return list;
     }
 
-    $scope.questionList2 = function () {
-        var list = [];
-        angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
-            list.push({
-                text: "Question#" + value.id,
-                click: function ($itemScope, $event, modelValue, text, $li) {
-                    var startindex = $($event.target).html().indexOf($scope.calculationCursor.nodeValue);
-                    var start = $($event.target).html().substring(0, startindex + $scope.calculationCursor.caretPos);
-                    var texttoAdd = '<span class="chip" data-type="question" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
-                    var end = $($event.target).html().substring(startindex + $scope.calculationCursor.caretPos);
-                    $($event.target).html(start + texttoAdd + end);
-                    angular.element('.removeChip').on('click', function (event) {
-                        angular.element(event.target).parent().remove();
-                    })
-                },
-                hasBottomDivider: true
-            })
-        });
-        return list;
-    }
+    //$scope.questionList2 = function () {
+    //    var list = [];
+    //    angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
+    //        list.push({
+    //            text: "Question#" + value.id,
+    //            click: function ($itemScope, $event, modelValue, text, $li) {
+    //                var startindex = $($event.target).html().indexOf($scope.calculationCursor.nodeValue);
+    //                var start = $($event.target).html().substring(0, startindex + $scope.calculationCursor.caretPos);
+    //                var texttoAdd = '<span class="chip" data-type="question" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
+    //                var end = $($event.target).html().substring(startindex + $scope.calculationCursor.caretPos);
+    //                $($event.target).html(start + texttoAdd + end);
+    //                angular.element('.removeChip').on('click', function (event) {
+    //                    angular.element(event.target).parent().remove();
+    //                })
+    //            },
+    //            hasBottomDivider: true
+    //        })
+    //    });
+    //    return list;
+    //}
 
     $scope.calculatedVariableList = function () {
         var list = [];
@@ -1932,10 +1971,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                         list.push({
                             text: innervalue.name,
                             click: function ($itemScope, $event, modelValue, text, $li) {
-                                var startindex = $itemScope.question.question.indexOf($scope.questionCursor.nodeValue);
-                                var start = $itemScope.question.question.substring(0, startindex + $scope.questionCursor.caretPos);
+                                var type = $($event.target).data('contenttype');
+                                var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
+                                var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
                                 var texttoAdd = '<span class="chip" data-type="cv" data-question-id="' + innervalue.name + '" contenteditable="false" readonly>' + innervalue.name + '<span class="removeChip">-</span></span>';
-                                var end = $itemScope.question.question.substring(startindex + $scope.questionCursor.caretPos);
+                                var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
                                 $($event.target).html(start + texttoAdd + end);
                                 angular.element('.removeChip').on('click', function (event) {
                                     angular.element(event.target).parent().remove();
@@ -1975,23 +2015,24 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         return [{
             text: 'Insert Answer of',
             click: function ($itemScope) { },
-            children: $scope.questionList2()
+            children: $scope.questionList()
         }]
     };
 
-    $scope.calculationCursor = {
-        caretPos: 0,
-        nodeValue: ""
+    $scope.menuOptionsRest = function () {
+        return [{
+            text: 'Highlight',
+            click: function ($itemScope, $event) {
+                $scope.highlightSelection($event)
+            },
+            hasBottomDivider: true
+        }]
     };
 
-    $scope.questionCursor = {};
+    $scope.cursor = [];
 
     $scope.setcursorposition = function (event) {
-        $scope.calculationCursor = getCaretPosition(event.target);
-    }
-
-    $scope.setquestioncursorposition = function (event) {
-        $scope.questionCursor = getCaretPosition(event.target);
+        $scope.cursor[angular.element(event.target).data('contenttype')] = getCaretPosition(event.target);
     }
 
     $scope.addQuestionToCalculation = function (event, question) {
@@ -3195,6 +3236,16 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
             if (gapi != undefined) {
                 $interval.cancel(gt);
                 $scope.start();
+                $mdDialog.show({
+                    contentElement: '#myDialog',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose: true
+                })
+                .then(function () {
+                    $scope.status = 'You said the information was.';
+                }, function () {
+                    $scope.status = 'You cancelled the dialog.';
+                });
             }
         }, 100);
     };
@@ -3202,10 +3253,12 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
     // When callback is received, process user info.
     $scope.userInfoCallback = function (userInfo) {
         // You can check user info for domain.
-        $rootScope.user.name = userInfo.displayName;
-        $rootScope.user.logintype = 'google';
-        $rootScope.user.id = userInfo.id;
-        $rootScope.loginstatus = true;
+        $rootScope.$apply(function () {
+            $rootScope.user.name = userInfo.displayName;
+            $rootScope.user.logintype = 'google';
+            $rootScope.user.id = userInfo.id;
+            $rootScope.loginstatus = true;
+        })
     };
 
     // Request user info.

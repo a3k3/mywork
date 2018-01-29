@@ -2,7 +2,7 @@
   "cover_template": "default",
   "default": {
     "media_src": "../asset/img/coverpage_media.JPG",
-    "text": "Hi, Welcome to <span class='action-word'>Papform</span> template. Let us know your experience.",
+    "text": "Hi, Welcome to Papform template. Let us know your experience.",
     "start": {
       "url": "#/experience",
       "text": "start"

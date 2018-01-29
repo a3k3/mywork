@@ -6,7 +6,7 @@
         <div class="content-section">
             <h3 ng-bind-html="coverdata.default.text"></h3>
         </div>
-        <md-button class="start md-raised md-primary md-hue-1" ng-if="!coverdata.settings.autocomplete.condition" ng-click="gotoExperience(coverdata.default.start.url, $event)">{{coverdata.default.start.text}}</md-button>
+        <md-button class="start md-raised md-primary md-hue-1" ng-click="gotoExperience(coverdata.default.start.url, $event)">{{coverdata.default.start.text}}</md-button>
     </div>
     <div class="cover-container" ng-show="coverdata.settings.covertemplate.condition">
         <div>Offical Template</div>

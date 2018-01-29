@@ -583,7 +583,7 @@ md-input-container.md-mytheme-theme label {
     text-decoration-color: rgba(0,0,0,0.7);
 }
 
-.black .question {
+.black .question, .black .serialno {
     color: #fff;
 }
 
@@ -591,7 +591,7 @@ md-input-container.md-mytheme-theme label {
     color: #999999;
 }
 
-.black .question, .black .caption, .black .hint {
+.black .question, .black .serialno, .black .caption, .black .hint {
     text-decoration-color: rgba(225,225,225,0.9);
 }
 
@@ -604,7 +604,7 @@ md-input-container.md-mytheme-theme label {
     color: rgba(203,203,203,0.8);
 }
 
-.pink .question {
+.pink .question, .pink .serialno {
     color: #fff;
 }
 
@@ -612,7 +612,7 @@ md-input-container.md-mytheme-theme label {
     color: #eeeeee;
 }
 
-.pink .question, .pink .caption, .pink .hint, .pink md-input-container input {
+.pink .question,.pink .serialno, .pink .caption, .pink .hint, .pink md-input-container input {
     text-decoration-color: rgba(225,225,225,0.9);
 }
 
@@ -625,7 +625,7 @@ md-input-container.md-mytheme-theme label {
     color: rgba(67,67,67,0.8);
 }
 
-.blue .question {
+.blue .question, .blue .serialno {
     color: #000;
 }
 
@@ -633,7 +633,7 @@ md-input-container.md-mytheme-theme label {
     color: #666666;
 }
 
-.blue .question, .blue .caption, .blue .hint, .blue md-input-container input {
+.blue .question, .blue .serialno , .blue .caption, .blue .hint, .blue md-input-container input {
     text-decoration-color: rgba(225,225,225,0.9);
 }
 
@@ -646,7 +646,7 @@ md-input-container.md-mytheme-theme label {
     color: rgba(0,0,0,0.8);
 }
 
-.yellow .question {
+.yellow .question, .yellow .serialno  {
     color: #000;
 }
 
@@ -667,7 +667,7 @@ md-input-container.md-mytheme-theme label {
     color: rgba(0,0,0,0.8);
 }
 
-.orange .question {
+.orange .question, .orange .serialno {
     color: #fff;
 }
 
@@ -675,7 +675,7 @@ md-input-container.md-mytheme-theme label {
     color: #eee;
 }
 
-.orange .question, .orange .caption, .orange .hint, .orange md-input-container input {
+.orange .question, .orange .serialno, .orange .caption, .orange .hint, .orange md-input-container input {
     text-decoration-color: rgba(255,255,255,0.9);
 }
 
@@ -688,7 +688,7 @@ md-input-container.md-mytheme-theme label {
     color: rgba(0,0,0,0.8);
 }
 
-.green .question {
+.green .question, .green .serialno {
     color: #fff;
 }
 
@@ -696,7 +696,7 @@ md-input-container.md-mytheme-theme label {
     color: #eee;
 }
 
-.green .question, .green .caption, .green .hint, .green md-input-container input {
+.green .question, .green .serialno, .green .caption, .green .hint, .green md-input-container input {
     text-decoration-color: rgba(255,255,255,0.9);
 }
 
@@ -1678,6 +1678,7 @@ md-progress-circular + .counter {
     max-height: 100vh;
     width: 100%;
     background-color: rgba(255,255,255,.6);
+    top: 0;
 }
 
 .buildpopup .via_progressbar button {
@@ -1720,9 +1721,11 @@ md-progress-circular + .counter {
 
 .buildpopup {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     padding: 50px;
+    padding-top: 3.2vh;
     background: rgba(64, 64, 64, 0.41);
+    top: 0;
 }
 
     .buildpopup .inner_layout {
@@ -2074,9 +2077,9 @@ formsettings ng-include [layout="row"] {
 
 .form_set_items ul li {
     height: 40px;
-    margin-bottom: 2px;
     background: #fff;
     padding: 12px;
+    border-bottom: 1px solid #d2d2d2;
 }
 
 .form_set_items ul li.active {
@@ -2084,9 +2087,11 @@ formsettings ng-include [layout="row"] {
 }
 
 .form_set_items {
-    width: 26%;
+    width: 17%;
     float: left;
     margin-right: 3%;
+    height: 65vh;
+    background-color: #fff;
 }
 
 .form_set_items_display {
@@ -2151,6 +2156,10 @@ formsettings ng-include [layout="row"] {
 }
 .create-tabs #tab-content-2 > .md-dialog-container {
     top:0!important;
+    -webkit-box-pack: start;
+    justify-content: start;
+    -webkit-box-align: start;
+    align-items: start;
 }
 
 
@@ -2160,28 +2169,28 @@ formsettings ng-include [layout="row"] {
     padding: 40px;
 }
 
-    .audience_layout .sharelink_block {
-        width: 100%;
-        display: inline-block;
-    }
+.slide_layout .sharelink_block {
+    width: 100%;
+    display: inline-block;
+}
 
-    .audience_layout .Auidience_text {
-        width: 50%;
-        float: left;
-    }
+.slide_layout .Auidience_text {
+    width: 50%;
+    float: left;
+}
 
-        .audience_layout .Auidience_text h3 {
-            margin-bottom: 0;
-        }
+.slide_layout .Auidience_text h3 {
+    margin: 0;
+}
 
-.audience_type {
+.slide_layout .audience_type {
     width: 40%;
     float: left;
     background: #fff;
     padding: 12px;
 }
 
-.audience_type {
+.slide_layout .audience_type {
     white-space: nowrap;
 }
 
@@ -2189,6 +2198,7 @@ formsettings ng-include [layout="row"] {
 /*General_Form*/
 .generalForm_layout, .slide_layout {
     padding: 40px;
+    padding-top: 20px;
 }
 
 .general_table {
@@ -2321,18 +2331,16 @@ email_left textarea {
 
 .slide_window {
     padding: 6px 0;
-    /* width: 50%; */
     text-transform: capitalize;
-    margin-left: 34px;
 }
 
-    .slide_window p {
-        font-size: 0.9em;
-    }
+.slide_window p {
+    font-size: 0.9em;
+}
 
-    .slide_window h3 {
-        font-weight: bold;
-    }
+.slide_window h3 {
+    font-weight: bold;
+}
 
 .access-table .table-head {
     padding: 10px 20px;

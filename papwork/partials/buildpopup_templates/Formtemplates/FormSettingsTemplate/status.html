@@ -5,7 +5,7 @@
             <div flex>
                 <md-input-container class="">
                     <md-select ng-model="setting.selected">
-                        <md-option value="{{option}}" ng-repeat="option in setting.options">{{option.name}}</md-option>
+                        <md-option ng-value="option" ng-repeat="option in setting.options">{{option.name}}</md-option>
                     </md-select>
                 </md-input-container>
             </div>

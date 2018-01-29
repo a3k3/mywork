@@ -303,6 +303,39 @@ question.active .questionPanel {
     animation: .8s ease 0s normal forwards 1 fadein;
 }
 
+.hidenextprompt question.next_active,.hidenextprompt question.next_next_active {
+    opacity:0!important;
+}
+
+.questionPanel .serialno {
+    font-family: Optima;
+    font-weight: bold;
+    line-height: 26px;
+    padding-right: 5px;
+    float: left;
+}
+
+question.next_active .questionPanel .serialno {
+    line-height: 16px;
+    font-size: 14px;
+    height: 30px;
+    font-family: Optima;
+    color: #999999;
+    font-weight: bold;
+}
+
+question.next_next_active .questionPanel .serialno{
+    line-height: 14px;
+    font-size:12px;
+    height: 30px;
+    overflow: hidden;
+    font-family:Optima;
+    color: #999999;
+    font-weight: bold;
+}
+question.active .questionPanel h2 span {
+    font-family: Optima;
+}
 @keyframes fadein{
     0% { opacity:0; }
      20% { opacity:0.2; }
