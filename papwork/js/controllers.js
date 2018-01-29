@@ -285,7 +285,7 @@ function writeResult(result, questions) {
 
     if (typeof (Storage) !== "undefined") {
         // Code for localStorage/sessionStorage.
-        sessionStorage.questionsObj = JSON.stringify(questions);
+        sessionStorage.addviaquestions = JSON.stringify(questions);
     } else {
         // Sorry! No Web Storage support..
         aler("Sorry! No Web Storage support..");
@@ -343,7 +343,7 @@ function addviatext(text) {
                 console.log(matches[1]);
                 switch (matches[1]) {
                     case "checkbox":
-                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" name="vehicle" value="Bike">I have a bike<br><input type="checkbox" name="vehicle" value="Car">I have a car';
                         console.log(customhtml);
                         break;
                     case "radio":
@@ -363,6 +363,7 @@ function addviatext(text) {
                         console.log(customhtml);
                         break;
                 }
+                names.push(customhtml);
             }
         }
     });
@@ -390,7 +391,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         theme: "default",
         questions: [],
         maxCount: function () {
-            return this.questions.filter(function (item) { return item.enable }).length;
+            if (this.questions != undefined && this.questions.length > 0)
+                return this.questions.filter(function (item) { return item.enable }).length;
+            else
+                return 0;
         },
         minCount: 0,
         activeNow: 0,
@@ -411,6 +415,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj).questions;
                 $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
                 $scope.applyFormSettings();
+                if (sessionStorage.addviaquestions != undefined) {
+                    $scope.questionsObj.questions = JSON.parse(sessionStorage.addviaquestions);
+                }
             }
             else {
                 $scope.questionsObj.questions = response.data;
@@ -653,9 +660,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     }
 
     $scope.$watch('questionsObj.questions', function (newval, oldval) {
-        $scope.checkadvancedvalidation();
-        $scope.checkshowhidevalidation();
-        $scope.writeToResponse();
+        if ($scope.questionsObj.questions != undefined && newval.length > 0) {
+            $scope.checkadvancedvalidation();
+            $scope.checkshowhidevalidation();
+            $scope.writeToResponse();
+        }
     }, true);
 
     $scope.writeToResponse = function () {
@@ -1720,9 +1729,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         }
         $scope.saveQuestions = function () {
-            if (sessionStorage.questionsObj != undefined) {
-                var tempquestions = JSON.parse(sessionStorage.questionsObj);
+            if (sessionStorage.addviaquestions != undefined) {
+                var tempquestions = JSON.parse(sessionStorage.addviaquestions);
                 $rootScope.$broadcast('addviaquestions', tempquestions);
+                sessionStorage.removeItem('addviaquestions');
             }
             $scope.hide();
         }
