@@ -261,7 +261,7 @@ function addviahtml(html) {
                 else {
                     var option = {
                         "value": "",
-                        "placeholder":"Enter Value"
+                        "placeholder": "Enter Value"
                     }
                     question.options.push(option);
                 }
@@ -293,7 +293,7 @@ function writeResult(result, questions) {
 }
 
 var customhtml = "";
-var names=[];
+var names = [];
 
 function addviatext(text) {
     //var str = "1. The ra2.in in SPAIN stays mainly in the plain?";
@@ -316,9 +316,9 @@ function addviatext(text) {
     //    alert();
     //});
 
-    
+
     $.each(question_List, function (index, value) {
-        
+
         //console.log(question_List[index]);
         //var Question_index = question_List[index].indexOf('?');
         var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
@@ -364,7 +364,7 @@ function addviatext(text) {
                         break;
                 }
             }
-        }            
+        }
     });
 
     console.log(names);
@@ -409,6 +409,8 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         else {
             if (sessionStorage.questionsObj != undefined) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj).questions;
+                $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
+                $scope.applyFormSettings();
             }
             else {
                 $scope.questionsObj.questions = response.data;
@@ -426,7 +428,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                                 var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
                                 $(innervalue).replaceWith(insertVal);
                             }
-                            else if ($(innervalue).data('type') == 'cv'){
+                            else if ($(innervalue).data('type') == 'cv') {
                                 var option = value.advancedvalidations.calculatedvariable.logic_options.filter(function (item) { return item.name == answerfor })[0];
                                 var tmpOption = document.createElement("DIV");
                                 tmpOption.innerHTML = option.calculation;
@@ -475,6 +477,15 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     }, function myError(response) {
         $scope.status = response.statusText;
     });
+
+    $scope.applyFormSettings = function () {
+        $scope.slideSettings = {}
+        angular.forEach($scope.questionsObj.formSettings, function (value, index) {
+            if (value.name == "Slide") {
+                $scope.slideSettings = value.settings;
+            }
+        });
+    }
 
     $scope.$on('questionsFormTheme', function (event, data) {
         $scope.questionsObj.theme = data;
@@ -541,7 +552,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
     }
 
     $scope.checkadvancedvalidation = function () {
-        var index = $scope.questionsObj.activeNow-1;
+        var index = $scope.questionsObj.activeNow - 1;
         if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
             var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
             var answer = {};
@@ -557,7 +568,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 })[0];
             }
             var match = jumplogic.logic_options.filter(function (item) {
-                if (answer != undefined && answer != "" && answer!= "NaN" && item.answer != undefined)
+                if (answer != undefined && answer != "" && answer != "NaN" && item.answer != undefined)
                     return item.answer.value.toLowerCase() === answer.value.toLowerCase();
             })[0];
 
@@ -984,7 +995,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         sampleQuestion = response.data;
     }, function myError(response) {
         $scope.status = response.statusText;
-    },true);
+    }, true);
 
     $scope.buildQuestionsObj = {
         name: "Untitled",
@@ -1010,7 +1021,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                         name: "autocomplete",
                         condition: false,
                         time: 0,
-                        enable:true
+                        enable: true
                     },
                     {
                         name: "status",
@@ -1038,7 +1049,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                             {
                                 name: "Disable after ",
                                 selected: false,
-                                type:'number'
+                                type: 'number'
                             }
                         ],
                         enable: true
@@ -1054,7 +1065,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                     {
                         name: "kiosk",
                         condition: false,
-                        enable:true
+                        enable: true
                     }
                 ]
             },
@@ -1063,28 +1074,28 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 enable: true,
                 active: false,
                 template: 'slideForm',
-                settings: [
-                    {
+                settings: {
+                    nextquestionprompts: {
                         name: "nextquestionprompts",
                         condition: false,
                         enable: true
                     },
-                    {
+                    questionserialno: {
                         name: "questionserialno",
                         condition: false,
                         enable: true
                     },
-                    {
+                    progressbar: {
                         name: "progressbar",
                         condition: false,
                         enable: true
                     },
-                    {
+                    randomizequestion: {
                         name: "randomizequestion",
                         condition: false,
                         enable: true
                     }
-                ]
+                }
             },
             {
                 name: "Audience",
@@ -1123,47 +1134,47 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 template: 'processingForm',
             }
         ],
-        metadata:{
-            timeOpened:new Date(),
-            timezone:(new Date()).getTimezoneOffset()/60,
+        metadata: {
+            timeOpened: new Date(),
+            timezone: (new Date()).getTimezoneOffset() / 60,
 
-            pageon(){return window.location.pathname},
-            referrer(){return document.referrer},
-            previousSites(){return history.length},
+            pageon() { return window.location.pathname },
+            referrer() { return document.referrer },
+            previousSites() { return history.length },
 
-            browserName(){return navigator.appName},
-            browserEngine(){return navigator.product},
-            browserVersion1a(){return navigator.appVersion},
-            browserVersion1b(){return navigator.userAgent},
-            browserLanguage(){return navigator.language},
-            browserOnline(){return navigator.onLine},
-            browserPlatform(){return navigator.platform},
-            javaEnabled(){return navigator.javaEnabled()},
-            dataCookiesEnabled(){return navigator.cookieEnabled},
-            dataCookies1(){return document.cookie},
-            dataCookies2(){return decodeURIComponent(document.cookie.split(";"))},
-            dataStorage(){return localStorage},
+            browserName() { return navigator.appName },
+            browserEngine() { return navigator.product },
+            browserVersion1a() { return navigator.appVersion },
+            browserVersion1b() { return navigator.userAgent },
+            browserLanguage() { return navigator.language },
+            browserOnline() { return navigator.onLine },
+            browserPlatform() { return navigator.platform },
+            javaEnabled() { return navigator.javaEnabled() },
+            dataCookiesEnabled() { return navigator.cookieEnabled },
+            dataCookies1() { return document.cookie },
+            dataCookies2() { return decodeURIComponent(document.cookie.split(";")) },
+            dataStorage() { return localStorage },
 
-            sizeScreenW(){return screen.width},
-            sizeScreenH(){return screen.height},
-            sizeDocW(){return document.width},
-            sizeDocH(){return document.height},
-            sizeInW(){return innerWidth},
-            sizeInH(){return innerHeight},
-            sizeAvailW(){return screen.availWidth},
-            sizeAvailH(){return screen.availHeight},
-            scrColorDepth(){return screen.colorDepth},
-            scrPixelDepth(){return screen.pixelDepth},
+            sizeScreenW() { return screen.width },
+            sizeScreenH() { return screen.height },
+            sizeDocW() { return document.width },
+            sizeDocH() { return document.height },
+            sizeInW() { return innerWidth },
+            sizeInH() { return innerHeight },
+            sizeAvailW() { return screen.availWidth },
+            sizeAvailH() { return screen.availHeight },
+            scrColorDepth() { return screen.colorDepth },
+            scrPixelDepth() { return screen.pixelDepth },
 
 
-            latitude(){return position.coords.latitude},
-            longitude(){return position.coords.longitude},
-            accuracy(){return position.coords.accuracy},
-            altitude(){return position.coords.altitude},
-            altitudeAccuracy(){return position.coords.altitudeAccuracy},
-            heading(){return position.coords.heading},
-            speed(){return position.coords.speed},
-            timestamp(){return position.timestamp},
+            latitude() { return position.coords.latitude },
+            longitude() { return position.coords.longitude },
+            accuracy() { return position.coords.accuracy },
+            altitude() { return position.coords.altitude },
+            altitudeAccuracy() { return position.coords.altitudeAccuracy },
+            heading() { return position.coords.heading },
+            speed() { return position.coords.speed },
+            timestamp() { return position.timestamp },
 
 
         }
@@ -1178,7 +1189,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     $scope.$on('questionsFormTheme', function (event, data) {
         $scope.buildQuestionsObj.theme = data;
     });
-    
+
     $scope.$on('addviaquestions', function (event, data) {
         angular.forEach(data, function (value, index) {
             value.enable = "true"; /*temporary should be removed*/
@@ -1370,7 +1381,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         questionTemp.logic_options.splice(removeindex, 1);
     }
 
-    $scope.contentEdit = function (e) {       
+    $scope.contentEdit = function (e) {
         var keycode = e.which ? e.which : e.keyCode;
         var el = angular.element(e.target);
         if (keycode == 13) {
@@ -1381,9 +1392,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                     $timeout(function () {
                         el.next().focus();
                     }, 500);
-                });                    
+                });
             }
-        }        
+        }
     }
 
     $scope.updateAdvanceAnswers = function (logic) {
@@ -1462,7 +1473,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         } else {
             angular.element('.navigation-slide').css('overflow-x', 'hidden');
         }
-        if (angular.element('body').width()<= 767) {
+        if (angular.element('body').width() <= 767) {
             angular.element('.navigating_blocks').css('width', slidewidth * _slideLength);
         }
         else {
@@ -1623,7 +1634,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     function BuildPopupController($scope, $mdDialog, template, buildQuestionsObj, $timeout) {
         $scope.template = template;
         $scope.getTemplateUrl = function () {
-            return '../partials/buildpopup_templates/'+template+'.html';
+            return '../partials/buildpopup_templates/' + template + '.html';
         }
         $scope.hide = function () {
             $mdDialog.hide();
@@ -1671,7 +1682,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             else {
                 addviatext(_formdata);
             }
-           
+
         }
         $scope.saveQuestions = function () {
             if (sessionStorage.questionsObj != undefined) {
@@ -1962,10 +1973,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.menuOptions2 = function () {
         return [{
-                   text: 'Insert Answer of',
-                   click: function ($itemScope) { },
-                   children: $scope.questionList2()
-               }]
+            text: 'Insert Answer of',
+            click: function ($itemScope) { },
+            children: $scope.questionList2()
+        }]
     };
 
     $scope.calculationCursor = {
@@ -2014,10 +2025,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     angular.element($window).bind('resize', function () {
         //console.log('resize');
-        if($(window).width() > 797)
+        if ($(window).width() > 797)
             angular.element('.navigation-slide md-card').css('width', angular.element('.navigation-slide md-card').css('height'));
         else
-            angular.element('.navigation-slide md-card').css('width','');
+            angular.element('.navigation-slide md-card').css('width', '');
     });
 });
 
@@ -2093,13 +2104,13 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
 var table = {
     "surveyCompleted": 600,
     "surveyEngaged": 950,
-    "surveyVisited":1200,
-    '1':{
-        "ResponseID":"345hfgqt",
+    "surveyVisited": 1200,
+    '1': {
+        "ResponseID": "345hfgqt",
         "userResponses": [
             {
                 'Q': "What is your Name?",
-                'A': "Amit Shaw"            
+                'A': "Amit Shaw"
             },
             {
                 'Q': "Your Age?",
@@ -2119,16 +2130,16 @@ var table = {
             }
         ],
         "reviewerResponses": {
-            "1": { 
-                'reviewerId':"rev1",
+            "1": {
+                'reviewerId': "rev1",
                 'responses': [
                     {
                         'Q': "Plz answer Q1",
-                        'A':"Answer1"
+                        'A': "Answer1"
                     },
                     {
                         'Q': "Answer Q2",
-                        'A':"Answer2"
+                        'A': "Answer2"
                     },
                     {
                         'Q': "Answer Q3",
@@ -2147,13 +2158,13 @@ var table = {
                         'Q': "Answer Q2",
                         'A': "Answer2"
                     }
-                    
+
                 ]
             }
         },
         "Action": {
             "value": "submitted",
-            "state":"disabled"
+            "state": "disabled"
         }
     },
     '2': {
@@ -2218,8 +2229,8 @@ var table = {
             "state": "enabled"
         }
     },
-    '3':{
-        "ResponseID":"345hfggty",
+    '3': {
+        "ResponseID": "345hfggty",
         "userResponses": [
             {
                 'Q': "What is your Name?",
@@ -2244,7 +2255,7 @@ var table = {
         ],
         "reviewerResponses": {
             "1": {
-                'reviewerId':"rev1",
+                'reviewerId': "rev1",
                 'responses': [
                     {
                         'Q': "Plz answer Q1",
@@ -2277,7 +2288,7 @@ var table = {
         },
         "Action": {
             "value": "review",
-            "state":"enabled"
+            "state": "enabled"
         }
     },
     '4': {
@@ -2342,7 +2353,7 @@ var table = {
             "state": "enabled"
         }
     }
-    
+
 };
 
 function JSONToArray(jsonVal) {
@@ -2412,20 +2423,20 @@ function getAnswer(tbl) {
     return rowList;
 }
 function getFilterAnswer(answList) {
-    var col = [],cls=[];
-    for (var i = 0; i < answList[0].length; i++){
-        var arr = [],arr1=[];
-        for (var j = 0; j < answList.length; j++){
+    var col = [], cls = [];
+    for (var i = 0; i < answList[0].length; i++) {
+        var arr = [], arr1 = [];
+        for (var j = 0; j < answList.length; j++) {
             var val = answList[j][i];
             arr1.push(val);
             if (arr.indexOf(val) == -1) {
                 arr.push(val);
-            } 
-        }        
+            }
+        }
         col.push(arr);
         cls.push(arr1);
     }
-    return [col,cls];
+    return [col, cls];
 }
 var chartcolors = ["#ce4b99", "#A44C3A", "#57B425", "#25A5B4"];
 function getValue(uniqArr) {
@@ -2436,15 +2447,15 @@ function getValue(uniqArr) {
     })
 
 }
-function drawChart(arr,elm) {
+function drawChart(arr, elm) {
     var crclgrp = "";
     var initOff = 25, nxtOff = 25;
     arr.forEach(function (el, i) {
         var k = 100 - el;
-        var offs = k + nxtOff;        
-        crclgrp += "<circle class='donut-segment' cx='25' cy='25' r='15.91549430918954' fill='transparent' stroke='" + chartcolors[i] + "' stroke-width='13' stroke-dasharray='" + el + ' ' + k + "' stroke-dashoffset='" + nxtOff+"'></circle>";
+        var offs = k + nxtOff;
+        crclgrp += "<circle class='donut-segment' cx='25' cy='25' r='15.91549430918954' fill='transparent' stroke='" + chartcolors[i] + "' stroke-width='13' stroke-dasharray='" + el + ' ' + k + "' stroke-dashoffset='" + nxtOff + "'></circle>";
         nxtOff = (offs <= 100) ? offs : offs - 100;
-        
+
     });
     elm.insertAdjacentHTML('beforeend', crclgrp);
 
@@ -2454,7 +2465,7 @@ function getlabels(uniqueArr, totalArr) {
     var countTot = [];
     uniqueArr.forEach(function (el, i) {
         if (i > 0) {
-            var countArr = [],percentage=[],label=[],sum;
+            var countArr = [], percentage = [], label = [], sum;
             uniqueArr[i].forEach(function (elm, ind) {
                 var count = 0;
                 totalArr[i].forEach(function (e, id) {
@@ -2465,8 +2476,8 @@ function getlabels(uniqueArr, totalArr) {
                 countArr.push(count);
             })
             sum = countArr.reduce(function (tot, num) {
-                return tot +  num;
-            },0);
+                return tot + num;
+            }, 0);
             countArr.forEach(function (em, indx) {
                 var pc = (em / sum) * 100;
                 var eachLabel = [];
@@ -2476,7 +2487,7 @@ function getlabels(uniqueArr, totalArr) {
                 eachLabel.push(el[indx]);
                 label.push(eachLabel);
             })
-            countTot.push([percentage,label]);
+            countTot.push([percentage, label]);
         }
         //countTot.push(countArr);
     });
@@ -2488,7 +2499,7 @@ function chartHeight() {
     var dcs = document.querySelectorAll('doughnut-chart');
     $(dcs).css("min-height", "");
     var maxHT = [];
-    dcs.forEach(function (el, ind) {        
+    dcs.forEach(function (el, ind) {
         maxHT.push(el.height);
     });
     var maxheight = Math.max(maxHT);
@@ -2513,7 +2524,7 @@ function startdrawing() {
         var label = JSON.parse(legendCtr.getAttribute("datalabel"));
         var labels = '';
         label.forEach(function (d, i) {
-            labels += "<strong style=color:" + chartcolors[i] + "><h4>"+label[i][0]+"<b>, </b></h4><h4>" + label[i][1] + "<b>, </b></h4><small>" + label[i][2] + "</small></strong>";
+            labels += "<strong style=color:" + chartcolors[i] + "><h4>" + label[i][0] + "<b>, </b></h4><h4>" + label[i][1] + "<b>, </b></h4><small>" + label[i][2] + "</small></strong>";
         })
         legendCtr.insertAdjacentHTML('beforeend', labels);
         //maxHT.push(el.height);
@@ -2566,7 +2577,7 @@ function take(targetElem) {
     //targetElem.imagesLoaded(function () {
     // At this point the container has no SVG, it only has HTML and Canvases.
 
-        
+
     //})
 }
 
@@ -2575,22 +2586,22 @@ function captureSnap(element) {
         document.body.appendChild(canvas);
     });
     console.log(canvas);
-    
+
 }
 myapp.controller('responsectrl', function ($scope, $mdDialog) {
     $scope.surveyCompleted = table.surveyCompleted;
     $scope.surveyEngaged = table.surveyEngaged;
     $scope.surveyVisited = table.surveyVisited;
-    $scope.audienceInterest = Math.round((Number($scope.surveyEngaged) / Number($scope.surveyVisited))*100);
-    $scope.papformQuality = Math.round((Number($scope.surveyCompleted) / Number($scope.surveyEngaged))*100);
+    $scope.audienceInterest = Math.round((Number($scope.surveyEngaged) / Number($scope.surveyVisited)) * 100);
+    $scope.papformQuality = Math.round((Number($scope.surveyCompleted) / Number($scope.surveyEngaged)) * 100);
     $scope.questlist = getQ(table);
     var qt = $scope.questlist.slice();
     qt.splice(0, 1);
     $scope.cards = qt;
-    $scope.expandChart = function (evt, indx) {        
+    $scope.expandChart = function (evt, indx) {
         if (!($(evt.target).hasClass("chart-close") || $(evt.target).closest(".chart-close").length)) {
             $(evt.target).closest("doughnut-chart").parent().addClass("pap-zoom");
-        }        
+        }
     }
     $scope.answerlist = getAnswer(table);
     $scope.uniqueArr = getFilterAnswer($scope.answerlist)[0];
@@ -2601,7 +2612,7 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
         answeredCount.push(el.length);
     });
     $scope.totAns = answeredCount;
-    $scope.collapseChart = function (evt, indx) {        
+    $scope.collapseChart = function (evt, indx) {
         $(evt.target).closest("doughnut-chart").parent().removeClass("pap-zoom");
     }
     //setTimeout(tableFilter, 5000);
@@ -2620,11 +2631,11 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
         $(".hide-insights").hide();
         setTimeout(function () {
             //$(document).scrollTop(0);
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }, 500);
-        
+
     }
-    $scope.refresh = function (totCount,totAnsCol) {        
+    $scope.refresh = function (totCount, totAnsCol) {
         $scope.totCount = totCount;
         $scope.totAnsCol = totAnsCol;
         var ac = [];
@@ -2635,7 +2646,7 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
         setTimeout(function () {
             startdrawing()
         }, 1000);
-        
+
     }
     $scope.showdetailresponse = function (evt, indx) {
         console.log($(evt.target));
@@ -2683,13 +2694,13 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
 
     }
 
-    setTimeout(chartHeight,5000);
+    setTimeout(chartHeight, 5000);
     //chartHeight();
     $scope.openmenu = function (evt, index) {
         //$(evt.currentTarget).siblings(".filterbox").find(".filter-menu").show();
         var button = angular.element(evt.target);
         //var rect = button.getBoundingClientRect();
-        var position = { top: evt.screenY, left: evt.screenX};
+        var position = { top: evt.screenY, left: evt.screenX };
         $mdDialog.show({
             locals: {
                 uniqueArr: $scope.uniqueArr[index],
@@ -2748,7 +2759,7 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
         newAnswerList.forEach(function (el, i) {
             if (query.operator == "equals" && el.indexOf(query.answer) != -1) {
                 Answarr.push(el);
-            } else if (query.operator == "not" && el.indexOf(query.answer) ==-1) {
+            } else if (query.operator == "not" && el.indexOf(query.answer) == -1) {
                 Answarr.push(el);
             }
         });
@@ -2815,7 +2826,7 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
         });
         $scope.cards = cards;
         $scope.getAnswers = function () {
-            $scope.answers = uniqueArr[$scope.query.question+1];
+            $scope.answers = uniqueArr[$scope.query.question + 1];
         }
 
         $scope.query = {};
@@ -3023,9 +3034,9 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
         if (newval == true) {
             $mdDialog.cancel()
         }
-    },true)
+    }, true)
 
-    $scope.openUserMenu = function ($mdOpenMenu,ev) {
+    $scope.openUserMenu = function ($mdOpenMenu, ev) {
         $mdOpenMenu(ev);
     }
 
@@ -3044,7 +3055,7 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
             });
         }
         if (action == 'logOut') {
-            if($rootScope.user.logintype == 'fb')
+            if ($rootScope.user.logintype == 'fb')
                 FBLogin.logout();
             else if ($rootScope.user.logintype == 'google')
                 gapi.auth.signOut();

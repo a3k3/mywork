@@ -79,6 +79,9 @@ md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-a
     .experience-screen {
         display: initial;
     }
+    #tab-content-3 .cover-page {
+        height: 78vh;
+    }
     .main-navigation{
         margin-top: -20px;
     }
@@ -2090,6 +2093,8 @@ formsettings ng-include [layout="row"] {
     width: 70%;
     float: left;
     background: #fff;
+    overflow-y: scroll;
+    height: 65vh;
 }
 
 .formsettings_layout .popup_layout {

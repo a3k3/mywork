@@ -1,5 +1,5 @@
 <form class="{{questionsObj.theme}}" name="{{questionsObj.name}}" ng-controller="questionsCtrl as vm" md-theme="mytheme" ng-swipe-up="onSwipeUp()" ng-swipe-down="onSwipeDown()">
-    <div class="progressContainer">
+    <div class="progressContainer" ng-if="slideSettings.progressbar.condition">
         <md-progress-linear class="md-warn md-hue-1" md-mode="determinate" value="{{questionsObj.percentComplete()}}" aria-valuemin="{{questionsObj.minCount}}" aria-valuemax="{{questionsObj.maxCount()}}"></md-progress-linear>
         <div class="status col-xs-12 text-center font-color-aaa font-size-10"> {{questionsObj.activeNow}} out of {{questionsObj.maxCount()}}</div>
     </div>
