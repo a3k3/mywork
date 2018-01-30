@@ -114,7 +114,7 @@ myservice.service('loginService', function () {
     }
 });
 
-myservice.service('FBLogin', ['$rootScope', function ($rootScope) {
+myservice.service('FBLogin', ['$rootScope', '$http', function ($rootScope, $http) {
     this.watchLoginChange = function () {
 
         var _self = this;
@@ -154,8 +154,16 @@ myservice.service('FBLogin', ['$rootScope', function ($rootScope) {
         var _self = this;
 
         FB.api('/me', function (res) {
-            $rootScope.$apply(function () {
+            $http({
+                method: 'GET',
+                url: 'https://graph.facebook.com/' + $rootScope.user.id + '/picture?redirect=false',
+            }).success(function (response) {
                 $rootScope.user = _self.user = res;
+                $rootScope.user.image = response.data.url;
+                $rootScope.user.logintype = "fb";
+            })
+            .error(function (error) {
+                console.log(error);
             });
         });
 

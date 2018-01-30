@@ -498,7 +498,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             else if (value.name == "General") {
                 if (value.settings.autocomplete.condition) {
                     $timeout(function () {
-                        var reload_url = window.location.href.replace(/\#\/.*\?/gi, '#/cover?')
+                        var reload_url = window.location.href.replace(/\#\/.*(\?|$)/gi, '#/cover?')
                         window.location.href = reload_url;
                     }, value.settings.autocomplete.time * 60 * 1000);
                 }
@@ -576,94 +576,122 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkadvancedvalidation = function () {
         var index = $scope.questionsObj.activeNow - 1;
-        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined) {
             var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
-            var answer = {};
-            if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
-                answer.value = $scope.questionsObj.questions[index].response;
-            }
-            else if ($scope.questionsObj.questions[index].options != undefined) {
-                answer = $scope.questionsObj.questions[index].options.filter(function (item) {
-                    if (item.selected != undefined)
-                        return item.selected == true
-                    else
-                        return item.value != ""
-                })[0];
-            }
-            var match = jumplogic.logic_options.filter(function (item) {
-                if (answer != undefined && answer != "" && answer != "NaN" && item.answer != undefined)
-                    return item.answer.value.toLowerCase() === answer.value.toLowerCase();
-            })[0];
-
-            if (match != undefined) {
-                for (var i = $scope.questionsObj.activeNow; i < match.slide_to_show - 1; i++) {
-                    $scope.questionsObj.questions[i].enable = false;
-                }
-                for (var i = match.slide_to_show; i < $scope.questionsObj.maxCount() ; i++) {
-                    $scope.questionsObj.questions[i].enable = true;
-                }
-                $scope.changeslideorder = true;
-            }
-            else {
-                for (var i = $scope.questionsObj.activeNow; i < $scope.questionsObj.maxCount() ; i++) {
-                    $scope.questionsObj.questions[i].enable = true;
-                }
-                $scope.changeslideorder = true;
-            }
-            $scope.changeslideArrangement();
-        }
-    }
-
-    $scope.checkshowhidevalidation = function () {
-        var index = $scope.questionsObj.activeNow;
-        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
-            var showhide = $scope.questionsObj.questions[index].advancedvalidations.showhide;
-            $scope.questionsObj.questions[index].enable = showhide.condition;
-            var _condition = true;
-            angular.forEach(showhide.logic_options, function (option, i) {
-                var _question = $scope.questionsObj.questions.filter(function (item) {
-                    return item.id = option.questionno;
-                })[0];
-
+            var validjumpconditions = jumplogic.logic_options.filter(function(item){ return item.slide_to_show != null});
+            if (validjumpconditions.length > 0) {
                 var answer = {};
-                if (_question.response != undefined && _question.response != "") {
-                    answer.value = _question.response;
+                if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
+                    answer.value = $scope.questionsObj.questions[index].response;
                 }
-                else if (_question.options != undefined) {
-                    answer = _question.options.filter(function (item) {
+                else if ($scope.questionsObj.questions[index].options != undefined) {
+                    answer = $scope.questionsObj.questions[index].options.filter(function (item) {
                         if (item.selected != undefined)
                             return item.selected == true
                         else
                             return item.value != ""
                     })[0];
                 }
+                var match = jumplogic.logic_options.filter(function (item) {
+                    if (answer != undefined && answer != "" && answer != "NaN" && item.answer != undefined)
+                        return item.answer.value.toLowerCase() === answer.value.toLowerCase();
+                })[0];
 
-                switch (option.operator) {
-                    case "equals": if (answer.value == option.answer.value) _condition = true
-                    else _condition = false;
-                        break
-                    case "notequals": if (answer.value != option.answer.value) _condition = true
-                    else _condition = false;
-                        break
-                    default: _condition = true;
+                if (match != undefined) {
+                    for (var i = $scope.questionsObj.activeNow; i < match.slide_to_show - 1; i++) {
+                        $scope.questionsObj.questions[i].enable = false;
+                    }
+                    for (var i = match.slide_to_show; i < $scope.questionsObj.maxCount() ; i++) {
+                        $scope.questionsObj.questions[i].enable = true;
+                    }
+                    $scope.changeslideorder = true;
                 }
-            });
+                else {
+                    for (var i = $scope.questionsObj.activeNow; i < $scope.questionsObj.maxCount() ; i++) {
+                        $scope.questionsObj.questions[i].enable = true;
+                    }
+                    $scope.changeslideorder = true;
+                }
+                $scope.changeslideArrangement();
+            }
+        }
+    }
 
-            if (_condition && showhide.condition)
-                $scope.questionsObj.questions[index].enable = true;
-            else
-                $scope.questionsObj.questions[index].enable = false;
+    $scope.checkshowhidevalidation = function () {
+        var index = $scope.questionsObj.activeNow;
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined) {
+            var showhide = $scope.questionsObj.questions[index].advancedvalidations.showhide;
+            var validshowhideconditions = showhide.logic_options.filter(function (item) { return item.questionno != null && item.questionno != "Question" });
+            if (validshowhideconditions.length > 0) {
+                $scope.questionsObj.questions[index].enable = showhide.condition;
+                var _condition = true;
+                var _relation = null;
+                var _previousCondition = null;
+                angular.forEach(showhide.logic_options, function (option, i) {
+                    var _question = $scope.questionsObj.questions.filter(function (item) {
+                        return item.id == option.questionno;
+                    })[0];
+                    if (_question != undefined) {
+                        var answer = {};
+                        if (_question.response != undefined && _question.response != "") {
+                            answer.value = _question.response;
+                        }
+                        else if (_question.options != undefined) {
+                            answer = _question.options.filter(function (item) {
+                                if (item.selected != undefined)
+                                    return item.selected == true
+                                else
+                                    return item.value != ""
+                            })[0];
+                        }
 
-            $scope.changeslideorder = true;
-            $scope.changeslideArrangement();
+                        switch (option.operator) {
+                            case "equals": if (answer.value == option.answer) _condition = true
+                            else _condition = false;
+                                break
+                            case "notequals": if (answer.value != option.answer) _condition = true
+                            else _condition = false;
+                                break
+                            default: _condition = true;
+                        }
+
+                        if (option.relation != "") {
+                            if (option.relation == "or") {
+                                if (_previousCondition != null)
+                                    _condition = _previousCondition || _condition;
+                            }
+                            else if (option.relation == "and") {
+                                if (_previousCondition != null)
+                                    _condition = _previousCondition && _condition;
+                            }
+                            _previousCondition = _condition;
+                        }
+                    }
+                });
+
+                if (_condition)
+                    if (showhide.condition === "true")
+                        $scope.questionsObj.questions[index].enable = true;
+                    else
+                        $scope.questionsObj.questions[index].enable = false;
+                else
+                    if (showhide.condition === "true")
+                        $scope.questionsObj.questions[index].enable = false;
+                    else
+                        $scope.questionsObj.questions[index].enable = true;
+                        
+
+                $scope.changeslideorder = true;
+                $scope.changeslideArrangement();
+            }
         }
     }
 
     $scope.$watch('questionsObj.questions', function (newval, oldval) {
         if ($scope.questionsObj.questions != undefined && newval.length > 0) {
+            $scope.writeToResponse();
             $scope.checkadvancedvalidation();
             $scope.checkshowhidevalidation();
-            $scope.writeToResponse();
         }
     }, true);
 
@@ -673,7 +701,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             $scope.questionsObj.questions[index].response = "";
             if ($scope.questionsObj.questions[index].options != undefined) {
                 var response = $scope.questionsObj.questions[index].options
-                angular.forEach(response, function (value, index) {
+                angular.forEach(response, function (value, i) {
                     if ($scope.questionsObj.questions[index] != undefined) {
                         $scope.questionsObj.questions[index].response = $scope.questionsObj.questions[index].response + value.value
                     }
@@ -952,9 +980,17 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
 
     function publishController($scope, $mdDialog) {
         $scope.publish = {};
-        $scope.publish.publishUrl = window.location.host.replace('create', 'cover') + '?id=' + $rootScope.formid
+        var regex = /(\#\/)(.*)(\?|$)/gi;
+        var matches = window.location.href.match(regex);
+        $scope.publish.publishUrl = window.location.href.replace(matches[1], 'cover') + '?id=' + $rootScope.formid
 
-        $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+        $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100vh"></iframe>';
+
+        $scope.copyUrlText = function (event,inputtype) {
+            var element = angular.element(event.target).hasClass('md-button') ? angular.element(event.target) : angular.element(event.target).parent();
+            var copytext = element.prev().children(inputtype)[0].select();
+            document.execCommand("Copy");
+        }
 
         $scope.updatePublishIframe = function () {
             if ($scope.publish.type == "banner") {
@@ -1443,22 +1479,24 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.updateAdvanceAnswers = function (logic) {
         var index = logic.questionno == 0 ? logic.questionno : logic.questionno - 1;
-        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
-            logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
+        if ($scope.buildQuestionsObj.questions[index].answertype != "text" && $scope.buildQuestionsObj.questions[index].answertype != "textarea" && $scope.buildQuestionsObj.questions[index].answertype != "statement") {
+            logic.type = "dynamic";
         }
         else {
             logic.type = "static";
         }
+        logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
     }
 
     $scope.updateAdvanceJumpAnswers = function (logic) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
-            logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
+        if ($scope.buildQuestionsObj.questions[index].answertype != "text" && $scope.buildQuestionsObj.questions[index].answertype != "textarea" && $scope.buildQuestionsObj.questions[index].answertype != "statement") {
+            logic.type = "dynamic";
         }
         else {
             logic.type = "static";
         }
+        logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
     }
 
     //delete options
@@ -1737,6 +1775,37 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $scope.hide();
         }
         /*******Add Via Slide********/
+
+        /******Share and Embed*****/
+        $scope.publish = {};
+        var regex = /(\#\/)(.*)(\?|$)/gi;
+        var matches = window.location.href.match(regex);
+        $scope.publish.publishUrl = window.location.href.replace(matches[1], 'cover') + '?id=' + $rootScope.formid
+
+        $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+
+        $scope.updatePublishIframe = function () {
+            if ($scope.publish.type == "banner") {
+                $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+            }
+            else if ($scope.publish.type == "load") {
+                $scope.publish.embedUrl = '<script type="text/javascript">setTimeout(function(){ alert("load after load"); }, 3000);</script>';
+            }
+            else {
+                $scope.publish.embedUrl = '<script type="text/javascript">setTimeout(function(){ alert("load after scroll"); }, 3000);</script>';
+            }
+        }
+
+        $scope.copyUrlText = function (event, inputtype) {
+            var element = angular.element(event.target).hasClass('md-button') ? angular.element(event.target) : angular.element(event.target).parent();
+            var copytext = element.prev().children(inputtype)[0].select();
+            document.execCommand("Copy");
+        }
+        /******Share and Embed*****/
+
+        /****Make Quiz****/
+
+        /****Make Quiz****/
     }
 
     function resetSlide() {
@@ -3106,10 +3175,14 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
             });
         }
         if (action == 'logOut') {
-            if ($rootScope.user.logintype == 'fb')
+            if ($rootScope.user.logintype == 'fb') {
                 FBLogin.logout();
-            else if ($rootScope.user.logintype == 'google')
+                $rootScope.user.image = '../asset/img/md-icons/svg/ic_person_black_24px.svg';
+            }
+            else if ($rootScope.user.logintype == 'google') {
                 gapi.auth.signOut();
+                $rootScope.user.image = '../asset/img/md-icons/svg/ic_person_black_24px.svg';
+            }
         }
     }
 
@@ -3156,6 +3229,7 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
 
     /********Login Section********/
     $rootScope.user = {};
+    $rootScope.user.image = '../asset/img/md-icons/svg/ic_person_black_24px.svg';
 
     $window.fbAsyncInit = function () {
         // Executed when the SDK is loaded
@@ -3267,6 +3341,7 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
             $rootScope.user.name = userInfo.displayName;
             $rootScope.user.logintype = 'google';
             $rootScope.user.id = userInfo.id;
+            $rootScope.user.image = userInfo.image.url;
             $rootScope.loginstatus = true;
         })
     };
