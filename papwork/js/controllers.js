@@ -594,7 +594,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 }
                 var match = jumplogic.logic_options.filter(function (item) {
                     if (answer != undefined && answer != "" && answer != "NaN" && item.answer != undefined)
-                        return item.answer.value.toLowerCase() === answer.value.toLowerCase();
+                        if (item.type == "dynamic")
+                            return item.answer.value.toLowerCase() === answer.value.toLowerCase();
+                        else
+                            return item.answer.toLowerCase() === answer.value.toLowerCase();
                 })[0];
 
                 if (match != undefined) {
@@ -655,17 +658,15 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                             default: _condition = true;
                         }
 
-                        if (option.relation != "") {
-                            if (option.relation == "or") {
-                                if (_previousCondition != null)
+                        if (_previousCondition != null)
+                            if (_relation != null && _relation != "") {
+                                if(_relation == "or")
                                     _condition = _previousCondition || _condition;
-                            }
-                            else if (option.relation == "and") {
-                                if (_previousCondition != null)
+                                else if(_relation == "and")
                                     _condition = _previousCondition && _condition;
                             }
-                            _previousCondition = _condition;
-                        }
+                        _previousCondition = _condition;
+                        _relation = option.relation;
                     }
                 });
 
@@ -721,6 +722,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             _active.next().next().addClass('next_next_active');
             $scope.changeslideorder = false;
         }
+
+        $timeout(function () {
+            $scope.changeslideorder = true;
+            $scope.changeslideArrangement();
+        }, 1000)
     }
 
     $scope.questionsObj.nextTab = function (event) {
@@ -774,6 +780,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.sizeSelection = function (index, event, options) {
@@ -783,6 +790,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             value.selected = false;
         })
         options[index].selected = true;
+        $scope.writeToResponse();
     }
 
     $scope.starSelection = function (index, event, options) {
@@ -797,6 +805,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.selectProduct = function (index, event, options) {
@@ -814,6 +823,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.smileySelection = function (index, event, options) {
@@ -829,6 +839,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.checkboxSelection = function (index, event, options) {
@@ -839,6 +850,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         else {
             options[index].selected = true;
         }
+        $scope.writeToResponse();
     }
 
     $scope.keypress = function ($event) {
@@ -955,6 +967,11 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
         $scope.status = response.statusText;
     });
 
+    $scope.$on('successData', function (event, data) {
+        $scope.successdata = data;
+        //$scope.checkIfTimed();
+    });
+
     if (window.location.href.indexOf('#/success') >= 0 && $(window).width() < 768) {
         angular.element('.experience-screen').css('display', 'inherit');
     }
@@ -963,7 +980,7 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
     }
 });
 
-myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
+myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, formData) {
 
     $scope.child = {}
 
@@ -971,17 +988,27 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
 
     $rootScope.bodylayout = 'create-layout';
 
-    $scope.themes = ['default', 'green', 'black', 'pink', 'blue', 'yellow', 'orange'];
+    $scope.themes = [{ type: 'color', value: 'default' }, { type: 'color', value: 'green' }, { type: 'color', value: 'black' }, { type: 'color', value: 'pink' }, { type: 'color', value: 'blue' }, { type: 'color', value: 'yellow' }, { type: 'color', value: 'orange' }];
 
     $scope.changeTheme = function (event) {
         var theme = $(event.target).data('theme');
-        $rootScope.$broadcast('questionsFormTheme', theme);
+        $rootScope.$broadcast('questionsFormTheme', $scope.themes.filter(function (item) { return item.value == theme })[0]);
     }
 
-    function publishController($scope, $mdDialog) {
+    function publishController($scope, $mdDialog, formData) {
         $scope.publish = {};
         var regex = /(\#\/)(.*)(\?|$)/gi;
         var matches = window.location.href.match(regex);
+
+        var _formBuildData = JSON.parse(sessionStorage.questionsObj)
+        _formBuildData.userid = $rootScope.user.id;
+
+        formData.postData(_formBuildData).success(function (response) {
+            console.log(reponse)
+        }).error(function (error) {
+            console.log(error);
+        })
+
         $scope.publish.publishUrl = window.location.href.replace(matches[1], 'cover') + '?id=' + $rootScope.formid
 
         $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100vh"></iframe>';
@@ -1015,6 +1042,9 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
 
     $scope.PublishPopup = function (event) {
         $mdDialog.show({
+            locals: {
+                formData: formData
+            },
             controller: publishController,
             templateUrl: '../partials/PublishPopup.html',
             parent: $(event.target).closest('body'),
@@ -1052,7 +1082,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet, $window) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getBuildCoverData, getBuildSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet, $window) {
 
     $scope.$watch('buildQuestionsObj', function () {
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj);
@@ -1071,6 +1101,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         id: guid(),
         theme: "default",
         questions: [],
+        buildcoverdata: {},
+        buildsuccessdata: {},
         maxCount: function () {
             return this.questions.length;
         },
@@ -1278,19 +1310,19 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
     });
 
-    getCoverData.then(function (cover) {
-        $scope.buildcoverdata = cover.data;
-        $rootScope.$broadcast('coverData', $scope.buildcoverdata);
+    getBuildCoverData.then(function (cover) {
+        $scope.buildQuestionsObj.buildcoverdata = cover.data;
+        $rootScope.$broadcast('coverData', $scope.buildQuestionsObj.buildcoverdata);
         //settings
         getSettings.then(function (response) {
-            $scope.buildcoverdata.settings = response.data.cover.settings;
+            $scope.buildQuestionsObj.buildcoverdata.settings = response.data.cover.settings;
             //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
-            $scope.buildcoverdata.defaultsettings = angular.copy($scope.buildcoverdata.settings);
-            if ($scope.buildcoverdata.settings.covertemplate.condition) {
-                $scope.buildcoverdata.cover_template = 'official';
+            $scope.buildQuestionsObj.buildcoverdata.defaultsettings = angular.copy($scope.buildQuestionsObj.buildcoverdata.settings);
+            if ($scope.buildQuestionsObj.buildcoverdata.settings.covertemplate.condition) {
+                $scope.buildQuestionsObj.buildcoverdata.cover_template = 'official';
             }
             else {
-                $scope.buildcoverdata.cover_template = 'default';
+                $scope.buildQuestionsObj.buildcoverdata.cover_template = 'default';
             }
             $timeout(function () {
                 hideProgressBar();
@@ -1300,19 +1332,19 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.status = response.statusText;
     });
 
-    getSuccessData.then(function (success) {
-        $scope.buildsuccessdata = success.data;
-        $rootScope.$broadcast('successData', $scope.buildsuccessdata);
+    getBuildSuccessData.then(function (success) {
+        $scope.buildQuestionsObj.buildsuccessdata = success.data;
+        $rootScope.$broadcast('successData', $scope.buildQuestionsObj.buildsuccessdata);
         //settings
         getSettings.then(function (response) {
-            $scope.buildsuccessdata.settings = response.data.success.settings;
-            $scope.buildsuccessdata.defaultsettings = angular.copy($scope.buildsuccessdata.settings);
+            $scope.buildQuestionsObj.buildsuccessdata.settings = response.data.success.settings;
+            $scope.buildQuestionsObj.buildsuccessdata.defaultsettings = angular.copy($scope.buildQuestionsObj.buildsuccessdata.settings);
             //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
-            if ($scope.buildsuccessdata.settings.successtemplate.condition) {
-                $scope.buildsuccessdata.success_template = 'official';
+            if ($scope.buildQuestionsObj.buildsuccessdata.settings.successtemplate.condition) {
+                $scope.buildQuestionsObj.buildsuccessdata.success_template = 'official';
             }
             else {
-                $scope.buildsuccessdata.success_template = 'default';
+                $scope.buildQuestionsObj.buildsuccessdata.success_template = 'default';
             }
         })
     }, function myError(response) {
@@ -1804,6 +1836,38 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         /******Share and Embed*****/
 
         /****Make Quiz****/
+        $scope.buildQuestionsObj.quizData = {};
+        $scope.buildQuestionsObj.quizData.totalMax = 0;
+        $scope.buildQuestionsObj.quizData.totalMin = 0;
+        $scope.$watch('buildQuestionsObj.questions', function (newVal, oldVal) {
+            $scope.buildQuestionsObj.quizData.totalMax = $scope.calculateTotal('max');
+            $scope.buildQuestionsObj.quizData.totalMin = $scope.calculateTotal('min');
+        }, true)
+        $scope.calculateTotal = function (type) {
+            var _total = 0;
+            angular.forEach($scope.buildQuestionsObj.questions, function (value, index) {
+                if (type == "max")
+                    _total = _total + Math.max.apply(Math, value.options.map(function (option) { return parseInt(option.quizoptionscore); }))
+                else
+                    _total = _total + Math.min.apply(Math, value.options.map(function (option) { return parseInt(option.quizoptionscore); }))
+            })
+            return _total
+        };
+        var resultsconditions = {
+            operator: null,
+            score: 0,
+            grade: null,
+            slide_to_show: "none"
+        }
+        $scope.buildQuestionsObj.quizData.results = [];
+        $scope.buildQuestionsObj.quizData.results.push(angular.copy(resultsconditions));
+        $scope.addResultCondition = function () {
+            $scope.buildQuestionsObj.quizData.results.push(angular.copy(resultsconditions))
+        }
+
+        $scope.removeResultCondition = function (index) {
+            $scope.buildQuestionsObj.quizData.results.splice(index, 1);
+        }
 
         /****Make Quiz****/
     }
@@ -2179,9 +2243,6 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
 
     $scope.gotoExperience = function (url, event) {
         if (event != null && $(event.target).closest('.create-tabs').length > 0) {
-            //var ngInclude = $(event.target).closest('.cover-page').parent();
-            //ngInclude.attr('ng-include', '../partials/experience.html');
-
             if (superclass.gotoExperience) {
                 superclass.gotoExperience();
             }

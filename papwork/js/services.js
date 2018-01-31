@@ -6,13 +6,25 @@
 var myservice = angular.module('experienceApp.services', []);
 myservice.value('version', '0.2');
 
-myservice.service('getAllQuestions', ['$http',function ($http) {
+myservice.service('getAllQuestions', ['$http', function ($http) {
     return $http({
         method: "GET",
         url: "../asset/data/questionData.json"
     })
 }]);
 
+myservice.service('formData', ['$http', function ($http) {
+    this.postData = function (data) {
+        return $http({
+            method: 'POST',
+            url: 'http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/create',
+            data: data,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        });
+    }
+}]);
 
 myservice.service('getSettings', ['$http', function ($http) {
     return $http({
@@ -29,6 +41,20 @@ myservice.service('getCoverData', ['$http', function ($http) {
 }]);
 
 myservice.service('getSuccessData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/success.json"
+    })
+}]);
+
+myservice.service('getBuildCoverData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/cover.json"
+    })
+}]);
+
+myservice.service('getBuildSuccessData', ['$http', function ($http) {
     return $http({
         method: "GET",
         url: "../asset/data/success.json"
@@ -65,7 +91,7 @@ myservice.service('uploadData', ['$http', function ($http) {
     }
 }]);
 
-myservice.service('uploadDataToAWS',function () {
+myservice.service('uploadDataToAWS', function () {
     var creds = {
         bucket: 'papwork',
         access_key: 'AKIAJC7GME4TSDD4AFSA',
