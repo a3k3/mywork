@@ -459,6 +459,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             }
             else if (sessionStorage.questionsObj != undefined) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj).questions;
+                $scope.questionsObj.cvdata = JSON.parse(sessionStorage.questionsObj).cvdata;
                 $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
                 $scope.applyFormSettings();
             }
@@ -479,7 +480,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                                 $(innervalue).replaceWith(insertVal);
                             }
                             else if ($(innervalue).data('type') == 'cv') {
-                                var option = value.advancedvalidations.calculatedvariable.logic_options.filter(function (item) { return item.name == answerfor })[0];
+                                var option = $scope.questionsObj.cvdata.variables.filter(function (item) { return item.name == answerfor })[0];
                                 var tmpOption = document.createElement("DIV");
                                 tmpOption.innerHTML = option.calculation;
                                 if (angular.element(tmpOption).find('span').length > 0) {
@@ -1146,6 +1147,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         questions: [],
         buildcoverdata: {},
         buildsuccessdata: {},
+        cvdata: {
+            variables: []
+        },
         maxCount: function () {
             return this.questions.length;
         },
@@ -1351,6 +1355,10 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             $scope.buildQuestionsObj.questions.push(value);
         });
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
+    });
+
+    $scope.$on('buildpopupObjData', function (event, data) {
+        $scope.buildQuestionsObj = data;
     });
 
     getBuildCoverData.then(function (cover) {
@@ -1913,6 +1921,102 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         }
 
         /****Make Quiz****/
+
+        /******Calculated Variable*****/
+        $scope.showCalculate = false;
+        $scope.addVariable = function () {
+            var _variable = {
+                name: "",
+                calculation: ""
+            }
+            $scope.showCalculate = true;
+            $scope.variable = _variable;
+            $scope.variableindex = -1;
+            //$scope.buildQuestionsObj.cvdata.variables.push(_variable);
+        }
+
+        $scope.editVariable = function (index) {
+            $scope.showCalculate = true;
+            $scope.variableindex = index;
+            $scope.variable = $scope.buildQuestionsObj.cvdata.variables[index];
+        }
+
+        $scope.deleteVariable = function (index) {
+            $scope.buildQuestionsObj.cvdata.variables.splice(index, 1);
+            $rootScope.$broadcast('buildpopupObjData', $scope.buildQuestionsObj);
+        }
+
+        $scope.saveVariable = function () {
+            if ($scope.variableindex > -1)
+                $scope.buildQuestionsObj.cvdata.variables[$scope.variableindex] = $scope.variable;
+            else
+                $scope.buildQuestionsObj.cvdata.variables.push($scope.variable);
+            $scope.showCalculate = false;
+
+            $rootScope.$broadcast('buildpopupObjData', $scope.buildQuestionsObj);
+        }
+
+        $scope.cancelVariable = function () {
+            $scope.showCalculate = false;
+        }
+
+        $scope.questionList = function () {
+            var list = [];
+            angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
+                list.push({
+                    text: "Question#" + value.id,
+                    click: function ($itemScope, $event, modelValue, text, $li) {
+                        var type = $($event.target).data('contenttype');
+                        var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
+                        var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
+                        var texttoAdd = '<span class="chip" data-type="question" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
+                        var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
+                        $($event.target).html(start + texttoAdd + end);
+                        angular.element('.removeChip').on('click', function (event) {
+                            angular.element(event.target).parent().remove();
+                        })
+                    },
+                    hasBottomDivider: true
+                })
+            });
+            return list;
+        };
+
+        $scope.menuOptions2 = function () {
+            return [{
+                text: 'Insert Answer of',
+                click: function ($itemScope) { },
+                children: $scope.questionList()
+            }]
+        };
+
+        $scope.cursor = [];
+
+        $scope.setcursorposition = function (event) {
+            $scope.cursor[angular.element(event.target).data('contenttype')] = getCaretPosition(event.target);
+        }
+
+        $scope.addQuestionToCalculation = function (event, question) {
+            var calculationbox = angular.element(event.target).closest('.right_varible').find('.calculations');
+            var startindex = calculationbox.html().indexOf($scope.calculationCursor.nodeValue);
+            var start = calculationbox.html().substring(0, startindex + $scope.calculationCursor.caretPos);
+            var texttoAdd = '<span class="chip" data-question-id=' + question.id + ' contenteditable="false" readonly>' + angular.element(event.target).text() + '<span class="removeChip">-</span></span>';
+            var end = calculationbox.html().substring(startindex + $scope.calculationCursor.caretPos);
+            calculationbox.html(start + texttoAdd + end);
+            angular.element('.removeChip').on('click', function (event) {
+                angular.element(event.target).parent().remove();
+            })
+        }
+
+        $scope.operation = function (event, operator) {
+            var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
+            calculationbox.html(calculationbox.html() + operator);
+        }
+
+        $scope.closeTab = function (tabid) {
+            $scope[tabid] = false;
+        }
+        /******Calculated Variable*****/
     }
 
     function resetSlide() {
@@ -2150,27 +2254,24 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.calculatedVariableList = function () {
         var list = [];
-        angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
-            if (value.advancedvalidations != undefined && value.advancedvalidations.calculatedvariable != undefined && value.advancedvalidations.calculatedvariable.logic_options.length > 0)
-                angular.forEach(value.advancedvalidations.calculatedvariable.logic_options, function (innervalue, innerkey) {
-                    if (innervalue.name != "") {
-                        list.push({
-                            text: innervalue.name,
-                            click: function ($itemScope, $event, modelValue, text, $li) {
-                                var type = $($event.target).data('contenttype');
-                                var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
-                                var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
-                                var texttoAdd = '<span class="chip" data-type="cv" data-question-id="' + innervalue.name + '" contenteditable="false" readonly>' + innervalue.name + '<span class="removeChip">-</span></span>';
-                                var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
-                                $($event.target).html(start + texttoAdd + end);
-                                angular.element('.removeChip').on('click', function (event) {
-                                    angular.element(event.target).parent().remove();
-                                })
-                            },
-                            hasBottomDivider: true
+        angular.forEach($scope.buildQuestionsObj.cvdata.variables, function (value, key) {
+            if (value.name != "") {
+                list.push({
+                    text: value.name,
+                    click: function ($itemScope, $event, modelValue, text, $li) {
+                        var type = $($event.target).data('contenttype');
+                        var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
+                        var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
+                        var texttoAdd = '<span class="chip" data-type="cv" data-question-id="' + value.name + '" contenteditable="false" readonly>' + value.name + '<span class="removeChip">-</span></span>';
+                        var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
+                        $($event.target).html(start + texttoAdd + end);
+                        angular.element('.removeChip').on('click', function (event) {
+                            angular.element(event.target).parent().remove();
                         })
-                    }
-                });
+                    },
+                    hasBottomDivider: true
+                })
+            }
         });
         return list;
     }
@@ -2230,7 +2331,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         calculationbox.html(start + texttoAdd + end);
         angular.element('.removeChip').on('click', function (event) {
             angular.element(event.target).parent().remove();
-        })
+        });
     }
 
     $scope.operation = function (event, operator) {
