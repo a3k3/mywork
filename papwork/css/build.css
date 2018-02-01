@@ -2528,6 +2528,18 @@ email_left textarea {
 /*Processing Form*/
 .processing_layout{
     padding: 40px 25px;
+    position: relative;
+}
+.processing_layout .close-tab {
+    right: 20px!important;
+    z-index: 1;
+}
+.processing_popup{
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    left: 0;
 }
 .Calculated {
     background-color: #7f1db1;
@@ -2550,7 +2562,6 @@ email_left textarea {
     color: white;
     margin-right: 11px;
 }
-
 .Url{
     background-color: #7c8ca9;
     padding: 6px;
@@ -2581,14 +2592,11 @@ email_left textarea {
 /*Calculated Variable Popup*/
 .Calculate_Popup {
     background-color: white;
-    /* width: 70%; */
     position: absolute;
-    /* display: inline-block; */
-    margin-top: 4%;
-    margin-left: -2%;
-    width: 71%;
+    width: 100%;
     position: absolute;
-    padding: 0;s
+    padding: 0;
+    height: 65vh;
 }
 .inner_content {
 background-color:white;
@@ -2597,22 +2605,17 @@ padding:20px;
 .doc_section  {
     display:flex;
 }
-
-
 .type_variable {
-    margin-top: 20px;
+    margin: 20px 0;
 }
 .type_variable h4{
     display:inline-block;
 }
-
-
 .type_variable md-input-container {
     display: inline-block;
     margin: 0;
     margin-left: 300px;
 }
-
 .variable_setting{
     margin-top:40px;
 }
@@ -2620,22 +2623,21 @@ padding:20px;
     display: inline-block;
    width:50%
 }
- .left_varible .actions-table .table-head {
+.left_varible .actions-table .table-head {
       border-radius:8px 8px 0 0;
-}
-    
+}    
 .right_varible {
-        display: inline-block;
-        width: 50%;
-        margin-left: 20px;
-       
+    display: inline-block;
+    width: 50%;
+}
+.calculatedvariable .layout-row .right_varible .operators{
+    min-height: 250px;
 }
 .right_varible .actions-table .table-head {
     border-radius: 8px 8px 0 0;
 }
 .left-table-cell .table-row {
     border: none;
-    /* width: 22%; */
     text-align: center;
     display: inline;
     padding:5px;
@@ -2649,7 +2651,7 @@ padding:20px;
    
 
 }  
- .right-table-cell .table-row{
+.right-table-cell .table-row{
      border:none;
  }
 .cancel_save_variable {
@@ -2663,18 +2665,10 @@ padding:20px;
 }
 
 /*Docgen Popup*/
-.Docgen_Popup {
+.Docgen_Popup, .Docscan_Popup,.Url_Popup  {
     background-color: white;
-    /* width: 70%; */
-    position: absolute;
-    /* display: inline-block; */
-    margin-top: 4%;
-    margin-left: -2%;
-    width: 71%;
-    position: absolute;
     padding: 0;
-    height:450px;
-    
+    height: 65vh;
 }
 
 .cancel_save_variable {
@@ -2689,31 +2683,6 @@ padding:20px;
  }
 
 /*Docscan_Popup */
-.Docscan_Popup {
-    background-color: white;
-    /* width: 70%; */
-    position: absolute;
-    /* display: inline-block; */
-    margin-top: 4%;
-    margin-left: -2%;
-    width: 71%;
-    position: absolute;
-    padding: 0;
-    height: 450px;
-}
-
-.Url_Popup {
-    background-color: white;
-    /* width: 70%; */
-    position: absolute;
-    /* display: inline-block; */
-    margin-top: 4%;
-    margin-left: -2%;
-    width: 71%;
-    position: absolute;
-    padding: 0;
-    height: 450px;
-}
 
 /*Generate_doc */
 .document_section {
