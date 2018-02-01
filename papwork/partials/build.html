@@ -33,7 +33,7 @@
                                 <md-icon title="Add slides via" md-svg-icon="../../asset/img/md-icons/svg/doc.svg"></md-icon>
                             </md-button>
                         </li>
-                        <li ng-click="buildpopup($event, 'MakeQuiz')">
+                        <li ng-click="buildpopup($event, 'makeQuiz')">
                             <md-tooltip md-direction="bottom">Make Quiz</md-tooltip>
                             <md-button class="md-icon-button" aria-label="quiz">
                                 <md-icon title="Make Quiz" md-svg-icon="../../asset/img/md-icons/svg/quiz.svg"></md-icon>
@@ -56,7 +56,6 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
         </div>
         <div class="progressContainer">
@@ -85,7 +84,7 @@
                             <md-tabs>
                                 <md-tab label="basic">
                                     <md-content class="md-padding">
-                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildcoverdata.settings"></ng-include>
+                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildQuestionsObj.buildcoverdata.settings"></ng-include>
                                     </md-content>
                                 </md-tab>
                                 <md-tab label="advanced" ng-disabled="true">
@@ -205,7 +204,7 @@
                             <md-tabs>
                                 <md-tab label="basic">
                                     <md-content class="md-padding">
-                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildsuccessdata.settings"></ng-include>
+                                        <ng-include src="getSettingUrl(setting.name)" ng-repeat="setting in buildQuestionsObj.buildsuccessdata.settings"></ng-include>
                                     </md-content>
                                 </md-tab>
                                 <md-tab label="advanced">

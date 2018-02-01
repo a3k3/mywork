@@ -39,7 +39,7 @@
         <md-tab label="Preview & Publish" md-on-select="onPublishTabSelect()">
             <div class="publish-panel" layout="row">
                 <div flex="70" class="themes">
-                    <div class="circle {{theme}}" data-theme="{{theme}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>
+                    <div class="circle {{theme.value}}" data-theme="{{theme.value}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>
                 </div>
                 <div flex="30" class="publish-btn-container">
                     <md-button class="publish md-raised md-primary md-hue-1" ng-click="PublishPopup($event)">Publish</md-button>

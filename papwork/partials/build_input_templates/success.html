@@ -1,28 +1,28 @@
 ﻿<div class="app-submit-page" ng-controller="successCtrl">
-    <div class="default-container" ng-if="!buildsuccessdata.settings.successtemplate.condition">
+    <div class="default-container" ng-if="!buildQuestionsObj.buildsuccessdata.settings.successtemplate.condition">
         <user-card>
             <md-card md-colors="::{backgroundColor: '{{theme}}-warn-hue-1'}">
                 <md-card-title>
                     <md-card-title-text>
-                        <span class="md-headline text-center font-color-fff font-size-18" contenteditable ng-model="buildsuccessdata.default.headline">{{buildsuccessdata.default.headline}}</span>
+                        <span class="md-headline text-center font-color-fff font-size-18" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.default.headline">{{buildQuestionsObj.buildsuccessdata.default.headline}}</span>
                     </md-card-title-text>
                 </md-card-title>
             </md-card>
         </user-card>
         <div class="content-section">
-            <img class="success_media" src="{{buildsuccessdata.official.media_src}}" />
-            <h2 class="font-size-18 font-color-999" contenteditable ng-model="buildsuccessdata.default.content.headline_text">{{buildsuccessdata.default.content.headline_text}}</h2>
-            <p class="font-color-666 font-size-14" contenteditable ng-model="buildsuccessdata.default.content.mail_text">{{buildsuccessdata.default.content.mail_text}}</p>
-            <h6 class="font-color-ccc font-size-14" contenteditable ng-model="buildsuccessdata.default.content.poweredby_text">{{buildsuccessdata.default.content.poweredby_text}}</h6>
+            <img class="success_media" src="{{buildQuestionsObj.buildsuccessdata.official.media_src}}" />
+            <h2 class="font-size-18 font-color-999" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.default.content.headline_text">{{buildQuestionsObj.buildsuccessdata.default.content.headline_text}}</h2>
+            <p class="font-color-666 font-size-14" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.default.content.mail_text">{{buildQuestionsObj.buildsuccessdata.default.content.mail_text}}</p>
+            <h6 class="font-color-ccc font-size-14" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.default.content.poweredby_text">{{buildQuestionsObj.buildsuccessdata.default.content.poweredby_text}}</h6>
             <div class="home_button">
                 <md-button class="home md-raised" md-colors="{::background: '{{theme}}-primary-hue-1'}">
-                <span contenteditable ng-model="buildsuccessdata.default.content.home_button.text">{{buildsuccessdata.default.content.home_button.text}}</span></md-button>
+                <span contenteditable ng-model="buildQuestionsObj.buildsuccessdata.default.content.home_button.text">{{buildQuestionsObj.buildsuccessdata.default.content.home_button.text}}</span></md-button>
             </div>
         </div>
         <div class="recomends">
-            <h4 class="font-size-16 font-color-666" contenteditable ng-model="buildsuccessdata.default.content.reccomend_text">{{buildsuccessdata.default.content.reccomend_text}}</h4>
+            <h4 class="font-size-16 font-color-666" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.default.content.reccomend_text">{{buildQuestionsObj.buildsuccessdata.default.content.reccomend_text}}</h4>
             <ul>
-                <li ng-repeat="reccomendation in buildsuccessdata.settings.reccomendations.options">
+                <li ng-repeat="reccomendation in buildQuestionsObj.buildsuccessdata.settings.reccomendations.options">
                     <a href="{{reccomendation.link_url}}">
                         <img class="selected-icon" src="{{reccomendation.link_icon}}">
                         <p class="font-size-12 font-color-444" contenteditable ng-model="reccomendation.link_title">{{reccomendation.link_title}}</p>
@@ -31,34 +31,34 @@
             </ul>
         </div>
     </div>
-    <div class="variant-container" ng-if="buildsuccessdata.settings.successtemplate.condition">
+    <div class="variant-container" ng-if="buildQuestionsObj.buildsuccessdata.settings.successtemplate.condition">
         <user-card>
             <md-card md-colors="::{backgroundColor: '{{theme}}-primary-hue-1'}">
                 <md-card-title>
                     <md-card-title-text>
-                        <img class="success_media_logo" src="{{buildsuccessdata.official.media_src}}" />
-                        <span class="md-headline text-center font-color-000 font-size-18" contenteditable ng-model="buildsuccessdata.official.headline">{{buildsuccessdata.official.headline}}</span>
+                        <img class="success_media_logo" src="{{buildQuestionsObj.buildsuccessdata.official.media_src}}" />
+                        <span class="md-headline text-center font-color-000 font-size-18" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.official.headline">{{buildQuestionsObj.buildsuccessdata.official.headline}}</span>
                     </md-card-title-text>
                 </md-card-title>
             </md-card>
         </user-card>
         <div class="content-section">
-            <img class="success_media" src="{{buildsuccessdata.official.media_src}}" />
-            <h2 contenteditable ng-model="buildsuccessdata.official.content.headline_text">{{buildsuccessdata.official.content.headline_text}}</h2>
-            <p class="font-color-000 font-size-24" contenteditable ng-model="buildsuccessdata.official.content.mail_text">{{buildsuccessdata.official.content.mail_text}}</p>
-            <h6 class="font-color:rgb(88, 80, 80) font-size-16 margin-top:20px margin-bottom:35px;" contenteditable ng-model="buildsuccessdata.official.content.cheer_text">{{buildsuccessdata.official.content.cheer_text}}</h6>
+            <img class="success_media" src="{{buildQuestionsObj.buildsuccessdata.official.media_src}}" />
+            <h2 contenteditable ng-model="buildQuestionsObj.buildsuccessdata.official.content.headline_text">{{buildQuestionsObj.buildsuccessdata.official.content.headline_text}}</h2>
+            <p class="font-color-000 font-size-24" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.official.content.mail_text">{{buildQuestionsObj.buildsuccessdata.official.content.mail_text}}</p>
+            <h6 class="font-color:rgb(88, 80, 80) font-size-16 margin-top:20px margin-bottom:35px;" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.official.content.cheer_text">{{buildQuestionsObj.buildsuccessdata.official.content.cheer_text}}</h6>
         </div>
         <div class="recomends">
-            <h4 class="font-size-16 font-color-000 margin-bottom:20px;" contenteditable ng-model="buildsuccessdata.official.content.share_text">{{buildsuccessdata.official.content.share_text}}</h4>
+            <h4 class="font-size-16 font-color-000 margin-bottom:20px;" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.official.content.share_text">{{buildQuestionsObj.buildsuccessdata.official.content.share_text}}</h4>
             <ul>
-                <li ng-repeat="social in buildsuccessdata.settings.share.options">
+                <li ng-repeat="social in buildQuestionsObj.buildsuccessdata.settings.share.options">
                     <a href="{{social.link_url}}">
                         <img class="selected-icon" src="{{social.link_icon}}">
                         <p class="font-size-12 font-color-444" contenteditable ng-model="social.link_title">{{social.link_title}}</p>
                     </a>
                 </li>
             </ul>
-            <h6 class="font-color-666 font-size-14 text-center" contenteditable ng-model="buildsuccessdata.official.content.poweredby_text">{{buildsuccessdata.official.content.poweredby_text}}</h6>
+            <h6 class="font-color-666 font-size-14 text-center" contenteditable ng-model="buildQuestionsObj.buildsuccessdata.official.content.poweredby_text">{{buildQuestionsObj.buildsuccessdata.official.content.poweredby_text}}</h6>
         </div>
     </div>
 </div>

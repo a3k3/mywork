@@ -1,19 +1,19 @@
 ﻿<div class="cover-page">
-    <div class="cover-container" ng-if="!buildcoverdata.settings.covertemplate.condition">
+    <div class="cover-container" ng-if="!buildQuestionsObj.buildcoverdata.settings.covertemplate.condition">
         <div class="media-section">
-            <div class="selected-icon" data-file="file1" ng-click="updateMedia($event)" style="background-image:url('{{buildcoverdata.default.media_src}}')">
+            <div class="selected-icon" data-file="file1" ng-click="updateMedia($event)" style="background-image:url('{{buildQuestionsObj.buildcoverdata.default.media_src}}')">
                 <div class="upload">
                     <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_file_upload_black_24px.svg"></md-icon>
                 </div>
             </div>
-            <input type="file" id="file1" name="file" ng-files="getTheFiles($files,buildcoverdata.default)" style="display:none;"/>
+            <input type="file" id="file1" name="file" ng-files="getTheFiles($files,buildQuestionsObj.buildcoverdata.default)" style="display:none;"/>
         </div>
         <div class="content-section">
-            <h3 contenteditable ng-model="buildcoverdata.default.text" context-menu="menuOptionsRest()" ng-mousedown="setcursorposition($event)" ng-mouseup="setcursorposition($event)" ng-keydown="setcursorposition($event)" ng-keyup="setcursorposition($event)">{{buildcoverdata.default.text}}</h3>
+            <h3 contenteditable ng-model="buildQuestionsObj.buildcoverdata.default.text" context-menu="menuOptionsRest()" ng-mousedown="setcursorposition($event)" ng-mouseup="setcursorposition($event)" ng-keydown="setcursorposition($event)" ng-keyup="setcursorposition($event)">{{buildQuestionsObj.buildcoverdata.default.text}}</h3>
         </div>
-        <md-button class="start md-raised md-primary md-hue-1"><span contenteditable ng-model="buildcoverdata.default.start.text">{{buildcoverdata.default.start.text}}</span></md-button>
+        <md-button class="start md-raised md-primary md-hue-1"><span contenteditable ng-model="buildQuestionsObj.buildcoverdata.default.start.text">{{buildQuestionsObj.buildcoverdata.default.start.text}}</span></md-button>
     </div>
-    <div class="cover-container" ng-if="buildcoverdata.settings.covertemplate.condition">
+    <div class="cover-container" ng-if="buildQuestionsObj.buildcoverdata.settings.covertemplate.condition">
         <div>Offical Template</div>
     </div>
 </div>
