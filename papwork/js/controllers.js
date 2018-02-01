@@ -293,7 +293,7 @@ function writeResult(result, questions) {
 }
 
 var customhtml = "";
-var names = [];
+var names = []; 
 
 function addviatext(text) {
     //var str = "1. The ra2.in in SPAIN stays mainly in the plain?";
@@ -321,14 +321,14 @@ function addviatext(text) {
 
         //console.log(question_List[index]);
         //var Question_index = question_List[index].indexOf('?');
-        var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
-        var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
+        //var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+        //var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
         //console.log(question_tag + ' --- ' + input_text);
 
 
         if (question_List[index] != "") {
             if (question_List[index].indexOf('{') == -1) {
-                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var question_tag = question_List[index];
                 var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
                 customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
                 console.log(customhtml);
@@ -336,22 +336,65 @@ function addviatext(text) {
 
             }
             else {
-                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var question_tag = question_List[index].substr(0, question_List[index].indexOf('{'));
                 var input_text = question_List[index].substr(question_List[index].indexOf("}") + 1);
                 var regExpne = /\{([^)]+)\}/;
                 var matches = regExpne.exec(question_List[index]);
                 console.log(matches[1]);
                 switch (matches[1]) {
                     case "checkbox":
-                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" name="vehicle" value="Bike">I have a bike<br><input type="checkbox" name="vehicle" value="Car">I have a car';
+                        var optionstag = [];
+                        var check_diff = /\s*}\s*/;
+                        var options_sep = /\s*[a-z]\.\s*/;
+                        var options_List = question_List[index].split(check_diff);
+                        console.log(options_List);
+                        console.log(options_List[1]);
+                        var dummy_list_answer = options_List[1].split(options_sep);
+                        $.each(dummy_list_answer, function (index, value) {
+                            var x = dummy_list_answer[index];
+                            var newdf = '<input type="checkbox" name="checkboxa" value="' + x + '">' + x + '</input>';
+                            optionstag.push(newdf);
+                        });
+
+                        console.log(optionstag);
+                        console.log(optionstag.toString());
+                        //console.log(optionstag);
+                        var result_ = optionstag.toString().replace(/^[, ]+|[, ]+$|[, ]+/g, " ").trim();
+                        //var options_List_answer = options_List.split(options_sep);
+                        //console.log(options_List[1]);
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label>' + result_ + '';
                         console.log(customhtml);
+                        optionstag = [];
+                        //var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" name="vehicle" value="Bike">I have a bike<br><input type="checkbox" name="vehicle" value="Car">I have a car';
+                        //console.log(customhtml);
                         break;
                     case "radio":
-                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="radio" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        var optionstag = [];
+                        var check_diff = /\s*}\s*/;
+                        var options_sep = /\s*[a-z]\.\s*/;
+                        var options_List = question_List[index].split(check_diff);
+                        console.log(options_List);
+                        console.log(options_List[1]);
+                        var dummy_list_answer = options_List[1].split(options_sep);
+                        $.each(dummy_list_answer, function (index, value) {
+                            var x = dummy_list_answer[index];
+                            var newdf = '<input type="radio" name="radioa" value="' + x + '">' + x + '</input>';
+                            optionstag.push(newdf);
+                        });
+
+                        console.log(optionstag);
+                        console.log(optionstag.toString());
+                        //console.log(optionstag);
+                        var result_ = optionstag.toString().replace(/^[, ]+|[, ]+$|[, ]+/g, " ").trim();
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label>' + result_ + '';
                         console.log(customhtml);
+                        optionstag = [];
                         break;
+                        //var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="radio" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        //console.log(customhtml);
+                        
                     case "date":
-                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="date" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="input_calendar" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
                         console.log(customhtml);
                         break;
                     case "email":
@@ -411,13 +454,13 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             $scope.action = $location.search().actionurl;
         }
         else {
-            if (sessionStorage.questionsObj != undefined) {
+            if (sessionStorage.addviaquestions != undefined) {
+                $scope.questionsObj.questions = JSON.parse(sessionStorage.addviaquestions);
+            }
+            else if (sessionStorage.questionsObj != undefined) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj).questions;
                 $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
                 $scope.applyFormSettings();
-                if (sessionStorage.addviaquestions != undefined) {
-                    $scope.questionsObj.questions = JSON.parse(sessionStorage.addviaquestions);
-                }
             }
             else {
                 $scope.questionsObj.questions = response.data;
