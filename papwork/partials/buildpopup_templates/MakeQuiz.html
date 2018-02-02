@@ -1,141 +1,139 @@
-﻿<div>
-    <div class="quiz_layout" md-theme="mytheme">
-        <div class="makeQuiz_inner_layout">
-            <div class="actions-table quiz_Edit">
-                <div layout="row" class="table-head">
-                    <div flex="10">
-                        Slides
-                    </div>
-                    <div flex="30">
-                        Questions
-                    </div>
-                    <div flex="25">
-                        Correct Answer
-                    </div>
-                    <div flex="10">
-                        Score
-                    </div>
-                    <div flex="25">
-                        Instant Feedback
-                    </div>
+﻿<div class="quiz_layout" md-theme="mytheme">
+    <div class="makeQuiz_inner_layout">
+        <div class="actions-table quiz_Edit">
+            <div layout="row" class="table-head">
+                <div flex="10">
+                    Slides
                 </div>
-                <div layout="row" class="table-row" ng-repeat="question in buildQuestionsObj.questions">
-                    <div flex="10" class="serialno">
-                        {{$index+1}}
-                    </div>
-                    <div flex="30" class="question" ng-bind-html="question.question"></div>
-                    <div flex="25">
-                        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="options.quizoptionanswer" class="md-primary" ng-repeat="option in question.options" ng-if="question.answertype == 'checkbox'" ng-init="options.quizoptionanswer = ''">
-                            {{option.value}}
-                        </md-checkbox>
-                        <md-radio-group ng-model="options.quizoptionanswer" ng-if="question.answertype == 'radio' || question.answertype == 'select'">
-                            <md-radio-button ng-repeat="option in question.options" value="{{option.value}}" class="md-primary">{{option.value}}</md-radio-button>
-                        </md-radio-group>
-                        <md-input-container ng-repeat="option in question.options" ng-if="question.answertype == 'text' || question.answertype == 'textarea'" ng-init="options.quizoptionanswer = ''">
-                            <input type="text" name="quizanswer" ng-model="options.quizoptionanswer">
-                        </md-input-container>
-                    </div>
-                    <div flex="10">
-                        <md-input-container ng-repeat="option in question.options" ng-init="option.quizoptionscore = 0">
-                            <input type="number" name="score" min="-5" max="5" ng-model="option.quizoptionscore">
-                        </md-input-container>
-                    </div>
-                    <div flex="25">
-                        <md-select name="feedback" ng-model="option.quizoptionfeedback" ng-repeat="option in question.options">
-                            <md-option value="wrong">Wrong Answer</md-option>
-                            <md-option value="correct">Correct Answer</md-option>
-                        </md-select>
-                    </div>
+                <div flex="30">
+                    Questions
+                </div>
+                <div flex="25">
+                    Correct Answer
+                </div>
+                <div flex="10">
+                    Score
+                </div>
+                <div flex="25">
+                    Instant Feedback
                 </div>
             </div>
-
-            <div class="quiz_Setting">
-                <div class="quiz_score">
-                    <span>Grand Total Score</span>
-                    <span class="max_value"><span ng-bind="buildQuestionsObj.quizData.totalMax"></span> Max</span>
-                    <span class="min_value"><span ng-bind="buildQuestionsObj.quizData.totalMin">100</span> Min </span>
+            <div layout="row" class="table-row" ng-repeat="question in buildQuestionsObj.questions">
+                <div flex="10" class="serialno">
+                    {{$index+1}}
                 </div>
-                <div class="answer_block">
-                    <span>Correct Answer Score:</span> <span>
-                        <md-input-container class="md-mytheme-theme md-input-has-value">
-                            <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
-                        </md-input-container>
-                    </span><br>
-                    <span> Wrong Answer Score:</span>
-                    <span>
-                        <md-input-container class="md-mytheme-theme md-input-has-value">
-                            <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
-                        </md-input-container>
-                    </span>
-
+                <div flex="30" class="question" ng-bind-html="question.question"></div>
+                <div flex="25">
+                    <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="options.quizoptionanswer" class="md-primary" ng-repeat="option in question.options" ng-if="question.answertype == 'checkbox'" ng-init="options.quizoptionanswer = ''">
+                        {{option.value}}
+                    </md-checkbox>
+                    <md-radio-group ng-model="options.quizoptionanswer" ng-if="question.answertype == 'radio' || question.answertype == 'select'">
+                        <md-radio-button ng-repeat="option in question.options" value="{{option.value}}" class="md-primary">{{option.value}}</md-radio-button>
+                    </md-radio-group>
+                    <md-input-container ng-repeat="option in question.options" ng-if="question.answertype == 'text' || question.answertype == 'textarea'" ng-init="options.quizoptionanswer = ''">
+                        <input type="text" name="quizanswer" ng-model="options.quizoptionanswer">
+                    </md-input-container>
                 </div>
-                <div class="quiz_result">
-                    <h4>Generate Result</h4>
-                    <div class="quiz_setting_checkbox">
-                        <h6>if the Score</h6>
-                        <div layout="row" layout-align="start center" ng-repeat="result in buildQuestionsObj.quizData.results">
-                            <div flex="20">
-                                <md-input-container>
-                                    <md-input-container>
-                                        <md-select name="operator" ng-model="result.operator">
-                                            <md-option value="equals">Equals</md-option>
-                                            <md-option value="not_equals">Not Equals</md-option>
-                                            <md-option value="less_than">Less Than</md-option>
-                                            <md-option value="greater_than">Greater Than</md-option>
-                                            <md-option value="contains">Contains</md-option>
-                                        </md-select>
-                                    </md-input-container>
-                                </md-input-container>
-                            </div>
-                            <div flex="20">
-                                <md-input-container>
-                                    <input ng-model="result.score" type="number" min="{{buildQuestionsObj.quizData.totalMin}}" max="{{buildQuestionsObj.quizData.totalMax}}" />
-                                </md-input-container>
-                            </div>
-                            <div flex="20">
-                                Then result
-                            </div>
-                            <div flex="20">
-                                <md-input-container>
-                                    <input ng-model="result.grade" class="md-accent hue-2" name="answer" type="text">
-                                </md-input-container>
-                            </div>
-                            <div flex="20s">
-                                <md-input-container>
-                                    <md-select name="relation" ng-model="result.slide_to_show">
-                                        <md-option value="none">None</md-option>
-                                        <md-option ng-value="question" ng-repeat="question in buildQuestionsObj.questions">{{question.question}}</md-option>
-                                    </md-select>
-                                </md-input-container>
-                            </div>
-                            <md-button class="md-fab md-mini remove" md-colors="{background: 'grey'}" aria-label="Remove" ng-click="removeResultCondition($index)" ng-if="$index != 0">
-                                <md-icon md-svg-src="../../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
-                            </md-button>
-                        </div>
-                        <div ng-click="addResultCondition()" class="advance-option">
-                            <md-button class="add" md-colors="{background: 'grey'}">Add</md-button>
-                        </div>
-                    </div>
+                <div flex="10">
+                    <md-input-container ng-repeat="option in question.options" ng-init="option.quizoptionscore = 0">
+                        <input type="number" name="score" min="-5" max="5" ng-model="option.quizoptionscore">
+                    </md-input-container>
                 </div>
-                <div class="conditional_flow">
-                    <h4>Settings</h4>
-                    <div class="quiz_setting_checkbox">
-                        <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">Send detailed quiz report to Applicants</md-checkbox>
-                        <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">Encourage Applicants to share their Results</md-checkbox>
-                        <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">Do not allow RETRY after receiving the   answer</md-checkbox>
-                    </div>
+                <div flex="25">
+                    <md-select name="feedback" ng-model="option.quizoptionfeedback" ng-repeat="option in question.options">
+                        <md-option value="wrong">Wrong Answer</md-option>
+                        <md-option value="correct">Correct Answer</md-option>
+                    </md-select>
                 </div>
-
             </div>
         </div>
-    </div>
-    <div class="cancel_save_via">
-        <md-button class="md-raised hue-2" aria-label="copy" ng-click="cancel()">
-            Cancel
-        </md-button>
 
-        <md-button class="md-raised md-primary hue-2" aria-label="save" ng-click="saveQuestions()">
-            Save
-        </md-button>
+        <div class="quiz_Setting">
+            <div class="quiz_score">
+                <span>Grand Total Score</span>
+                <span class="max_value"><span ng-bind="buildQuestionsObj.quizData.totalMax"></span> Max</span>
+                <span class="min_value"><span ng-bind="buildQuestionsObj.quizData.totalMin">100</span> Min </span>
+            </div>
+            <div class="answer_block">
+                <span>Correct Answer Score:</span> <span>
+                    <md-input-container class="md-mytheme-theme md-input-has-value">
+                        <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                    </md-input-container>
+                </span><br>
+                <span> Wrong Answer Score:</span>
+                <span>
+                    <md-input-container class="md-mytheme-theme md-input-has-value">
+                        <input type="number" name="score" min="-5" max="5" ng-model="s" class="ng-pristine ng-valid md-input ng-not-empty ng-valid-min ng-valid-max ng-touched" aria-invalid="false" style="">
+                    </md-input-container>
+                </span>
+
+            </div>
+            <div class="quiz_result">
+                <h4>Generate Result</h4>
+                <div class="quiz_setting_checkbox">
+                    <h6>if the Score</h6>
+                    <div layout="row" layout-align="start center" ng-repeat="result in buildQuestionsObj.quizData.results">
+                        <div flex="20">
+                            <md-input-container>
+                                <md-input-container>
+                                    <md-select name="operator" ng-model="result.operator">
+                                        <md-option value="equals">Equals</md-option>
+                                        <md-option value="not_equals">Not Equals</md-option>
+                                        <md-option value="less_than">Less Than</md-option>
+                                        <md-option value="greater_than">Greater Than</md-option>
+                                        <md-option value="contains">Contains</md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </md-input-container>
+                        </div>
+                        <div flex="20">
+                            <md-input-container>
+                                <input ng-model="result.score" type="number" min="{{buildQuestionsObj.quizData.totalMin}}" max="{{buildQuestionsObj.quizData.totalMax}}" />
+                            </md-input-container>
+                        </div>
+                        <div flex="20">
+                            Then result
+                        </div>
+                        <div flex="20">
+                            <md-input-container>
+                                <input ng-model="result.grade" class="md-accent hue-2" name="answer" type="text">
+                            </md-input-container>
+                        </div>
+                        <div flex="20s">
+                            <md-input-container>
+                                <md-select name="relation" ng-model="result.slide_to_show">
+                                    <md-option value="none">None</md-option>
+                                    <md-option ng-value="question" ng-repeat="question in buildQuestionsObj.questions">{{question.question}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <md-button class="md-fab md-mini remove" md-colors="{background: 'grey'}" aria-label="Remove" ng-click="removeResultCondition($index)" ng-if="$index != 0">
+                            <md-icon md-svg-src="../../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+                        </md-button>
+                    </div>
+                    <div ng-click="addResultCondition()" class="advance-option">
+                        <md-button class="add" md-colors="{background: 'grey'}">Add</md-button>
+                    </div>
+                </div>
+            </div>
+            <div class="conditional_flow">
+                <h4>Settings</h4>
+                <div class="quiz_setting_checkbox">
+                    <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">Send detailed quiz report to Applicants</md-checkbox>
+                    <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">Encourage Applicants to share their Results</md-checkbox>
+                    <md-checkbox class="green mdcheckbox" aria-label="" name="" value="">Do not allow RETRY after receiving the   answer</md-checkbox>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>
+<div class="cancel_save_via">
+    <md-button class="md-raised hue-2" aria-label="copy" ng-click="cancel()">
+        Cancel
+    </md-button>
+
+    <md-button class="md-raised md-primary hue-2" aria-label="save" ng-click="saveQuestions()">
+        Save
+    </md-button>
 </div>
