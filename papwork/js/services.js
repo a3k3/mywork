@@ -9,7 +9,10 @@ myservice.value('version', '0.2');
 myservice.service('getAllQuestions', ['$http', function ($http) {
     return $http({
         method: "GET",
-        url: "../asset/data/questionData.json"
+        url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/get?user_id=1680837175288210&form_id=37e414e9-f5dc-c2f5-dc82-2749531243d3",
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
     })
 }]);
 

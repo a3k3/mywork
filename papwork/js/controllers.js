@@ -1045,7 +1045,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, f
         var matches = window.location.href.match(regex);
 
         var _formBuildData = JSON.parse(sessionStorage.questionsObj)
-        _formBuildData.userid = $rootScope.user.id;
+        _formBuildData.user_id = $rootScope.user.id;
 
         formData.postData(_formBuildData).success(function (response) {
             console.log(reponse)

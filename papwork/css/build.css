@@ -1814,27 +1814,27 @@ md-progress-circular + .counter {
     top: 0;
 }
 
-    .buildpopup .inner_layout {
-        position: relative;
-    }
+.buildpopup .inner_layout {
+    position: relative;
+}
 
-        .buildpopup .inner_layout .close-tab {
-            position: absolute;
-            right: 0;
-            top: 0;
-            margin: 5px 0;
-            background-color: #fff;
-            padding: 5px;
-            border-radius: 50%;
-            box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-        }
+.buildpopup .inner_layout .close-tab {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px 0;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+}
 
-    .buildpopup ng-include.popupcontainer {
-        display: inline-block;
-        width: 100%;
-        height: 68vh;
-        /* margin-top: 2vh; */
-    }
+.buildpopup ng-include.popupcontainer {
+    display: inline-block;
+    width: 100%;
+    height: 68vh;
+    margin-top: 2vh;
+}
 
 formsettings md-content {
     background: #fff !important;
