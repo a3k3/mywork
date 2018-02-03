@@ -9,23 +9,31 @@ myservice.value('version', '0.2');
 myservice.service('getAllQuestions', ['$http', function ($http) {
     return $http({
         method: "GET",
-        url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/get?user_id=1680837175288210&form_id=37e414e9-f5dc-c2f5-dc82-2749531243d3",
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
+        url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/get?user_id=1680837175288210&form_id=37e414e9-f5dc-c2f5-dc82-2749531243d3"
     })
 }]);
 
-myservice.service('formData', ['$http', function ($http) {
+myservice.service('formData', ['$http','$rootScope', function ($http, $rootScope) {
     this.postData = function (data) {
         return $http({
             method: 'POST',
             url: 'http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/create',
-            data: data,
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
+            data: data
         });
+    }
+    this.getData = function (form_id) {
+        if ($rootScope.user.id == undefined || $rootScope.user.id.length == 0) {
+            return $http({
+                method: "GET",
+                url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/forms/"+ form_id
+            })
+        }
+        else {
+            return $http({
+                method: "GET",
+                url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/get?user_id=" + $rootScope.user.id + "&form_id=" + form_id
+            })
+        }
     }
 }]);
 

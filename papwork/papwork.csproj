@@ -229,6 +229,7 @@
     <Content Include="js\mdCarousel.js" />
     <Content Include="js\swipe.js" />
     <Content Include="lib\accordian\sirAccordian.js" />
+    <Content Include="lib\apigetway\apigClient.js" />
     <Content Include="lib\aws-sdk\aws-sdk.js" />
     <Content Include="lib\bigEval.js" />
     <Content Include="lib\contextmenu\contextMenu.js" />
@@ -391,6 +392,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="lib\apigetway\lib\apiGatewayCore\" />
+    <Folder Include="lib\apigetway\lib\axios\" />
+    <Folder Include="lib\apigetway\lib\CryptoJS\" />
+    <Folder Include="lib\apigetway\lib\url-template\" />
     <Folder Include="lib\html2canvas\" />
   </ItemGroup>
   <PropertyGroup>

@@ -420,13 +420,9 @@ function addviatext(text) {
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
-myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile, $window) {
+myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile, $window, formData) {
 
     $rootScope.bodylayout = 'experience-layout';
-
-    var vm = this;
-
-    $scope.formData = {};
 
     $scope.questionsObj = {
         name: "Untitled",
@@ -446,7 +442,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         }
     };
 
-    getAllQuestions.then(function (response) {
+    var _formId = $location.search().form_id;
+
+    formData.getData(_formId).then(function (response) {
 
         //for utility to work
         if ($location.search().session == "true") {
@@ -464,7 +462,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 $scope.applyFormSettings();
             }
             else {
-                $scope.questionsObj.questions = response.data;
+                $scope.questionsObj.questions = JSON.parse(response.data).questions;
+                $scope.questionsObj.cvdata = JSON.parse(sessionStorage.questionsObj).cvdata;
+                $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
+                $scope.applyFormSettings();
             }
             angular.forEach($scope.questionsObj.questions, function (value, index) {
                 value.question = value.question;
@@ -542,7 +543,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             else if (value.name == "General") {
                 if (value.settings.autocomplete.condition) {
                     $timeout(function () {
-                        var reload_url = window.location.href.replace(/\#\/.*(\?|$)/gi, '#/cover?')
+                        var regex = /(\#\/)(.*?)(\?|$)/gi;
+                        var matches = regex.exec(window.location.href)//window.location.href.match(regex);
+                        var reload_url = window.location.href.replace(matches[2], 'cover')
                         window.location.href = reload_url;
                     }, value.settings.autocomplete.time * 60 * 1000);
                 }
@@ -1041,8 +1044,8 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, f
 
     function publishController($scope, $mdDialog, formData) {
         $scope.publish = {};
-        var regex = /(\#\/)(.*)(\?|$)/gi;
-        var matches = window.location.href.match(regex);
+        var regex = /(\#\/)(.*?)(\?|$)/gi;
+        var matches = regex.exec(window.location.href)//window.location.href.match(regex);
 
         var _formBuildData = JSON.parse(sessionStorage.questionsObj)
         _formBuildData.user_id = $rootScope.user.id;
@@ -1053,7 +1056,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, f
             console.log(error);
         })
 
-        $scope.publish.publishUrl = window.location.href.replace(matches[1], 'cover') + '?id=' + $rootScope.formid
+        $scope.publish.publishUrl = window.location.href.replace(matches[2], 'cover') + '?id=' + $rootScope.formid
 
         $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100vh"></iframe>';
 
@@ -1861,9 +1864,9 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         /******Share and Embed*****/
         $scope.publish = {};
-        var regex = /(\#\/)(.*)(\?|$)/gi;
-        var matches = window.location.href.match(regex);
-        $scope.publish.publishUrl = window.location.href.replace(matches[1], 'cover') + '?id=' + $rootScope.formid
+        var regex = /(\#\/)(.*?)(\?|$)/gi;
+        var matches = regex.exec(window.location.href)//window.location.href.match(regex);
+        $scope.publish.publishUrl = window.location.href.replace(matches[2], 'cover') + '?id=' + $rootScope.formid
 
         $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
 
