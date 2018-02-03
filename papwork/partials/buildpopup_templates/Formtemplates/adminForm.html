@@ -1,6 +1,8 @@
 ﻿<div class="admin_layout" md-theme="mytheme">
     <div class="publish_layout">
         <div class="actions-table">
+            <div id="unblurred"><div id="box">coming soon..!!</div></div>
+
             <div layout="row" class="table-head">
                 <div flex="10">
                     Sl.No
@@ -33,23 +35,23 @@
                     </md-button>
                 </div>
             </div>
-                    <div layout="row" class="table-row">
-                        <div flex="10">
-                            2
-                        </div>
-                        <div flex="40">
-                            Sanjay Kumar
-                        </div>
-                        <div flex="30">
-                            Viewer
-                        </div>
-                        <div flex="20">
-                            <md-button class="md-icon-button" aria-label="delete">
-                                <md-tooltip md-direction="bottom">Delete</md-tooltip>
-                                <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
-                            </md-button>
-                        </div>
-                    </div>
+            <div layout="row" class="table-row">
+                <div flex="10">
+                    2
+                </div>
+                <div flex="40">
+                    Sanjay Kumar
+                </div>
+                <div flex="30">
+                    Viewer
+                </div>
+                <div flex="20">
+                    <md-button class="md-icon-button" aria-label="delete">
+                        <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                        <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
             <div layout="row" class="table-row">
                 <div flex="10">
                     3
@@ -68,16 +70,16 @@
                 </div>
             </div>
 
-                    <div layout="row" class="table-row" ng-init="show=false">
-                        <div flex="20">
-                            <md-button class="md-icon-button" ng-click="show=true" aria-label="add">
-                                <md-tooltip md-direction="bottom">Add User</md-tooltip>
-                                <md-icon class="md-primary" md-svg-icon="../../asset/img/md-icons/svg/ic_add_circle_black_24px.svg"></md-icon>
-                            </md-button>
-                            Add User
-                        </div>
-                    </div>
-          <!--modal Popup -->
+            <div layout="row" class="table-row" ng-init="show=false">
+                <div flex="20">
+                    <md-button class="md-icon-button" ng-click="show=true" aria-label="add">
+                        <md-tooltip md-direction="bottom">Add User</md-tooltip>
+                        <md-icon class="md-primary" md-svg-icon="../../asset/img/md-icons/svg/ic_add_circle_black_24px.svg"></md-icon>
+                    </md-button>
+                    Add User
+                </div>
+            </div>
+            <!--modal Popup -->
             <div class="modalpop" ng-if="show">
                 <div class="close-tab" layout="row" layout-align="center center">
                     <div flex>
@@ -115,6 +117,6 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
 </div></div>

@@ -253,6 +253,7 @@
     <Content Include="partials\buildpopup_templates\Formtemplates\audienceForm.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\emailForm.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\emailNotificationForm.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\Integrations.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\nextquestionprompts.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\questionserialno.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\progressbar.html" />
@@ -263,12 +264,14 @@
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\kiosk.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\FormSettingsTemplate\status.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\generalForm.html" />
+    <Content Include="partials\buildpopup_templates\Formtemplates\Integrations.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\makeQuiz.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\ProcessingForm.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\PublishPopup.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\shareEmbed.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\slideForm.html" />
     <Content Include="partials\buildpopup_templates\makeQuiz.html" />
+    <Content Include="partials\buildpopup_templates\Payments.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
     <Content Include="partials\build_input_templates\email.html" />
