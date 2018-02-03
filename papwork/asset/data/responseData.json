@@ -1,0 +1,254 @@
+﻿{
+  "surveyCompleted": 600,
+  "surveyEngaged": 950,
+  "surveyVisited": 1200,
+  "1": {
+    "ResponseID": "345hfgqt",
+    "userResponses": [
+      {
+        "Q": "What is your Name?",
+        "A": "Amit Shaw"
+      },
+      {
+        "Q": "Your Age?",
+        "A": "30"
+      },
+      {
+        "Q": "Do you have Aadhar?",
+        "A": "Yes"
+      },
+      {
+        "Q": "Which language you Speak?",
+        "A": "Hindi"
+      },
+      {
+        "Q": "your Address?",
+        "A": "Bangalore"
+      }
+    ],
+    "reviewerResponses": {
+      "1": {
+        "reviewerId": "rev1",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          },
+          {
+            "Q": "Answer Q3",
+            "A": "Answer3"
+          }
+        ]
+      },
+      "2": {
+        "reviewerId": "rev2",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          }
+
+        ]
+      }
+    },
+    "Action": {
+      "value": "submitted",
+      "state": "disabled"
+    }
+  },
+  "2": {
+    "ResponseID": "345hfgdgxf",
+    "userResponses": [
+      {
+        "Q": "What is your Name?",
+        "A": "Sumit Shaw"
+      },
+      {
+        "Q": "Your Age?",
+        "A": "34"
+      },
+      {
+        "Q": "Do you have Aadhar?",
+        "A": "No"
+      },
+      {
+        "Q": "Which language you Speak?",
+        "A": "Hindi"
+      },
+      {
+        "Q": "your Address?",
+        "A": "Hyderabad"
+      }
+    ],
+    "reviewerResponses": {
+      "1": {
+        "reviewerId": "rev1",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          },
+          {
+            "Q": "Answer Q3",
+            "A": "Answer3"
+          }
+        ]
+      },
+      "2": {
+        "reviewerId": "rev2",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          }
+
+        ]
+      }
+    },
+    "Action": {
+      "value": "Review",
+      "state": "enabled"
+    }
+  },
+  "3": {
+    "ResponseID": "345hfggty",
+    "userResponses": [
+      {
+        "Q": "What is your Name?",
+        "A": "Karan Singh"
+      },
+      {
+        "Q": "Your Age?",
+        "A": "25"
+      },
+      {
+        "Q": "Do you have Aadhar?",
+        "A": "Yes"
+      },
+      {
+        "Q": "Which language you Speak?",
+        "A": "Marathi"
+      },
+      {
+        "Q": "your Address?",
+        "A": "Bangalore"
+      }
+    ],
+    "reviewerResponses": {
+      "1": {
+        "reviewerId": "rev1",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          },
+          {
+            "Q": "Answer Q3",
+            "A": "Answer3"
+          }
+        ]
+      },
+      "2": {
+        "reviewerId": "rev2",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          }
+
+        ]
+      }
+    },
+    "Action": {
+      "value": "review",
+      "state": "enabled"
+    }
+  },
+  "4": {
+    "ResponseID": "345hfggtx",
+    "userResponses": [
+      {
+        "Q": "What is your Name?",
+        "A": "Arjun Reddy"
+      },
+      {
+        "Q": "Your Age?",
+        "A": "27"
+      },
+      {
+        "Q": "Do you have Aadhar?",
+        "A": "Yes"
+      },
+      {
+        "Q": "Which language you Speak?",
+        "A": "Telugu"
+      },
+      {
+        "Q": "your Address?",
+        "A": "Hyderabad"
+      }
+    ],
+    "reviewerResponses": {
+      "1": {
+        "reviewerId": "rev1",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          },
+          {
+            "Q": "Answer Q3",
+            "A": "Answer3"
+          }
+        ]
+      },
+      "2": {
+        "reviewerId": "rev2",
+        "responses": [
+          {
+            "Q": "Plz answer Q1",
+            "A": "Answer1"
+          },
+          {
+            "Q": "Answer Q2",
+            "A": "Answer2"
+          }
+
+        ]
+      }
+    },
+    "Action": {
+      "value": "review",
+      "state": "enabled"
+    }
+  }
+
+}

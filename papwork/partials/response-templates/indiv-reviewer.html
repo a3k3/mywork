@@ -1,0 +1,24 @@
+﻿<div class="reviewer">
+    <div class="table">
+        <!--<tbl rows="reviewer1"></tbl>-->
+        <div class="tablehead">
+            <div class="tablecell">
+                <p ng-bind-html="reviewer.reviewerId"></p>                
+            </div>
+        </div>
+        <div class="tablebody">
+            <div class="tablerow" ng-repeat="(key,val) in reviewer.responses">
+                <div class="tablecell">
+                    <h5>{{val.Q}}</h5>
+                    <p><b>{{val.A}}</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="quest-answ">
+        <div class="quest-block" ng-repeat="(key,val) in qblocks">
+            <h5>{{key}}.{{val.Q}}</h5>
+            <p><b>{{val.A}}</b></p>
+        </div>
+    </div>
+</div>

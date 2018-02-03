@@ -1,29 +1,8 @@
 ﻿<section class="response-review">
     <section class="response-questions">
-        <h3 class="responseid">{{responseid}}</h3>
+        <h3 class="responseid">Response ID : {{responseid}}</h3>
         <div class="reviewers">
-            <div class="reviewer">
-                <div class="table">
-                    <tbl rows="reviewer1"></tbl>
-                </div>
-                <div class="quest-answ">
-                    <div class="quest-block" ng-repeat="(key,val) in qblock1">
-                        <h5>{{key}}.{{val.Q}}</h5>
-                        <p><b>{{val.A}}</b></p>
-                    </div>
-                </div>
-            </div>
-            <div class="reviewer">
-                <div class="table">
-                    <tbl rows="reviewer2"></tbl>
-                </div>
-                <div class="quest-answ">
-                    <div class="quest-block" ng-repeat="(key,val) in qblock2">
-                        <h5>{{key}}.{{val.Q}}</h5>
-                        <p><b>{{val.A}}</b></p>
-                    </div>
-                </div>
-            </div>
+            <reviewer ng-repeat="reviewer in reviewers"></reviewer>            
         </div>
     </section>
     <section class="response-rating">

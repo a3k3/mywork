@@ -802,9 +802,13 @@ md-pagination-wrapper {
     width: 10%;
     min-width: 100px;
     transform:translateY(-10%);
+    top:0 !important;
     /*right: 0;
     left: unset;
     transform: translate(719%,35%);*/
+}
+.tablehead .tablecell .md-dialog-container {
+    top: 0 !important;
 }
 .chart-box .md-card {
     display: inline-block;
@@ -855,6 +859,8 @@ doughnut-chart:nth-child(n+5){display:none;}
 .action-bar md-datepicker .md-datepicker-input-container {
     position:absolute;
     border: none;
+    left:0;
+    width:50%;
 }
 .action-bar button.md-datepicker-button.md-icon-button.md-button {
     right: 0;
@@ -942,7 +948,6 @@ hr {
     height: 2px;
     background-color: #c1c1c1;
 }
-.tablerow.searched {color:red;}
 @media only screen and (max-width:640px){
     .chart-box .md-card {
         min-height: 315px;        
@@ -984,22 +989,22 @@ hr {
     }
         
 }
-.response-section .table {
+.response-section .table, .reviewers .table {
     display: table;
     border: 1px solid #c3b8b8;
     position: relative;
 }
-.response-section .tablerow, .response-section .tablehead {
+.response-section .tablerow, .response-section .tablehead, .reviewers .tablerow, .reviewers .tablehead {
     display: table-row;
 }
-.response-section .tablehead{
-    color:#444444;
-    font-size:14px;
+.response-section .tablehead, .reviewers .tablehead {
+    color: #444444;
+    font-size: 14px;
 }
 .response-section .tablehead .tablecell:first-child {    
     font-size: 18px;
 }
-.response-section .tablebody {
+.response-section .tablebody, .reviewers .tablebody {
     color: #666666;
     font-size: 14px;
 }
@@ -1011,23 +1016,26 @@ hr {
     margin: 15px 0;
 }
 
-.response-section .tablebody {
+.response-section .tablebody, .reviewers .tablebody {
     display: table-row-group;
-} 
-.response-section .tablecell {
+}
+.response-section .tablecell, .reviewers .tablecell {
     display: table-cell;
     border: 0.05px solid #c3b8b8;
     border-collapse: collapse;
     border-bottom: 0px;
     padding: 5px 15px;
-    position:relative;
-    min-height:40px;
-    vertical-align:middle;
+    position: relative;
+    min-height: 40px;
+    vertical-align: middle;
 }
-    .response-section .tablecell p{margin:0;}
+    .response-section .tablecell p, .reviewers .tablecell p {
+        margin: 0;
+    }
     .response-data-table .search-box {
         min-width:250px;
         display: inline-block;
+        padding-left:0;
         margin-top: 0;
         margin-right: 15px;
         font-size: 16px;
@@ -1042,31 +1050,44 @@ hr {
         border: 1px solid #999999;
         margin: 0 -2px;
     }
-.search-box md-icon{
-    left:6px;
-    top:7px;
+.md-datepicker-triangle-button.md-button.md-icon-button {
+    transform:translate(0,0);
+}
+.search-box md-icon {
+    left: 6px;
+    top: 7px;
 }
 .search-box input {
     border-bottom:transparent !important;
 }
-.response-section .tablerow:nth-child(odd) {
+.response-section .tablerow:nth-child(odd), .reviewers .tablerow:nth-child(odd) {
     background-color: #fdfafa;
 }
 .response-section .tablehead {
     background-color: #b3b2b1;
 }
-.response-section .tablerow:nth-child(even) {
+.response-section .tablerow:nth-child(even), .reviewers .tablerow:nth-child(even) {
     background-color: #fff;
 }
+
+.filterApplied .tablerow:not(.searched){display:none;}
 .response-questions {
     width: 65%;
     /*padding-right: 10px;*/
     border-right: 2px solid #d0caca;
 }
+section.response-review {
+    width: 85vw;
+    margin: auto 5%;
+}
+.chartbox-headers .md-dialog-container{
+    transform:translateY(-11%);
+}
 .reviewer {
     width: 48%;
     display: inline-block;
     padding-right: 2%;
+    vertical-align: top;
 }
 .response-review>*{
     display:inline-block;

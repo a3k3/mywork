@@ -597,3 +597,22 @@ myapp.directive('tbl', function () {
     };
 
 });
+
+myapp.directive('responseDetails', function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: "../partials/response-templates/response-user-details.html",
+
+    }
+
+});
+myapp.directive('reviewer', function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: "../partials/response-templates/indiv-reviewer.html",
+
+    }
+
+});

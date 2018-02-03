@@ -174,3 +174,10 @@ myservice.service('FBLogin', ['$rootScope', function ($rootScope) {
 
     }
 }]);
+
+myservice.service('getResponseData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/responseData.json"
+    })
+}]);

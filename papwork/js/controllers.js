@@ -2142,260 +2142,262 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
     });
 });
 
-var table = {
-    "surveyCompleted": 600,
-    "surveyEngaged": 950,
-    "surveyVisited": 1200,
-    '1': {
-        "ResponseID": "345hfgqt",
-        "userResponses": [
-            {
-                'Q': "What is your Name?",
-                'A': "Amit Shaw"
-            },
-            {
-                'Q': "Your Age?",
-                'A': "30"
-            },
-            {
-                'Q': "Do you have Aadhar?",
-                'A': "Yes"
-            },
-            {
-                'Q': "Which language you Speak?",
-                'A': "Hindi"
-            },
-            {
-                'Q': "your Address?",
-                'A': "Bangalore"
-            }
-        ],
-        "reviewerResponses": {
-            "1": {
-                'reviewerId': "rev1",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    },
-                    {
-                        'Q': "Answer Q3",
-                        'A': "Answer3"
-                    }
-                ]
-            },
-            "2": {
-                'reviewerId': "rev2",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    }
 
-                ]
-            }
-        },
-        "Action": {
-            "value": "submitted",
-            "state": "disabled"
-        }
-    },
-    '2': {
-        "ResponseID": "345hfgdgxf",
-        "userResponses": [
-            {
-                'Q': "What is your Name?",
-                'A': "Sumit Shaw"
-            },
-            {
-                'Q': "Your Age?",
-                'A': "34"
-            },
-            {
-                'Q': "Do you have Aadhar?",
-                'A': "No"
-            },
-            {
-                'Q': "Which language you Speak?",
-                'A': "Hindi"
-            },
-            {
-                'Q': "your Address?",
-                'A': "Hyderabad"
-            }
-        ],
-        "reviewerResponses": {
-            "1": {
-                'reviewerId': "rev1",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    },
-                    {
-                        'Q': "Answer Q3",
-                        'A': "Answer3"
-                    }
-                ]
-            },
-            "2": {
-                'reviewerId': "rev2",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    }
+//var table = {
+//    "surveyCompleted": 600,
+//    "surveyEngaged": 950,
+//    "surveyVisited": 1200,
+//    '1': {
+//        "ResponseID": "345hfgqt",
+//        "userResponses": [
+//            {
+//                'Q': "What is your Name?",
+//                'A': "Amit Shaw"
+//            },
+//            {
+//                'Q': "Your Age?",
+//                'A': "30"
+//            },
+//            {
+//                'Q': "Do you have Aadhar?",
+//                'A': "Yes"
+//            },
+//            {
+//                'Q': "Which language you Speak?",
+//                'A': "Hindi"
+//            },
+//            {
+//                'Q': "your Address?",
+//                'A': "Bangalore"
+//            }
+//        ],
+//        "reviewerResponses": {
+//            "1": {
+//                'reviewerId': "rev1",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    },
+//                    {
+//                        'Q': "Answer Q3",
+//                        'A': "Answer3"
+//                    }
+//                ]
+//            },
+//            "2": {
+//                'reviewerId': "rev2",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    }
 
-                ]
-            }
-        },
-        "Action": {
-            "value": "Review",
-            "state": "enabled"
-        }
-    },
-    '3': {
-        "ResponseID": "345hfggty",
-        "userResponses": [
-            {
-                'Q': "What is your Name?",
-                'A': "Karan Singh"
-            },
-            {
-                'Q': "Your Age?",
-                'A': "25"
-            },
-            {
-                'Q': "Do you have Aadhar?",
-                'A': "Yes"
-            },
-            {
-                'Q': "Which language you Speak?",
-                'A': "Marathi"
-            },
-            {
-                'Q': "your Address?",
-                'A': "Bangalore"
-            }
-        ],
-        "reviewerResponses": {
-            "1": {
-                'reviewerId': "rev1",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    },
-                    {
-                        'Q': "Answer Q3",
-                        'A': "Answer3"
-                    }
-                ]
-            },
-            "2": {
-                'reviewerId': "rev2",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    }
+//                ]
+//            }
+//        },
+//        "Action": {
+//            "value": "submitted",
+//            "state": "disabled"
+//        }
+//    },
+//    '2': {
+//        "ResponseID": "345hfgdgxf",
+//        "userResponses": [
+//            {
+//                'Q': "What is your Name?",
+//                'A': "Sumit Shaw"
+//            },
+//            {
+//                'Q': "Your Age?",
+//                'A': "34"
+//            },
+//            {
+//                'Q': "Do you have Aadhar?",
+//                'A': "No"
+//            },
+//            {
+//                'Q': "Which language you Speak?",
+//                'A': "Hindi"
+//            },
+//            {
+//                'Q': "your Address?",
+//                'A': "Hyderabad"
+//            }
+//        ],
+//        "reviewerResponses": {
+//            "1": {
+//                'reviewerId': "rev1",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    },
+//                    {
+//                        'Q': "Answer Q3",
+//                        'A': "Answer3"
+//                    }
+//                ]
+//            },
+//            "2": {
+//                'reviewerId': "rev2",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    }
 
-                ]
-            }
-        },
-        "Action": {
-            "value": "review",
-            "state": "enabled"
-        }
-    },
-    '4': {
-        "ResponseID": "345hfggtx",
-        "userResponses": [
-            {
-                'Q': "What is your Name?",
-                'A': "Arjun Reddy"
-            },
-            {
-                'Q': "Your Age?",
-                'A': "27"
-            },
-            {
-                'Q': "Do you have Aadhar?",
-                'A': "Yes"
-            },
-            {
-                'Q': "Which language you Speak?",
-                'A': "Telugu"
-            },
-            {
-                'Q': "your Address?",
-                'A': "Hyderabad"
-            }
-        ],
-        "reviewerResponses": {
-            "1": {
-                'reviewerId': "rev1",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    },
-                    {
-                        'Q': "Answer Q3",
-                        'A': "Answer3"
-                    }
-                ]
-            },
-            "2": {
-                'reviewerId': "rev2",
-                'responses': [
-                    {
-                        'Q': "Plz answer Q1",
-                        'A': "Answer1"
-                    },
-                    {
-                        'Q': "Answer Q2",
-                        'A': "Answer2"
-                    }
+//                ]
+//            }
+//        },
+//        "Action": {
+//            "value": "Review",
+//            "state": "enabled"
+//        }
+//    },
+//    '3': {
+//        "ResponseID": "345hfggty",
+//        "userResponses": [
+//            {
+//                'Q': "What is your Name?",
+//                'A': "Karan Singh"
+//            },
+//            {
+//                'Q': "Your Age?",
+//                'A': "25"
+//            },
+//            {
+//                'Q': "Do you have Aadhar?",
+//                'A': "Yes"
+//            },
+//            {
+//                'Q': "Which language you Speak?",
+//                'A': "Marathi"
+//            },
+//            {
+//                'Q': "your Address?",
+//                'A': "Bangalore"
+//            }
+//        ],
+//        "reviewerResponses": {
+//            "1": {
+//                'reviewerId': "rev1",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    },
+//                    {
+//                        'Q': "Answer Q3",
+//                        'A': "Answer3"
+//                    }
+//                ]
+//            },
+//            "2": {
+//                'reviewerId': "rev2",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    }
 
-                ]
-            }
-        },
-        "Action": {
-            "value": "review",
-            "state": "enabled"
-        }
-    }
+//                ]
+//            }
+//        },
+//        "Action": {
+//            "value": "review",
+//            "state": "enabled"
+//        }
+//    },
+//    '4': {
+//        "ResponseID": "345hfggtx",
+//        "userResponses": [
+//            {
+//                'Q': "What is your Name?",
+//                'A': "Arjun Reddy"
+//            },
+//            {
+//                'Q': "Your Age?",
+//                'A': "27"
+//            },
+//            {
+//                'Q': "Do you have Aadhar?",
+//                'A': "Yes"
+//            },
+//            {
+//                'Q': "Which language you Speak?",
+//                'A': "Telugu"
+//            },
+//            {
+//                'Q': "your Address?",
+//                'A': "Hyderabad"
+//            }
+//        ],
+//        "reviewerResponses": {
+//            "1": {
+//                'reviewerId': "rev1",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    },
+//                    {
+//                        'Q': "Answer Q3",
+//                        'A': "Answer3"
+//                    }
+//                ]
+//            },
+//            "2": {
+//                'reviewerId': "rev2",
+//                'responses': [
+//                    {
+//                        'Q': "Plz answer Q1",
+//                        'A': "Answer1"
+//                    },
+//                    {
+//                        'Q': "Answer Q2",
+//                        'A': "Answer2"
+//                    }
 
-};
+//                ]
+//            }
+//        },
+//        "Action": {
+//            "value": "review",
+//            "state": "enabled"
+//        }
+//    }
+
+//};
+var table;
 
 function JSONToArray(jsonVal) {
 
@@ -2622,6 +2624,11 @@ function take(targetElem) {
     //})
 }
 
+function tablDataToCSV() {
+    
+
+}
+
 function captureSnap(element) {
     var canvas = html2canvas(document.body, { logging: true, async: true, allowTaint: true }).then(function (canvas) {
         document.body.appendChild(canvas);
@@ -2629,7 +2636,10 @@ function captureSnap(element) {
     console.log(canvas);
 
 }
-myapp.controller('responsectrl', function ($scope, $mdDialog) {
+myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$timeout) {
+    getResponseData.then(function (response) {
+        table = response.data;
+    
     $scope.surveyCompleted = table.surveyCompleted;
     $scope.surveyEngaged = table.surveyEngaged;
     $scope.surveyVisited = table.surveyVisited;
@@ -2655,10 +2665,42 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
     $scope.totAns = answeredCount;
     $scope.collapseChart = function (evt, indx) {
         $(evt.target).closest("doughnut-chart").parent().removeClass("pap-zoom");
+    };
+    $scope.removeFilter = function () {
+        $(".tablebody.filterApplied").removeClass("filterApplied").removeAttr("filtercol");
+        $(".tablerow.searched").removeClass("searched");
+        $(".tablecell.matched").removeClass("matched");
     }
+    $scope.exporttocsv = function () {
+        var csvstring = "";
+        document.querySelectorAll(".tablehead .tablecell").forEach(function (val) {
+            csvstring += val.getElementsByTagName("p")[0].textContent + ",";
+        })
+        csvstring += "\n";
+        if (document.querySelectorAll(".tablebody.filterApplied").length) {
+            var slct = document.querySelectorAll(".tablebody .tablerow.searched");
+        } else {
+            var slct = document.querySelectorAll(".tablebody .tablerow");
+        }
+        slct.forEach(function (val) {
+            val.querySelectorAll(".tablecell").forEach(function (value) {
+                csvstring += value.getElementsByTagName("p")[0].textContent + ",";
+            })
+            csvstring += "\n";
+        });
+        var btn = document.createElement("a");
+        btn.setAttribute("download", "reponseTable.csv");
+        btn.setAttribute("href", 'data:application/csv;charset=UTF-8,' + encodeURIComponent(csvstring));        
+        btn.click();     
+
+    };
     //setTimeout(tableFilter, 5000);
     $scope.snap = function (event) {
         var elm = $("body");
+        $('img[data-url]').each(function () {
+        });
+
+
         //captureSnap(elm);
         //take(elm);
     }
@@ -2718,7 +2760,7 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
         //console.log("hiiii");
         $mdDialog.show({
             controller: ReviewerController,
-            templateUrl: '../partials/PublishPopup.html',
+            templateUrl: '../partials/response-templates/response-user-details.html',
             parent: $(evt.target).closest('body'),
             targetEvent: evt,
             clickOutsideToClose: true,
@@ -2731,8 +2773,20 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
             });
     }
 
-    function ReviewerController($scope, $mdDialog) {
-
+    function ReviewerController($scope, $mdDialog,targetEvent) {
+        $scope.responseid = $(targetEvent.currentTarget).find(".tablecell").first().find("p").text();
+        $scope.qblocks = filterTblObj($scope.responseid).userResponses;
+        $scope.reviewers = filterTblObj($scope.responseid).reviewerResponses;
+        function filterTblObj(id) {
+            var obj;
+            Object.keys(table).forEach(function (i) {
+                if (table[i].hasOwnProperty("ResponseID") && table[i].ResponseID == id) {
+                    obj=table[i];
+                    //break;
+                }
+            })
+            return obj;
+        }
     }
 
     setTimeout(chartHeight, 5000);
@@ -2816,16 +2870,52 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
 
         }*/
     }
-    $scope.filterTableData = function (option) {
-        $scope.filterQuery = option;
-        $(".table-row").each(function () {
-            var $this = $(this);
-            $this.find("p").each(function () {
-                if ($(this).text() == option) {
-                    $(this).closest(".table-row").addClass("searched");
-                }
-            })
-        })
+    $scope.filterTableData = function (event) {
+        $timeout(function () {
+            var optArr = [];
+            var $evtTargt = $(event.target);
+            var index = $evtTargt.closest(".tablecell").index();
+            var filterAtr = $evtTargt.closest(".tablehead").siblings(".tablebody").attr("filtercol");
+            var filterCol = (filterAtr != undefined) ? (filterAtr.indexOf(index) != -1) ? filterAtr: (filterAtr + "," + index) : index;           
+            
+            angular.forEach($evtTargt.closest("md-dialog").find(".md-checked"), function (val, key) {
+                optArr.push($(val).attr("value")); 
+            });
+            //$scope.filterQuery = option;
+            var angEl = $(".tablebody").hasClass("filterApplied") ? angular.element(".tablerow") : angular.element(".tablerow");
+
+            angular.forEach(angEl, function (val, key) {
+                $(val).removeClass("searched");
+                var $tblCl = $(val).find(".tablecell:eq(" + index + ")");
+                var searchVal = $tblCl.find("p").text();
+                if (optArr.indexOf(searchVal) >= 0) {
+                    $tblCl.addClass("matched");
+                    var mtAr = [];
+                    var filterArr = (typeof (filterCol) == "number") ? [filterCol] : filterCol.split(",");
+                    filterArr.forEach(function (value, index) {
+                        if ($(val).find(".tablecell:eq(" + value + ")").hasClass("matched")) {
+                            mtAr.push(1);
+                        } else {
+                            mtAr.push(0);
+                        }
+                    });
+                    if (mtAr.indexOf(0) == -1) {
+                        $tblCl.closest(".tablerow").addClass("searched");
+                    }
+                    $tblCl.closest(".tablebody").addClass("filterApplied").attr("filtercol", filterCol);
+                }                
+                //$(val).closest(".tablerow.tmpsearch").removeClass("tmpsearch");
+            }); 
+        }, 1000)
+               
+        //$(".table-row").each(function () {
+        //    var $this = $(this);
+        //    $this.find("p").each(function () {
+        //        if ($(this).text() == option) {
+        //            $(this).closest(".table-row").addClass("searched");
+        //        }
+        //    })
+        //})
     }
 
     function userDetailsController($scope, $mdDialog) {
@@ -2854,8 +2944,8 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
             $mdDialog.cancel();
         };
 
-        $scope.filterTableData = function (option) {
-            callback(option);
+        $scope.filterTableData = function (event) {
+            callback(event);
         }
     }
 
@@ -2985,6 +3075,9 @@ myapp.controller('responsectrl', function ($scope, $mdDialog) {
             "A": "Hyderabad"
         }
     }
+    }, function myerror(response) {
+        //console.log(response);
+    })
 });
 
 myapp.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet, event, option) {

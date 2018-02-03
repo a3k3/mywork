@@ -26,13 +26,13 @@
             <md-button class="md-raised scan-qr"><md-icon md-svg-src="../asset/img/scan.svg" aria-label=""></md-icon>Scan QR</md-button>
 
             <md-input-container md-no-float class="md-block search-box">
-                <md-icon md-svg-src="../asset/img/md-icons/svg/ic_search_black_24px.svg"></md-icon>
+               <!-- <md-icon md-svg-src="../asset/img/md-icons/svg/ic_search_black_24px.svg"></md-icon>-->
                 <input type="text" placeholder="Search by keyword or ID" ng-model="searchtext">
             </md-input-container>
             <md-datepicker ng-model="dt"></md-datepicker>
             <md-icon md-svg-src="../asset/img/md-icons/svg/ic_crop_square_black_24px.svg" aria-label=""></md-icon>
-            <md-icon md-svg-src="../asset/img/md-icons/svg/ic_email_black_24px.svg" aria-label=""></md-icon>
-            <md-icon md-svg-src="../asset/img/md-icons/svg/ic_delete_black_24px.svg" aria-label=""></md-icon>
+            <md-icon md-svg-src="../asset/img/md-icons/svg/ic_email_black_24px.svg" aria-label="" ng-click="exporttocsv()"></md-icon>
+            <md-icon md-svg-src="../asset/img/md-icons/svg/ic_delete_black_24px.svg" aria-label="" ng-click="removeFilter()"></md-icon>
 
         </div>
         <div class="table">
@@ -44,7 +44,7 @@
                     </md-button>
                 </div>                
             </div>
-            <!--<tbl rows="answerlist"></tbl>-->
+            
             <div class="tablebody">
                 <div class="tablerow" ng-repeat="row in answerlist" ng-click="showResponse($event)">
                     <div class="tablecell" ng-repeat="dataval in row"><p ng-bind-html="dataval"></p></div>

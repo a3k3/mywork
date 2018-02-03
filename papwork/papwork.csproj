@@ -314,6 +314,7 @@
     <Content Include="partials\response-templates\donut.html" />
     <Content Include="partials\response-templates\chart-card.html" />
     <Content Include="partials\response-templates\filter-audience.html" />
+    <Content Include="partials\response-templates\indiv-reviewer.html" />
     <Content Include="partials\response-templates\respone-table.html" />
     <Content Include="partials\response-templates\response-user-details.html" />
     <Content Include="partials\response-templates\tablefitltermenu.html" />
@@ -356,6 +357,7 @@
     <Content Include="asset\font\OPTIMA.TTF" />
     <Content Include="asset\font\OPTIMA_B.TTF" />
     <Content Include="asset\font\unicode.optima.ttf" />
+    <Content Include="asset\data\responseData.json" />
     <None Include="Properties\PublishProfiles\papwork aws.pubxml" />
     <None Include="Properties\PublishProfiles\PapWork.pubxml" />
     <None Include="Web.Debug.config">
