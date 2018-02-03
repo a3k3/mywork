@@ -11,13 +11,13 @@
                     <small>Calculate using from data values</small>
                 </div>
             </div>
-            <div class="processing_popup" flex="100">
+            <div class="close-tab" layout="row" layout-align="center center" ng-click="closeTab('showCalculate')">
+                <div flex>
+                    <md-icon class="close-modal" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
+                </div>
+            </div>          <div class="processing_popup" flex="100">
                 <div layout="row" layout-sm="column" ng-if="showCalculate">
-                    <div class="close-tab" layout="row" layout-align="center center" ng-click="closeTab('showCalculate')">
-                        <div flex>
-                            <md-icon class="close-modal" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
-                        </div>
-                    </div>
+                    
                     <div class="Calculate_Popup calculatedvariable">
                         <div class="md-container inner_content">
                             <div class="layout-row flex-50">
@@ -67,8 +67,9 @@
                     <small>Generate a Document with from data</small>
                 </div>
             </div>
-
             <div layout="row" layout-sm="column" ng-if="showDocgen" style="position: absolute;top: 0;z-index: 999;width: 100%;">
+               
+                               
                 <div class="close-tab" layout="row" layout-align="center center">
                     <div flex>
                         <md-icon class="close-modal" ng-click="showDocgen=false" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
@@ -76,6 +77,7 @@
                 </div>
 
                 <div class="processing_popup Docgen_Popup">
+                    <div id="unblurred"><div id="box">coming soon..!!</div></div>
                     <div layout="row"><h4>Generate a Doc </h4></div>
                     <div class="flex doc_section">
                         <div layout="row" class="layout-row flex">
@@ -140,6 +142,7 @@
             </div>
 
             <div layout="row" layout-sm="column" ng-if="showDocscan" style="position: absolute;top: 0;z-index: 999;width: 100%;">
+               
                 <div class="close-tab" layout="row" layout-align="center center">
                     <div flex>
                         <md-icon class="close-modal" ng-click="showDocscan=false" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
@@ -147,6 +150,7 @@
                 </div>
 
                 <div class="processing_popup Docscan_Popup">
+                    <div id="unblurred"><div id="box">coming soon..!!</div></div>
                     <div class="md-container inner_content">
 
                         <div layout="row"><h4>OCR/Scan a Doc </h4></div>
@@ -165,8 +169,17 @@
                                                 <md-content class="_md md-mytheme-theme">
                                                     <md-option tabindex="0" md-option-empty="" class="md-ink-ripple" role="option" aria-selected="" id=""><div class="md-text">Question</div></md-option>
                                                     <!--<md-option ng-value="{{tempquestion.id}}" ng-repeat="tempquestion in buildQuestionsObj.questions">{{tempquestion.question}}</md-option>-->
+                                                    >
+
+
                                                 </md-content>
+
+
+                                                >
+
+
                                             </md-select-menu>
+                                            nu
                                         </div>
                                     </md-select>
                                 </div>
@@ -200,71 +213,71 @@
                         <div class="document_section">
                             <!--<div class="document_section_inner">
 
-                                <h3><u>LETTER OF OFFER</u></h3>
-                                <div layout="row" class="flex">
-                                    <md-input-container>
-                                        <p>To:</p>
-                                    </md-input-container>
-                                </div>
-                                <div layout="row" class="line1">
-                                    <div flex="20">
-                                        PROPERTY:
-                                    </div>
-                                    <div flex="80">
-                                        <md-input-container>
-                                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
-                                            <div class="md-errors-spacer"></div>
-                                            </md-input-container>
-                                    </div>
-                                </div>
+                <h3><u>LETTER OF OFFER</u></h3>
+                <div layout="row" class="flex">
+                    <md-input-container>
+                        <p>To:</p>
+                    </md-input-container>
+                </div>
+                <div layout="row" class="line1">
+                    <div flex="20">
+                        PROPERTY:
+                    </div>
+                    <div flex="80">
+                        <md-input-container>
+                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
+                            <div class="md-errors-spacer"></div>
+                            </md-input-container>
+                    </div>
+                </div>
 
-                                <div layout="row" class="line1">
-                                    <div flex="20">
-                                        PURCHASE NAME:
-                                    </div>
-                                    <div flex="80">
-                                        <md-input-container>
-                                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
-                                            <div class="md-errors-spacer"></div>
-                                            </md-input-container>
-                                    </div>
-                                </div>
+                <div layout="row" class="line1">
+                    <div flex="20">
+                        PURCHASE NAME:
+                    </div>
+                    <div flex="80">
+                        <md-input-container>
+                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
+                            <div class="md-errors-spacer"></div>
+                            </md-input-container>
+                    </div>
+                </div>
 
-                                <div layout="row" class="line1">
-                                    <div flex="20">
-                                        PURCHASE ADDRESS:
-                                    </div>
-                                    <div flex="80">
-                                        <md-input-container>
-                                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
-                                            <div class="md-errors-spacer"></div>
-                                        </md-input-container>
-                                    </div>
-                                </div>
+                <div layout="row" class="line1">
+                    <div flex="20">
+                        PURCHASE ADDRESS:
+                    </div>
+                    <div flex="80">
+                        <md-input-container>
+                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>
+                    </div>
+                </div>
 
-                                <div layout="row" class="line1">
-                                    <div flex="20">
-                                        CONTACT DETAILS:
-                                    </div>
-                                    <div flex="80">
-                                        <md-input-container>
-                                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
-                                            <div class="md-errors-spacer"></div>
-                                        </md-input-container>
-                                    </div>
-                                </div>
+                <div layout="row" class="line1">
+                    <div flex="20">
+                        CONTACT DETAILS:
+                    </div>
+                    <div flex="80">
+                        <md-input-container>
+                            <input ng-model="fdd" class="ng-pristine ng-valid md-input">
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>
+                    </div>
+                </div>
 
-                                <div layout="row" class="line1">
-                                    <div flex="30">
-                                        <p>
-                                            Please be advised  that  I/we wish to offer $ ........................................................
-                                            .......................................................................................
-                                            As consideration for the purchase of the above property.
-                                        </p>
-                                    </div>
-                                </div>
+                <div layout="row" class="line1">
+                    <div flex="30">
+                        <p>
+                            Please be advised  that  I/we wish to offer $ ........................................................
+                            .......................................................................................
+                            As consideration for the purchase of the above property.
+                        </p>
+                    </div>
+                </div>
 
-                            </div>-->
+            </div>-->
                         </div>
                     </div>
                 </div>
@@ -284,6 +297,7 @@
             </div>
 
             <div layout="row" layout-sm="column" ng-if="showUrl" style="position: absolute;top: 0;z-index: 999;width: 100%;">
+                
                 <div class="close-tab" layout="row" layout-align="center center">
                     <div flex>
                         <md-icon class="close-modal" ng-click="showUrl=false" md-svg-icon="../asset/img/md-icons/svg/ic_close_black_24px.svg"></md-icon>
@@ -291,6 +305,7 @@
                 </div>
 
                 <div class="processing_popup Url_Popup">
+                    <div id="unblurred"><div id="box">coming soon..!!</div></div>
                     <div layout="row"><h4>URL Parameter </h4></div>
                     <div class="flex doc_section">
                         <div layout="row" class="layout-row flex">

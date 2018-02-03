@@ -1266,7 +1266,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 name: "Integrations",
                 enable: true,
                 active: false,
-                template: 'integrationsForm',
+                template: 'Integrations',
             },
             {
                 name: "Admin",

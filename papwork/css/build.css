@@ -2309,8 +2309,11 @@ formsettings ng-include [layout="row"] {
 }
 
 /*emailform*/
-.email_layout {
+.form_set_items_display .email_layout {
     padding: 40px 25px;
+    background-color: #efefef;
+    // background-color: rgba(191, 191, 191, 0.2);
+    height: 100%;
 }
 
 .email_table .table-head {
@@ -2335,10 +2338,19 @@ formsettings ng-include [layout="row"] {
     /* min-width: 0; */
 }
 
-
-
-
-
+/*admin_layout */
+.admin_layout {
+    padding: 40px 25px;
+    background-color: #efefef;
+    // background-color: rgba(191, 191, 191, 0.2);
+    height: 100%;
+}
+.Integration_layout {
+    padding: 40px 25px;
+    background-color: #efefef;
+    // background-color: rgba(191, 191, 191, 0.2);
+    height: 100%
+}
 /*emailNotificationForm*/
 .emailLayout {
     width: 100%;
@@ -2665,11 +2677,33 @@ padding:20px;
 }
 
 /*Docgen Popup*/
-.Docgen_Popup, .Docscan_Popup,.Url_Popup  {
+.Docgen_Popup, .Docscan_Popup, .Url_Popup {
     background-color: white;
     padding: 0;
     height: 65vh;
+    // background-color: rgba(121, 121, 121, 0.2);
+    pointer-events: none;
+    overflow-y: hidden;
 }
+
+#unblurred #box {
+    border: 1px solid grey;
+    padding: 50px;
+    filter: blur(1px);
+    width: 40vw;
+    background: #FFf;
+    display: inline-block;
+    box-shadow: 2px 2px 2px white;
+    border-radius: 10px;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    filter: blur(0px);
+    position: absolute;
+    z-index: 1; 
+    
+}
+
 
 .cancel_save_variable {
     align-content: center;
