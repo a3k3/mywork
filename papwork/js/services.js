@@ -6,13 +6,36 @@
 var myservice = angular.module('experienceApp.services', []);
 myservice.value('version', '0.2');
 
-myservice.service('getAllQuestions', ['$http',function ($http) {
+myservice.service('getAllQuestions', ['$http', function ($http) {
     return $http({
         method: "GET",
-        url: "../asset/data/questionData.json"
+        url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/get?user_id=1680837175288210&form_id=37e414e9-f5dc-c2f5-dc82-2749531243d3"
     })
 }]);
 
+myservice.service('formData', ['$http','$rootScope', function ($http, $rootScope) {
+    this.postData = function (data) {
+        return $http({
+            method: 'POST',
+            url: 'http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/create',
+            data: data
+        });
+    }
+    this.getData = function (form_id) {
+        if ($rootScope.user.id == undefined || $rootScope.user.id.length == 0) {
+            return $http({
+                method: "GET",
+                url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/forms/"+ form_id
+            })
+        }
+        else {
+            return $http({
+                method: "GET",
+                url: "http://ec2-18-216-185-181.us-east-2.compute.amazonaws.com:5000/get?user_id=" + $rootScope.user.id + "&form_id=" + form_id
+            })
+        }
+    }
+}]);
 
 myservice.service('getSettings', ['$http', function ($http) {
     return $http({
@@ -29,6 +52,20 @@ myservice.service('getCoverData', ['$http', function ($http) {
 }]);
 
 myservice.service('getSuccessData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/success.json"
+    })
+}]);
+
+myservice.service('getBuildCoverData', ['$http', function ($http) {
+    return $http({
+        method: "GET",
+        url: "../asset/data/cover.json"
+    })
+}]);
+
+myservice.service('getBuildSuccessData', ['$http', function ($http) {
     return $http({
         method: "GET",
         url: "../asset/data/success.json"
@@ -65,7 +102,7 @@ myservice.service('uploadData', ['$http', function ($http) {
     }
 }]);
 
-myservice.service('uploadDataToAWS',function () {
+myservice.service('uploadDataToAWS', function () {
     var creds = {
         bucket: 'papwork',
         access_key: 'AKIAJC7GME4TSDD4AFSA',
@@ -114,7 +151,7 @@ myservice.service('loginService', function () {
     }
 });
 
-myservice.service('FBLogin', ['$rootScope', function ($rootScope) {
+myservice.service('FBLogin', ['$rootScope', '$http', function ($rootScope, $http) {
     this.watchLoginChange = function () {
 
         var _self = this;
@@ -154,8 +191,16 @@ myservice.service('FBLogin', ['$rootScope', function ($rootScope) {
         var _self = this;
 
         FB.api('/me', function (res) {
-            $rootScope.$apply(function () {
+            $http({
+                method: 'GET',
+                url: 'https://graph.facebook.com/' + $rootScope.user.id + '/picture?redirect=false',
+            }).success(function (response) {
                 $rootScope.user = _self.user = res;
+                $rootScope.user.image = response.data.url;
+                $rootScope.user.logintype = "fb";
+            })
+            .error(function (error) {
+                console.log(error);
             });
         });
 

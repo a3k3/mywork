@@ -2,32 +2,32 @@
     <div class="publish_layout">
         <div class="sharelink_block">
             <div class="share_text">
-                <h2>Share Link</h2>
-                <p>Hint</p>
+                <div class="title">Share Link</div>
+                <small>Hint</small>
             </div>
             <div class="share_text_url">
                 <md-input-container>
                     <input class="md-accent hue-2" ng-model="publish.publishUrl">
                 </md-input-container>
-                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="">
+                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="copyUrlText($event,'input')">
                     COPY
                 </md-button>
             </div>
         </div>
         <div class="embedlink_block">
             <div class="embed_text">
-                <h2>Embed</h2>
-                <p>Hint</p>
+                <div class="title">Embed</div>
+                <small>Hint</small>
             </div>
             <div class="embed_text_url">
                 <md-radio-group ng-model="publish.type" ng-change="updatePublishIframe()">
-                    <md-radio-button value="banner" class="md-primary">Banner</md-radio-button>
+                    <md-radio-button value="banner" class="md-primary" selected="true">Banner</md-radio-button>
                     <div layout="row" layout-align="start center">
                         <div flex="45">
-                            <md-radio-button value="pafter" class="md-primary">Pop Up window after</md-radio-button>
+                            <md-radio-button value="pafter" class="md-primary" disabled="true">Pop Up window after</md-radio-button>
                         </div>
                         <div flex="20">
-                            <md-select name="time" ng-model="publish.afterload">
+                            <md-select name="time" ng-model="publish.afterload" disabled="true">
                                 <md-option>0 Sec</md-option>
                                 <md-option>5 Sec</md-option>
                                 <!--<md-option ng-value="{{time}}" ng-repeat="time in ">{{time}}</md-option>-->
@@ -40,10 +40,10 @@
                     </div>
                     <div layout="row" layout-align="start center">
                         <div flex="45">
-                            <md-radio-button value="pafter1" class="md-primary">Pop Up window after</md-radio-button>
+                            <md-radio-button value="pafter1" class="md-primary" disabled="true">Pop Up window after</md-radio-button>
                         </div>
                         <div flex="20">
-                            <md-select name="percentage" ng-model="publish.afterScroll">
+                            <md-select name="percentage" ng-model="publish.afterScroll" disabled="true">
                                 <md-option>% Sec</md-option>
                                 <md-option>1% Sec</md-option>
                                 <!--<md-option ng-value="{{time}}" ng-repeat="time in ">{{time}}</md-option>-->
@@ -56,13 +56,12 @@
                     </div>
                 </md-radio-group>
                 <div class="checkbox-block">
-                    <md-checkbox class="green mdcheckbox" ng-click="" aria-label="" name="" value="appear once">Appear once per user session on website</md-checkbox>
+                    <md-checkbox class="green mdcheckbox" ng-click="" aria-label="" name="" value="appear once" disabled="true">Appear once per user session on website</md-checkbox>
                 </div>
                 <md-input-container>
-                    <!--<input class="md-accent hue-2" row="4" ng-model="embedUrl">-->
                     <textarea name="textarea" ng-model="publish.embedUrl" rows="4" ></textarea>
                 </md-input-container>
-                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="">
+                <md-button class="md-raised" md-colors="{background: 'grey'}" aria-label="copy" ng-click="copyUrlText($event,'textarea')">
                     COPY
                 </md-button>
                 </div>

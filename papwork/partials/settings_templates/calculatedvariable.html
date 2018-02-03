@@ -7,7 +7,7 @@
         <div flex="50">Variable name:</div>
         <div flex="50">
             <md-input-container>
-                <input type="text" ng-model="logic.name" placeholder="Type variable name" aria-label="{{logic.name}}" />
+                <input type="text" ng-model="buildQuestionsObj.cvdata.variables[$index].name" placeholder="Type variable name" aria-label="{{logic.name}}" />
             </md-input-container>
         </div>
     </div>
@@ -26,7 +26,7 @@
             <div class="ctable" layout="column" layout-align="start start">
                 <div class="cheader" flex="100">Calculation</div>
                 <div class="crow" layout="row" layout-align="start start">
-                    <div flex="80" class="calculations" data-contenttype="calculation" contenteditable ng-model="logic.calculation" context-menu="menuOptions2()" ng-mousedown="setcursorposition($event)" ng-mouseup="setcursorposition($event)" ng-keydown="setcursorposition($event)" ng-keyup="setcursorposition($event)"></div>
+                    <div flex="80" class="calculations" data-contenttype="calculation" contenteditable ng-model="buildQuestionsObj.cvdata.variables[$index].calculation" context-menu="menuOptions2()" ng-mousedown="setcursorposition($event)" ng-mouseup="setcursorposition($event)" ng-keydown="setcursorposition($event)" ng-keyup="setcursorposition($event)"></div>
                     <div flex="20" class="operators">
                         <div class="operation addition" ng-click="operation($event,'+')">+</div>
                         <div class="operation subtraction" ng-click="operation($event,'-')">-</div>

@@ -139,29 +139,29 @@
     "advsettings": {
       "showhide": {
         "name": "showhide",
-        "condition": "true",
+        "condition": true,
         "text": "Show/Hide Logic",
         "logic_options": [
           {
-            "questionno": 0,
-            "operator": "not",
-            "answer": "",
-            "answer_list": [ ],
-            "relation": "and"
+            "questionno": null,
+            "operator": "",
+            "answer": {},
+            "answer_list": [],
+            "relation": ""
           }
         ]
       },
       "jumplogic": {
         "name": "jumplogic",
-        "condition": "jump",
+        "condition": "nojump",
         "text": "Jump Logic",
         "logic_options": [
           {
             "jump_text": "If this slide answer is",
             "operator": "Jump to",
-            "answer": "",
-            "answer_list": [ ],
-            "slide_to_show": 0
+            "answer": {},
+            "answer_list": [],
+            "slide_to_show": null
           }
         ]
       },

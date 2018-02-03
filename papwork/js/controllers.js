@@ -285,7 +285,7 @@ function writeResult(result, questions) {
 
     if (typeof (Storage) !== "undefined") {
         // Code for localStorage/sessionStorage.
-        sessionStorage.questionsObj = JSON.stringify(questions);
+        sessionStorage.addviaquestions = JSON.stringify(questions);
     } else {
         // Sorry! No Web Storage support..
         aler("Sorry! No Web Storage support..");
@@ -293,7 +293,7 @@ function writeResult(result, questions) {
 }
 
 var customhtml = "";
-var names = [];
+var names = []; 
 
 function addviatext(text) {
     //var str = "1. The ra2.in in SPAIN stays mainly in the plain?";
@@ -321,14 +321,14 @@ function addviatext(text) {
 
         //console.log(question_List[index]);
         //var Question_index = question_List[index].indexOf('?');
-        var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
-        var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
+        //var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+        //var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
         //console.log(question_tag + ' --- ' + input_text);
 
 
         if (question_List[index] != "") {
             if (question_List[index].indexOf('{') == -1) {
-                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var question_tag = question_List[index];
                 var input_text = question_List[index].substr(question_List[index].indexOf("?") + 1);
                 customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="text" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
                 console.log(customhtml);
@@ -336,22 +336,65 @@ function addviatext(text) {
 
             }
             else {
-                var question_tag = question_List[index].substr(0, question_List[index].indexOf('?'));
+                var question_tag = question_List[index].substr(0, question_List[index].indexOf('{'));
                 var input_text = question_List[index].substr(question_List[index].indexOf("}") + 1);
                 var regExpne = /\{([^)]+)\}/;
                 var matches = regExpne.exec(question_List[index]);
                 console.log(matches[1]);
                 switch (matches[1]) {
                     case "checkbox":
-                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        var optionstag = [];
+                        var check_diff = /\s*}\s*/;
+                        var options_sep = /\s*[a-z]\.\s*/;
+                        var options_List = question_List[index].split(check_diff);
+                        console.log(options_List);
+                        console.log(options_List[1]);
+                        var dummy_list_answer = options_List[1].split(options_sep);
+                        $.each(dummy_list_answer, function (index, value) {
+                            var x = dummy_list_answer[index];
+                            var newdf = '<input type="checkbox" name="checkboxa" value="' + x + '">' + x + '</input>';
+                            optionstag.push(newdf);
+                        });
+
+                        console.log(optionstag);
+                        console.log(optionstag.toString());
+                        //console.log(optionstag);
+                        var result_ = optionstag.toString().replace(/^[, ]+|[, ]+$|[, ]+/g, " ").trim();
+                        //var options_List_answer = options_List.split(options_sep);
+                        //console.log(options_List[1]);
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label>' + result_ + '';
                         console.log(customhtml);
+                        optionstag = [];
+                        //var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="checkbox" name="vehicle" value="Bike">I have a bike<br><input type="checkbox" name="vehicle" value="Car">I have a car';
+                        //console.log(customhtml);
                         break;
                     case "radio":
-                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="radio" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        var optionstag = [];
+                        var check_diff = /\s*}\s*/;
+                        var options_sep = /\s*[a-z]\.\s*/;
+                        var options_List = question_List[index].split(check_diff);
+                        console.log(options_List);
+                        console.log(options_List[1]);
+                        var dummy_list_answer = options_List[1].split(options_sep);
+                        $.each(dummy_list_answer, function (index, value) {
+                            var x = dummy_list_answer[index];
+                            var newdf = '<input type="radio" name="radioa" value="' + x + '">' + x + '</input>';
+                            optionstag.push(newdf);
+                        });
+
+                        console.log(optionstag);
+                        console.log(optionstag.toString());
+                        //console.log(optionstag);
+                        var result_ = optionstag.toString().replace(/^[, ]+|[, ]+$|[, ]+/g, " ").trim();
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label>' + result_ + '';
                         console.log(customhtml);
+                        optionstag = [];
                         break;
+                        //var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="radio" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        //console.log(customhtml);
+                        
                     case "date":
-                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="date" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
+                        var customhtml = '<label for="fname">' + question_tag + '?' + '</label><input type="input_calendar" id="fname" name="firstname" placeholder="Your name set.." value=' + input_text + '>';
                         console.log(customhtml);
                         break;
                     case "email":
@@ -363,6 +406,7 @@ function addviatext(text) {
                         console.log(customhtml);
                         break;
                 }
+                names.push(customhtml);
             }
         }
     });
@@ -376,13 +420,9 @@ function addviatext(text) {
 
 var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
 
-myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile, $window) {
+myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile, $window, formData) {
 
     $rootScope.bodylayout = 'experience-layout';
-
-    var vm = this;
-
-    $scope.formData = {};
 
     $scope.questionsObj = {
         name: "Untitled",
@@ -390,7 +430,10 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         theme: "default",
         questions: [],
         maxCount: function () {
-            return this.questions.filter(function (item) { return item.enable }).length;
+            if (this.questions != undefined && this.questions.length > 0)
+                return this.questions.filter(function (item) { return item.enable }).length;
+            else
+                return 0;
         },
         minCount: 0,
         activeNow: 0,
@@ -399,7 +442,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         }
     };
 
-    getAllQuestions.then(function (response) {
+    var _formId = $location.search().form_id;
+
+    formData.getData(_formId).then(function (response) {
 
         //for utility to work
         if ($location.search().session == "true") {
@@ -407,13 +452,20 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             $scope.action = $location.search().actionurl;
         }
         else {
-            if (sessionStorage.questionsObj != undefined) {
+            if (sessionStorage.addviaquestions != undefined) {
+                $scope.questionsObj.questions = JSON.parse(sessionStorage.addviaquestions);
+            }
+            else if (sessionStorage.questionsObj != undefined) {
                 $scope.questionsObj.questions = JSON.parse(sessionStorage.questionsObj).questions;
+                $scope.questionsObj.cvdata = JSON.parse(sessionStorage.questionsObj).cvdata;
                 $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
                 $scope.applyFormSettings();
             }
             else {
-                $scope.questionsObj.questions = response.data;
+                $scope.questionsObj.questions = JSON.parse(response.data).questions;
+                $scope.questionsObj.cvdata = JSON.parse(sessionStorage.questionsObj).cvdata;
+                $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
+                $scope.applyFormSettings();
             }
             angular.forEach($scope.questionsObj.questions, function (value, index) {
                 value.question = value.question;
@@ -429,7 +481,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                                 $(innervalue).replaceWith(insertVal);
                             }
                             else if ($(innervalue).data('type') == 'cv') {
-                                var option = value.advancedvalidations.calculatedvariable.logic_options.filter(function (item) { return item.name == answerfor })[0];
+                                var option = $scope.questionsObj.cvdata.variables.filter(function (item) { return item.name == answerfor })[0];
                                 var tmpOption = document.createElement("DIV");
                                 tmpOption.innerHTML = option.calculation;
                                 if (angular.element(tmpOption).find('span').length > 0) {
@@ -491,7 +543,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             else if (value.name == "General") {
                 if (value.settings.autocomplete.condition) {
                     $timeout(function () {
-                        var reload_url = window.location.href.replace(/\#\/.*\?/gi, '#/cover?')
+                        var regex = /(\#\/)(.*?)(\?|$)/gi;
+                        var matches = regex.exec(window.location.href)//window.location.href.match(regex);
+                        var reload_url = window.location.href.replace(matches[2], 'cover')
                         window.location.href = reload_url;
                     }, value.settings.autocomplete.time * 60 * 1000);
                 }
@@ -569,93 +623,124 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
 
     $scope.checkadvancedvalidation = function () {
         var index = $scope.questionsObj.activeNow - 1;
-        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined) {
             var jumplogic = $scope.questionsObj.questions[index].advancedvalidations.jumplogic;
-            var answer = {};
-            if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
-                answer.value = $scope.questionsObj.questions[index].response;
-            }
-            else if ($scope.questionsObj.questions[index].options != undefined) {
-                answer = $scope.questionsObj.questions[index].options.filter(function (item) {
-                    if (item.selected != undefined)
-                        return item.selected == true
-                    else
-                        return item.value != ""
-                })[0];
-            }
-            var match = jumplogic.logic_options.filter(function (item) {
-                if (answer != undefined && answer != "" && answer != "NaN" && item.answer != undefined)
-                    return item.answer.value.toLowerCase() === answer.value.toLowerCase();
-            })[0];
-
-            if (match != undefined) {
-                for (var i = $scope.questionsObj.activeNow; i < match.slide_to_show - 1; i++) {
-                    $scope.questionsObj.questions[i].enable = false;
-                }
-                for (var i = match.slide_to_show; i < $scope.questionsObj.maxCount() ; i++) {
-                    $scope.questionsObj.questions[i].enable = true;
-                }
-                $scope.changeslideorder = true;
-            }
-            else {
-                for (var i = $scope.questionsObj.activeNow; i < $scope.questionsObj.maxCount() ; i++) {
-                    $scope.questionsObj.questions[i].enable = true;
-                }
-                $scope.changeslideorder = true;
-            }
-            $scope.changeslideArrangement();
-        }
-    }
-
-    $scope.checkshowhidevalidation = function () {
-        var index = $scope.questionsObj.activeNow;
-        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined && window.location.href.indexOf('experience') != -1) {
-            var showhide = $scope.questionsObj.questions[index].advancedvalidations.showhide;
-            $scope.questionsObj.questions[index].enable = showhide.condition;
-            var _condition = true;
-            angular.forEach(showhide.logic_options, function (option, i) {
-                var _question = $scope.questionsObj.questions.filter(function (item) {
-                    return item.id = option.questionno;
-                })[0];
-
+            var validjumpconditions = jumplogic.logic_options.filter(function(item){ return item.slide_to_show != null});
+            if (validjumpconditions.length > 0) {
                 var answer = {};
-                if (_question.response != undefined && _question.response != "") {
-                    answer.value = _question.response;
+                if ($scope.questionsObj.questions[index].response != undefined && $scope.questionsObj.questions[index].response != "") {
+                    answer.value = $scope.questionsObj.questions[index].response;
                 }
-                else if (_question.options != undefined) {
-                    answer = _question.options.filter(function (item) {
+                else if ($scope.questionsObj.questions[index].options != undefined) {
+                    answer = $scope.questionsObj.questions[index].options.filter(function (item) {
                         if (item.selected != undefined)
                             return item.selected == true
                         else
                             return item.value != ""
                     })[0];
                 }
+                var match = jumplogic.logic_options.filter(function (item) {
+                    if (answer != undefined && answer != "" && answer != "NaN" && item.answer != undefined)
+                        if (item.type == "dynamic")
+                            return item.answer.value.toLowerCase() === answer.value.toLowerCase();
+                        else
+                            return item.answer.toLowerCase() === answer.value.toLowerCase();
+                })[0];
 
-                switch (option.operator) {
-                    case "equals": if (answer.value == option.answer.value) _condition = true
-                    else _condition = false;
-                        break
-                    case "notequals": if (answer.value != option.answer.value) _condition = true
-                    else _condition = false;
-                        break
-                    default: _condition = true;
+                if (match != undefined) {
+                    for (var i = $scope.questionsObj.activeNow; i < match.slide_to_show - 1; i++) {
+                        $scope.questionsObj.questions[i].enable = false;
+                    }
+                    for (var i = match.slide_to_show; i < $scope.questionsObj.maxCount() ; i++) {
+                        $scope.questionsObj.questions[i].enable = true;
+                    }
+                    $scope.changeslideorder = true;
                 }
-            });
+                else {
+                    for (var i = $scope.questionsObj.activeNow; i < $scope.questionsObj.maxCount() ; i++) {
+                        $scope.questionsObj.questions[i].enable = true;
+                    }
+                    $scope.changeslideorder = true;
+                }
+                $scope.changeslideArrangement();
+            }
+        }
+    }
 
-            if (_condition && showhide.condition)
-                $scope.questionsObj.questions[index].enable = true;
-            else
-                $scope.questionsObj.questions[index].enable = false;
+    $scope.checkshowhidevalidation = function () {
+        var index = $scope.questionsObj.activeNow;
+        if ($scope.questionsObj.questions[index] != undefined && $scope.questionsObj.questions[index].advancedvalidations != undefined) {
+            var showhide = $scope.questionsObj.questions[index].advancedvalidations.showhide;
+            var validshowhideconditions = showhide.logic_options.filter(function (item) { return item.questionno != null && item.questionno != "Question" });
+            if (validshowhideconditions.length > 0) {
+                $scope.questionsObj.questions[index].enable = showhide.condition;
+                var _condition = true;
+                var _relation = null;
+                var _previousCondition = null;
+                angular.forEach(showhide.logic_options, function (option, i) {
+                    var _question = $scope.questionsObj.questions.filter(function (item) {
+                        return item.id == option.questionno;
+                    })[0];
+                    if (_question != undefined) {
+                        var answer = {};
+                        if (_question.response != undefined && _question.response != "") {
+                            answer.value = _question.response;
+                        }
+                        else if (_question.options != undefined) {
+                            answer = _question.options.filter(function (item) {
+                                if (item.selected != undefined)
+                                    return item.selected == true
+                                else
+                                    return item.value != ""
+                            })[0];
+                        }
 
-            $scope.changeslideorder = true;
-            $scope.changeslideArrangement();
+                        switch (option.operator) {
+                            case "equals": if (answer.value == option.answer) _condition = true
+                            else _condition = false;
+                                break
+                            case "notequals": if (answer.value != option.answer) _condition = true
+                            else _condition = false;
+                                break
+                            default: _condition = true;
+                        }
+
+                        if (_previousCondition != null)
+                            if (_relation != null && _relation != "") {
+                                if(_relation == "or")
+                                    _condition = _previousCondition || _condition;
+                                else if(_relation == "and")
+                                    _condition = _previousCondition && _condition;
+                            }
+                        _previousCondition = _condition;
+                        _relation = option.relation;
+                    }
+                });
+
+                if (_condition)
+                    if (showhide.condition === "true")
+                        $scope.questionsObj.questions[index].enable = true;
+                    else
+                        $scope.questionsObj.questions[index].enable = false;
+                else
+                    if (showhide.condition === "true")
+                        $scope.questionsObj.questions[index].enable = false;
+                    else
+                        $scope.questionsObj.questions[index].enable = true;
+                        
+
+                $scope.changeslideorder = true;
+                $scope.changeslideArrangement();
+            }
         }
     }
 
     $scope.$watch('questionsObj.questions', function (newval, oldval) {
-        $scope.checkadvancedvalidation();
-        $scope.checkshowhidevalidation();
-        $scope.writeToResponse();
+        if ($scope.questionsObj.questions != undefined && newval.length > 0) {
+            $scope.writeToResponse();
+            $scope.checkadvancedvalidation();
+            $scope.checkshowhidevalidation();
+        }
     }, true);
 
     $scope.writeToResponse = function () {
@@ -664,7 +749,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             $scope.questionsObj.questions[index].response = "";
             if ($scope.questionsObj.questions[index].options != undefined) {
                 var response = $scope.questionsObj.questions[index].options
-                angular.forEach(response, function (value, index) {
+                angular.forEach(response, function (value, i) {
                     if ($scope.questionsObj.questions[index] != undefined) {
                         $scope.questionsObj.questions[index].response = $scope.questionsObj.questions[index].response + value.value
                     }
@@ -684,6 +769,11 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             _active.next().next().addClass('next_next_active');
             $scope.changeslideorder = false;
         }
+
+        $timeout(function () {
+            $scope.changeslideorder = true;
+            $scope.changeslideArrangement();
+        }, 1000)
     }
 
     $scope.questionsObj.nextTab = function (event) {
@@ -737,6 +827,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.sizeSelection = function (index, event, options) {
@@ -746,6 +837,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
             value.selected = false;
         })
         options[index].selected = true;
+        $scope.writeToResponse();
     }
 
     $scope.starSelection = function (index, event, options) {
@@ -760,6 +852,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.selectProduct = function (index, event, options) {
@@ -777,6 +870,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.smileySelection = function (index, event, options) {
@@ -792,6 +886,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         $timeout(function () {
             $scope.questionsObj.next();
         }, 1000);
+        $scope.writeToResponse();
     }
 
     $scope.checkboxSelection = function (index, event, options) {
@@ -802,6 +897,7 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
         else {
             options[index].selected = true;
         }
+        $scope.writeToResponse();
     }
 
     $scope.keypress = function ($event) {
@@ -918,6 +1014,11 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
         $scope.status = response.statusText;
     });
 
+    $scope.$on('successData', function (event, data) {
+        $scope.successdata = data;
+        //$scope.checkIfTimed();
+    });
+
     if (window.location.href.indexOf('#/success') >= 0 && $(window).width() < 768) {
         angular.element('.experience-screen').css('display', 'inherit');
     }
@@ -926,7 +1027,7 @@ myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
     }
 });
 
-myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
+myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, formData) {
 
     $scope.child = {}
 
@@ -934,18 +1035,36 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
 
     $rootScope.bodylayout = 'create-layout';
 
-    $scope.themes = ['default', 'green', 'black', 'pink', 'blue', 'yellow', 'orange'];
+    $scope.themes = [{ type: 'color', value: 'default' }, { type: 'color', value: 'green' }, { type: 'color', value: 'black' }, { type: 'color', value: 'pink' }, { type: 'color', value: 'blue' }, { type: 'color', value: 'yellow' }, { type: 'color', value: 'orange' }];
 
     $scope.changeTheme = function (event) {
         var theme = $(event.target).data('theme');
-        $rootScope.$broadcast('questionsFormTheme', theme);
+        $rootScope.$broadcast('questionsFormTheme', $scope.themes.filter(function (item) { return item.value == theme })[0]);
     }
 
-    function publishController($scope, $mdDialog) {
+    function publishController($scope, $mdDialog, formData) {
         $scope.publish = {};
-        $scope.publish.publishUrl = window.location.host.replace('create', 'cover') + '?id=' + $rootScope.formid
+        var regex = /(\#\/)(.*?)(\?|$)/gi;
+        var matches = regex.exec(window.location.href)//window.location.href.match(regex);
 
-        $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+        var _formBuildData = JSON.parse(sessionStorage.questionsObj)
+        _formBuildData.user_id = $rootScope.user.id;
+
+        formData.postData(_formBuildData).success(function (response) {
+            console.log(reponse)
+        }).error(function (error) {
+            console.log(error);
+        })
+
+        $scope.publish.publishUrl = window.location.href.replace(matches[2], 'cover') + '?id=' + $rootScope.formid
+
+        $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100vh"></iframe>';
+
+        $scope.copyUrlText = function (event,inputtype) {
+            var element = angular.element(event.target).hasClass('md-button') ? angular.element(event.target) : angular.element(event.target).parent();
+            var copytext = element.prev().children(inputtype)[0].select();
+            document.execCommand("Copy");
+        }
 
         $scope.updatePublishIframe = function () {
             if ($scope.publish.type == "banner") {
@@ -970,6 +1089,9 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
 
     $scope.PublishPopup = function (event) {
         $mdDialog.show({
+            locals: {
+                formData: formData
+            },
             controller: publishController,
             templateUrl: '../partials/PublishPopup.html',
             parent: $(event.target).closest('body'),
@@ -1007,7 +1129,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout) {
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getCoverData, getSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet, $window) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getBuildCoverData, getBuildSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet, $window) {
 
     $scope.$watch('buildQuestionsObj', function () {
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj);
@@ -1026,6 +1148,11 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         id: guid(),
         theme: "default",
         questions: [],
+        buildcoverdata: {},
+        buildsuccessdata: {},
+        cvdata: {
+            variables: []
+        },
         maxCount: function () {
             return this.questions.length;
         },
@@ -1142,7 +1269,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
                 name: "Integrations",
                 enable: true,
                 active: false,
-                template: 'integrationsForm',
+                template: 'Integrations',
             },
             {
                 name: "Admin",
@@ -1233,19 +1360,23 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.buildQuestionsObj.activeNow = $scope.buildQuestionsObj.maxCount();
     });
 
-    getCoverData.then(function (cover) {
-        $scope.buildcoverdata = cover.data;
-        $rootScope.$broadcast('coverData', $scope.buildcoverdata);
+    $scope.$on('buildpopupObjData', function (event, data) {
+        $scope.buildQuestionsObj = data;
+    });
+
+    getBuildCoverData.then(function (cover) {
+        $scope.buildQuestionsObj.buildcoverdata = cover.data;
+        $rootScope.$broadcast('coverData', $scope.buildQuestionsObj.buildcoverdata);
         //settings
         getSettings.then(function (response) {
-            $scope.buildcoverdata.settings = response.data.cover.settings;
+            $scope.buildQuestionsObj.buildcoverdata.settings = response.data.cover.settings;
             //$scope.buildcoverdata.advsettings = response.data.cover.advsettings;
-            $scope.buildcoverdata.defaultsettings = angular.copy($scope.buildcoverdata.settings);
-            if ($scope.buildcoverdata.settings.covertemplate.condition) {
-                $scope.buildcoverdata.cover_template = 'official';
+            $scope.buildQuestionsObj.buildcoverdata.defaultsettings = angular.copy($scope.buildQuestionsObj.buildcoverdata.settings);
+            if ($scope.buildQuestionsObj.buildcoverdata.settings.covertemplate.condition) {
+                $scope.buildQuestionsObj.buildcoverdata.cover_template = 'official';
             }
             else {
-                $scope.buildcoverdata.cover_template = 'default';
+                $scope.buildQuestionsObj.buildcoverdata.cover_template = 'default';
             }
             $timeout(function () {
                 hideProgressBar();
@@ -1255,19 +1386,19 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         $scope.status = response.statusText;
     });
 
-    getSuccessData.then(function (success) {
-        $scope.buildsuccessdata = success.data;
-        $rootScope.$broadcast('successData', $scope.buildsuccessdata);
+    getBuildSuccessData.then(function (success) {
+        $scope.buildQuestionsObj.buildsuccessdata = success.data;
+        $rootScope.$broadcast('successData', $scope.buildQuestionsObj.buildsuccessdata);
         //settings
         getSettings.then(function (response) {
-            $scope.buildsuccessdata.settings = response.data.success.settings;
-            $scope.buildsuccessdata.defaultsettings = angular.copy($scope.buildsuccessdata.settings);
+            $scope.buildQuestionsObj.buildsuccessdata.settings = response.data.success.settings;
+            $scope.buildQuestionsObj.buildsuccessdata.defaultsettings = angular.copy($scope.buildQuestionsObj.buildsuccessdata.settings);
             //$scope.buildsuccessdata.advsettings = response.data.success.advsettings;
-            if ($scope.buildsuccessdata.settings.successtemplate.condition) {
-                $scope.buildsuccessdata.success_template = 'official';
+            if ($scope.buildQuestionsObj.buildsuccessdata.settings.successtemplate.condition) {
+                $scope.buildQuestionsObj.buildsuccessdata.success_template = 'official';
             }
             else {
-                $scope.buildsuccessdata.success_template = 'default';
+                $scope.buildQuestionsObj.buildsuccessdata.success_template = 'default';
             }
         })
     }, function myError(response) {
@@ -1434,22 +1565,24 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.updateAdvanceAnswers = function (logic) {
         var index = logic.questionno == 0 ? logic.questionno : logic.questionno - 1;
-        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
-            logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
+        if ($scope.buildQuestionsObj.questions[index].answertype != "text" && $scope.buildQuestionsObj.questions[index].answertype != "textarea" && $scope.buildQuestionsObj.questions[index].answertype != "statement") {
+            logic.type = "dynamic";
         }
         else {
             logic.type = "static";
         }
+        logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
     }
 
     $scope.updateAdvanceJumpAnswers = function (logic) {
         var index = $scope.buildQuestionsObj.activeNow - 1;
-        if ($scope.buildQuestionsObj.questions[index].options != undefined && $scope.buildQuestionsObj.questions[index].options.length > 0) {
-            logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
+        if ($scope.buildQuestionsObj.questions[index].answertype != "text" && $scope.buildQuestionsObj.questions[index].answertype != "textarea" && $scope.buildQuestionsObj.questions[index].answertype != "statement") {
+            logic.type = "dynamic";
         }
         else {
             logic.type = "static";
         }
+        logic.answer_list = $scope.buildQuestionsObj.questions[index].options;
     }
 
     //delete options
@@ -1720,13 +1853,173 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         }
         $scope.saveQuestions = function () {
-            if (sessionStorage.questionsObj != undefined) {
-                var tempquestions = JSON.parse(sessionStorage.questionsObj);
+            if (sessionStorage.addviaquestions != undefined) {
+                var tempquestions = JSON.parse(sessionStorage.addviaquestions);
                 $rootScope.$broadcast('addviaquestions', tempquestions);
+                sessionStorage.removeItem('addviaquestions');
             }
             $scope.hide();
         }
         /*******Add Via Slide********/
+
+        /******Share and Embed*****/
+        $scope.publish = {};
+        var regex = /(\#\/)(.*?)(\?|$)/gi;
+        var matches = regex.exec(window.location.href)//window.location.href.match(regex);
+        $scope.publish.publishUrl = window.location.href.replace(matches[2], 'cover') + '?id=' + $rootScope.formid
+
+        $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+
+        $scope.updatePublishIframe = function () {
+            if ($scope.publish.type == "banner") {
+                $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+            }
+            else if ($scope.publish.type == "load") {
+                $scope.publish.embedUrl = '<script type="text/javascript">setTimeout(function(){ alert("load after load"); }, 3000);</script>';
+            }
+            else {
+                $scope.publish.embedUrl = '<script type="text/javascript">setTimeout(function(){ alert("load after scroll"); }, 3000);</script>';
+            }
+        }
+
+        $scope.copyUrlText = function (event, inputtype) {
+            var element = angular.element(event.target).hasClass('md-button') ? angular.element(event.target) : angular.element(event.target).parent();
+            var copytext = element.prev().children(inputtype)[0].select();
+            document.execCommand("Copy");
+        }
+        /******Share and Embed*****/
+
+        /****Make Quiz****/
+        $scope.buildQuestionsObj.quizData = {};
+        $scope.buildQuestionsObj.quizData.totalMax = 0;
+        $scope.buildQuestionsObj.quizData.totalMin = 0;
+        $scope.$watch('buildQuestionsObj.questions', function (newVal, oldVal) {
+            $scope.buildQuestionsObj.quizData.totalMax = $scope.calculateTotal('max');
+            $scope.buildQuestionsObj.quizData.totalMin = $scope.calculateTotal('min');
+        }, true)
+        $scope.calculateTotal = function (type) {
+            var _total = 0;
+            angular.forEach($scope.buildQuestionsObj.questions, function (value, index) {
+                if (type == "max")
+                    _total = _total + Math.max.apply(Math, value.options.map(function (option) { return parseInt(option.quizoptionscore); }))
+                else
+                    _total = _total + Math.min.apply(Math, value.options.map(function (option) { return parseInt(option.quizoptionscore); }))
+            })
+            return _total
+        };
+        var resultsconditions = {
+            operator: null,
+            score: 0,
+            grade: null,
+            slide_to_show: "none"
+        }
+        $scope.buildQuestionsObj.quizData.results = [];
+        $scope.buildQuestionsObj.quizData.results.push(angular.copy(resultsconditions));
+        $scope.addResultCondition = function () {
+            $scope.buildQuestionsObj.quizData.results.push(angular.copy(resultsconditions))
+        }
+
+        $scope.removeResultCondition = function (index) {
+            $scope.buildQuestionsObj.quizData.results.splice(index, 1);
+        }
+
+        /****Make Quiz****/
+
+        /******Calculated Variable*****/
+        $scope.showCalculate = false;
+        $scope.addVariable = function () {
+            var _variable = {
+                name: "",
+                calculation: ""
+            }
+            $scope.showCalculate = true;
+            $scope.variable = _variable;
+            $scope.variableindex = -1;
+            //$scope.buildQuestionsObj.cvdata.variables.push(_variable);
+        }
+
+        $scope.editVariable = function (index) {
+            $scope.showCalculate = true;
+            $scope.variableindex = index;
+            $scope.variable = $scope.buildQuestionsObj.cvdata.variables[index];
+        }
+
+        $scope.deleteVariable = function (index) {
+            $scope.buildQuestionsObj.cvdata.variables.splice(index, 1);
+            $rootScope.$broadcast('buildpopupObjData', $scope.buildQuestionsObj);
+        }
+
+        $scope.saveVariable = function () {
+            if ($scope.variableindex > -1)
+                $scope.buildQuestionsObj.cvdata.variables[$scope.variableindex] = $scope.variable;
+            else
+                $scope.buildQuestionsObj.cvdata.variables.push($scope.variable);
+            $scope.showCalculate = false;
+
+            $rootScope.$broadcast('buildpopupObjData', $scope.buildQuestionsObj);
+        }
+
+        $scope.cancelVariable = function () {
+            $scope.showCalculate = false;
+        }
+
+        $scope.questionList = function () {
+            var list = [];
+            angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
+                list.push({
+                    text: "Question#" + value.id,
+                    click: function ($itemScope, $event, modelValue, text, $li) {
+                        var type = $($event.target).data('contenttype');
+                        var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
+                        var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
+                        var texttoAdd = '<span class="chip" data-type="question" data-question-id="' + value.id + '" contenteditable="false" readonly>Question#' + value.id + '<span class="removeChip">-</span></span>';
+                        var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
+                        $($event.target).html(start + texttoAdd + end);
+                        angular.element('.removeChip').on('click', function (event) {
+                            angular.element(event.target).parent().remove();
+                        })
+                    },
+                    hasBottomDivider: true
+                })
+            });
+            return list;
+        };
+
+        $scope.menuOptions2 = function () {
+            return [{
+                text: 'Insert Answer of',
+                click: function ($itemScope) { },
+                children: $scope.questionList()
+            }]
+        };
+
+        $scope.cursor = [];
+
+        $scope.setcursorposition = function (event) {
+            $scope.cursor[angular.element(event.target).data('contenttype')] = getCaretPosition(event.target);
+        }
+
+        $scope.addQuestionToCalculation = function (event, question) {
+            var calculationbox = angular.element(event.target).closest('.right_varible').find('.calculations');
+            var startindex = calculationbox.html().indexOf($scope.calculationCursor.nodeValue);
+            var start = calculationbox.html().substring(0, startindex + $scope.calculationCursor.caretPos);
+            var texttoAdd = '<span class="chip" data-question-id=' + question.id + ' contenteditable="false" readonly>' + angular.element(event.target).text() + '<span class="removeChip">-</span></span>';
+            var end = calculationbox.html().substring(startindex + $scope.calculationCursor.caretPos);
+            calculationbox.html(start + texttoAdd + end);
+            angular.element('.removeChip').on('click', function (event) {
+                angular.element(event.target).parent().remove();
+            })
+        }
+
+        $scope.operation = function (event, operator) {
+            var calculationbox = angular.element(event.target).closest('.calculatedvariable').find('.calculations');
+            calculationbox.html(calculationbox.html() + operator);
+        }
+
+        $scope.closeTab = function (tabid) {
+            $scope[tabid] = false;
+        }
+        /******Calculated Variable*****/
     }
 
     function resetSlide() {
@@ -1964,27 +2257,24 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
     $scope.calculatedVariableList = function () {
         var list = [];
-        angular.forEach($scope.buildQuestionsObj.questions, function (value, key) {
-            if (value.advancedvalidations != undefined && value.advancedvalidations.calculatedvariable != undefined && value.advancedvalidations.calculatedvariable.logic_options.length > 0)
-                angular.forEach(value.advancedvalidations.calculatedvariable.logic_options, function (innervalue, innerkey) {
-                    if (innervalue.name != "") {
-                        list.push({
-                            text: innervalue.name,
-                            click: function ($itemScope, $event, modelValue, text, $li) {
-                                var type = $($event.target).data('contenttype');
-                                var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
-                                var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
-                                var texttoAdd = '<span class="chip" data-type="cv" data-question-id="' + innervalue.name + '" contenteditable="false" readonly>' + innervalue.name + '<span class="removeChip">-</span></span>';
-                                var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
-                                $($event.target).html(start + texttoAdd + end);
-                                angular.element('.removeChip').on('click', function (event) {
-                                    angular.element(event.target).parent().remove();
-                                })
-                            },
-                            hasBottomDivider: true
+        angular.forEach($scope.buildQuestionsObj.cvdata.variables, function (value, key) {
+            if (value.name != "") {
+                list.push({
+                    text: value.name,
+                    click: function ($itemScope, $event, modelValue, text, $li) {
+                        var type = $($event.target).data('contenttype');
+                        var startindex = $($event.target).html().indexOf($scope.cursor[type].nodeValue);
+                        var start = $($event.target).html().substring(0, startindex + $scope.cursor[type].caretPos);
+                        var texttoAdd = '<span class="chip" data-type="cv" data-question-id="' + value.name + '" contenteditable="false" readonly>' + value.name + '<span class="removeChip">-</span></span>';
+                        var end = $($event.target).html().substring(startindex + $scope.cursor[type].caretPos);
+                        $($event.target).html(start + texttoAdd + end);
+                        angular.element('.removeChip').on('click', function (event) {
+                            angular.element(event.target).parent().remove();
                         })
-                    }
-                });
+                    },
+                    hasBottomDivider: true
+                })
+            }
         });
         return list;
     }
@@ -2044,7 +2334,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
         calculationbox.html(start + texttoAdd + end);
         angular.element('.removeChip').on('click', function (event) {
             angular.element(event.target).parent().remove();
-        })
+        });
     }
 
     $scope.operation = function (event, operator) {
@@ -2100,9 +2390,6 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
 
     $scope.gotoExperience = function (url, event) {
         if (event != null && $(event.target).closest('.create-tabs').length > 0) {
-            //var ngInclude = $(event.target).closest('.cover-page').parent();
-            //ngInclude.attr('ng-include', '../partials/experience.html');
-
             if (superclass.gotoExperience) {
                 superclass.gotoExperience();
             }
@@ -3189,10 +3476,14 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
             });
         }
         if (action == 'logOut') {
-            if ($rootScope.user.logintype == 'fb')
+            if ($rootScope.user.logintype == 'fb') {
                 FBLogin.logout();
-            else if ($rootScope.user.logintype == 'google')
+                $rootScope.user.image = '../asset/img/md-icons/svg/ic_person_black_24px.svg';
+            }
+            else if ($rootScope.user.logintype == 'google') {
                 gapi.auth.signOut();
+                $rootScope.user.image = '../asset/img/md-icons/svg/ic_person_black_24px.svg';
+            }
         }
     }
 
@@ -3239,6 +3530,7 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
 
     /********Login Section********/
     $rootScope.user = {};
+    $rootScope.user.image = '../asset/img/md-icons/svg/ic_person_black_24px.svg';
 
     $window.fbAsyncInit = function () {
         // Executed when the SDK is loaded
@@ -3350,6 +3642,7 @@ myapp.controller('mainCtrl', function ($scope, $mdSidenav, FBLogin, $rootScope, 
             $rootScope.user.name = userInfo.displayName;
             $rootScope.user.logintype = 'google';
             $rootScope.user.id = userInfo.id;
+            $rootScope.user.image = userInfo.image.url;
             $rootScope.loginstatus = true;
         })
     };

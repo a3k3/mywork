@@ -13,8 +13,9 @@
                 <md-icon md-menu-origin md-svg-icon="../asset/img/md-icons/svg/ic_search_black_24px.svg"></md-icon>
             </md-button>
             <md-menu md-position-mode="target-left bottom" md-offset="-5 10">
-                <md-button aria-label="sign in" class="md-icon-button" ng-click="openUserMenu($mdOpenMenu, $event)">
-                    <md-icon md-menu-origin md-svg-icon="../asset/img/md-icons/svg/ic_person_black_24px.svg"></md-icon>
+                <md-button aria-label="sign in" class="sign-in md-icon-button md-raised" ng-click="openUserMenu($mdOpenMenu, $event)">
+                    <md-icon md-menu-origin md-svg-icon="{{user.image}}" ng-if="!loginstatus"></md-icon>
+                    <img ng-src="{{user.image}}" ng-if="loginstatus"/>
                 </md-button>
                 <md-menu-content width="3">
                     <md-menu-item ng-repeat="item in menuitems" ng-if="item.enable">
@@ -38,7 +39,7 @@
         <md-tab label="Preview & Publish" md-on-select="onPublishTabSelect()">
             <div class="publish-panel" layout="row">
                 <div flex="70" class="themes">
-                    <div class="circle {{theme}}" data-theme="{{theme}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>
+                    <div class="circle {{theme.value}}" data-theme="{{theme.value}}" ng-repeat="theme in themes" ng-click="changeTheme($event)"></div>
                 </div>
                 <div flex="30" class="publish-btn-container">
                     <md-button class="publish md-raised md-primary md-hue-1" ng-click="PublishPopup($event)">Publish</md-button>
@@ -54,9 +55,17 @@
 <div style="visibility: hidden">
     <div class="md-dialog-container" id="myDialog">
         <md-dialog layout-padding>
-            <h2>Sign In</h2>
-            <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" login_text="Log in"></div>
-            <span id="googleSignIn"><span id="signInButton"></span></span>
+            <div class="sign-in-panel">
+                <h2 class="text-center">Sign In</h2>
+                <button class="loginBtn loginBtn--facebook">
+                    Login with Facebook
+                    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                </button>
+                <button class="loginBtn loginBtn--google">
+                    Login with Google
+                    <span id="googleSignIn"><span id="signInButton"></span></span>
+                </button>
+            </div>
         </md-dialog>
     </div>
 </div>
