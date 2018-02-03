@@ -1914,6 +1914,8 @@ formsettings ng-include [layout="row"] {
     height: inherit;
 }
 
+
+
 .quiz_Setting {
     width: 40%;
     float: left;
@@ -2158,6 +2160,76 @@ formsettings ng-include [layout="row"] {
     border-top: 1px solid #e2e2e2;
 }
 /******Work Flow*******/
+
+/***Payments***/
+
+.Payment {
+    background-color:white;
+    width: 400px;
+    height: 100%;
+    align-items:center; 
+    margin-left: 500px;
+    position:relative;
+}
+.Payment_layout {
+    width: 100%;
+    height:100%;
+}
+.pay_header {
+    background-color: #FF3333;
+    padding: 35px;
+}
+
+    .pay_header img {
+        border-radius: 48px;
+        float: left;
+    }
+
+.paytext {
+    float: left;
+    margin-top: 0px;
+    padding: 5px;
+}
+
+.pay_items {
+}
+
+.Pay_seletion {
+    padding: 10px;
+    border-radius: 2px;
+    background-color: grey;
+    margin-top:10px;
+    align-content:center;
+}
+
+.Paytype {
+    padding: 20px;
+    border-radius:10px;
+    background-color:rgb(129,199,132);
+    margin-top: 20px;
+}
+
+.pay_bottom:hover + p {
+    background-color: red;
+    display: block;
+}
+
+.pay_bottom {
+    background-color: yellow;
+    padding: 20px;
+}
+
+
+.over_div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: white;
+    top: 0;
+    opacity: 0.4;
+}
+/*Payments end*/
+
 
 
 

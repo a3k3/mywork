@@ -270,6 +270,7 @@
     <Content Include="partials\buildpopup_templates\Formtemplates\shareEmbed.html" />
     <Content Include="partials\buildpopup_templates\Formtemplates\slideForm.html" />
     <Content Include="partials\buildpopup_templates\makeQuiz.html" />
+    <Content Include="partials\buildpopup_templates\Payments.html" />
     <Content Include="partials\build_input_templates\checkbox.html" />
     <Content Include="partials\build_input_templates\cover.html" />
     <Content Include="partials\build_input_templates\email.html" />
