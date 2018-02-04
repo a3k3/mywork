@@ -138,6 +138,7 @@
     <Content Include="asset\img\coverpage_media.JPG" />
     <Content Include="asset\img\excellent.png" />
     <Content Include="asset\img\excellent_active.png" />
+    <Content Include="asset\img\export-icon.svg.png" />
     <Content Include="asset\img\export.svg" />
     <Content Include="asset\img\good.png" />
     <Content Include="asset\img\good_active.png" />
@@ -319,6 +320,7 @@
     <Content Include="partials\response-templates\chart-card.html" />
     <Content Include="partials\response-templates\filter-audience.html" />
     <Content Include="partials\response-templates\indiv-reviewer.html" />
+    <Content Include="partials\response-templates\question-filter.html" />
     <Content Include="partials\response-templates\respone-table.html" />
     <Content Include="partials\response-templates\response-user-details.html" />
     <Content Include="partials\response-templates\tablefitltermenu.html" />

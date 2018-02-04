@@ -418,9 +418,9 @@ function addviatext(text) {
 
 /* App Controllers */
 
-var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter']);
+var myapp = angular.module('experienceApp.controllers', ['angular-toArrayFilter','ngAnimate']);
 
-myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile, $window, formData) {
+myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $document, $rootScope, $http, $interval, $filter, uploadData, $compile, $window, formData) {
 
     $rootScope.bodylayout = 'experience-layout';
 
@@ -462,9 +462,9 @@ myapp.controller('questionsCtrl', function ($scope, getAllQuestions, $timeout, $
                 $scope.applyFormSettings();
             }
             else {
-                $scope.questionsObj.questions = JSON.parse(response.data).questions;
-                $scope.questionsObj.cvdata = JSON.parse(sessionStorage.questionsObj).cvdata;
-                $scope.questionsObj.formSettings = JSON.parse(sessionStorage.questionsObj).formSettings;
+                $scope.questionsObj.questions = response.data.questions;
+                $scope.questionsObj.cvdata = response.data.cvdata;
+                $scope.questionsObj.formSettings = response.data.formSettings;
                 $scope.applyFormSettings();
             }
             angular.forEach($scope.questionsObj.questions, function (value, index) {
@@ -1051,7 +1051,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, f
         _formBuildData.user_id = $rootScope.user.id;
 
         formData.postData(_formBuildData).success(function (response) {
-            console.log(reponse)
+            console.log(response)
         }).error(function (error) {
             console.log(error);
         })
@@ -1129,14 +1129,14 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, f
     }
 });
 
-myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getBuildCoverData, getBuildSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet, $window) {
+myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog, $compile, getSettings, getBuildCoverData, getBuildSuccessData, $http, $timeout, getSampleQuestionData, uploadData, $mdBottomSheet, $window, formData) {
 
     $scope.$watch('buildQuestionsObj', function () {
         $rootScope.$broadcast('questionsData', $scope.buildQuestionsObj);
     });
 
     var sampleQuestion = {};
-
+    
     getSampleQuestionData.then(function (response) {
         sampleQuestion = response.data;
     }, function myError(response) {
@@ -2363,11 +2363,34 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
     });
 });
 
-myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller, $interval) {
+myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller, $interval, $location, formData) {
 
     $rootScope.bodylayout = 'cover-layout';
+    var _formId = $location.search().form_id;
 
-    getCoverData.then(function (cover) {
+    if (_formId != undefined) {
+        formData.getData(_formId).then(function (response) {
+            if (response.data.status == undefined || response.data.status != "None") {
+                var cover = {};
+                cover.data = response.data.buildcoverdata;
+                $scope.initCover(cover);
+            }
+            else {
+
+            }
+        }, function myError(response) {
+            $scope.status = response.statusText;
+        });
+    }
+    else {
+        getCoverData.then(function (cover) {
+            $scope.initCover(cover);
+        }, function myError(response) {
+            $scope.status = response.statusText;
+        });
+    }
+
+    $scope.initCover = function (cover) {
         if (cover.data.settings.disablecover != undefined && cover.data.settings.disablecover.condition && window.location.href.indexOf('create') == -1) {
             $scope.gotoExperience('#/experience', null);
         }
@@ -2375,9 +2398,7 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
             $scope.coverdata = cover.data;
             $scope.checkIfTimed();
         }
-    }, function myError(response) {
-        $scope.status = response.statusText;
-    });
+    }
 
     $scope.$on('coverData', function (event, data) {
         $scope.coverdata = data;
@@ -2430,260 +2451,6 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
 });
 
 
-//var table = {
-//    "surveyCompleted": 600,
-//    "surveyEngaged": 950,
-//    "surveyVisited": 1200,
-//    '1': {
-//        "ResponseID": "345hfgqt",
-//        "userResponses": [
-//            {
-//                'Q': "What is your Name?",
-//                'A': "Amit Shaw"
-//            },
-//            {
-//                'Q': "Your Age?",
-//                'A': "30"
-//            },
-//            {
-//                'Q': "Do you have Aadhar?",
-//                'A': "Yes"
-//            },
-//            {
-//                'Q': "Which language you Speak?",
-//                'A': "Hindi"
-//            },
-//            {
-//                'Q': "your Address?",
-//                'A': "Bangalore"
-//            }
-//        ],
-//        "reviewerResponses": {
-//            "1": {
-//                'reviewerId': "rev1",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    },
-//                    {
-//                        'Q': "Answer Q3",
-//                        'A': "Answer3"
-//                    }
-//                ]
-//            },
-//            "2": {
-//                'reviewerId': "rev2",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    }
-
-//                ]
-//            }
-//        },
-//        "Action": {
-//            "value": "submitted",
-//            "state": "disabled"
-//        }
-//    },
-//    '2': {
-//        "ResponseID": "345hfgdgxf",
-//        "userResponses": [
-//            {
-//                'Q': "What is your Name?",
-//                'A': "Sumit Shaw"
-//            },
-//            {
-//                'Q': "Your Age?",
-//                'A': "34"
-//            },
-//            {
-//                'Q': "Do you have Aadhar?",
-//                'A': "No"
-//            },
-//            {
-//                'Q': "Which language you Speak?",
-//                'A': "Hindi"
-//            },
-//            {
-//                'Q': "your Address?",
-//                'A': "Hyderabad"
-//            }
-//        ],
-//        "reviewerResponses": {
-//            "1": {
-//                'reviewerId': "rev1",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    },
-//                    {
-//                        'Q': "Answer Q3",
-//                        'A': "Answer3"
-//                    }
-//                ]
-//            },
-//            "2": {
-//                'reviewerId': "rev2",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    }
-
-//                ]
-//            }
-//        },
-//        "Action": {
-//            "value": "Review",
-//            "state": "enabled"
-//        }
-//    },
-//    '3': {
-//        "ResponseID": "345hfggty",
-//        "userResponses": [
-//            {
-//                'Q': "What is your Name?",
-//                'A': "Karan Singh"
-//            },
-//            {
-//                'Q': "Your Age?",
-//                'A': "25"
-//            },
-//            {
-//                'Q': "Do you have Aadhar?",
-//                'A': "Yes"
-//            },
-//            {
-//                'Q': "Which language you Speak?",
-//                'A': "Marathi"
-//            },
-//            {
-//                'Q': "your Address?",
-//                'A': "Bangalore"
-//            }
-//        ],
-//        "reviewerResponses": {
-//            "1": {
-//                'reviewerId': "rev1",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    },
-//                    {
-//                        'Q': "Answer Q3",
-//                        'A': "Answer3"
-//                    }
-//                ]
-//            },
-//            "2": {
-//                'reviewerId': "rev2",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    }
-
-//                ]
-//            }
-//        },
-//        "Action": {
-//            "value": "review",
-//            "state": "enabled"
-//        }
-//    },
-//    '4': {
-//        "ResponseID": "345hfggtx",
-//        "userResponses": [
-//            {
-//                'Q': "What is your Name?",
-//                'A': "Arjun Reddy"
-//            },
-//            {
-//                'Q': "Your Age?",
-//                'A': "27"
-//            },
-//            {
-//                'Q': "Do you have Aadhar?",
-//                'A': "Yes"
-//            },
-//            {
-//                'Q': "Which language you Speak?",
-//                'A': "Telugu"
-//            },
-//            {
-//                'Q': "your Address?",
-//                'A': "Hyderabad"
-//            }
-//        ],
-//        "reviewerResponses": {
-//            "1": {
-//                'reviewerId': "rev1",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    },
-//                    {
-//                        'Q': "Answer Q3",
-//                        'A': "Answer3"
-//                    }
-//                ]
-//            },
-//            "2": {
-//                'reviewerId': "rev2",
-//                'responses': [
-//                    {
-//                        'Q': "Plz answer Q1",
-//                        'A': "Answer1"
-//                    },
-//                    {
-//                        'Q': "Answer Q2",
-//                        'A': "Answer2"
-//                    }
-
-//                ]
-//            }
-//        },
-//        "Action": {
-//            "value": "review",
-//            "state": "enabled"
-//        }
-//    }
-
-//};
 var table;
 
 function JSONToArray(jsonVal) {
@@ -2708,26 +2475,16 @@ function chartResize() {
     chartHeight();
 
 }
-//window.addEventListener('resize', chartResize);
+
 function tableFilter() {
     var answerList = [], uniqueList = [];
     document.querySelectorAll(".response-data-table .table .tablebody .tablerow").forEach(function (el, i) {
-        var rowAnsw = [], uniqueRow = [];
-        //el.getElementsByClassName("tablecell").forEach(function (elm, indx) {
+        var rowAnsw = [], uniqueRow = [];        
         el.querySelectorAll(".tablecell").forEach(function (elm, indx) {
-            rowAnsw.push(elm.textContent);
-            /*if (answerList.length && answerList[indx].indexOf(elm.value) != -1) {
-                uniqueRow.push(elm.textContent);
-            } else {
-                uniqueRow.push("EMPTY");
-            }*/
+            rowAnsw.push(elm.textContent);            
         });
-        answerList.push(rowAnsw);
-        //uniqueList.push(uniqueRow);
-
-    });
-    console.log(answerList);
-    //console.log(uniqueList);
+        answerList.push(rowAnsw);       
+    });    
 }
 function getQ(tbl) {
     var arr = [];
@@ -2937,8 +2694,11 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
     qt.splice(0, 1);
     $scope.cards = qt;
     $scope.expandChart = function (evt, indx) {
-        if (!($(evt.target).hasClass("chart-close") || $(evt.target).closest(".chart-close").length)) {
-            $(evt.target).closest("doughnut-chart").parent().addClass("pap-zoom");
+        var $tgt = $(evt.target);
+        if (!($tgt.hasClass("chart-close") || $tgt.closest(".chart-close").length)) {
+            $tgt.closest("doughnut-chart").parent().addClass("pap-zoom");
+            var offset = $tgt.closest("doughnut-chart").offset().top - $(".chartbox-headers").height()-48;
+            document.querySelectorAll("#tab-content-4")[0].scrollTo(0, offset);
         }
     }
     $scope.answerlist = getAnswer(table);
@@ -2957,11 +2717,19 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
         $(".tablebody.filterApplied").removeClass("filterApplied").removeAttr("filtercol");
         $(".tablerow.searched").removeClass("searched");
         $(".tablecell.matched").removeClass("matched");
+        $(".tablecell.colmatched").removeClass("colmatched");
+        $(".table.colmatched-table").removeClass("colmatched-table");        
     }
     $scope.exporttocsv = function () {
         var csvstring = "";
         document.querySelectorAll(".tablehead .tablecell").forEach(function (val) {
-            csvstring += val.getElementsByTagName("p")[0].textContent + ",";
+            if ($(".table").hasClass("colmatched-table")) {
+                if ($(val).hasClass("colmatched") || !$(val).index()) {
+                    csvstring += val.getElementsByTagName("p")[0].textContent + ",";
+                }
+            } else {
+                csvstring += val.getElementsByTagName("p")[0].textContent + ",";
+            }            
         })
         csvstring += "\n";
         if (document.querySelectorAll(".tablebody.filterApplied").length) {
@@ -2971,7 +2739,14 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
         }
         slct.forEach(function (val) {
             val.querySelectorAll(".tablecell").forEach(function (value) {
-                csvstring += value.getElementsByTagName("p")[0].textContent + ",";
+                if ($(".table").hasClass("colmatched-table")) {
+                    if ($(value).hasClass("colmatched")|| !$(value).index()) {
+                        csvstring += value.getElementsByTagName("p")[0].textContent + ",";
+                    }
+                } else {
+                    csvstring += value.getElementsByTagName("p")[0].textContent + ",";
+                }   
+                
             })
             csvstring += "\n";
         });
@@ -2997,13 +2772,9 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
         $(".show-insights").hide();
     }
     $scope.hideinsights = function () {
-        $("doughnut-chart,.show-insights").removeAttr("style");
+        $("doughnut-chart,.show-insights").removeAttr("style");        
+        document.querySelectorAll("#tab-content-4")[0].scrollTo(0, 0);
         $(".hide-insights").hide();
-        setTimeout(function () {
-            //$(document).scrollTop(0);
-            window.scrollTo(0, 0);
-        }, 500);
-
     }
     $scope.refresh = function (totCount, totAnsCol) {
         $scope.totCount = totCount;
@@ -3019,16 +2790,10 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
 
     }
     $scope.showdetailresponse = function (evt, indx) {
-        console.log($(evt.target));
-        //var button = angular.element(evt.target).get(0);
-        //var rect = button.getBoundingClientRect();
-        //var position = { top: rect.top, left: rect.left };
+        console.log($(evt.target));        
         $mdDialog.show({
-            locals: {
-                //cards: $scope.cards,
-                //uniqueArr: $scope.uniqueArr,
-                callback: $scope.responseTable,
-                //position: position
+            locals: {                
+                callback: $scope.responseTable,                
             },
             controller: userDetailsController,
             templateUrl: '../partials/response-templates/response-user-details.html',
@@ -3078,10 +2843,29 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
 
     setTimeout(chartHeight, 5000);
     //chartHeight();
-    $scope.openmenu = function (evt, index) {
-        //$(evt.currentTarget).siblings(".filterbox").find(".filter-menu").show();
+    $scope.openQuestList = function (evt) {
         var button = angular.element(evt.target);
-        //var rect = button.getBoundingClientRect();
+        var position = { top: evt.screenY, left: evt.screenX };
+        $mdDialog.show({
+            locals: {
+                questArr: $scope.questlist.slice(1),
+                callback: $scope.filterColmData,
+                position: position
+            },
+            controller: TableFilterColmController,
+            templateUrl: '../partials/response-templates/question-filter.html',
+            parent: $(evt.target).closest(".action-bar"),
+            targetEvent: evt,
+            clickOutsideToClose: true            
+        })
+            .then(function () {
+                $scope.status = 'You said the information was.';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+    }
+    $scope.openmenu = function (evt, index) {        
+        var button = angular.element(evt.target);        
         var position = { top: evt.screenY, left: evt.screenX };
         $mdDialog.show({
             locals: {
@@ -3102,9 +2886,7 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
                 $scope.status = 'You cancelled the dialog.';
             });
     };
-    $scope.totCount = getlabels($scope.uniqueArr, $scope.totalAnsCol);
-    //console.log("----Total Count-----");
-    //console.log($scope.totCount);
+    $scope.totCount = getlabels($scope.uniqueArr, $scope.totalAnsCol);    
     $scope.numvalue = $scope.totCount[0];
     $scope.percentage = $scope.totCount[1];
     $scope.label = $scope.totCount[2];
@@ -3133,9 +2915,7 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
             });
     }
 
-    $scope.popQuest = function (query) {
-        //$scope.filteraudquestions = query;
-        //console.log(query);
+    $scope.popQuest = function (query) {        
         var newAnswerList = $scope.answerlist.slice();
         var Answarr = [];
         newAnswerList.forEach(function (el, i) {
@@ -3144,18 +2924,12 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
             } else if (query.operator == "not" && el.indexOf(query.answer) == -1) {
                 Answarr.push(el);
             }
-        });
-        //console.log(Answarr);
+        });        
         $scope.uniqueArrFilt = getFilterAnswer(Answarr)[0];
-        $scope.totalAnsColFilt = getFilterAnswer(Answarr)[1];
-        //console.log($scope.uniqueArrFilt);
-        //console.log($scope.totalAnsColFilt);
+        $scope.totalAnsColFilt = getFilterAnswer(Answarr)[1];        
         $scope.totCount = getlabels($scope.uniqueArrFilt, $scope.totalAnsColFilt);
         $scope.refresh($scope.totCount, $scope.totalAnsColFilt);
-        $scope.hide();
-        /*function getfilteredAnswerList(answer, list) {
-
-        }*/
+        $scope.hide();       
     }
     $scope.filterTableData = function (event) {
         $timeout(function () {
@@ -3164,11 +2938,14 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
             var index = $evtTargt.closest(".tablecell").index();
             var filterAtr = $evtTargt.closest(".tablehead").siblings(".tablebody").attr("filtercol");
             var filterCol = (filterAtr != undefined) ? (filterAtr.indexOf(index) != -1) ? filterAtr: (filterAtr + "," + index) : index;           
-            
-            angular.forEach($evtTargt.closest("md-dialog").find(".md-checked"), function (val, key) {
-                optArr.push($(val).attr("value")); 
-            });
-            //$scope.filterQuery = option;
+            if ($evtTargt.closest("md-checkbox").attr("value") == "NULL") {
+                var $El = $evtTargt.closest("md-dialog").find("md-checkbox");                
+            } else {
+                var $El = $evtTargt.closest("md-dialog").find(".md-checked");                
+            }
+            angular.forEach($El, function (val, key) {
+                optArr.push($(val).attr("value"));
+            });            
             var angEl = $(".tablebody").hasClass("filterApplied") ? angular.element(".tablerow") : angular.element(".tablerow");
 
             angular.forEach(angEl, function (val, key) {
@@ -3193,16 +2970,32 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
                 }                
                 //$(val).closest(".tablerow.tmpsearch").removeClass("tmpsearch");
             }); 
-        }, 1000)
-               
-        //$(".table-row").each(function () {
-        //    var $this = $(this);
-        //    $this.find("p").each(function () {
-        //        if ($(this).text() == option) {
-        //            $(this).closest(".table-row").addClass("searched");
-        //        }
-        //    })
-        //})
+        }, 1000)       
+    }
+
+    $scope.filterColmData = function (event) {
+        $timeout(function () {
+            var optArr = [],indexArr=[];
+            var $evtTargt = $(event.target);
+            //var index = $evtTargt.closest("md-dialog").index();
+            //var filterAtr = $evtTargt.closest(".tablehead").siblings(".tablebody").attr("filtercol");
+            //var filterCol = (filterAtr != undefined) ? (filterAtr.indexOf(index) != -1) ? filterAtr : (filterAtr + "," + index) : index;            
+            angular.forEach($evtTargt.closest("md-dialog").find(".md-checked"), function (val, key) {
+                optArr.push($(val).index());
+            });
+            $(".tablecell").removeClass("colmatched");
+            $(".table").removeClass("colmatched-table");
+            if (optArr.indexOf(0) == -1) {
+                angular.forEach($(".tablecell"), function (value, key) {
+                    if (optArr.indexOf($(value).index()) >= 0) {
+                        $(value).addClass("colmatched");
+                    }
+                    //$(".tablehead .tablecell:eq(" + value + ")").addClass("colmatched");
+                    //$(".tablerow .tablecell:eq(" + value + ")").addClass("colmatched");
+                });                
+                $(".table").addClass("colmatched-table");
+            }            
+        }, 1000)       
     }
 
     function userDetailsController($scope, $mdDialog) {
@@ -3212,6 +3005,27 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
+    }
+    function TableFilterColmController($scope, $mdDialog, questArr, callback, position, $timeout) {
+        $timeout(function () {
+            var el = $('md-dialog');
+            var rect = el.get(0).getBoundingClientRect();
+            el.css('position', 'fixed');
+            el.css('top', position['top'] + el.height);
+            el.css('left', (position['left'] - el.width));
+        });
+        $scope.questArr = questArr;
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+
+        $scope.filterColmData = function (event) {
+            callback(event);
+        }
     }
 
     function TableFilterController($scope, $mdDialog, uniqueArr, callback, position, $timeout) {
@@ -3262,106 +3076,9 @@ myapp.controller('responsectrl', function ($scope, $mdDialog, getResponseData,$t
 
         }
     }
-    //$scope.totaltable = table;
-    $scope.responseid = "Response ID: 345hfgdgxf";
-    //$scope.totaltable = {
-    //    "row1": {
-    //        "col1": "Response ID",
-    //        "col2": "Whats your name?",
-    //        "col3": "Whats your age?"
-    //    },
-    //    "row2": {
-    //        "col1": "abd23ndjnd",
-    //        "col2": "Amit Shaw",
-    //        "col3": 35
-    //    },
-    //    "row3": {
-    //        "col1": "abd23ndjnd",
-    //        "col2": "Sumit Shaw",
-    //        "col3": 27
-    //    }
-    //};
+    
 
-    $scope.reviewer1 = {
-        "1": {
-            "1": "Reviewer#1"
-        },
-        "2": {
-            "1": "Question1<br/>answer"
-        },
-        "3": {
-            "1": "Question2<br/>answer"
-        },
-        "4": {
-            "1": "Question3<br/>answer"
-        }
-    };
-    $scope.reviewer2 = {
-        "1": {
-            "1": "Reviewer#2"
-        },
-        "2": {
-            "1": "Question1<br/>answer"
-        },
-        "3": {
-            "1": "Question2<br/>answer"
-        },
-        "4": {
-            "1": "Question3<br/>answer"
-        }
-    };
-    $scope.qblock1 = {
-        "1": {
-            "Q": "Whats your name?",
-            "A": "Amit Kumar Shaw"
-        },
-        "2": {
-            "Q": "Whats your age?",
-            "A": 35
-        },
-        "3": {
-            "Q": "What language do you speak?",
-            "A": "Hindi"
-        },
-        "4": {
-            "Q": "What is your fathers name?",
-            "A": "XYZ Shaw"
-        },
-        "5": {
-            "Q": "Which location you prefer for job?",
-            "A": "Hyderabad"
-        },
-        "6": {
-            "Q": "Which location you prefer for job?",
-            "A": "Hyderabad"
-        }
-    };
-    $scope.qblock2 = {
-        "1": {
-            "Q": "Whats your name?",
-            "A": "Amit Kumar Shaw"
-        },
-        "2": {
-            "Q": "Whats your age?",
-            "A": 35
-        },
-        "3": {
-            "Q": "What language do you speak?",
-            "A": "Hindi"
-        },
-        "4": {
-            "Q": "What is your fathers name?",
-            "A": "XYZ Shaw"
-        },
-        "5": {
-            "Q": "Which location you prefer for job?",
-            "A": "Hyderabad"
-        },
-        "6": {
-            "Q": "Which location you prefer for job?",
-            "A": "Hyderabad"
-        }
-    }
+    
     }, function myerror(response) {
         //console.log(response);
     })

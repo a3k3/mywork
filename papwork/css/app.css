@@ -829,7 +829,16 @@ md-pagination-wrapper {
     min-width:100px;
     padding:15px;
 }
-.response-section .tablecell > * {display:inline-flex;}
+.action-bar md-dialog {
+    padding: 15px;
+}
+.response-section .tablecell > * {
+    display: inline-flex;
+}
+md-icon img{width:100%;}
+.colmatched-table .tablecell:not(:first-child):not(.colmatched) {
+    display: none !important;
+}
 .chart-box .md-card > h4 {
     color: #666666;
 }

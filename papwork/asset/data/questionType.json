@@ -82,7 +82,7 @@
       }
     ]
   },
-    "question_type": {
+  "question_type": {
     "name": "Question Type",
     "options": [
       {
