@@ -442,7 +442,7 @@ myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $docume
         }
     };
 
-    var _formId = $location.search().form_id;
+    var _formId = $location.search().id;
 
     formData.getData(_formId).then(function (response) {
 
@@ -462,6 +462,9 @@ myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $docume
                 $scope.applyFormSettings();
             }
             else {
+                $scope.questionsObj.name = response.data.name;
+                $scope.questionsObj.id = response.data.id;
+                $scope.questionsObj.theme = response.data.theme;
                 $scope.questionsObj.questions = response.data.questions;
                 $scope.questionsObj.cvdata = response.data.cvdata;
                 $scope.questionsObj.formSettings = response.data.formSettings;
@@ -561,36 +564,6 @@ myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $docume
         $scope.questionsObj.theme = data;
     });
 
-    //$scope.$on('questionsData', function (event, data) {
-    //    $scope.questionsObj.questions = data;
-    //    angular.forEach($scope.questionsObj.questions, function (value, index) {
-    //        value.question = value.question;
-    //        var temp = value.question;
-    //        var tmp = document.createElement("DIV");
-    //        tmp.innerHTML = temp;
-    //        if (angular.element(tmp).find('span').length > 0) {
-    //            angular.element(tmp).find('span').each(function (index, value) {
-    //                if ($(value).hasClass('chip')) {
-    //                    var answerfor = $(value).data('question-id');
-    //                    var insertVal = $('<span ng-bind-html="questionsObj.questions[' + (answerfor - 1) + '].response"></span>');
-    //                    $(value).replaceWith(insertVal);
-    //                }
-    //            })
-    //        }
-    //        value.question = tmp.innerHTML;
-    //        //$compile(value.question)($scope);
-    //        value.enable = true;
-    //        if (value.validations != undefined && value.validations.internal != undefined && value.validations.internal.condition) {
-    //            value.enable = false;
-    //        }
-
-    //        //check for random options
-    //        if (value.validations != undefined && value.validations.randomize != undefined && value.validations.randomize.condition) {
-    //            value.options = shuffleArray(value.options);
-    //        }
-    //    });
-    //});
-
     $scope.dynamicTemplateUrl = function (data) {
         return "../partials/input_templates/" + getTemplate(data) + ".html"
     }
@@ -609,7 +582,7 @@ myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $docume
         _active = angular.element(_active);
         if (_active.find('.inputContainer input').hasClass('ng-invalid')) return;
         $timeout(function () {
-            if (_active.index() >= 0 && _active.index() < $scope.questionsObj.maxCount()) {
+            if (_active.index() >= 0 && _active.index() < $scope.questionsObj.maxCount()-1) {
                 _active.removeClass('active').addClass('visited').next().addClass('active').removeClass('next_active').next().addClass('next_active').removeClass('next_next_active').next().addClass('next_next_active');
                 var autocomplete = $scope.questionsObj.questions[$scope.questionsObj.activeNow - 1].validations.autocomplete;
                 if (autocomplete != undefined && autocomplete.start > 0) {
@@ -699,7 +672,16 @@ myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $docume
                             case "equals": if (answer.value == option.answer) _condition = true
                             else _condition = false;
                                 break
-                            case "notequals": if (answer.value != option.answer) _condition = true
+                            case "not_equals": if (answer.value != option.answer) _condition = true
+                            else _condition = false;
+                                break
+                            case "less_than": if (answer.value < option.answer) _condition = true
+                            else _condition = false;
+                                break
+                            case "greater_than": if (answer.value > option.answer) _condition = true
+                            else _condition = false;
+                                break
+                            case "contains": if (answer.value.indexOf(option.answer)) _condition = true
                             else _condition = false;
                                 break
                             default: _condition = true;
@@ -808,7 +790,7 @@ myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $docume
     $scope.questionsObj.prev = function () {
         var _active = document.getElementsByClassName("active");
         _active = angular.element(_active);
-        if (_active.index() > 1) {
+        if (_active.index() > 0) {
             _active.removeClass('active').addClass('next_active').prev().addClass('active').removeClass('next_active').removeClass('visited');
             _active.next().removeClass('next_active').addClass('next_next_active');
             _active.next().next().removeClass('next_next_active')
@@ -978,7 +960,10 @@ myapp.controller('questionsCtrl', function ($scope, $timeout, $location, $docume
     }
     /*******Web Cam Functions********/
     $scope.submit = function () {
-        console.log($scope.questionsObj.questions);
+        console.log($scope.questionsObj); //send this some service and upon success run below
+        var regex = /(\#\/)(.*?)(\?|$)/gi;
+        var matches = regex.exec(window.location.href)//window.location.href.match(regex);
+        window.location = window.location.href.replace(matches[2], 'success');
     }
 })
 
@@ -1002,17 +987,39 @@ var getTemplate = function (data) {
     return input_template;
 }
 
-myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope) {
+myapp.controller('successCtrl', function ($scope, getSuccessData, $rootScope, formData, $location) {
 
     $rootScope.bodylayout = 'success-layout';
 
     $scope.theme = "mytheme";
 
-    getSuccessData.then(function (success) {
+    var _formId = $location.search().id;
+
+    if (_formId != undefined) {
+        formData.getData(_formId).then(function (response) {
+            if (response.data.status == undefined || response.data.status != "None") {
+                var success = {};
+                success.data = response.data.buildsuccessdata;
+                $scope.initSuccess(success);
+            }
+            else {
+
+            }
+        }, function myError(response) {
+            $scope.status = response.statusText;
+        });
+    }
+    else {
+        getSuccessData.then(function (success) {
+            $scope.initSuccess(success);
+        }, function myError(response) {
+            $scope.status = response.statusText;
+        });
+    }
+
+    $scope.initSuccess = function (success) {
         $scope.successdata = success.data;
-    }, function myError(response) {
-        $scope.status = response.statusText;
-    });
+    }
 
     $scope.$on('successData', function (event, data) {
         $scope.successdata = data;
@@ -2366,7 +2373,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope, $controller, $interval, $location, formData) {
 
     $rootScope.bodylayout = 'cover-layout';
-    var _formId = $location.search().form_id;
+    var _formId = $location.search().id;
 
     if (_formId != undefined) {
         formData.getData(_formId).then(function (response) {
@@ -2392,7 +2399,7 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
 
     $scope.initCover = function (cover) {
         if (cover.data.settings.disablecover != undefined && cover.data.settings.disablecover.condition && window.location.href.indexOf('create') == -1) {
-            $scope.gotoExperience('#/experience', null);
+            $scope.gotoExperience('experience', null);
         }
         else {
             $scope.coverdata = cover.data;
@@ -2416,7 +2423,9 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
             }
         }
         else {
-            window.location = url;
+            var regex = /(\#\/)(.*?)(\?|$)/gi;
+            var matches = regex.exec(window.location.href)//window.location.href.match(regex);
+            window.location = window.location.href.replace(matches[2], url);
         }
     }
 
@@ -2431,7 +2440,7 @@ myapp.controller('coverCtrl', function ($scope, getCoverData, $http, $rootScope,
                     _autocomplete.start += 1;
                     _autocomplete.seconds = parseInt(_autocomplete.start / (100 / _autocomplete.time)) + 's';
                     if (_autocomplete.start >= 100) {
-                        $scope.gotoExperience('#/experience', null);
+                        $scope.gotoExperience('experience', null);
                         $interval.cancel(_autocomplete.interval);
                     }
                 }, _autocomplete.time * 10);
@@ -2449,7 +2458,6 @@ myapp.controller('typeLayoutCtrl', function ($scope, getTypeData) {
         $scope.status = response.statusText;
     });
 });
-
 
 var table;
 

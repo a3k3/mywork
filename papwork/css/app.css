@@ -22,7 +22,10 @@ body *{
     margin:0 0;
 }
 .experience-screen {
-    display:inherit;
+    display: inherit;
+}
+.experience-layout .experience-screen {
+    display: initial;
 }
 .experience-screen, .experience-screen > form {
     height:100vh;
@@ -264,6 +267,7 @@ question.active{
 }
 question.visited {
    top:-75vh;
+   left: 0;
 }
 question.next_active {
     opacity: 0.8;
