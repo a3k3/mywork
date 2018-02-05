@@ -2616,12 +2616,12 @@ email_left textarea {
 }
 .processing_layout .close-tab {
     right: 20px!important;
-    z-index: 1;
+    z-index: 6;
 }
 .processing_popup{
     position: absolute;
     top: 0;
-    z-index: 0;
+    z-index: 3;
     width: 100%;
     left: 0;
 }
