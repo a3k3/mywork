@@ -1991,8 +1991,7 @@ formsettings ng-include [layout="row"] {
     height: 24px;
     vertical-align: top;
     min-height: 0;
-    /* width: 24px; */
-    /* min-width: 0; */
+    width: auto;
 }
 /****actions table****/
 
@@ -2265,6 +2264,7 @@ formsettings ng-include [layout="row"] {
     background: #fff;
     overflow-y: scroll;
     height: 65vh;
+    position: relative;
 }
 
 .formsettings_layout .popup_layout {
@@ -2621,7 +2621,7 @@ email_left textarea {
 .processing_popup{
     position: absolute;
     top: 0;
-    z-index: 999;
+    z-index: 0;
     width: 100%;
     left: 0;
 }
@@ -2688,6 +2688,9 @@ padding:20px;
 }
 .doc_section  {
     display:flex;
+}
+.doc_section md-input-container, .doc_section md-select {
+    margin-top: 0;
 }
 .type_variable {
     margin: 20px 0;
@@ -2760,9 +2763,9 @@ padding:20px;
 
 #unblurred #box {
     border: 1px solid grey;
-    padding: 50px;
+    padding: 30px;
     filter: blur(1px);
-    width: 40vw;
+    width: 27vw;
     background: #FFf;
     display: inline-block;
     box-shadow: 2px 2px 2px white;
@@ -2772,8 +2775,11 @@ padding:20px;
     transform: translate(-50%,-50%);
     filter: blur(0px);
     position: absolute;
-    z-index: 1; 
-    
+    z-index: 1;
+    text-align: center;
+    font-size: 38px;
+    color: green;
+    box-shadow: 2px 2px 42px #000;
 }
 
 

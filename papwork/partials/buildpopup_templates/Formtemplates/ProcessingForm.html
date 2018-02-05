@@ -406,329 +406,55 @@
         <div class="flex-25">
             <div class="title">Doc Templates</div>
             <div class="actions-table">
-                <div layout="row" class="table-row layout-row">
-                    <div class="flex-50">
-                        Doc 1
+                <div layout="row" class="table-row layout-row" ng-repeat="variable in buildQuestionsObj.cvdata.variables">
+                    <div flex="70">
+                        {{variable.name}}
                     </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
+                    <div flex="30">
+                        <md-button class="md-icon-button" aria-label="edit" ng-click="editVariable($index)">
+                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="delete" ng-click="deleteVariable($index)">
+                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                        </md-button>
                     </div>
                 </div>
-                <div layout="row" class="table-row layout-row">
-                    <div class="flex-50">
-                        Doc 1
-                    </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div class="flex-50">
-                        Doc 2
-                    </div>
-
-                    <div class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div class="flex-50">
-                        Doc 3
-                    </div>
-
-                    <div class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-
             </div>
         </div>
 
         <div class="flex-25">
             <div class="title">DOC OCR Templates</div>
             <div class="actions-table">
-                <div layout="row" class="table-row layout-row">
-                    <div class="flex-50">
-                        Template 1
+                <div layout="row" class="table-row layout-row" ng-repeat="variable in buildQuestionsObj.cvdata.variables">
+                    <div flex="70">
+                        {{variable.name}}
                     </div>
-
-                    <div class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div class="flex-50">
-                        Template 2
-                    </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div flex="50" class="flex-50">
-                        Template 3
-                    </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div flex="50" class="flex-50">
-                        Template 3
-                    </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
+                    <div flex="30">
+                        <md-button class="md-icon-button" aria-label="edit" ng-click="editVariable($index)">
+                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="delete" ng-click="deleteVariable($index)">
+                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                        </md-button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div flex="25" class="flex-25">
+        <div class="flex-25">
             <div class="title">Parameters</div>
             <div class="actions-table">
-                <div layout="row" class="table-row layout-row">
-                    <div flex="50" class="flex-50">
-                        Parameter 1
+                <div layout="row" class="table-row layout-row" ng-repeat="variable in buildQuestionsObj.cvdata.variables">
+                    <div flex="70">
+                        {{variable.name}}
                     </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div flex="50" class="flex-50">
-                        Parameter 2
-                    </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div flex="50" class="flex-50">
-                        Parameter 3
-                    </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                    </div>
-                </div>
-                <div layout="row" class="table-row layout-row">
-                    <div flex="50" class="flex-50">
-                        Parameter 4
-                    </div>
-
-                    <div flex="50" class="flex-50">
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="edit">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
-                        <button class="md-icon-button md-button md-mytheme-theme md-ink-ripple" type="button" ng-transclude="" aria-label="delete">
-
-                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg" class="ng-scope md-mytheme-theme" aria-hidden="true">
-                                <svg fill="#000000" height="100%" viewBox="0 0 24 24" width="100%" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                </svg>
-                            </md-icon>
-                        </button>
+                    <div flex="30">
+                        <md-button class="md-icon-button" aria-label="edit" ng-click="editVariable($index)">
+                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_mode_edit_black_24px.svg"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="delete" ng-click="deleteVariable($index)">
+                            <md-icon md-svg-icon="../../asset/img/md-icons/svg/ic_delete_black_24px.svg"></md-icon>
+                        </md-button>
                     </div>
                 </div>
             </div>

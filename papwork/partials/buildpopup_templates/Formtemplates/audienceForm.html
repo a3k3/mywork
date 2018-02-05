@@ -8,11 +8,11 @@
 
             <div class="audience_type">
 
-                <md-radio-group ng-model="usertype">
+                <md-radio-group ng-model="buildQuestionsObj.usertype">
                     <md-radio-button value="regUser" class="md-primary">Only Registered Users</md-radio-button>
-                    <md-radio-button value="A_submission" class="md-primary">Anonymous Submission</md-radio-button>
-                    <md-radio-button value="U_submission" class="md-primary">Unique Submission- <small>Restration plus only one time submission</small></md-radio-button>
-                    <md-radio-button value="OptionalUser" class="md-primary">Optionally Registered Users</md-radio-button>
+                    <md-radio-button value="anonymous" class="md-primary">Anonymous Submission</md-radio-button>
+                    <md-radio-button value="unique" class="md-primary" disabled="true">Unique Submission- <small>Restration plus only one time submission</small></md-radio-button>
+                    <md-radio-button value="regOpt" class="md-primary" disabled="true">Optionally Registered Users</md-radio-button>
                 </md-radio-group>
             </div>
 

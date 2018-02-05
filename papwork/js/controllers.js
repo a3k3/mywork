@@ -1051,6 +1051,7 @@ myapp.controller('tabCtrl', function ($scope, $rootScope, $mdDialog, $timeout, f
 
     function publishController($scope, $mdDialog, formData) {
         $scope.publish = {};
+        $scope.publish.type = "banner";
         var regex = /(\#\/)(.*?)(\?|$)/gi;
         var matches = regex.exec(window.location.href)//window.location.href.match(regex);
 
@@ -1346,7 +1347,8 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
             timestamp() { return position.timestamp },
 
 
-        }
+        },
+        usertype: "anonymous"
     };
 
     $rootScope.formid = $scope.buildQuestionsObj.id;
@@ -1871,6 +1873,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         /******Share and Embed*****/
         $scope.publish = {};
+        $scope.publish.type = "banner";
         var regex = /(\#\/)(.*?)(\?|$)/gi;
         var matches = regex.exec(window.location.href)//window.location.href.match(regex);
         $scope.publish.publishUrl = window.location.href.replace(matches[2], 'cover') + '?id=' + $rootScope.formid
@@ -1879,7 +1882,7 @@ myapp.controller('buildCtrl', function ($scope, $document, $rootScope, $mdDialog
 
         $scope.updatePublishIframe = function () {
             if ($scope.publish.type == "banner") {
-                $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100%"></iframe>';
+                $scope.publish.embedUrl = '<iframe src="' + $scope.publish.publishUrl + '" width="100%" height="100vh"></iframe>';
             }
             else if ($scope.publish.type == "load") {
                 $scope.publish.embedUrl = '<script type="text/javascript">setTimeout(function(){ alert("load after load"); }, 3000);</script>';
